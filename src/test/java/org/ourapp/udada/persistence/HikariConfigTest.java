@@ -32,8 +32,7 @@ public class HikariConfigTest {
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
+
 	}
 	
-	
-
 }
