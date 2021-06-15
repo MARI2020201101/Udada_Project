@@ -41,7 +41,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <img src="/resources/imgs/logo.png" alt="logo2" width="40">
                 </div>
                 <div class="sidebar-brand-text mx-3">UDADA</div>
             </a>
@@ -50,8 +50,8 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Mypage</span>
+                    <i class="fas fa-user"></i>
+                    <span>MY PAGE</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
@@ -67,29 +67,29 @@
             <!-- Nav Item - Food -->
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Food</span></a>
+                    <i class="fas fa-hamburger"></i>
+                    <span>FOOD</span></a>
             </li>
             <!-- Nav Item - Recipe -->
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="fas fa-cookie-bite"></i>
-                    <span>Recipe</span></a>
+                    <i class="fas fa-utensils"></i>
+                    <span>RECIPE</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="fas fa-running"></i>
-                    <span>Exercise</span></a>
+                    <i class="fas fa-dumbbell"></i>
+                    <span>EXERCISE</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Challenge</span></a>
+                    <i class="fas fa-users"></i>
+                    <span>CHALLENGE</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Journal</span></a>
+                    <i class="fas fa-newspaper"></i>
+                    <span>JOURNAL</span></a>
             </li>
 
         </ul>
