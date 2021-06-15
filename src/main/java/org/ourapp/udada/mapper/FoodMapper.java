@@ -1,4 +1,4 @@
-package org.ourapp.udada.food;
+package org.ourapp.udada.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
