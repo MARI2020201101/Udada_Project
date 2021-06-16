@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="org.ourapp.udada.mapper.RecipeMapper">
+
+	<resultMap type="org.ourapp.udada.recipe.RecipeDTO" id="recipeMap">
+			<id column="R_NO" property="rNo"/>
+			<result column="M_EMAIL" property="mEmail"/>
+			<result column="R_TITLE" property="rTitle"/>
+			<result column="R_CONTENT" property="rContent"/>
+			<result column="R_DATE" property="rDate"/>
+	</resultMap>
+	
+	<select id="getList" resultMap="recipeMap">
+		SELECT * FROM RECIPE
+	</select>
+	<select id="read" parameterType="long" resultMap="recipeMap">
+		SELECT * FROM RECIPE WHERE R_NO = #{rNo}
+	</select>
+<insert id="register" >
+		INSERT INTO RECIPE(R_NO, M_EMAIL, R_TITLE, R_CONTENT )
+		VALUES (SEQ_RECIPE.NEXTVAL, #{mEmail} ,#{rTitle},#{rContent}) 
+	</insert>
+</mapper>

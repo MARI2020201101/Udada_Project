@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class FoodDTO {
 	
+	
 	/*
 		F_NO	VARCHAR2(20 BYTE)
 		F_NAME	VARCHAR2(1000 BYTE)
@@ -27,4 +28,6 @@ public class FoodDTO {
 	 * 
 	 * */
 
+	
+	
 }
