@@ -1,18 +1,7 @@
 package org.ourapp.udada.food;
 
-import org.ourapp.udada.mapper.FoodMapper;
-import org.springframework.stereotype.Service;
-
-import lombok.RequiredArgsConstructor;
-
-@Service
-@RequiredArgsConstructor
-public class FoodService {
-
-	private final FoodMapper foodMapper;
+public interface FoodService {
 	
-	public int countAll() {
-		return foodMapper.countAll();
-	}
-	
+	int countAll() throws Exception;
+
 }
