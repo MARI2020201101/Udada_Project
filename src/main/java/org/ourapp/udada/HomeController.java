@@ -23,8 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	private final FoodService foodService;
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -42,13 +41,10 @@ public class HomeController {
 		return "home";
 	}
 	
-	@GetMapping("/include/header")
-	public String includeSample() {
-		return "include/header";
-	}
+	
 	@GetMapping("/food/list")
 	public void listSample(Model model) {
-		int cnt = foodService.countAll();
-		model.addAttribute("cnt" , cnt);
+	
+	
 	}
 }

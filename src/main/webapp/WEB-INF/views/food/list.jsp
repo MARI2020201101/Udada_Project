@@ -6,7 +6,7 @@
 
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800">List Page</h1>
-	<h3>cnt : ${cnt }</h3>
+
 
 </div>
 <!-- /.container-fluid -->
