@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -110,7 +112,7 @@
 					<!-- Page Heading -->
 					<br>
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <p> 2021년 6월 16일 수요일<br>USER0101님 환영합니다.</p>
+                        <h1 class="h3 mb-0 text-gray-800">2021-06-16 수요일</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">LOGOUT</a>
                     </div>
 
