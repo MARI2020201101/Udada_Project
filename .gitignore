@@ -1,3 +1,6 @@
 pom.properties
 manifest.mf
-**/pom.properties
+target/**
+
+
+
