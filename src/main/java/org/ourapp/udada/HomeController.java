@@ -42,7 +42,7 @@ public class HomeController {
 	}
 	
 	
-	@GetMapping("/food/list")
+	@GetMapping("/journal/list")
 	public void listSample(Model model) {
 
 	}
