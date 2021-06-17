@@ -25,7 +25,7 @@ public class RecipeMapperTest {
 	
 	@Test
 	public void readTest() {
-		log.info(recipeMapper.read(1L).toString());
+		log.info(recipeMapper.read(2L).toString());
 		
 	}
 	
@@ -35,6 +35,19 @@ public class RecipeMapperTest {
 		
 		recipeMapper.register(recipeDTO); 
 		}
+	@Test 
+	public void updateTest() { 
+		RecipeDTO recipeDTO = RecipeDTO.builder().mEmail("user02@gmail.com").rContent("업뎃").rTitle("업뎃라면").rNo(2L).build(); 
+		
+		 int result=recipeMapper.update(recipeDTO); 
+		 log.info("\nresult : "+result);
+		}
 
+	@Test 
+	public void deleteTest() { 
+		
+		 int result=recipeMapper.delete(3L);
+		 log.info("\nresult : "+result);
+		}
 	
 }

@@ -5,7 +5,9 @@ import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
 @AllArgsConstructor
@@ -27,5 +29,7 @@ public class RecipeDTO {
 	private String rTitle;
 	private String rContent;
 	private Date rDate;
+	
+	
 	
 }
