@@ -1,5 +1,4 @@
-root-context.xml
-ConnectionTest.java
 pom.properties
 manifest.mf
+target/**
 

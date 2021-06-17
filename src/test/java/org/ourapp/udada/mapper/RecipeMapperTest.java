@@ -50,4 +50,12 @@ public class RecipeMapperTest {
 		 log.info("\nresult : "+result);
 		}
 	
+	@Test 
+	public void insertSelectKeyTest() { 
+		RecipeDTO recipeDTO = RecipeDTO.builder().mEmail("user01@gmail.com").rContent("삶아요").rTitle("라면 끓이기").build(); 
+		
+		recipeMapper.insertSelectKey(recipeDTO); 
+		log.info("\n selectKey: "+ recipeDTO.getRNo());
+		}
+	
 }

@@ -72,7 +72,7 @@
             </li>
             <!-- Nav Item - Recipe -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/recipe/list">
                     <i class="fas fa-utensils"></i>
                     <span>RECIPE</span></a>
             </li>
