@@ -10,4 +10,5 @@ public interface RecipeMapper {
 	RecipeDTO read(Long rNo);
 	void register(RecipeDTO recipeDTO);
 	int update(RecipeDTO recipeDTO);
+	int delete(Long rNo);
 }
