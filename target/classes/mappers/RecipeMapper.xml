@@ -14,13 +14,20 @@
 	</resultMap>
 	
 	<select id="getList" resultMap="recipeMap">
-		SELECT * FROM RECIPE
+		SELECT * FROM RECIPE ORDER BY R_NO DESC
 	</select>
 	<select id="read" parameterType="long" resultMap="recipeMap">
 		SELECT * FROM RECIPE WHERE R_NO = #{rNo}
 	</select>
-<insert id="register" >
+	<insert id="register">
 		INSERT INTO RECIPE(R_NO, M_EMAIL, R_TITLE, R_CONTENT )
 		VALUES (SEQ_RECIPE.NEXTVAL, #{mEmail} ,#{rTitle},#{rContent}) 
 	</insert>
+	<update id="update" >
+		UPDATE RECIPE SET M_EMAIL = #{mEmail} , R_TITLE = #{rTitle}, R_CONTENT = #{rContent}
+		WHERE R_NO = #{rNo}
+	</update>
+	<delete id="delete">
+		DELETE FROM RECIPE WHERE R_NO = #{rNo}
+	</delete>
 </mapper>
