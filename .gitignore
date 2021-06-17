@@ -1,6 +1,9 @@
 pom.properties
 manifest.mf
 target/**
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> original-settings
 
