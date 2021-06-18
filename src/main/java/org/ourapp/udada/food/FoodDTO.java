@@ -17,7 +17,6 @@ public class FoodDTO {
 	/*
 		F_NO	VARCHAR2(20 BYTE)
 		F_NAME	VARCHAR2(1000 BYTE)
-		F_REGION	VARCHAR2(500 BYTE)
 		F_MJCLASS	VARCHAR2(500 BYTE)
 		F_MNCLASS	VARCHAR2(500 BYTE)
 		F_ONCEOFFER	NUMBER
@@ -28,7 +27,7 @@ public class FoodDTO {
 	 * 
 	 * */
 
-	private Long fNO;
+	private String fNO;
 	private String fName;
 	private String fMjclass;
 	private String fMinclass;
