@@ -2,12 +2,14 @@ package org.ourapp.udada.recipe;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class RecipeIngredientDTO {
 /*
  *		RI_NO	NUMBER
@@ -20,5 +22,5 @@ public class RecipeIngredientDTO {
 	private Long riNo;
 	private Long rNo;
 	private String fNo;
-	private int riAmount;
+	private double riAmount;
 }

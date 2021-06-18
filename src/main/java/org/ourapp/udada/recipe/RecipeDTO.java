@@ -1,13 +1,13 @@
 package org.ourapp.udada.recipe;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Data
 @AllArgsConstructor
@@ -30,6 +30,6 @@ public class RecipeDTO {
 	private String rContent;
 	private Date rDate;
 	
-	
+	private List<RecipeIngredientDTO> ingredientList = new ArrayList<>();
 	
 }

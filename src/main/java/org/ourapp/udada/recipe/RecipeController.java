@@ -21,7 +21,7 @@ public class RecipeController {
 	private final RecipeService recipeService;
 	
 	@GetMapping("/list")
-	public void getList(Model model){
+	public void getList(Model model) throws Exception{
 		log.info("recipeController.......................");
 		
 		List<RecipeDTO> list = recipeService.getList();	
@@ -31,7 +31,7 @@ public class RecipeController {
 	}
 	
 	@GetMapping("/read")
-	public void get(Long rNo, Model model){
+	public void get(Long rNo, Model model) throws Exception{
 		log.info("read.......................");
 		model.addAttribute("dto", recipeService.get(rNo));
 	}
@@ -41,7 +41,7 @@ public class RecipeController {
 	}
 	
 	@PostMapping("/register")
-	public String register(RecipeDTO recipeDTO , RedirectAttributes rttr){
+	public String register(RecipeDTO recipeDTO , RedirectAttributes rttr) throws Exception{
 		
 		log.info("register..........................");
 		log.info(recipeDTO);
@@ -52,11 +52,11 @@ public class RecipeController {
 	}
 	
 	@GetMapping("/modify")
-	public void modifyForm(Long rNo, Model model){
+	public void modifyForm(Long rNo, Model model) throws Exception{
 		model.addAttribute("dto", recipeService.get(rNo));
 	}
 	@PostMapping("/modify")
-	public String modify(RecipeDTO recipeDTO, Model model, RedirectAttributes rttr){
+	public String modify(RecipeDTO recipeDTO, Model model, RedirectAttributes rttr) throws Exception{
 		log.info(recipeDTO);
 		recipeService.modify(recipeDTO);
 		rttr.addFlashAttribute("msg","레시피가 수정되었습니다. ");
@@ -64,7 +64,7 @@ public class RecipeController {
 	}
 	
 	@PostMapping("/remove")
-	public String remove(Long rNo, RedirectAttributes rttr){
+	public String remove(Long rNo, RedirectAttributes rttr) throws Exception{
 
 		log.info("\nremove rNo: "+rNo);
 		recipeService.remove(rNo);

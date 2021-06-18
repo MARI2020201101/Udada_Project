@@ -6,14 +6,14 @@
 
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800">List Page</h1>
-<<<<<<< HEAD
+
 	
-=======
+
 
 <!-- MVC -->
 
 
->>>>>>> original-settings
+
 </div>
 <!-- /.container-fluid -->
 </div>

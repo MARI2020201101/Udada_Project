@@ -1,5 +1,8 @@
 package org.ourapp.udada.recipe;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +20,30 @@ public class RecipeServiceTest {
 	private RecipeService recipeService;
 	
 	@Test
-	public void getListTest() {
+	public void getListTest() throws Exception{
 		recipeService.getList();
+	}
+	
+	@Test
+	public void insertWithIngredientTest() throws Exception{
+		
+		RecipeDTO recipeDTO = RecipeDTO.builder()
+				.mEmail("user02@gmail.com").rContent("쿠키").rTitle("쿠키").build();
+		List<RecipeIngredientDTO> ingredientList = new ArrayList<>();
+		
+		RecipeIngredientDTO dto1 = RecipeIngredientDTO.builder()
+				.fNo("R002762").riAmount(0.5).build();
+		RecipeIngredientDTO dto2 = RecipeIngredientDTO.builder()
+				.fNo("R002873").riAmount(1).build();
+		RecipeIngredientDTO dto3 = RecipeIngredientDTO.builder()
+				.fNo("R002407").riAmount(2).build();
+		
+		ingredientList.add(dto1);
+		ingredientList.add(dto2);
+		ingredientList.add(dto3);
+		recipeDTO.setIngredientList(ingredientList);
+		
+		recipeService.registerWithIngredient(recipeDTO);
 	}
 
 }

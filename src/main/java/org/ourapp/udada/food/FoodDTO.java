@@ -33,7 +33,7 @@ public class FoodDTO {
 	private String fMinclass;
 	private int fOnceoffer;
 	private int fKcal;
-	private int fProtine;
+	private int fProtein;
 	private int fFat;
 	private int fCarbo;
 	

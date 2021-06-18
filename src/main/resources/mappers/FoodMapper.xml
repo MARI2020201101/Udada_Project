@@ -12,7 +12,7 @@
 			<result column="F_MNCLASS" property="fMinclass"/>
 			<result column="F_ONCEOFFER" property="fOnceoffer"/>
 			<result column="F_KCAL" property="fKcal"/>
-			<result column="F_PROTEIN" property="fProtine"/>
+			<result column="F_PROTEIN" property="fProtein"/>
 			<result column="F_FAT" property="fFat"/>
 			<result column="F_CARBO" property="fCarbo"/>
 	</resultMap>
@@ -20,5 +20,46 @@
 	<select id = "countAll" resultType = "int">
 		SELECT COUNT(*) FROM FOOD
 	</select>
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<select id="selectByFName" resultMap="foodMap">
+	<![CDATA[
+	SELECT * FROM FOOD WHERE F_NAME LIKE '%'||#{keyword}||'%'  AND ROWNUM <= 10
+	    ]]>
+	</select>
 </mapper>
