@@ -1,8 +1,16 @@
 package org.ourapp.udada.food;
 
+import java.util.Date;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class FoodDTO {
 	
 	
@@ -13,21 +21,21 @@ public class FoodDTO {
 		F_MJCLASS	VARCHAR2(500 BYTE)
 		F_MNCLASS	VARCHAR2(500 BYTE)
 		F_ONCEOFFER	NUMBER
-		F_MEASURE	VARCHAR2(10 BYTE)
-		F_OFFERG	NUMBER
-		F_OFFERML	NUMBER
 		F_KCAL	NUMBER
 		F_PROTEIN	NUMBER
 		F_FAT	NUMBER
 		F_CARBO	NUMBER
-		F_SUGAR	NUMBER
-		F_FIBER	NUMBER
-		F_NA	NUMBER
-		F_CHOLES	NUMBER
-		F_DIV	VARCHAR2(30 BYTE)
 	 * 
 	 * */
 
-	
+	private Long fNO;
+	private String fName;
+	private String fMjclass;
+	private String fMinclass;
+	private int fOnceoffer;
+	private int fKcal;
+	private int fProtine;
+	private int fFat;
+	private int fCarbo;
 	
 }
