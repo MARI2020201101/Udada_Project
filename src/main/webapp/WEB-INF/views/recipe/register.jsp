@@ -20,6 +20,8 @@
       <div class="form-group row">
         <button class="btn btn-secondary addIngreBtn"><span class="text">ADD INGREDINT</span></button>
       </div>
+      <div class="ingreBox"></div>
+      <br>
       <div class="form-group row">
         <label>WRITER</label>
         <input type="text" class="form-control form-control-user" name="mEmail" >
@@ -28,9 +30,15 @@
 			<span class="text">Register</span>
 		</button>
 	</form>
+	
+	
+
+
+
 </div>
 <!-- /.container-fluid -->
 </div>
+
 <!-- End of Main Content -->
 <div class="modal" tabindex="-1" role="dialog" id="addIngreModal">
             <div class="modal-dialog" role="document">
@@ -46,7 +54,7 @@
               			<input class="form-control searchInput" type="text" placeholder="Search Food...">
            			 </div>
            			<div class="form-group amountDiv">
-              			<input class="form-control amountInput"type="text" placeholder="Add Amount...">
+              			<input class="form-control amountInput" type="text" value=1.0 placeholder="Add Amount...">
            			 </div>
            			 <div class="searchResult">
            			 	<ul></ul>
@@ -64,32 +72,71 @@
 
 $(document).ready(function(){
 	var modal = $("#addIngreModal");
+	var searchBtn = $(".searchBtn");
+	var amountBtn = $(".amountBtn");
+	var amountDiv = $(".amountDiv");
+	var searchInput = $(".searchInput");
+	var amountInput = $(".amountInput");	
+	var ingreBox = $(".ingreBox");	
+	
 	var cloneModal = modal.clone();
 
 
-	//여기부터 다시
 	$(".searchResult ul").on("click","button",function(e){
 
-		console.log(this);
+		var selected = $(this).closest("li").clone();
+		$(".searchResult ul").empty();
+		$(".searchResult ul").html(selected);
+		$(".addBtn").hide();
+		amountDiv.show();
+		amountBtn.show();
+
+		amountBtn.click(function(e){
+			
+			e.preventDefault();
+			console.log("selected.data('fno')>>",selected.data('fno'));
+			console.log("selected.data('fname')>>",selected.data('fname'));
+			var fno = selected.data('fno');
+			var fname = selected.data('fname');
+			var amount = amountInput.val();
+			
+			var str="";
+				
+			str += "<div class='card w-80' data-fno='"+ fno +"'>"
+				+ "<div class='card-body'><b class='card-title'>" + fname + "</b>"
+		    	+ "<p class='card-text' data-amount='"+ amount +"'>selected amount : "+amount +" </p>"
+		    	+ "<button type='button' class='btn btn-danger btn-sm cancelIngre'>&times;</button>"
+		  		+ "</div></div>" 
+
+			//ingreBox.append(str); 
+			ingreBox.append(selected);
+			selected.last().html(str);
+			modal.modal('hide');
+			
+			});
 		
-		});//
+		});
+
 	
 	$(".addIngreBtn").on("click", function(e){
 		e.preventDefault();
+		searchInput.val('');
+		$(".searchResult ul").empty();
+		searchBtn.show();
 		modal.find(".amountBtn").hide();
 		modal.find(".amountDiv").hide();
 		modal.modal();
 
-		$(".searchBtn").click(function(e){
+		searchBtn.click(function(e){
 			e.preventDefault();
-			console.log(this);
+			//console.log(this);
 			
-			var keyword = $(".searchInput").val();
-			console.log(keyword);
+			var keyword = searchInput.val();
+			//console.log(keyword);
 			
  			$.getJSON("/searchForIngredient?keyword="+keyword, function(array){
 					var str = "";
-					
+					searchBtn.hide();
 					if(array.length<1){
 						str +="<p>검색결과가 없습니다.</p>";
 						$(".searchResult ul").append(str);
@@ -97,19 +144,20 @@ $(document).ready(function(){
 						}
 					
 					$.each(array, function(idx,obj){
-						str+="<li data-fno='"+ obj.fno +"'><b>" + obj.fname +"</b><div>"
-				        +"<span>carbo : "+ obj.fcarbo +"</span>&nbsp;"
-				        +"<span>protein : "+ obj.fprotein +"</span>&nbsp;"
-				        +"<span>fat : "+ obj.ffat +"</span>&nbsp;"
-				        +"<span>kcal : "+ obj.fkcal +"</span></div><div>"
-						+"<button type='button' class='btn btn-success btn-sm my-1 addIngreBtn'>"
-						+"ADD INGREDINET</button></div></li><br>"
-						console.log(obj);
+						//console.log(obj);
+						str+="<li data-fno='"+ obj.fno +"' data-fname='" + obj.fname+ "'>"
+						  + "<div class='card w-80'><div class='card-body'><b class='card-title'>"+obj.fname+"</b>"
+						  +  "<p class='card-text'><span>carbo : "+ obj.fcarbo +"</span>&nbsp;"
+						  + "<span>protein : "+ obj.fprotein +"</span>&nbsp;"
+					      + "<span>fat : "+ obj.ffat +"</span>&nbsp;"
+					      +   "<span>kcal : "+ obj.fkcal +"</span></p>"
+						  + "<button type='button' class='btn btn-success btn-sm addBtn'>ADD INGREDINET</button>"
+						  + "</div></div></li><br>"
+						
 						});
 				$(".searchResult ul").append(str);
-				
+							
 				}); 
-			
 			
 			});
 		
