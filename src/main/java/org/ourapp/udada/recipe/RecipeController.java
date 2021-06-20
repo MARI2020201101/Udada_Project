@@ -45,7 +45,8 @@ public class RecipeController {
 		
 		log.info("register..........................");
 		log.info(recipeDTO);
-		recipeService.register(recipeDTO);
+		//recipeService.register(recipeDTO);
+		recipeService.registerWithIngredient(recipeDTO);
 		rttr.addFlashAttribute("msg", "레시피가 등록되었습니다.");
 		
 		return "redirect:/recipe/list";

@@ -10,11 +10,11 @@
 <form method="POST" action="/recipe/register">
       <div class="form-group row">
         <label>TITLE</label>
-        <input type="text" class="form-control form-control-user" name="rTitle">
+        <input type="text" class="form-control form-control-user" name="rTitle" >
       </div>
       <div class="form-group row">
         <label>CONTENT</label>
-        <textarea cols="5" class="form-control form-control-user" name="rContent"
+        <textarea cols="5" class="form-control form-control-user" name="rContent" 
                        placeholder="Content"></textarea>
       </div>
       <div class="form-group row">
@@ -26,14 +26,11 @@
         <label>WRITER</label>
         <input type="text" class="form-control form-control-user" name="mEmail" >
       </div>
-		<button class="btn btn-primary">
+		<button class="btn btn-primary registerBtn">
 			<span class="text">Register</span>
 		</button>
 	</form>
 	
-	
-
-
 
 </div>
 <!-- /.container-fluid -->
@@ -80,47 +77,70 @@ $(document).ready(function(){
 	var ingreBox = $(".ingreBox");	
 	
 	var cloneModal = modal.clone();
+	var str2="";	
+	var amount = 0;
+	var fnoInselected="";
+	var fnameInselected="";
+	
+	$(".registerBtn").click(function(e){
+		e.preventDefault();
+		console.log(this);
+		var str="";
+		 $(".ingreBox li").each(function (i , obj){
+			 var target =$(obj);
+			console.log(target);
+			console.log(target.data('fno'));
+			str +="<input type='hidden' type='text' name='ingredientList["+ i +"].fNo' value='"+ target.data('fno') +"'>"
+			str +="<input type='hidden' type='text' name='ingredientList["+ i +"].riAmount' value='"+ target.data('amount') +"'>"
 
-
+			 });
+		 $("form").append(str);
+		 $("form").submit();
+		
+		
+	});
+	
 	$(".searchResult ul").on("click","button",function(e){
 
 		var selected = $(this).closest("li").clone();
 		$(".searchResult ul").empty();
 		$(".searchResult ul").html(selected);
+		console.log("selected>>>",selected);
 		$(".addBtn").hide();
 		amountDiv.show();
 		amountBtn.show();
+		fnoInselected = selected.data('fno');
+		fnameInselected = selected.data('fname');
 
-		amountBtn.click(function(e){
-			
+	});	
+
+
+	amountBtn.click(function(e){		
 			e.preventDefault();
-			console.log("selected.data('fno')>>",selected.data('fno'));
-			console.log("selected.data('fname')>>",selected.data('fname'));
-			var fno = selected.data('fno');
-			var fname = selected.data('fname');
-			var amount = amountInput.val();
-			
-			var str="";
-				
-			str += "<div class='card w-80' data-fno='"+ fno +"'>"
-				+ "<div class='card-body'><b class='card-title'>" + fname + "</b>"
-		    	+ "<p class='card-text' data-amount='"+ amount +"'>selected amount : "+amount +" </p>"
-		    	+ "<button type='button' class='btn btn-danger btn-sm cancelIngre'>&times;</button>"
-		  		+ "</div></div>" 
-
-			//ingreBox.append(str); 
-			ingreBox.append(selected);
-			selected.last().html(str);
+			amount = amountInput.val();			
+			console.log("amount>>" ,amount);
+		 	str2 = "<li data-amount='"+ amount +"' data-fno='"+ fnoInselected +"'><div class='card w-80'>"
+				+ "<div class='card-body'><b class='card-title'>" + fnameInselected + "</b>"
+		    	+ "<p class='card-text' >selected amount : "+amount +" </p>"
+		    	+ "<button type='button' class='btn btn-danger btn-sm cancelIngre' >&times;</button>"
+		  		+ "</div></div></li>" 
+ 
+			ingreBox.append(str2);
 			modal.modal('hide');
-			
-			});
 		
-		});
+			});
 
+	
+   ingreBox.on("click",".cancelIngre", function(e){
+		console.log($(this));
+		$(this).closest('li').remove();
+
+		}); 
 	
 	$(".addIngreBtn").on("click", function(e){
 		e.preventDefault();
 		searchInput.val('');
+		amountInput.val(1.0);
 		$(".searchResult ul").empty();
 		searchBtn.show();
 		modal.find(".amountBtn").hide();
@@ -128,22 +148,21 @@ $(document).ready(function(){
 		modal.modal();
 
 		searchBtn.click(function(e){
-			e.preventDefault();
-			//console.log(this);
-			
+			e.preventDefault();			
 			var keyword = searchInput.val();
-			//console.log(keyword);
-			
+			var str = "";
  			$.getJSON("/searchForIngredient?keyword="+keyword, function(array){
-					var str = "";
-					searchBtn.hide();
-					if(array.length<1){
+ 					
+					searchBtn.hide();				
+					
+/* 					if(array.length<1){
 						str +="<p>검색결과가 없습니다.</p>";
 						$(".searchResult ul").append(str);
-						return;
+						return;					
 						}
 					
-					$.each(array, function(idx,obj){
+					 */
+						$.each(array, function(idx,obj){
 						//console.log(obj);
 						str+="<li data-fno='"+ obj.fno +"' data-fname='" + obj.fname+ "'>"
 						  + "<div class='card w-80'><div class='card-body'><b class='card-title'>"+obj.fname+"</b>"
@@ -155,10 +174,11 @@ $(document).ready(function(){
 						  + "</div></div></li><br>"
 						
 						});
-				$(".searchResult ul").append(str);
-							
+				
+						$(".searchResult ul").append(str);
+						
 				}); 
-			
+ 			
 			});
 		
 		});
