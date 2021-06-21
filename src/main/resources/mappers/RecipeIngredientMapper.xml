@@ -17,4 +17,8 @@
 		INSERT INTO RECIPE_INGREDIENT(RI_NO, R_NO, F_NO, RI_AMOUNT)
 		VALUES (SEQ_RI.NEXTVAL, #{rNo}, #{fNo} , #{riAmount}) 
 	</insert>
+	
+	<delete id="deleteByRNo">
+		DELETE FROM RECIPE_INGREDIENT WHERE R_NO = #{rNo}
+	</delete>
 </mapper>

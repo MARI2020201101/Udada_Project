@@ -6,7 +6,7 @@
 
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800">Recipe Read Page</h1>
-
+		<input type="hidden" class="form-control form-control-user" name="pageNum" value=${pageRequestDTO.pageNum }>
 		<div class="form-group row">
        <label>RNO</label>
         <input type="text" class="form-control form-control-user" value="${dto.RNo}" readonly>
@@ -27,11 +27,31 @@
         <label>REGDATE</label>
         <input type="text" class="form-control form-control-user"  value="${dto.RDate}" readonly>
       </div>
-      
-		<a href="/recipe/list" class="btn btn-secondary">
+ 
+	<div class="ingreBox">
+		<ul>
+			<c:if test="${not empty dto.ingredientList && dto.ingredientList.size() gt 0 }">
+	
+				<c:forEach var="ingredient" items="${dto.ingredientList}" varStatus="status">
+					<li>
+						<div class='card w-80'>
+							<div class='card-body'>
+								<b class='card-title ingreName'>${ingredient.FName}</b>
+								<p class='card-text'>
+									<span>selected amount : </span>${ingredient.riAmount}</p>
+							</div>
+						</div>
+					</li>
+				</c:forEach>
+
+			</c:if>
+		</ul>
+	</div>
+
+	<a href="/recipe/list?pageNum=${pageRequestDTO.pageNum }" class="btn btn-secondary">
             <span class="text">LIST</span>
         </a>
-        <a href='/recipe/modify?rNo=${dto.RNo}' class="btn btn-warning">
+        <a href='/recipe/modify?rNo=${dto.RNo}&pageNum=${pageRequestDTO.pageNum }' class="btn btn-warning">
         	<span class="text">MODIFY</span>
         </a>
 </div>
@@ -60,12 +80,22 @@
 <script>
 $(document).ready(function(){
 	var msg = '${msg}';
+	var ingreName = $(".ingreName");
+	var ingreBox = $(".ingreBox");
+
 	console.log("msg>>",msg);
+	console.log("ingreName>>",ingreName);
 	if (!(msg===''||history.state)){
 		var modal= $(".modal");
 		console.log(modal);	
 		modal.modal();
 	}
+
+
+	if(ingreName.text()==''|| ingreName.text()==null){
+		console.log("$(this).closest('li')>>",$(this).closest('li'));
+		ingreName.closest('li').remove();
+		}
 });
 	
 </script>

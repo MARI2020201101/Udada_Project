@@ -155,13 +155,6 @@ $(document).ready(function(){
  					
 					searchBtn.hide();				
 					
-/* 					if(array.length<1){
-						str +="<p>검색결과가 없습니다.</p>";
-						$(".searchResult ul").append(str);
-						return;					
-						}
-					
-					 */
 						$.each(array, function(idx,obj){
 						//console.log(obj);
 						str+="<li data-fno='"+ obj.fno +"' data-fname='" + obj.fname+ "'>"

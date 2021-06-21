@@ -2,6 +2,7 @@ package org.ourapp.udada.mapper;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.ourapp.udada.recipe.PageRequestDTO;
 import org.ourapp.udada.recipe.RecipeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -58,4 +59,27 @@ public class RecipeMapperTest {
 		log.info("\n selectKey: "+ recipeDTO.getRNo());
 		}
 	
+	@Test 
+	public void selectWithIngreTest() { 
+			
+		RecipeDTO recipeDTO=recipeMapper.selectWithIngredient(31L);
+		log.info(recipeDTO.toString());
+		}
+	
+	@Test 
+	public void selectWithIngreAndFoodTest() { 
+			
+		RecipeDTO recipeDTO=recipeMapper.selectWithIngredientAndFood(40L);
+		log.info(recipeDTO.toString());
+		}
+	
+	
+	@Test 
+	public void selectWithPagingTest() { 
+			recipeMapper.selectWithPaging(PageRequestDTO.builder().pageNum(2).pageSize(10).build());
+		}
+	@Test 
+	public void countAllTest() { 
+		log.info("recipe count : "+ recipeMapper.countAll());
+		}
 }

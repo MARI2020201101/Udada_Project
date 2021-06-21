@@ -2,6 +2,7 @@ package org.ourapp.udada.mapper;
 
 import java.util.List;
 
+import org.ourapp.udada.recipe.PageRequestDTO;
 import org.ourapp.udada.recipe.RecipeDTO;
 
 public interface RecipeMapper {
@@ -12,5 +13,10 @@ public interface RecipeMapper {
 	void insertSelectKey(RecipeDTO recipeDTO);
 	int update(RecipeDTO recipeDTO);
 	int delete(Long rNo);
+	
+	RecipeDTO selectWithIngredient(Long rNo);
+	RecipeDTO selectWithIngredientAndFood(Long rNo);
+	List<RecipeDTO> selectWithPaging(PageRequestDTO pageRequestDTO);
+	int countAll();
 	
 }

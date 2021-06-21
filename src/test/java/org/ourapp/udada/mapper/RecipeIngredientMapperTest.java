@@ -24,5 +24,12 @@ public class RecipeIngredientMapperTest {
 				.fNo("R002762").riAmount(3).rNo(11L).build();
 		recipeIngredientMapper.insert(recipeIngredientDTO);
 	}
+	
+	@Test
+	public void deleteTest() {
+		
+		recipeIngredientMapper.deleteByRNo(11L);
+	}
+
 
 }

@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -12,7 +11,7 @@
 		<a href="/recipe/register" class="btn btn-primary">
             <span class="text">Register</span>
         </a>
-        
+  
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -29,7 +28,7 @@
 					<c:forEach var="dto" items="${list}">
 						<tr>
 							<th scope="row"><c:out value="${dto.RNo}"></c:out></th>
-							<td><a href='/recipe/read?rNo=<c:out value="${dto.RNo}"/>'><c:out value="${dto.RTitle}" /></a></td>
+							<td><a href='/recipe/read?rNo=<c:out value="${dto.RNo}"/>&pageNum=${pageResultDTO.pageRequestDTO.pageNum}'><c:out value="${dto.RTitle}" /></a></td>
 							<td><c:out value="${dto.MEmail}"></c:out></td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${dto.RDate}" /></td>
 						</tr>
@@ -39,7 +38,25 @@
                 </table>
             </div>
         </div>
-
+		<nav>
+		  <ul class="pagination">
+		    <li class="page-item ${pageResultDTO.prev ? "":'disabled' }">
+		      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Prev</a>
+		    </li>
+		    
+		    <c:forEach var="page" begin="${pageResultDTO.start}" end="${pageResultDTO.end }">
+		    	<li class="page-item ${page==pageResultDTO.pageRequestDTO.pageNum? 'active' : '' }">
+		    		<a class="page-link" href="/recipe/list?pageNum=${page }">
+		    			<c:out value="${page}"/>
+		    		</a>
+		    	</li>
+		    </c:forEach>
+		   
+		    <li class="page-item ${pageResultDTO.next ? "":'disabled' }">
+		      <a class="page-link" href="#">Next</a>
+		    </li>
+		  </ul>
+		</nav>
 
 </div>
 <!-- /.container-fluid -->

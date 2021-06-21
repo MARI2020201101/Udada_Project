@@ -23,4 +23,6 @@ public class RecipeIngredientDTO {
 	private Long rNo;
 	private String fNo;
 	private double riAmount;
+	
+	private String fName;
 }
