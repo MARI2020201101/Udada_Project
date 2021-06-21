@@ -66,11 +66,14 @@
 	<![CDATA[
 		SELECT * FROM(
 		SELECT 
-		/*+ INDEX_DESC(RECIPE R_NO)*/
+		/*+ INDEX_DESC(R PK_RECIPE)*/
 		R.R_NO, R.M_EMAIL ,R.R_TITLE, R.R_CONTENT, R.R_DATE, ROWNUM RN 
-		FROM RECIPE R) SUB 
+		FROM RECIPE R
+		WHERE ROWNUM <= #{pageNum} * #{pageSize}
+		) SUB 
 		WHERE SUB.RN > (#{pageNum}-1) * #{pageSize} 
-		AND SUB.RN <= #{pageNum} * #{pageSize}
+		
+		
 	]]>
 	</select>
 	<select id="countAll" resultType="int">
