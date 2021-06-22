@@ -2,6 +2,8 @@ package org.ourapp.udada.recipe;
 
 import java.util.List;
 
+import org.ourapp.udada.image.ImageDTO;
+import org.ourapp.udada.mapper.ImageMapper;
 import org.ourapp.udada.mapper.RecipeIngredientMapper;
 import org.ourapp.udada.mapper.RecipeMapper;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ public class RecipeServiceImpl implements RecipeService{
 	
 	private final RecipeMapper recipeMapper;
 	private final RecipeIngredientMapper recipeIngredientMapper;
+	private final ImageMapper imageMapper;
 
 	@Override
 	public List<RecipeDTO> getList() throws Exception{	
@@ -101,6 +104,27 @@ public class RecipeServiceImpl implements RecipeService{
 	@Override
 	public int countAll() {
 		return recipeMapper.countAll();
+	}
+
+	@Override @Transactional
+	public void registerWithIngreAndImage(RecipeDTO recipeDTO) throws Exception {
+		recipeMapper.insertSelectKey(recipeDTO);
+		Long rNo = recipeDTO.getRNo();
+		
+		if(recipeDTO.getImageDTO()!=null && recipeDTO.getImageDTO().getIName()!="") {
+			ImageDTO imageDTO = recipeDTO.getImageDTO();
+			imageDTO.setOriNo(rNo);
+			imageMapper.insert(imageDTO);
+		}
+		
+		if(recipeDTO.getIngredientList()!=null && recipeDTO.getIngredientList().size()>0) {
+			
+			List<RecipeIngredientDTO> ingredientList = recipeDTO.getIngredientList();
+			for(RecipeIngredientDTO dto : ingredientList) {
+				dto.setRNo(rNo);
+				recipeIngredientMapper.insert(dto);
+			}
+		}	
 	}
 	
 	

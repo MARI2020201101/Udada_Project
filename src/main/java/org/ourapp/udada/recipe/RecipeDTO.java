@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.ourapp.udada.food.FoodDTO;
+import org.ourapp.udada.image.ImageDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,6 +33,7 @@ public class RecipeDTO {
 	private Date rDate;
 	
 	private List<RecipeIngredientDTO> ingredientList = new ArrayList<>();
+	private ImageDTO imageDTO;
 	
 	
 

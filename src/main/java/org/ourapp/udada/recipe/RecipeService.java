@@ -17,4 +17,6 @@ public interface RecipeService {
 	boolean modifyWithIngredient(RecipeDTO recipeDTO)throws Exception;
 	List<RecipeDTO> getListWithPaging(PageRequestDTO pageRequestDTO) throws Exception;
 	int countAll();
+	
+	void registerWithIngreAndImage(RecipeDTO recipeDTO)throws Exception;
 }

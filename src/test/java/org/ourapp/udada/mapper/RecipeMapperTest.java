@@ -82,4 +82,10 @@ public class RecipeMapperTest {
 	public void countAllTest() { 
 		log.info("recipe count : "+ recipeMapper.countAll());
 		}
+	
+	@Test 
+	public void selectWithImageAndPagingTest() { 
+			recipeMapper.selectWithImageAndPaging(PageRequestDTO.builder().pageNum(1).pageSize(10).build());
+		}
+	
 }

@@ -11,6 +11,7 @@
 			<result column="R_TITLE" property="rTitle"/>
 			<result column="R_CONTENT" property="rContent"/>
 			<result column="R_DATE" property="rDate"/>
+			<association property="imageDTO" resultMap="imageMap" />
 			<collection property="ingredientList" resultMap="recipeIngredientMap"></collection>
 	</resultMap>
 	
@@ -20,6 +21,14 @@
 			<result column="F_NO" property="fNo"/>
 			<result column="RI_AMOUNT" property="riAmount"/>
 			<result column="F_NAME" property="fName"/>
+	</resultMap>
+	
+	<resultMap type="org.ourapp.udada.image.ImageDTO" id="imageMap" >
+		  	<id column="I_UUID" property="iUuid"/>
+		 	<result column="ORI_NO" property="oriNo"/>
+			<result column="I_NAME" property="iName"/>
+			<result column="I_DIR" property="iDir"/>
+			<result column="I_DIV" property="iDiv"/>
 	</resultMap>
 
 	<select id="getList" resultMap="recipeMap">
@@ -72,11 +81,28 @@
 		WHERE ROWNUM <= #{pageNum} * #{pageSize}
 		) SUB 
 		WHERE SUB.RN > (#{pageNum}-1) * #{pageSize} 
-		
-		
+			
 	]]>
 	</select>
 	<select id="countAll" resultType="int">
 		SELECT COUNT(R_NO) FROM RECIPE
+	</select>
+	
+	<select id="selectWithImageAndPaging" resultMap="recipeMap">
+	<![CDATA[
+		SELECT * FROM(
+		SELECT SSUB.*,I.* FROM (SELECT 
+		/*+ INDEX_DESC(R PK_RECIPE)*/
+		R.R_NO, R.M_EMAIL ,R.R_TITLE, R.R_CONTENT, R.R_DATE, ROWNUM RN 
+		
+		FROM RECIPE R 
+		ORDER BY R_NO DESC
+		) SSUB
+		LEFT JOIN IMAGE I
+		ON SSUB.R_NO = I.ORI_NO
+		) SUB 
+		WHERE SUB.RN > (#{pageNum}-1) * #{pageSize}  AND SUB.RN <= #{pageNum} * #{pageSize}
+	]]>
+	
 	</select>
 </mapper>

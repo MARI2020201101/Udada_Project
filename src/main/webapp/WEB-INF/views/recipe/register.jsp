@@ -7,7 +7,7 @@
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800">Recipe Register Page</h1>
 
-<form method="POST" action="/recipe/register">
+<form method="POST" action="/recipe/register" enctype="multipart/form-data">
       <div class="form-group row">
         <label>TITLE</label>
         <input type="text" class="form-control form-control-user" name="rTitle" >
@@ -22,6 +22,10 @@
       </div>
       <div class="ingreBox"></div>
       <br>
+      <div class="form-group row">
+        <label>IMAGE</label>
+        <input type="file" class="form-control form-control-user imageInput" name="image" >
+      </div>
       <div class="form-group row">
         <label>WRITER</label>
         <input type="text" class="form-control form-control-user" name="mEmail" >
@@ -73,7 +77,8 @@ $(document).ready(function(){
 	var amountBtn = $(".amountBtn");
 	var amountDiv = $(".amountDiv");
 	var searchInput = $(".searchInput");
-	var amountInput = $(".amountInput");	
+	var amountInput = $(".amountInput");
+	var imageInput = $(".imageInput");	
 	var ingreBox = $(".ingreBox");	
 	
 	var cloneModal = modal.clone();
@@ -81,22 +86,60 @@ $(document).ready(function(){
 	var amount = 0;
 	var fnoInselected="";
 	var fnameInselected="";
+
+	var amountDiv = $(".amountDiv");
+	var regEx = new RegExp("\\.(bmp|gif|jpg|jpeg|png)$");
+    var maxSize = 1024*1024*10;
+    var appended = true;
+    
+    imageInput.change(function(e){
+
+		
+		var image = imageInput[0].files;
+		console.log(image);
+		var imageSize = image[0].size;
+		var imageName = image[0].name;
+		
+		if(!(isSafeImage(imageSize, imageName))){
+			appended = false;		
+			}
+		else{
+			appended = true;			
+			}	
+			return appended;
+		});
+
+	function isSafeImage(imageSize, imageName){
+        if(imageSize > maxSize){
+            alert("10MB 이하의 이미지만 업로드 가능합니다.");
+            return false;
+        }
+        if(!(regEx.test(imageName))){
+            alert("이미지 파일만 업로드 가능합니다.");
+            return false;
+        }
+        return true;
+    };
+
 	
 	$(".registerBtn").click(function(e){
 		e.preventDefault();
 		console.log(this);
-		var str="";
-		 $(".ingreBox li").each(function (i , obj){
-			 var target =$(obj);
-			console.log(target);
-			console.log(target.data('fno'));
-			str +="<input type='hidden' type='text' name='ingredientList["+ i +"].fNo' value='"+ target.data('fno') +"'>"
-			str +="<input type='hidden' type='text' name='ingredientList["+ i +"].riAmount' value='"+ target.data('amount') +"'>"
+		if(appended){
 
-			 });
-		 $("form").append(str);
-		 $("form").submit();
-		
+			var str="";
+			 $(".ingreBox li").each(function (i , obj){
+				 var target =$(obj);
+				console.log(target);
+				console.log(target.data('fno'));
+				str +="<input type='hidden' type='text' name='ingredientList["+ i +"].fNo' value='"+ target.data('fno') +"'>"
+				str +="<input type='hidden' type='text' name='ingredientList["+ i +"].riAmount' value='"+ target.data('amount') +"'>"
+
+				 });
+			 $("form").append(str);
+			 $("form").submit();
+			}
+			
 		
 	});
 	

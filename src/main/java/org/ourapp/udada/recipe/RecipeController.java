@@ -2,12 +2,14 @@ package org.ourapp.udada.recipe;
 
 import java.util.List;
 
+import org.ourapp.udada.image.ImageController;
+import org.ourapp.udada.image.ImageDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.RequiredArgsConstructor;
@@ -48,12 +50,21 @@ public class RecipeController {
 	}
 	
 	@PostMapping("/register")
-	public String register(RecipeDTO recipeDTO , RedirectAttributes rttr) throws Exception{
-		
+	public String register(RecipeDTO recipeDTO , RedirectAttributes rttr , MultipartFile image) throws Exception{
+
 		log.info("register..........................");
 		log.info(recipeDTO);
+		
+		if(image!=null && image.getOriginalFilename()!="") {
+			 ImageDTO imageDTO = ImageController.uploadImage(image);
+			 imageDTO.setIDiv("RCP");
+			 recipeDTO.setImageDTO(imageDTO);
+			 log.info(imageDTO);
+		}
+		
 		//recipeService.register(recipeDTO);
-		recipeService.registerWithIngredient(recipeDTO);
+		//recipeService.registerWithIngredient(recipeDTO);
+		recipeService.registerWithIngreAndImage(recipeDTO);
 		rttr.addFlashAttribute("msg", "레시피가 등록되었습니다.");
 		
 		return "redirect:/recipe/list";

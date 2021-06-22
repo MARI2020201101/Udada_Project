@@ -19,4 +19,6 @@ public interface RecipeMapper {
 	List<RecipeDTO> selectWithPaging(PageRequestDTO pageRequestDTO);
 	int countAll();
 	
+	List<RecipeDTO> selectWithImageAndPaging(PageRequestDTO pageRequestDTO);
+	
 }
