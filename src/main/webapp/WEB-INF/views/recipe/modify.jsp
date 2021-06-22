@@ -38,6 +38,7 @@
 								<b class='card-title ingreName'>${ingredient.FName}</b>
 								<p class='card-text'>
 									<span>selected amount : </span>${ingredient.riAmount}</p>
+									<button type='button' class='btn btn-danger btn-sm cancelIngre' >&times;</button>
 							</div>
 						</div>
 					</li>
