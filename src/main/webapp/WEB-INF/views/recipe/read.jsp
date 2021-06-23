@@ -6,11 +6,17 @@
 
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800">Recipe Read Page</h1>
-		<input type="hidden" class="form-control form-control-user" name="pageNum" value=${pageRequestDTO.pageNum }>
-		<div class="form-group row">
-       <label>RNO</label>
-        <input type="text" class="form-control form-control-user" value="${dto.RNo}" readonly>
-      </div>
+	<input type="hidden" class="form-control form-control-user" name="pageNum" value=${pageRequestDTO.pageNum }>
+	<input type="hidden" class="form-control form-control-user" name="keyword" value=${pageRequestDTO.keyword }>
+	<input type="hidden" class="form-control form-control-user" name="rNo" value="${dto.RNo}">
+	 <div class="form-group row">
+      <c:if test="${not empty dto.imageDTO && dto.imageDTO.IName!='' }">
+      <a href="/image/show?imagePath=${dto.imageDTO.imagePath }">      	
+		<img src="/image/show?imagePath=${dto.imageDTO.thumbnailPath }">
+		<p>크게보기</p>
+		</a>
+	  </c:if>
+	  </div>
       <div class="form-group row">
         <label>TITLE</label>
         <input type="text" class="form-control form-control-user" value="${dto.RTitle}" readonly>
@@ -48,10 +54,10 @@
 		</ul>
 	</div>
 
-	<a href="/recipe/list?pageNum=${pageRequestDTO.pageNum }" class="btn btn-secondary">
+	<a href="/recipe/list?pageNum=${pageRequestDTO.pageNum }&keyword=${pageRequestDTO.keyword}" class="btn btn-secondary">
             <span class="text">LIST</span>
         </a>
-        <a href='/recipe/modify?rNo=${dto.RNo}&pageNum=${pageRequestDTO.pageNum }' class="btn btn-warning">
+        <a href='/recipe/modify?rNo=${dto.RNo}&pageNum=${pageRequestDTO.pageNum }&keyword=${pageRequestDTO.keyword}' class="btn btn-warning">
         	<span class="text">MODIFY</span>
         </a>
 </div>

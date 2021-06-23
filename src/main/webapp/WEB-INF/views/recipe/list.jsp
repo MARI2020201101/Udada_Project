@@ -7,12 +7,28 @@
 
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800">Recipe list Page</h1>
-	
-		<a href="/recipe/register" class="btn btn-primary">
-            <span class="text">Register</span>
-        </a>
-  
-        <div class="card-body">
+
+	<a href="/recipe/register" class="btn btn-primary"> <span
+		class="text">Register</span>
+	</a>
+	<!-- Topbar Search -->
+	<form action="/recipe/list" method="GET" id="searchForm"
+		class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+		<input type="hidden" class="form-control form-control-user" name="pageNum" value=${pageResultDTO.pageRequestDTO.pageNum }>
+		
+		<div class="input-group">
+			<input type="text" class="form-control bg-light border- small" name="keyword" value="${pageRequestDTO.keyword }"
+				placeholder="Search for..." aria-label="Search"
+				aria-describedby="basic-addon2">
+			<div class="input-group-append">
+				<button class="btn btn-primary searchBtn" type="button">
+					<i class="fas fa-search fa-sm"></i>
+				</button>
+			</div>
+		</div>
+	</form>
+
+	<div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -27,8 +43,16 @@
 
 					<c:forEach var="dto" items="${list}">
 						<tr>
-							<th scope="row"><c:out value="${dto.RNo}"></c:out></th>
-							<td><a href='/recipe/read?rNo=<c:out value="${dto.RNo}"/>&pageNum=${pageResultDTO.pageRequestDTO.pageNum}'><c:out value="${dto.RTitle}" /></a></td>
+							<th scope="row"><c:out value="${dto.RNo}"></c:out>
+								<c:if test="${not empty dto.imageDTO && dto.imageDTO.IName!='' }">
+									<img src="/image/show?imagePath=${dto.imageDTO.thumbnailPath }">
+								</c:if>
+							</th>
+							<td>																
+								<a href='/recipe/read?rNo=<c:out value="${dto.RNo}"/>&pageNum=${pageResultDTO.pageRequestDTO.pageNum}&keyword=${pageResultDTO.pageRequestDTO.keyword }'>
+								<c:out value="${dto.RTitle}" />
+								</a>
+							</td>
 							<td><c:out value="${dto.MEmail}"></c:out></td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${dto.RDate}" /></td>
 						</tr>
@@ -41,19 +65,19 @@
 		<nav>
 		  <ul class="pagination">
 		    <li class="page-item ${pageResultDTO.prev ? "":'disabled' }">
-		      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Prev</a>
+		      <a class="page-link" href="/recipe/list?pageNum=${pageResultDTO.pageRequestDTO.pageNum-1}&keyword=${pageResultDTO.pageRequestDTO.keyword}" tabindex="-1" aria-disabled="true">Prev</a>
 		    </li>
 		    
 		    <c:forEach var="page" begin="${pageResultDTO.start}" end="${pageResultDTO.end }">
 		    	<li class="page-item ${page==pageResultDTO.pageRequestDTO.pageNum? 'active' : '' }">
-		    		<a class="page-link" href="/recipe/list?pageNum=${page }">
+		    		<a class="page-link" href="/recipe/list?pageNum=${page}&keyword=${pageResultDTO.pageRequestDTO.keyword}">
 		    			<c:out value="${page}"/>
 		    		</a>
 		    	</li>
 		    </c:forEach>
 		   
 		    <li class="page-item ${pageResultDTO.next ? "":'disabled' }">
-		      <a class="page-link" href="#">Next</a>
+		      <a class="page-link" href="/recipe/list?pageNum=${pageResultDTO.pageRequestDTO.pageNum+1}&keyword=${pageResultDTO.pageRequestDTO.keyword}">Next</a>
 		    </li>
 		  </ul>
 		</nav>
@@ -83,8 +107,17 @@
         </div>
 <script>
 $(document).ready(function(){
+
+	var searchForm = $("#searchForm");
 	var msg = '${msg}';
 	console.log("msg>>",msg);
+
+	$("#searchForm button").on("click",function(e){
+
+		searchForm.find("input[name='pageNum']").val(1);
+		searchForm.submit();		
+		});
+
 	if (!(msg===''||history.state)){
 		var modal= $(".modal");
 		console.log(modal);	
