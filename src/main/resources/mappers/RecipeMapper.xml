@@ -105,4 +105,16 @@
 	]]>
 	
 	</select>
+	
+	<select id="selectWithIngreAndFoodAndImage" resultMap="recipeMap" >
+		SELECT R.*, RI.*, F.* , I.* FROM RECIPE R
+		LEFT JOIN RECIPE_INGREDIENT RI 
+		ON R.R_NO = RI.R_NO
+		LEFT JOIN FOOD F
+		ON RI.F_NO = F.F_NO
+        LEFT JOIN IMAGE I
+        ON R.R_NO = I.ORI_NO
+		WHERE R.R_NO = #{rNo}
+	
+	</select>
 </mapper>

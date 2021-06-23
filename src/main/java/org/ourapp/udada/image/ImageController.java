@@ -68,7 +68,16 @@ public class ImageController {
          return new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);     
     } 
 
-    
+    public static boolean removeImage(String imagePath) throws Exception{
+
+        File file = new File(uploadFolder+File.separator + imagePath);
+        File thumbnailImage = new File(file.getParent(), "thumb_"+file.getName());
+        if(file.exists()) {
+            file.delete();
+            thumbnailImage.delete();
+        }     
+        return true;
+}
     
 	private static String makeDirectory() throws Exception{
 		

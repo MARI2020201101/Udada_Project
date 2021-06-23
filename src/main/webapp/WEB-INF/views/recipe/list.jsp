@@ -27,8 +27,16 @@
 
 					<c:forEach var="dto" items="${list}">
 						<tr>
-							<th scope="row"><c:out value="${dto.RNo}"></c:out></th>
-							<td><a href='/recipe/read?rNo=<c:out value="${dto.RNo}"/>&pageNum=${pageResultDTO.pageRequestDTO.pageNum}'><c:out value="${dto.RTitle}" /></a></td>
+							<th scope="row"><c:out value="${dto.RNo}"></c:out>
+								<c:if test="${not empty dto.imageDTO && dto.imageDTO.IName!='' }">
+									<img src="/image/show?imagePath=${dto.imageDTO.thumbnailPath }">
+								</c:if>
+							</th>
+							<td>																
+								<a href='/recipe/read?rNo=<c:out value="${dto.RNo}"/>&pageNum=${pageResultDTO.pageRequestDTO.pageNum}'>
+								<c:out value="${dto.RTitle}" />
+								</a>
+							</td>
 							<td><c:out value="${dto.MEmail}"></c:out></td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${dto.RDate}" /></td>
 						</tr>

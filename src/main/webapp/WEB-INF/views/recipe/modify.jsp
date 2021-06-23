@@ -7,12 +7,17 @@
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800">Recipe Modify Page</h1>
 	
-	<form method="POST" action="/recipe/modify">
+	<form method="POST" action="/recipe/modify" enctype="multipart/form-data">
 	<input type="hidden" class="form-control form-control-user" name="pageNum" id="pageNum" value=${pageRequestDTO.pageNum }>
-		<div class="form-group row">
-       <label>RNO</label>
-        <input type="text" class="form-control form-control-user" name="rNo" value="${dto.RNo}" readonly>
-      </div>
+	<input type="hidden" class="form-control form-control-user" name="rNo" value="${dto.RNo}">
+	<div class="form-group row">
+      <c:if test="${not empty dto.imageDTO && dto.imageDTO.IName!='' }">
+      <a href="/image/show?imagePath=${dto.imageDTO.imagePath }">      	
+		<img src="/image/show?imagePath=${dto.imageDTO.thumbnailPath }">
+		<p>크게보기</p>
+		</a>
+	  </c:if>
+	  </div>
       <div class="form-group row">
         <label>TITLE</label>
         <input type="text" class="form-control form-control-user" name="rTitle" value="${dto.RTitle}" >
@@ -48,6 +53,22 @@
 		</ul>
 	</div>
 	<br>
+	  <div class="form-group row">
+        <label>NEW IMAGE</label>
+        <input type="file" class="form-control form-control-user imageInput" name="image" >
+      </div>
+       <div class="form-group row">
+         <label>ORIGINAL IMAGE</label>
+         <c:if test="${not empty dto.imageDTO && dto.imageDTO.IName!='' }">
+         <input type="text" class="form-control form-control-user"  name="imageDTO.iName" value="${dto.imageDTO.IName}" readonly>
+         <input type="hidden" class="form-control form-control-user" name="imageDTO.iUuid" value=${dto.imageDTO.IUuid }>
+         <input type="hidden" class="form-control form-control-user" name="imageDTO.oriNo" value=${dto.imageDTO.oriNo }>
+         <input type="hidden" class="form-control form-control-user" name="imageDTO.iDir"  value=${dto.imageDTO.IDir }>
+         <input type="hidden" class="form-control form-control-user" name="imageDTO.iDiv"  value=${dto.imageDTO.IDiv }>
+         </c:if>
+        </div>
+
+      	 
       <a class="btn btn-secondary listBtn">
             <span class="text">LIST</span>
         </a>

@@ -27,9 +27,9 @@ public class RecipeController {
 	public void getList(Model model , PageRequestDTO pageRequestDTO) throws Exception{
 		log.info("recipeController.......................");
 		
-		//List<RecipeDTO> list = recipeService.getList();	
-		
-		List<RecipeDTO> list = recipeService.getListWithPaging(pageRequestDTO);
+		//List<RecipeDTO> list = recipeService.getList();			
+		//List<RecipeDTO> list = recipeService.getListWithPaging(pageRequestDTO);
+		List<RecipeDTO> list = recipeService.getListWithImageAndPaging(pageRequestDTO);
 		model.addAttribute("list", list);
 		int total = recipeService.countAll();
 		model.addAttribute("pageResultDTO", new PageResultDTO(pageRequestDTO, total));
@@ -42,7 +42,8 @@ public class RecipeController {
 		log.info("read.......................");
 		//model.addAttribute("dto", recipeService.get(rNo));
 		//model.addAttribute("dto", recipeService.getWithIngredient(rNo));
-		model.addAttribute("dto", recipeService.getWithIngredientAndFood(rNo));
+		//model.addAttribute("dto", recipeService.getWithIngredientAndFood(rNo));
+		model.addAttribute("dto", recipeService.getWithIngreAndFoodAndImage(rNo));
 	}
 	
 	@GetMapping("/register")
@@ -72,24 +73,43 @@ public class RecipeController {
 	
 	@GetMapping("/modify")
 	public void modifyForm(Long rNo, Model model , PageRequestDTO pageRequestDTO) throws Exception{
-		model.addAttribute("dto", recipeService.getWithIngredientAndFood(rNo));
+		model.addAttribute("dto", recipeService.getWithIngreAndFoodAndImage(rNo));
 	}
 	@PostMapping("/modify")
-	public String modify(RecipeDTO recipeDTO, Model model, RedirectAttributes rttr ,PageRequestDTO pageRequestDTO) throws Exception{
-		log.info(recipeDTO);
+	public String modify(RecipeDTO recipeDTO, MultipartFile image, Model model, RedirectAttributes rttr ,PageRequestDTO pageRequestDTO) throws Exception{
+		
+		log.info("modify.......................");
+		log.info("modify.......+" + recipeDTO);
+		
+		//이미지 교체 or 새로등록
+		if(image!=null && image.getOriginalFilename()!="") {
+			
+			if(recipeDTO.getImageDTO()!=null && recipeDTO.getImageDTO().getIName()!="") {
+				 ImageController.removeImage(recipeDTO.getImageDTO().getImagePath());
+			}
+			 ImageDTO imageDTO = ImageController.uploadImage(image);
+			 imageDTO.setIDiv("RCP");
+			 recipeDTO.setImageDTO(imageDTO);
+			 log.info("modify.......+" + imageDTO);
+		}
+		
+		
 		//recipeService.modify(recipeDTO);
-		recipeService.modifyWithIngredient(recipeDTO);
+		recipeService.modifyWithIngreAndImage(recipeDTO);
 		rttr.addFlashAttribute("msg","레시피가 수정되었습니다. ");
 
 		return "redirect:/recipe/read?rNo="+recipeDTO.getRNo()+"&pageNum="+pageRequestDTO.getPageNum();
 	}
 	
 	@PostMapping("/remove")
-	public String remove(Long rNo, RedirectAttributes rttr) throws Exception{
+	public String remove(RecipeDTO recipeDTO, RedirectAttributes rttr) throws Exception{
 
-		log.info("\nremove rNo: "+rNo);
+		if(recipeDTO.getImageDTO()!=null && recipeDTO.getImageDTO().getIName()!="") {
+				 ImageController.removeImage(recipeDTO.getImageDTO().getImagePath());
+			}		 		
 		//recipeService.remove(rNo);
-		recipeService.removeWithIngredient(rNo);
+		//recipeService.removeWithIngredient(rNo);
+		recipeService.removeWithIngreAndImage(recipeDTO.getRNo());
 		rttr.addFlashAttribute("msg","레시피가 삭제되었습니다. ");
 		
 		return "redirect:/recipe/list";

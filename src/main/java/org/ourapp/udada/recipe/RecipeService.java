@@ -19,4 +19,8 @@ public interface RecipeService {
 	int countAll();
 	
 	void registerWithIngreAndImage(RecipeDTO recipeDTO)throws Exception;
+	List<RecipeDTO> getListWithImageAndPaging(PageRequestDTO pageRequestDTO) throws Exception;
+	RecipeDTO  getWithIngreAndFoodAndImage(Long rNo)throws Exception;
+	boolean modifyWithIngreAndImage(RecipeDTO recipeDTO)throws Exception;
+	boolean removeWithIngreAndImage(Long rNo)throws Exception;
 }

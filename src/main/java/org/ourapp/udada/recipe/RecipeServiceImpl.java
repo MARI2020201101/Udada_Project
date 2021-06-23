@@ -128,5 +128,49 @@ public class RecipeServiceImpl implements RecipeService{
 	}
 	
 	
+	@Override
+	public List<RecipeDTO> getListWithImageAndPaging(PageRequestDTO pageRequestDTO) throws Exception {
+		return recipeMapper.selectWithImageAndPaging(pageRequestDTO);
+	}
+
+	@Override
+	public RecipeDTO getWithIngreAndFoodAndImage(Long rNo) throws Exception {
+		return recipeMapper.selectWithIngreAndFoodAndImage(rNo);
+	}
+
+	@Override @Transactional
+	public boolean modifyWithIngreAndImage(RecipeDTO recipeDTO) throws Exception {
+		Long rNo = recipeDTO.getRNo();
+		recipeIngredientMapper.deleteByRNo(rNo);
+		imageMapper.delete(rNo, "RCP");
+		
+		int result = recipeMapper.update(recipeDTO);
+		
+		if(recipeDTO.getImageDTO()!=null && recipeDTO.getImageDTO().getIName()!="") {
+			ImageDTO imageDTO = recipeDTO.getImageDTO();
+			imageDTO.setOriNo(rNo);
+			imageMapper.insert(imageDTO);
+		}
+		if(recipeDTO.getIngredientList()!=null && recipeDTO.getIngredientList().size()>0) {
+			
+			List<RecipeIngredientDTO> ingredientList = recipeDTO.getIngredientList();
+			for(RecipeIngredientDTO dto : ingredientList) {
+				dto.setRNo(rNo);
+				recipeIngredientMapper.insert(dto);
+			}
+		}	
+		return result==1;
+	}
+
+	@Override @Transactional
+	public boolean removeWithIngreAndImage(Long rNo) throws Exception {
+		imageMapper.delete(rNo, "RCP");
+		recipeIngredientMapper.deleteByRNo(rNo);
+		return recipeMapper.delete(rNo)==1;
+	}
+
+
+	
+	
 
 }

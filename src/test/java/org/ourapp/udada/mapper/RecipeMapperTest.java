@@ -88,4 +88,9 @@ public class RecipeMapperTest {
 			recipeMapper.selectWithImageAndPaging(PageRequestDTO.builder().pageNum(1).pageSize(10).build());
 		}
 	
+	@Test
+	public void selectWithIngreAndFoodAndImageTest() {
+		log.info(recipeMapper.selectWithIngreAndFoodAndImage(10L).toString());
+	}
+	
 }
