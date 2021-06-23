@@ -11,13 +11,20 @@ public class PageRequestDTO {
 	
 	private int pageNum;
 	private int pageSize;
+	private String keyword;
 	
 	public PageRequestDTO() {
-		this(1,10);
+		this(1,10,"");
 	}
 
 	public PageRequestDTO(int pageNum, int pageSize) {
 		this.pageNum=pageNum;
 		this.pageSize=pageSize;
+	}
+	
+	public PageRequestDTO(int pageNum, int pageSize, String keyword) {
+		this.pageNum=pageNum;
+		this.pageSize=pageSize;
+		this.keyword=keyword;
 	}
 }

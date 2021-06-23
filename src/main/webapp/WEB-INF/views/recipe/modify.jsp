@@ -9,6 +9,7 @@
 	
 	<form method="POST" action="/recipe/modify" enctype="multipart/form-data">
 	<input type="hidden" class="form-control form-control-user" name="pageNum" id="pageNum" value=${pageRequestDTO.pageNum }>
+	<input type="hidden" class="form-control form-control-user" name="keyword" id="keyword" value=${pageRequestDTO.keyword }>
 	<input type="hidden" class="form-control form-control-user" name="rNo" value="${dto.RNo}">
 	<div class="form-group row">
       <c:if test="${not empty dto.imageDTO && dto.imageDTO.IName!='' }">
@@ -128,7 +129,7 @@ $(document).ready(function(){
 	var amount = 0;
 	var fnoInselected="";
 	var fnameInselected="";
-	var pageNum = $("#pageNum").val();
+
 	var ingreName = $(".ingreName");
 
 	if(ingreName.text()==''|| ingreName.text()==null){
@@ -155,10 +156,17 @@ $(document).ready(function(){
 	$(".listBtn").on("click",function(e){
 		e.preventDefault();
 		console.log($(this));
+		var pageNum = $("#pageNum").clone();
+		var keyword = $("#keyword").clone();
+		console.log("pageNum>>",pageNum);
+		console.log("keyword>>",keyword);
 		
 		form.empty();
+		form.append(pageNum);
+		form.append(keyword);
 		form.attr("method","GET");
-		form.attr("action","/recipe/list?pageNum="+pageNum);
+
+		form.attr("action","/recipe/list");
 		console.log(form);
 		form.submit();
 		});

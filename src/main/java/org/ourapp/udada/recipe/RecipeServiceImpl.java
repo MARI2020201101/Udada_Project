@@ -169,6 +169,16 @@ public class RecipeServiceImpl implements RecipeService{
 		return recipeMapper.delete(rNo)==1;
 	}
 
+	@Override
+	public int countAllWithSearch(PageRequestDTO pageRequestDTO) {
+		return recipeMapper.countAllWithSearch(pageRequestDTO);
+	}
+
+	@Override
+	public List<RecipeDTO> getListWithImageAndPagingAndSearch(PageRequestDTO pageRequestDTO) throws Exception {
+		return recipeMapper.selectWithImageAndPagingAndSearch(pageRequestDTO);
+	}
+
 
 	
 	

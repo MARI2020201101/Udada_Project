@@ -86,6 +86,7 @@
 	</select>
 	<select id="countAll" resultType="int">
 		SELECT COUNT(R_NO) FROM RECIPE
+		
 	</select>
 	
 	<select id="selectWithImageAndPaging" resultMap="recipeMap">
@@ -116,5 +117,36 @@
         ON R.R_NO = I.ORI_NO
 		WHERE R.R_NO = #{rNo}
 	
+	</select>
+	
+	<select id="selectWithImageAndPagingAndSearch" resultMap="recipeMap">
+	
+	<![CDATA[
+		SELECT SSUB.* FROM
+        (SELECT SUB.*, ROWNUM AS RN FROM
+        (SELECT 
+		R.R_NO , R.M_EMAIL ,R.R_TITLE, R.R_CONTENT, R.R_DATE ,I.*
+		FROM RECIPE R 
+        LEFT JOIN IMAGE I
+        ON R.R_NO = I.ORI_NO  
+       ]]>     		
+    <where>  
+	<if test = "keyword != null">
+		R.R_TITLE LIKE '%'||#{keyword}||'%'
+	</if>
+	</where>   
+    <![CDATA[
+		ORDER BY R_NO DESC)SUB )SSUB    
+        WHERE SSUB.RN > (#{pageNum}-1) * #{pageSize} AND SSUB.RN <= #{pageNum} * #{pageSize}          
+	]]>
+	</select>
+	
+	<select id="countAllWithSearch" resultType="int">
+		SELECT COUNT(R_NO) FROM RECIPE
+	<where>  
+		<if test = "keyword != null">
+		R_TITLE LIKE '%'||#{keyword}||'%'
+		</if>
+	</where>
 	</select>
 </mapper>

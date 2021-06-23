@@ -29,9 +29,11 @@ public class RecipeController {
 		
 		//List<RecipeDTO> list = recipeService.getList();			
 		//List<RecipeDTO> list = recipeService.getListWithPaging(pageRequestDTO);
-		List<RecipeDTO> list = recipeService.getListWithImageAndPaging(pageRequestDTO);
+		//List<RecipeDTO> list = recipeService.getListWithImageAndPaging(pageRequestDTO);
+		List<RecipeDTO> list = recipeService.getListWithImageAndPagingAndSearch(pageRequestDTO);
 		model.addAttribute("list", list);
-		int total = recipeService.countAll();
+		//int total = recipeService.countAll();
+		int total = recipeService.countAllWithSearch(pageRequestDTO);
 		model.addAttribute("pageResultDTO", new PageResultDTO(pageRequestDTO, total));
 		
 		//list.stream().map(r->r.getRTitle()).forEach(System.out::println);		
@@ -98,7 +100,7 @@ public class RecipeController {
 		recipeService.modifyWithIngreAndImage(recipeDTO);
 		rttr.addFlashAttribute("msg","레시피가 수정되었습니다. ");
 
-		return "redirect:/recipe/read?rNo="+recipeDTO.getRNo()+"&pageNum="+pageRequestDTO.getPageNum();
+		return "redirect:/recipe/read?rNo="+recipeDTO.getRNo()+"&pageNum="+pageRequestDTO.getPageNum()+"&keyword="+pageRequestDTO.getKeyword();
 	}
 	
 	@PostMapping("/remove")

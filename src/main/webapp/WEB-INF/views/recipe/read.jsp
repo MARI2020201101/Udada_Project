@@ -7,6 +7,7 @@
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800">Recipe Read Page</h1>
 	<input type="hidden" class="form-control form-control-user" name="pageNum" value=${pageRequestDTO.pageNum }>
+	<input type="hidden" class="form-control form-control-user" name="keyword" value=${pageRequestDTO.keyword }>
 	<input type="hidden" class="form-control form-control-user" name="rNo" value="${dto.RNo}">
 	 <div class="form-group row">
       <c:if test="${not empty dto.imageDTO && dto.imageDTO.IName!='' }">
@@ -53,10 +54,10 @@
 		</ul>
 	</div>
 
-	<a href="/recipe/list?pageNum=${pageRequestDTO.pageNum }" class="btn btn-secondary">
+	<a href="/recipe/list?pageNum=${pageRequestDTO.pageNum }&keyword=${pageRequestDTO.keyword}" class="btn btn-secondary">
             <span class="text">LIST</span>
         </a>
-        <a href='/recipe/modify?rNo=${dto.RNo}&pageNum=${pageRequestDTO.pageNum }' class="btn btn-warning">
+        <a href='/recipe/modify?rNo=${dto.RNo}&pageNum=${pageRequestDTO.pageNum }&keyword=${pageRequestDTO.keyword}' class="btn btn-warning">
         	<span class="text">MODIFY</span>
         </a>
 </div>

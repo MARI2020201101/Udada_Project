@@ -93,4 +93,14 @@ public class RecipeMapperTest {
 		log.info(recipeMapper.selectWithIngreAndFoodAndImage(10L).toString());
 	}
 	
+	@Test
+	public void selectWithImageAndPagingAndSearchTest() {
+		recipeMapper.selectWithImageAndPagingAndSearch(PageRequestDTO.builder().pageNum(1).pageSize(10).keyword("테").build());
+	}
+	
+	@Test
+	public void countAllWithSearchTest() {
+		recipeMapper.countAllWithSearch(PageRequestDTO.builder().pageNum(1).pageSize(10).keyword("테").build());
+	}
+	
 }
