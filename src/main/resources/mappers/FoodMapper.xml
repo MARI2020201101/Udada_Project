@@ -4,7 +4,70 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="org.ourapp.udada.mapper.FoodMapper">
-	<select id = "countAll" resultType = "int">
-		SELECT COUNT(*) FROM FOOD
+
+	<resultMap type="org.ourapp.udada.food.FoodDTO" id="foodMap">
+			<id column="F_NO" property="fNO"/>
+			<result column="F_NAME" property="fName"/>
+			<result column="F_MJCLASS" property="fMjclass"/>
+			<result column="F_MNCLASS" property="fMinclass"/>
+			<result column="F_ONCEOFFER" property="fOnceoffer"/>
+			<result column="F_KCAL" property="fKcal"/>
+			<result column="F_PROTEIN" property="fProtein"/>
+			<result column="F_FAT" property="fFat"/>
+			<result column="F_CARBO" property="fCarbo"/>
+	</resultMap>
+	
+	<select id="getList" resultMap="foodMap">
+		SELECT F_MJCLASS FROM FOOD GROUP BY F_MJCLASS
 	</select>
+	
+	<select id="getMn_List" resultMap="foodMap">
+		SELECT F_NAME, F_MNCLASS FROM FOOD WHERE F_MJCLASS LIKE #{fMjclass}
+	</select>
+	
+	<!-- <select id = "countAll" resultType = "int">
+		SELECT COUNT(*) FROM FOOD
+	</select> -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- <select id="selectByFName" resultMap="foodMap">
+	<![CDATA[
+	SELECT * FROM FOOD WHERE F_NAME LIKE '%'||#{keyword}||'%'  AND ROWNUM <= 10
+	    ]]>
+	</select> -->
 </mapper>

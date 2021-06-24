@@ -42,8 +42,4 @@ public class HomeController {
 	}
 	
 	
-	@GetMapping("/journal/list")
-	public void listSample(Model model) {
-
-	}
 }

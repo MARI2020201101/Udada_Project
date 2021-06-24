@@ -18,14 +18,16 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                     <tr>
-                        <th  scope="col">대분류</th>
+                    	<th  scope="col">소분류</th>
+                        <th  scope="col">식품명</th>
                     </tr>
                     </thead>
                     <tbody>
 
-					<c:forEach var="dto" items="${list}">
+					<c:forEach var="dto" items="${Mn_list}">
 						<tr>
-							<th scope="row"><a href='/food/MnClass?fMjclass=<c:out value="${dto.FMjclass}"/>'><c:out value="${dto.FMjclass}" /></a></th>
+							<th scope="row"><c:out value="${dto.FMinclass}"></c:out></th>
+							<td><a href='/food/name?fName=<c:out value="${dto.FName}"/>'><c:out value="${dto.FName}" /></a></td>
 						</tr>
 
 					</c:forEach>

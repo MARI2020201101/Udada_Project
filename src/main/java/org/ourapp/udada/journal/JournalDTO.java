@@ -1,5 +1,7 @@
 package org.ourapp.udada.journal;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -14,7 +16,8 @@ public class JournalDTO {
 	private long jNo;
 	private String mEmail;
 	private String jContent;
-	private String jDate;
+	private Date jDate;
+	private int lCnt;
 	
 	
 	

@@ -7,7 +7,7 @@
 <div class="container-fluid">
 
 	<!-- Page Heading -->
-	<h1 class="h3 mb-4 text-gray-800">Journal list Page</h1>
+	<h1 class="h3 mb-4 text-gray-800">journal list Page</h1>
 	
 		<a href="/journal/register" class="btn btn-primary">
             <span class="text">저널등록</span>
@@ -19,7 +19,7 @@
                     <thead>
                     <tr>
                         <th  scope="col">#</th>
-                        <th  scope="col">Writer</th>
+                        <th  scope="col">Email</th>
                         <th  scope="col">Content</th>
                         <th  scope="col">Like</th>
                         <th  scope="col">RegDate</th>
@@ -32,11 +32,9 @@
 							<th scope="row" ><a href='/journal/read?jNo=<c:out value="${dto.JNo}"/>'><c:out value="${dto.JNo}"></c:out></a></th>
 							<td>${dto.MEmail}</td>
 							<td><c:out value="${dto.JContent}"></c:out></td>
-							<td><a class="heart"><img src="/resources/imgs/heart2.svg" id="heart"></a></td>
-							
+							<td><button type="button" name="likebtn">좋아요</button></td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${dto.JDate}" /></td>
 						</tr>
-
 					</c:forEach>
 				</tbody>
                 </table>
@@ -79,51 +77,5 @@ $(document).ready(function(){
 });
 	
 </script>
-
-
-<!-- 좋아요 버튼 -->
-<script>
-$(document).ready(function () {
-
-    var heartval = ${heart};
-
-    if(heartval>0) {
-        console.log(heartval);
-        $("#heart").prop("src", "/resources/imgs/heart2.svg");
-        $(".heart").prop('name',heartval)
-    }
-    else {
-        console.log(heartval);
-        $("#heart").prop("src", "/resources/imgs/heart1.svg");
-        $(".heart").prop('name',heartval)
-    }
-
-    $(".heart").on("click", function () {
-
-        var that = $(".heart");
-
-        var sendData = {'mEmail' : '${dto.MEmail}','heart' : that.prop('name')};
-        $.ajax({
-            url :'/journal/heart',
-            type :'POST',
-            data : sendData,
-            success : function(data){
-                that.prop('name',data);
-                if(data==1) {
-                    $('#heart').prop("src","/resources/imgs/heart2.svg");
-                }
-                else{
-                    $('#heart').prop("src","/resources/imgs/heart1.svg");
-                }
-
-
-            }
-        });
-    });
-});
-
-
-</script>
-<!-- 좋아요 버튼 끝 -->
 
 <%@ include file="../include/footer.jsp"%>
