@@ -1,6 +1,9 @@
 package org.ourapp.udada.recipe;
 
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,8 +31,18 @@ public class RecipeGradeController {
 	   return new ResponseEntity<>(avg , HttpStatus.OK);
 	  }
 	
-	@PostMapping("/recipe/grade")
-	public ResponseEntity<String> register(@RequestBody RecipeGradeDTO recipeGradeDTO) throws Exception {
+	@PostMapping(value = "/recipe/grade", consumes="application/json" , produces= {MediaType.TEXT_PLAIN_VALUE})
+	public ResponseEntity<String> register(
+			@RequestBody Map<String, String> params) throws Exception {
+		log.info(params.toString());
+		Long rNo = Long.parseLong(params.get("rNo"));
+		String mEmail = params.get("mEmail");
+		int rgGrade = Integer.parseInt(params.get("rgGrade"));
+		
+		RecipeGradeDTO recipeGradeDTO = RecipeGradeDTO.builder()
+		  .rNo(rNo).mEmail(mEmail).rgGrade(rgGrade).build();
+		 
+		 log.info(recipeGradeDTO.toString()); 
 		recipeGradeService.register(recipeGradeDTO);
 		return new ResponseEntity<>("success",HttpStatus.OK);
 	}

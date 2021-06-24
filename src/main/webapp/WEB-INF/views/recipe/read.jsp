@@ -21,18 +21,20 @@
 	<input type="hidden" class="form-control form-control-user" name="keyword" value=${pageRequestDTO.keyword }>
 	<input type="hidden" class="form-control form-control-user" name="rNo" value="${dto.RNo}">
 	
+<div class="form-group row">
 	<p class="starBox"></p>
-	
+ 	</div>	
 	<div class="form-group row">
-	<select class="form-select form-select-sm" aria-label="이 레시피를 평가해주세요..">
+		
+	<select class="form-select form-select-sm selectStarOption" aria-label="이 레시피를 평가해주세요..">
 	  <option value=5>5</option>
 	  <option value=4>4</option>
 	  <option value=3>3</option>
 	  <option value=2>2</option>
 	  <option value=1>1</option>
-	</select>
-	<button type="button" class="btn btn-primary btn-sm" >평가하기</button>
-	</div>
+	</select>&nbsp;
+	<button type="button" class="btn btn-primary btn-sm insertStarBtn" >평가하기</button>
+ 	</div>
 	 <div class="form-group row">
       <c:if test="${not empty dto.imageDTO && dto.imageDTO.IName!='' }">
       <a href="/image/show?imagePath=${dto.imageDTO.imagePath }">      	
@@ -116,11 +118,39 @@ $(document).ready(function(){
 	var msg = '${msg}';
 	var ingreName = $(".ingreName");
 	var ingreBox = $(".ingreBox");
-
+	var insertStarBtn = $(".insertStarBtn");
+	var selectStarOption = $(".selectStarOption");
+	
 	loadStar();
 	
-	
+	insertStarBtn.click(function(e){
+		var starPoint = selectStarOption.val();
+
+		console.log("rNo>>",rNo);
+		console.log("starPoint>>" , starPoint);
+	var recipeGradeDTO = {
+		"rNo" : rNo,
+		"mEmail" : "user04@gmail.com",
+		"rgGrade" : starPoint
+		} 
+		console.log(recipeGradeDTO);
+		$.ajax({
+			 url:"/recipe/grade",
+	            method:"POST",
+	            data:JSON.stringify(recipeGradeDTO),
+	            contentType:"application/json; charset=utf-8",
+	            success:function(result){
+		            console.log(result);
+		            loadStar();
+		            },
+		        error: function(xhr,status,errorThrown){
+			        console.log("xhr >>",xhr);			
+			        }
+			});
+		});
 	function loadStar(){
+		starBox.empty();
+		
 		$.getJSON("/recipe/grade/"+rNo, function(result){
 			var avg = result;
 			var star = Math.round(result);
@@ -128,11 +158,9 @@ $(document).ready(function(){
 			for(var i=1; i<=star ; i++){
 				starBox.append("<span>★</span>");
 				}
-
 			for(var i=1 ; i<=5-star; i++){
 				starBox.append("<span>☆</span>");
-				}
-			
+				}			
 			starBox.append("<span>("+ result +")</span>");
 			});
 		}
