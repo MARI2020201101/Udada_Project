@@ -20,15 +20,15 @@
 	  </c:if>
 	  </div>
       <div class="form-group row">
-        <label>TITLE</label>
+        <label>요리의 이름</label>
         <input type="text" class="form-control form-control-user" name="rTitle" value="${dto.RTitle}" >
       </div>
       <div class="form-group row">
-        <label>CONTENT</label>
+        <label>조리법</label>
         <textarea cols="5" class="form-control form-control-user"  name="rContent">${dto.RContent}</textarea>
       </div>
       <div class="form-group row">
-        <label>WRITER</label>
+        <label>작성자</label>
         <input type="text" class="form-control form-control-user"  name="mEmail" value="${dto.MEmail}" readonly>
       </div>
       <div class="form-group row">
@@ -55,11 +55,11 @@
 	</div>
 	<br>
 	  <div class="form-group row">
-        <label>NEW IMAGE</label>
+        <label>새로운 이미지</label>
         <input type="file" class="form-control form-control-user imageInput" name="image" >
       </div>
        <div class="form-group row">
-         <label>ORIGINAL IMAGE</label>
+         <label>원본이미지</label>
          <c:if test="${not empty dto.imageDTO && dto.imageDTO.IName!='' }">
          <input type="text" class="form-control form-control-user"  name="imageDTO.iName" value="${dto.imageDTO.IName}" readonly>
          <input type="hidden" class="form-control form-control-user" name="imageDTO.iUuid" value=${dto.imageDTO.IUuid }>
