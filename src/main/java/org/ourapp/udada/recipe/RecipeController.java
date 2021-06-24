@@ -35,8 +35,7 @@ public class RecipeController {
 		//int total = recipeService.countAll();
 		int total = recipeService.countAllWithSearch(pageRequestDTO);
 		model.addAttribute("pageResultDTO", new PageResultDTO(pageRequestDTO, total));
-		
-		//list.stream().map(r->r.getRTitle()).forEach(System.out::println);		
+	
 	}
 	
 	@GetMapping("/read")
@@ -99,8 +98,11 @@ public class RecipeController {
 		//recipeService.modify(recipeDTO);
 		recipeService.modifyWithIngreAndImage(recipeDTO);
 		rttr.addFlashAttribute("msg","레시피가 수정되었습니다. ");
-
-		return "redirect:/recipe/read?rNo="+recipeDTO.getRNo()+"&pageNum="+pageRequestDTO.getPageNum()+"&keyword="+pageRequestDTO.getKeyword();
+		rttr.addAttribute("keyword" ,pageRequestDTO.getKeyword());
+		rttr.addAttribute("pageNum" ,pageRequestDTO.getPageNum());
+		rttr.addAttribute("rNo" ,recipeDTO.getRNo());
+		 
+		return "redirect:/recipe/read";
 	}
 	
 	@PostMapping("/remove")
