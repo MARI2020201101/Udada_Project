@@ -21,7 +21,7 @@ public class RecipeGradeServiceImpl implements RecipeGradeService{
 	}
 
 	@Override
-	public double loadAvgByRNo(Long rNo) throws Exception {
+	public Double loadAvgByRNo(Long rNo) throws Exception {
 		return recipeGradeMapper.selectAvgByRNo(rNo);
 	}
 	
