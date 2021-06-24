@@ -6,6 +6,6 @@ public interface RecipeGradeMapper {
 	
 	void insert(RecipeGradeDTO recipeGradeDTO);
 	void delete(RecipeGradeDTO recipeGradeDTO);
-	double selectAvgByRNo(Long rNo);
+	Double selectAvgByRNo(Long rNo);
 
 }
