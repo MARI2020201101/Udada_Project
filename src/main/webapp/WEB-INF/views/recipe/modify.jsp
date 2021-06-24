@@ -13,12 +13,13 @@
 	<input type="hidden" class="form-control form-control-user" name="rNo" value="${dto.RNo}">
 	<div class="form-group row">
       <c:if test="${not empty dto.imageDTO && dto.imageDTO.IName!='' }">
-      <a href="/image/show?imagePath=${dto.imageDTO.imagePath }">      	
-		<img src="/image/show?imagePath=${dto.imageDTO.thumbnailPath }">
-		<p>크게보기</p>
-		</a>
-	  </c:if>
-	  </div>
+	     <a href="/image/show?imagePath=${dto.imageDTO.imagePath }">      	
+			<img src="/image/show?imagePath=${dto.imageDTO.thumbnailPath }">
+			<p>크게보기</p>
+		 </a>
+	  </c:if>	  
+	</div>
+	  
       <div class="form-group row">
         <label>요리의 이름</label>
         <input type="text" class="form-control form-control-user" name="rTitle" value="${dto.RTitle}" >
