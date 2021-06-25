@@ -55,8 +55,7 @@
 											<div class="font-weight-bold text-primary text-uppercase mb-1">
 												마이 푸드 다이어리에 추가하기</div>
 												<br>
-											<div class="form-group my-2">
-										
+											<div class="form-group my-2">									
 												<b>양 입력 : </b>
 													<select class="form-select">
 														<option value=1> 1 인분 </option>

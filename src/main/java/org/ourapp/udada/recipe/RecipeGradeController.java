@@ -25,15 +25,14 @@ public class RecipeGradeController {
 	@GetMapping("/recipe/grade/{rNo}") 
 	public ResponseEntity<Double> loadAvgByRNo(@PathVariable("rNo")Long rNo) throws Exception{
 	   Double avg = recipeGradeService.loadAvgByRNo(rNo);
-	   log.info("avg : "+avg);
 	   if(avg==null)  avg=0.00;
 	   
 	   return new ResponseEntity<>(avg , HttpStatus.OK);
 	  }
 	
 	@PostMapping(value = "/recipe/grade", consumes="application/json" , produces= {MediaType.TEXT_PLAIN_VALUE})
-	public ResponseEntity<String> register(
-			@RequestBody Map<String, String> params) throws Exception {
+	public ResponseEntity<String> register(@RequestBody Map<String, String> params) throws Exception {
+		
 		log.info(params.toString());
 		Long rNo = Long.parseLong(params.get("rNo"));
 		String mEmail = params.get("mEmail");
@@ -42,7 +41,7 @@ public class RecipeGradeController {
 		RecipeGradeDTO recipeGradeDTO = RecipeGradeDTO.builder()
 		  .rNo(rNo).mEmail(mEmail).rgGrade(rgGrade).build();
 		 
-		 log.info(recipeGradeDTO.toString()); 
+		log.info(recipeGradeDTO.toString()); 
 		recipeGradeService.register(recipeGradeDTO);
 		return new ResponseEntity<>("success",HttpStatus.OK);
 	}
