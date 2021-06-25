@@ -106,10 +106,13 @@
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <li ><a href="#" class="btn btn-secondary">
+                        <li ><a href="/member/login" class="btn btn-secondary mx-1">
                             <span class="text">Login</span>
+                        </a></li>
+                        <li ><a href="/member/logout" class="btn btn-secondary mx-1">
+                            <span class="text">Logout</span>
                         </a></li>
                     </ul>
                 </nav>
-                
+        
                 <!-- End of Topbar -->

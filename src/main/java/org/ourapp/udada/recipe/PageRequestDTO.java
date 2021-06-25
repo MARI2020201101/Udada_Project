@@ -14,7 +14,7 @@ public class PageRequestDTO {
 	private String keyword;
 	
 	public PageRequestDTO() {
-		this(1,10,"");
+		this(1,5,"");
 	}
 
 	public PageRequestDTO(int pageNum, int pageSize) {

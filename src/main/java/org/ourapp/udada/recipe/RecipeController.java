@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.ourapp.udada.image.ImageController;
 import org.ourapp.udada.image.ImageDTO;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +25,9 @@ public class RecipeController {
 	private final RecipeService recipeService;
 	
 	@GetMapping("/list")
-	public void getList(Model model , PageRequestDTO pageRequestDTO) throws Exception{
+	public void getList(Model model , PageRequestDTO pageRequestDTO , Authentication auth) throws Exception{
 		log.info("recipeController.......................");
-		
+		log.info("Spring security auth : "+ auth);
 		//List<RecipeDTO> list = recipeService.getList();			
 		//List<RecipeDTO> list = recipeService.getListWithPaging(pageRequestDTO);
 		//List<RecipeDTO> list = recipeService.getListWithImageAndPaging(pageRequestDTO);
