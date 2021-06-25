@@ -9,11 +9,11 @@
 
 <form method="POST" action="/recipe/register" enctype="multipart/form-data">
       <div class="form-group row">
-        <label>TITLE</label>
+        <label>요리의 이름</label>
         <input type="text" class="form-control form-control-user" name="rTitle" >
       </div>
       <div class="form-group row">
-        <label>CONTENT</label>
+        <label>조리법</label>
         <textarea cols="5" class="form-control form-control-user" name="rContent" 
                        placeholder="Content"></textarea>
       </div>
@@ -23,11 +23,11 @@
       <div class="ingreBox"></div>
       <br>
       <div class="form-group row">
-        <label>IMAGE</label>
+        <label>대표 이미지</label>
         <input type="file" class="form-control form-control-user imageInput" name="image" >
       </div>
       <div class="form-group row">
-        <label>WRITER</label>
+        <label>작성자</label>
         <input type="text" class="form-control form-control-user" name="mEmail" >
       </div>
 		<button class="btn btn-primary registerBtn">

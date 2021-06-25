@@ -5,63 +5,72 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-	<!-- Page Heading -->
-	<h1 class="h3 mb-4 text-gray-800">Recipe list Page</h1>
+	
+<!-- Page Heading -->
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card mb-4 py-3">
+				<div class="card-body">
+					<h1 class="h3 mb-4 text-gray-800">
+						<a href="/recipe/list"> Recipe list Page</a>
+					</h1>
+					<a href="/recipe/register" class="btn btn-primary"> 
+						<span class="text">Register</span>
+					</a>
 
-	<a href="/recipe/register" class="btn btn-primary"> <span
-		class="text">Register</span>
-	</a>
-	<!-- Topbar Search -->
-	<form action="/recipe/list" method="GET" id="searchForm"
-		class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-		<input type="hidden" class="form-control form-control-user" name="pageNum" value=${pageResultDTO.pageRequestDTO.pageNum }>
-		
-		<div class="input-group">
-			<input type="text" class="form-control bg-light border- small" name="keyword" value="${pageRequestDTO.keyword }"
-				placeholder="Search for..." aria-label="Search"
-				aria-describedby="basic-addon2">
-			<div class="input-group-append">
-				<button class="btn btn-primary searchBtn" type="button">
-					<i class="fas fa-search fa-sm"></i>
-				</button>
+					<!-- Topbar Search -->
+					<form action="/recipe/list" method="GET" id="searchForm"
+						class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+						<input type="hidden" class="form-control form-control-user"
+							name="pageNum" value=${pageResultDTO.pageRequestDTO.pageNum }>
+
+						<div class="input-group">
+							<input type="text" class="form-control bg-light border- small" name="keyword" value="${pageRequestDTO.keyword }"
+								placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+							<div class="input-group-append">
+								<button class="btn btn-primary searchBtn" type="button">
+									<i class="fas fa-search fa-sm"></i>
+								</button>
+							</div>
+						</div>
+					</form>
+
+
+				</div>
 			</div>
 		</div>
-	</form>
+	</div>
 
-	<div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                    <tr>
-                        <th  scope="col">#</th>
-                        <th  scope="col">Title</th>
-                        <th  scope="col">Email</th>
-                        <th  scope="col">RegDate</th>
-                    </tr>
-                    </thead>
-                    <tbody>
 
-					<c:forEach var="dto" items="${list}">
-						<tr>
-							<th scope="row"><c:out value="${dto.RNo}"></c:out>
-								<c:if test="${not empty dto.imageDTO && dto.imageDTO.IName!='' }">
-									<img src="/image/show?imagePath=${dto.imageDTO.thumbnailPath }">
-								</c:if>
-							</th>
-							<td>																
-								<a href='/recipe/read?rNo=<c:out value="${dto.RNo}"/>&pageNum=${pageResultDTO.pageRequestDTO.pageNum}&keyword=${pageResultDTO.pageRequestDTO.keyword }'>
-								<c:out value="${dto.RTitle}" />
+
+	<c:forEach var="dto" items="${list}">
+		<div class="card mb-3">
+			<div class="card border-left-primary shadow h-100 py-2 px-2">
+				<div class="row g-0">
+					<div class="col-auto">
+						<c:if test="${not empty dto.imageDTO && dto.imageDTO.IName!='' }">
+							<img src="/image/show?imagePath=${dto.imageDTO.thumbnailPath }">
+						</c:if>
+					</div>
+					<div class="col">
+						<div class="card-body">
+							<h5 class="card-title">
+								<a
+									href='/recipe/read?rNo=<c:out value="${dto.RNo}"/>&pageNum=${pageResultDTO.pageRequestDTO.pageNum}&keyword=${pageResultDTO.pageRequestDTO.keyword }'>
+									<c:out value="${dto.RTitle}" />
 								</a>
-							</td>
-							<td><c:out value="${dto.MEmail}"></c:out></td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${dto.RDate}" /></td>
-						</tr>
+							</h5>
+							<p class="card-text">
+								<small class="text-muted"><c:out value="${dto.MEmail}"></c:out></small>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</c:forEach>
 
-					</c:forEach>
-				</tbody>
-                </table>
-            </div>
-        </div>
+        
 		<nav>
 		  <ul class="pagination">
 		    <li class="page-item ${pageResultDTO.prev ? "":'disabled' }">

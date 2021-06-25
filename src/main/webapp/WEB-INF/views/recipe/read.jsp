@@ -16,74 +16,109 @@
 	}
 </style>
 	<!-- Page Heading -->
-	<h1 class="h3 mb-4 text-gray-800">Recipe Read Page</h1>	
-	<input type="hidden" class="form-control form-control-user" name="pageNum" value=${pageRequestDTO.pageNum }>
-	<input type="hidden" class="form-control form-control-user" name="keyword" value=${pageRequestDTO.keyword }>
-	<input type="hidden" class="form-control form-control-user" name="rNo" value="${dto.RNo}">
-	
-	<p class="starBox"></p>
-	
-	<div class="form-group row">
-	<select class="form-select form-select-sm" aria-label="이 레시피를 평가해주세요..">
-	  <option value=5>5</option>
-	  <option value=4>4</option>
-	  <option value=3>3</option>
-	  <option value=2>2</option>
-	  <option value=1>1</option>
-	</select>
-	<button type="button" class="btn btn-primary btn-sm" >평가하기</button>
-	</div>
-	 <div class="form-group row">
-      <c:if test="${not empty dto.imageDTO && dto.imageDTO.IName!='' }">
-      <a href="/image/show?imagePath=${dto.imageDTO.imagePath }">      	
-		<img src="/image/show?imagePath=${dto.imageDTO.thumbnailPath }">
-		<p>크게보기</p>
-		</a>
-	  </c:if>
-	  </div>
-      <div class="form-group row">
-        <label>TITLE</label>
-        <input type="text" class="form-control form-control-user" value="${dto.RTitle}" readonly>
-      </div>
-      <div class="form-group row">
-        <label>CONTENT</label>
-        <textarea cols="5" class="form-control form-control-user" readonly>${dto.RContent}</textarea>
-      </div>
-      <div class="form-group row">
-        <label>WRITER</label>
-        <input type="text" class="form-control form-control-user"  value="${dto.MEmail}" readonly>
-      </div>
-      <div class="form-group row">
-        <label>REGDATE</label>
-        <input type="text" class="form-control form-control-user"  value="${dto.RDate}" readonly>
-      </div>
- 
-	<div class="ingreBox">
-		<ul>
-			<c:if test="${not empty dto.ingredientList && dto.ingredientList.size() gt 0 }">
-	
-				<c:forEach var="ingredient" items="${dto.ingredientList}" varStatus="status">
-					<li>
-						<div class='card w-80'>
-							<div class='card-body'>
-								<b class='card-title ingreName'>${ingredient.FName}</b>
-								<p class='card-text'>
-									<span>selected amount : </span>${ingredient.riAmount}</p>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card mb-4 py-3">
+				<div class="card-body">
+					<h1 class="h3 mb-4 text-gray-800">
+						<c:out value="${dto.RTitle}"></c:out>
+					</h1>
+
+					<div class="form-group row">
+						<p class="starBox"></p>
+					</div>
+					<div class="form-group row">
+						<select class="form-select form-select-sm selectStarOption">
+							<option value=5>5</option>
+							<option value=4>4</option>
+							<option value=3>3</option>
+							<option value=2>2</option>
+							<option value=1>1</option>
+						</select>&nbsp;
+						<button type="button" class="btn btn-primary btn-sm insertStarBtn">평가하기</button>
+					</div>
+
+					<div class="form-group row">
+						<c:if test="${not empty dto.imageDTO && dto.imageDTO.IName!='' }">
+							<a href="/image/show?imagePath=${dto.imageDTO.imagePath }"> <img
+								src="/image/show?imagePath=${dto.imageDTO.thumbnailPath }">
+								<p>크게보기</p>
+							</a>
+						</c:if>
+				<!-- Insert to MyFood Card -->
+						<div class="col-xl-4 col-md-6 mb-4">
+							<div class="card border-left-primary shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div class="font-weight-bold text-primary text-uppercase mb-1">
+												마이 푸드 다이어리에 추가하기</div>
+												<br>
+											<div class="form-group my-2">									
+												<b>양 입력 : </b>
+													<select class="form-select">
+														<option value=1> 1 인분 </option>
+														<option value=2> 2 인분 </option>
+														<option value=3> 3 인분 </option>
+													</select>&nbsp;
+													
+												<button type="button" class="btn btn-primary btn-sm ">추가</button>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
-					</li>
-				</c:forEach>
+				<!-- Insert to MyFood Card End-->    
+                        
+					</div>
 
-			</c:if>
-		</ul>
+					<div class="form-group row">
+						<b><label>조리법</label></b>
+						<textarea cols="5" class="form-control form-control-user" readonly>${dto.RContent}</textarea>
+					</div>
+					<div class="ingreBox">
+						<ul>
+							<c:if
+								test="${not empty dto.ingredientList && dto.ingredientList.size() gt 0 }">
+
+								<c:forEach var="ingredient" items="${dto.ingredientList}"
+									varStatus="status">
+									<li>
+										<div class='card w-80'>
+											<div class='card-body'>
+												<b class='card-title ingreName'>${ingredient.FName}</b>
+												<p class='card-text'>
+													<span>selected amount : </span>${ingredient.riAmount}</p>
+											</div>
+										</div>
+									</li>
+								</c:forEach>
+
+							</c:if>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<input type="hidden" class="form-control form-control-user" name="pageNum" value=${pageRequestDTO.pageNum }> 
+	<input type="hidden" class="form-control form-control-user" name="keyword" value=${pageRequestDTO.keyword }> 
+	<input type="hidden" class="form-control form-control-user" name="rNo" value="${dto.RNo}">
+
+	<div class="form-group row">
+		<input type="hidden" class="form-control form-control-user" value="${dto.MEmail}">
 	</div>
 
+
+
 	<a href="/recipe/list?pageNum=${pageRequestDTO.pageNum }&keyword=${pageRequestDTO.keyword}" class="btn btn-secondary">
-            <span class="text">LIST</span>
-        </a>
-        <a href='/recipe/modify?rNo=${dto.RNo}&pageNum=${pageRequestDTO.pageNum }&keyword=${pageRequestDTO.keyword}' class="btn btn-warning">
-        	<span class="text">MODIFY</span>
-        </a>
+       <span class="text">LIST</span>
+    </a>
+    <a href='/recipe/modify?rNo=${dto.RNo}&pageNum=${pageRequestDTO.pageNum }&keyword=${pageRequestDTO.keyword}' class="btn btn-warning">
+        <span class="text">MODIFY</span>
+    </a>
 </div>
 <!-- /.container-fluid -->
 </div>
@@ -116,11 +151,39 @@ $(document).ready(function(){
 	var msg = '${msg}';
 	var ingreName = $(".ingreName");
 	var ingreBox = $(".ingreBox");
-
+	var insertStarBtn = $(".insertStarBtn");
+	var selectStarOption = $(".selectStarOption");
+	
 	loadStar();
 	
-	
+	insertStarBtn.click(function(e){
+		var starPoint = selectStarOption.val();
+
+		console.log("rNo>>",rNo);
+		console.log("starPoint>>" , starPoint);
+	var recipeGradeDTO = {
+		"rNo" : rNo,
+		"mEmail" : "user04@gmail.com",
+		"rgGrade" : starPoint
+		} 
+		console.log(recipeGradeDTO);
+		$.ajax({
+			 url:"/recipe/grade",
+	            method:"POST",
+	            data:JSON.stringify(recipeGradeDTO),
+	            contentType:"application/json; charset=utf-8",
+	            success:function(result){
+		            console.log(result);
+		            loadStar();
+		            },
+		        error: function(xhr,status,errorThrown){
+			        console.log("xhr >>",xhr);			
+			        }
+			});
+		});
 	function loadStar(){
+		starBox.empty();
+		
 		$.getJSON("/recipe/grade/"+rNo, function(result){
 			var avg = result;
 			var star = Math.round(result);
@@ -128,11 +191,9 @@ $(document).ready(function(){
 			for(var i=1; i<=star ; i++){
 				starBox.append("<span>★</span>");
 				}
-
 			for(var i=1 ; i<=5-star; i++){
 				starBox.append("<span>☆</span>");
-				}
-			
+				}			
 			starBox.append("<span>("+ result +")</span>");
 			});
 		}
