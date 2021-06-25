@@ -28,7 +28,8 @@
       </div>
       <div class="form-group row">
         <label>작성자</label>
-        <input type="text" class="form-control form-control-user" name="mEmail" >
+        <input type="text" class="form-control form-control-user" name="mEmail" 
+        	value='<sec:authentication property="principal.memberDTO.mEmail" />' readonly>
       </div>
 		<button class="btn btn-primary registerBtn">
 			<span class="text">Register</span>

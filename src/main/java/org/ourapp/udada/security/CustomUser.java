@@ -1,5 +1,6 @@
 package org.ourapp.udada.security;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public class CustomUser extends User{
+public class CustomUser extends User implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	

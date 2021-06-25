@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.ourapp.udada.image.ImageController;
 import org.ourapp.udada.image.ImageDTO;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,10 +49,12 @@ public class RecipeController {
 		model.addAttribute("dto", recipeService.getWithIngreAndFoodAndImage(rNo));
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
 	public void registerForm(){
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/register")
 	public String register(RecipeDTO recipeDTO , RedirectAttributes rttr , MultipartFile image) throws Exception{
 
@@ -73,10 +76,13 @@ public class RecipeController {
 		return "redirect:/recipe/list";
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/modify")
 	public void modifyForm(Long rNo, Model model , PageRequestDTO pageRequestDTO) throws Exception{
 		model.addAttribute("dto", recipeService.getWithIngreAndFoodAndImage(rNo));
 	}
+	
+	@PreAuthorize("authentication.principal.username == #recipeDTO.mEmail or hasRole('ROLE_ADMIN')")
 	@PostMapping("/modify")
 	public String modify(RecipeDTO recipeDTO, MultipartFile image, Model model, RedirectAttributes rttr ,PageRequestDTO pageRequestDTO) throws Exception{
 		
@@ -106,6 +112,7 @@ public class RecipeController {
 		return "redirect:/recipe/read";
 	}
 	
+	@PreAuthorize("authentication.principal.username == #recipeDTO.mEmail or hasRole('ROLE_ADMIN')")
 	@PostMapping("/remove")
 	public String remove(RecipeDTO recipeDTO, RedirectAttributes rttr) throws Exception{
 

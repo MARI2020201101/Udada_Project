@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import lombok.RequiredArgsConstructor;
 
-/**
- * Handles requests for the application home page.
- */
+
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
@@ -27,7 +25,7 @@ public class HomeController {
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		return "recipe/list";
+		return "redirect:/recipe/list";
 	}
 	
 	
