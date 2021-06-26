@@ -1,6 +1,8 @@
 pom.properties
 manifest.mf
 target/**
+bin/**
+
 
 
 
