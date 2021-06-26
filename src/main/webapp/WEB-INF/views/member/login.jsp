@@ -9,7 +9,7 @@
 	
 	<b style="color:#FF46C5"><c:out value="${error }"></c:out></b>
 	<b><c:out value="${logout }"></c:out></b>
-	
+
 	<sec:authorize access="isAnonymous()">	
 		<div class="col-xl-10 col-lg-12 col-md-9">
 			<div class="card o-hidden border-0 shadow-lg my-5">
@@ -32,6 +32,10 @@
 									</div>
 									<button type="submit" class="btn btn-primary btn-lg btn-block btn-user">Login</button>						
 								</form>
+								<br>
+								<div class="text-center">
+                                     <a class="small" href="/member/joinForm">Create an Account!</a>
+                                </div>
 							</div>
 						</div>
 					</div>

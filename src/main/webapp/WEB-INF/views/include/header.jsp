@@ -121,3 +121,12 @@
 				</nav>
 
 				<!-- End of Topbar -->
+				
+				
+				
+	<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal.memberDTO.mGrade" var="loginUserRole"/> 
+   	<sec:authentication property="principal.memberDTO.mEmail" var="loginUser"/> 
+
+    </sec:authorize>
+    

@@ -4,8 +4,10 @@ package org.ourapp.udada.member;
 import java.io.Serializable;
 import java.util.Date;
 
+import lombok.Builder;
 import lombok.Data;
 
+@Builder
 @Data
 public class MemberDTO implements Serializable{
 	

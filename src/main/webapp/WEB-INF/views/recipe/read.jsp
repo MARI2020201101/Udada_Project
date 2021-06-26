@@ -121,17 +121,11 @@
        <span class="text">LIST</span>
     </a>
   
-    
-    
-    <sec:authorize access="isAuthenticated()">
-    <sec:authentication property="principal.memberDTO.mGrade" var="loginUserRole"/> 
-   	<sec:authentication property="principal.memberDTO.mEmail" var="loginUser"/> 
     <c:if test="${loginUser eq dto.MEmail || loginUserRole eq 'ADMIN'}">
     <a href='/recipe/modify?rNo=${dto.RNo}&pageNum=${pageRequestDTO.pageNum }&keyword=${pageRequestDTO.keyword}' class="btn btn-warning">
         <span class="text">MODIFY</span>
     </a>
     </c:if>
-    </sec:authorize>
     
     
 </div>

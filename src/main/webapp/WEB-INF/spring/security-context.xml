@@ -11,11 +11,17 @@
 	<bean id="customUserDetailsService"
 		class="org.ourapp.udada.security.CustomUserDetailsService"></bean>		
 		
+		
+	<bean id="customAccessDenied"
+		class="org.ourapp.udada.security.CustomAccessDeniedHandler"></bean>
+		
 	<security:http>
 
 		<security:form-login login-page="/member/login"/>
 		<security:logout logout-url="/member/logout" invalidate-session="true" />
 		<security:csrf disabled="true"/> 
+		
+		<security:access-denied-handler ref="customAccessDenied" />
 
 	</security:http>
 

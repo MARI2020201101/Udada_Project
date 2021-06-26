@@ -33,4 +33,12 @@ public class CustomUser extends User implements Serializable{
 		
 	}
 
+	@Override
+	public boolean isEnabled() {
+		
+		return !(super.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_CLOSED")));
+	}
+	
+	
+
 }
