@@ -60,7 +60,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="#">Calendar</a>
                         <a class="collapse-item" href="#">MyFood</a>
-                        <a class="collapse-item" href="#">MyExercise</a>
+                        <a class="collapse-item" href="/exercise/mylist">MyExercise</a>
                         <a class="collapse-item" href="#">Mychallenge</a>
                         <a class="collapse-item" href="#">MyFitness</a>
                     </div>
@@ -79,7 +79,7 @@
                     <span>RECIPE</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/exercise/list">
                     <i class="fas fa-dumbbell"></i>
                     <span>EXERCISE</span></a>
             </li>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="org.ourapp.udada.mapper.ExerciseMapper"> <!-- recipeMapper.java가 부모임 -->
+
+	<resultMap type="org.ourapp.udada.exercise.ExerciseDTO" id="exerciseMap">
+			<id column="E_NO" property="eNo"/>
+			<result column="E_NAME" property="eName"/>
+			<result column="E_STR" property="eStr"/>
+			<result column="E_KCAL" property="eKcal"/>
+	</resultMap>
+	
+	
+	<resultMap type="org.ourapp.udada.exercise.Exercise_myDTO" id="myexerciseMap">
+			<id column="EM_NO" property="emNo"/>
+			<result column="M_EMAIL" property="mEmail"/>
+			<result column="EM_DATE" property="emDate"/>
+			<result column="E_NO" property="eNo"/>
+			<result column="EM_TIME" property="emTime"/>
+			<result column="E_NAME" property="eName"/>
+			<result column="E_KCAL" property="eKcal"/>
+	</resultMap>
+	
+	<select id="getList" resultMap="exerciseMap">
+		SELECT * FROM EXERCISE ORDER BY E_NO ASC
+	</select>
+	
+	<select id="read" parameterType="long" resultMap="exerciseMap">
+		SELECT * FROM EXERCISE WHERE E_NO = #{eNo}
+	</select>
+	
+	<select id="myList" resultMap="myexerciseMap"><!-- parameterType  -->
+		SELECT A.EM_NO, A.M_EMAIL, A.EM_DATE, B.E_NAME, B.E_KCAL, A.E_NO, A.EM_TIME
+		FROM EXERCISE_MY A
+		INNER JOIN EXERCISE B
+		ON A.E_NO = B.E_NO
+	</select>
+	
+	<select id="myget" parameterType="long" resultMap="exerciseMap">
+		SELECT * FROM EXERCISE WHERE E_NO = #{eNo}
+	</select>
+	
+	<delete id="delete" parameterType="long">
+		DELETE FROM EXERCISE_MY WHERE E_NO = #{eNo}
+	</delete>
+	
+	
+	
+</mapper>
+
