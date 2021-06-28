@@ -40,7 +40,7 @@ public class MemberServiceTest {
 			else if(i<=30) {
 				memberDTO.setMGrade("ADMIN");
 			}else {
-				memberDTO.setMGrade("CLOSED");
+				memberDTO.setMGrade("CLOSE");
 			}
 		
 				memberService.join(memberDTO);});
