@@ -59,7 +59,7 @@
 	
 	<select id="selectByFName" resultMap="foodMap">
 	<![CDATA[
-	SELECT * FROM FOOD WHERE F_NAME LIKE '%'||#{keyword}||'%'  AND ROWNUM <= 10
+	SELECT * FROM FOOD WHERE F_NAME LIKE '%'||#{keyword}||'%'  AND ROWNUM <= 8
 	    ]]>
 	</select>
 </mapper>

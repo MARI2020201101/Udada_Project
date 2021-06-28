@@ -3,9 +3,11 @@ package org.ourapp.udada.member;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -116,9 +118,12 @@ public class MemberController {
 	
 	@ResponseBody
 	@PostMapping("/emailChk")
-	public int emilChk(String mEmail) throws Exception{
+	public ResponseEntity<String> emilChk(String mEmail) throws Exception{
 		int result = memberService.duplecateEmail(mEmail);
-		return result;
+		String msg = "";
+		if(result == 0) msg="success";
+		else msg="fail";
+		return new ResponseEntity<>(msg,HttpStatus.OK);
 	}
 	
 	@PostMapping("/emailCheckProc")
@@ -137,7 +142,14 @@ public class MemberController {
 	}
 	
 	@GetMapping("/login")
-	public void login() {
+	public void login(String error, String logout, Model model) {
+		
+		if(error!=null) {
+			model.addAttribute("error","아이디와 패스워드를 확인해주십시오.");
+		}
+		if(logout!=null) {
+			model.addAttribute("logout","로그아웃 되었습니다.");
+		}
 		
 	}
 	

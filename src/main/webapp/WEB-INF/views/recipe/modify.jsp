@@ -71,15 +71,21 @@
         </div>
 
       	 
-      <a class="btn btn-secondary listBtn">
-            <span class="text">LIST</span>
-        </a>
-        <a class="btn btn-warning modBtn">
-        	<span class="text">MODIFY</span>
-        </a>
-        <a class="btn btn-danger removeBtn">
-        	<span class="text">REMOVE</span>
-        </a>
+		      <a class="btn btn-secondary listBtn">
+		            <span class="text">LIST</span>
+		       </a>
+		       
+		<sec:authorize access="isAuthenticated()">
+ 		<sec:authentication property="principal.memberDTO.mGrade" var="loginUserRole"/> 
+		<sec:authentication property="principal.memberDTO.mEmail" var="loginUser" />
+		
+			<c:if test="${loginUser eq dto.MEmail || loginUserRole eq 'ADMIN'}">
+				<a class="btn btn-warning modBtn"> <span class="text">MODIFY</span>
+				</a>
+				<a class="btn btn-danger removeBtn"> <span class="text">REMOVE</span>
+				</a>
+			</c:if>
+		</sec:authorize>
 	</form>      
 		
 </div>

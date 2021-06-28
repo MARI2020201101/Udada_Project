@@ -28,17 +28,19 @@
 					<div class="form-group row">
 						<p class="starBox"></p>
 					</div>
-					<div class="form-group row">
-						<select class="form-select form-select-sm selectStarOption">
-							<option value=5>5</option>
-							<option value=4>4</option>
-							<option value=3>3</option>
-							<option value=2>2</option>
-							<option value=1>1</option>
-						</select>&nbsp;
-						<button type="button" class="btn btn-primary btn-sm insertStarBtn">평가하기</button>
-					</div>
-
+					<sec:authorize access="isAuthenticated()">
+						<div class="form-group row">
+							<select class="form-select form-select-sm selectStarOption">
+								<option value=5>5</option>
+								<option value=4>4</option>
+								<option value=3>3</option>
+								<option value=2>2</option>
+								<option value=1>1</option>
+							</select>&nbsp;
+							<button type="button"
+								class="btn btn-primary btn-sm insertStarBtn">평가하기</button>
+						</div>
+					</sec:authorize>
 					<div class="form-group row">
 						<c:if test="${not empty dto.imageDTO && dto.imageDTO.IName!='' }">
 							<a href="/image/show?imagePath=${dto.imageDTO.imagePath }"> <img
@@ -46,32 +48,34 @@
 								<p>크게보기</p>
 							</a>
 						</c:if>
-				<!-- Insert to MyFood Card -->
-						<div class="col-xl-4 col-md-6 mb-4">
-							<div class="card border-left-primary shadow h-100 py-2">
-								<div class="card-body">
-									<div class="row no-gutters align-items-center">
-										<div class="col mr-2">
-											<div class="font-weight-bold text-primary text-uppercase mb-1">
-												마이 푸드 다이어리에 추가하기</div>
+
+						<sec:authorize access="isAuthenticated()">
+							<!-- Insert to MyFood Card -->
+							<div class="col-xl-4 col-md-6 mb-4">
+								<div class="card border-left-primary shadow h-100 py-2">
+									<div class="card-body">
+										<div class="row no-gutters align-items-center">
+											<div class="col mr-2">
+												<div
+													class="font-weight-bold text-primary text-uppercase mb-1">
+													마이 푸드 다이어리에 추가하기</div>
 												<br>
-											<div class="form-group my-2">									
-												<b>양 입력 : </b>
-													<select class="form-select">
-														<option value=1> 1 인분 </option>
-														<option value=2> 2 인분 </option>
-														<option value=3> 3 인분 </option>
+												<div class="form-group my-2">
+													<b>양 입력 : </b> <select class="form-select">
+														<option value=1>1 인분</option>
+														<option value=2>2 인분</option>
+														<option value=3>3 인분</option>
 													</select>&nbsp;
-													
-												<button type="button" class="btn btn-primary btn-sm ">추가</button>
+
+													<button type="button" class="btn btn-primary btn-sm ">추가</button>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-				<!-- Insert to MyFood Card End-->    
-                        
+							<!-- Insert to MyFood Card End-->
+						</sec:authorize>
 					</div>
 
 					<div class="form-group row">
@@ -116,9 +120,14 @@
 	<a href="/recipe/list?pageNum=${pageRequestDTO.pageNum }&keyword=${pageRequestDTO.keyword}" class="btn btn-secondary">
        <span class="text">LIST</span>
     </a>
+  
+    <c:if test="${loginUser eq dto.MEmail || loginUserRole eq 'ADMIN'}">
     <a href='/recipe/modify?rNo=${dto.RNo}&pageNum=${pageRequestDTO.pageNum }&keyword=${pageRequestDTO.keyword}' class="btn btn-warning">
         <span class="text">MODIFY</span>
     </a>
+    </c:if>
+    
+    
 </div>
 <!-- /.container-fluid -->
 </div>
@@ -153,6 +162,8 @@ $(document).ready(function(){
 	var ingreBox = $(".ingreBox");
 	var insertStarBtn = $(".insertStarBtn");
 	var selectStarOption = $(".selectStarOption");
+	var mEmail = '${loginUser}';
+	console.log("mEmail>>",mEmail);
 	
 	loadStar();
 	
@@ -163,7 +174,7 @@ $(document).ready(function(){
 		console.log("starPoint>>" , starPoint);
 	var recipeGradeDTO = {
 		"rNo" : rNo,
-		"mEmail" : "user04@gmail.com",
+		"mEmail" : mEmail,
 		"rgGrade" : starPoint
 		} 
 		console.log(recipeGradeDTO);

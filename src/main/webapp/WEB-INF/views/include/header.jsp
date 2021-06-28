@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib  prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,16 +101,32 @@
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content">
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <li ><a href="#" class="btn btn-secondary">
-                            <span class="text">Login</span>
-                        </a></li>
-                    </ul>
-                </nav>
-                
-                <!-- End of Topbar -->
+			<!-- Main Content -->
+			<div id="content">
+				<!-- Topbar -->
+				<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+					<!-- Topbar Navbar -->
+					<ul class="navbar-nav ml-auto">
+						<sec:authorize access="isAnonymous()">
+							<li><a href="/member/login" class="btn btn-secondary mx-1">
+									<span class="text">Login</span>
+							</a></li>
+						</sec:authorize>
+						<sec:authorize access="isAuthenticated()">
+							<li><a href="/member/logout" class="btn btn-secondary mx-1">
+									<span class="text">Logout</span>
+							</a></li>
+						</sec:authorize>
+					</ul>
+				</nav>
+
+				<!-- End of Topbar -->
+				
+				
+				
+	<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal.memberDTO.mGrade" var="loginUserRole"/> 
+   	<sec:authentication property="principal.memberDTO.mEmail" var="loginUser"/> 
+
+    </sec:authorize>
+    

@@ -1,9 +1,8 @@
 package org.ourapp.udada.recipe;
 
-import lombok.AllArgsConstructor;
+
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Builder
@@ -14,7 +13,7 @@ public class PageRequestDTO {
 	private String keyword;
 	
 	public PageRequestDTO() {
-		this(1,10,"");
+		this(1,5,"");
 	}
 
 	public PageRequestDTO(int pageNum, int pageSize) {
