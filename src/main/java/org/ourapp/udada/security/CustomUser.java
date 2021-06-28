@@ -1,6 +1,7 @@
 package org.ourapp.udada.security;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -20,15 +21,18 @@ public class CustomUser extends User implements Serializable{
 	
 	private MemberDTO memberDTO;
 	
+	
 	public CustomUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
 		super(username, password, authorities);
 		
 	}
 
-	public CustomUser(MemberDTO memberDTO) {
+	public CustomUser(MemberDTO memberDTO, Collection<GrantedAuthority> authList) {
+	
 		super(memberDTO.getMEmail()					
 				,memberDTO.getMPw(), 				
-				List.of( new SimpleGrantedAuthority("ROLE_"+memberDTO.getMGrade())));
+				authList);
+
 		this.memberDTO = memberDTO;
 		
 	}
