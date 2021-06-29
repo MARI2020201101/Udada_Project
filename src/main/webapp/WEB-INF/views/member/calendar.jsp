@@ -17,6 +17,17 @@
 			</div>
 		</div>
 	</div>
+	
+		<div class="card shadow mb-4">
+		<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary">Last 7 Days : TOTAL NUTRIENT</h6>
+		</div>
+		<div class="card-body">
+			<div>
+				<canvas id="nutrientChart"></canvas>
+			</div>
+		</div>
+	</div>
 </div>
 
 
@@ -25,7 +36,12 @@
 		
 		var calendarDateList = []; 
 		var totalKcalList = [];
+		var nutrientList = [];
+		var totalCarbo = 0;
+		var totalProtein = 0;
+		var totalFat = 0;
 		var ctx = document.getElementById("totalKcaloriesChart").getContext('2d');
+		var ctx2 = document.getElementById("nutrientChart");
 		
 		$.ajax({
 				url:"/member/calendar",
@@ -37,9 +53,80 @@
 					console.log(obj);
 					calendarDateList.push(obj.calendarDate);
 					totalKcalList.push(obj.totalKcal);
+					totalCarbo += obj.totalCarbo;
+					totalProtein += obj.totalProtein;
+					totalFat += obj.totalFat;
+					
+
+					console.log("nutrient>>", totalCarbo , totalProtein , totalFat);
 					
 			}); 
+					var totalN = totalCarbo + totalProtein + totalFat ;
+					totalCarbo = Math.round((totalCarbo/totalN)*100) ;
+					totalProtein = Math.round((totalProtein/totalN)*100) ;
+					totalFat = Math.round((totalFat/totalN)*100) ;
+					nutrientList.push(totalCarbo,totalProtein,totalFat);
+					console.log("nutrientList>>" ,nutrientList);
 
+					
+					
+					var myChart2 = new Chart(ctx2, {
+					  type: 'doughnut',
+					  data: {
+					    labels: ['Carbo % ', 'Protein % ', 'Fat %'],
+					    datasets: [{
+					      label: '# nutrients + %',
+					      data: nutrientList,
+					      backgroundColor: [
+					        'rgba(255, 99, 132, 0.5)',					      				        
+					        'rgba(75, 192, 192, 0.2)',
+					        'rgba(255, 206, 86, 0.2)'
+					      ],
+					      borderColor: [
+					        'rgba(255,99,132,1)',					       
+					        'rgba(75, 192, 192, 1)',
+					        'rgba(255, 206, 86, 1)'
+					      ],
+					      borderWidth: 3
+					    }]
+					  },
+					  options : {
+							maintainAspectRatio : true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
+							scales : {
+								yAxes : [ {
+									ticks : {
+										beginAtZero : true
+									}
+								} ]
+							},
+					    plugins: {
+					        datalabels: {
+					          color: 'grey',
+					          anchor: 'center',
+					          borderWidth: 2,
+					          align: 'end',
+					          offset: 10,
+					          borderColor: '#fff',
+					          borderRadius: 25,
+					          backgroundColor: (context) => {
+					            return context.dataset.backgroundColor;
+					          },
+					          labels: {
+					            title: {
+					              font: {
+					                weight: 'bold'
+						            					              
+					              }
+					            },
+					            value: {
+					              color: 'green'
+					            }
+					          }
+					        }
+					      }//plugins end
+						
+						}//options end
+					});//nutrientDoughutgraph end
 
 
 					var myChart = new Chart(ctx, {
