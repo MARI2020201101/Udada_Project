@@ -31,6 +31,12 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/resources/js/sb-admin-2.min.js"></script>
+    
+    <!-- cdn chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+    
 </head>
 
 <body id="page-top">
@@ -59,7 +65,7 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Calendar</a>
+                        <a class="collapse-item" href="/member/calendar">Calendar</a>
                         <a class="collapse-item" href="#">MyFood</a>
                         <a class="collapse-item" href="#">MyExercise</a>
                         <a class="collapse-item" href="#">Mychallenge</a>
