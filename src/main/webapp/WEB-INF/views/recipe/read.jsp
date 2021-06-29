@@ -109,7 +109,7 @@
 		</div>
 	</div>
 
-	<div class="card shadow mb-4">
+	<div class="card shadow mb-4 recipeSpecDoughnutBox">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary">RECIPE NUTRIENT
 				SPEC</h6>
@@ -194,6 +194,7 @@ $(document).ready(function(){
 					console.log(result.sumCarbo);
 
 					if(result.sumCarbo+ result.sumProtein+ result.sumFat==0){
+						$(".recipeSpecDoughnutBox").remove();
 						return;}
 					else{
 						var sums = result.sumCarbo+ result.sumProtein+ result.sumFat ;

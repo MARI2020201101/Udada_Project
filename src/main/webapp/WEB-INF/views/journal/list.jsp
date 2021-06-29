@@ -8,6 +8,7 @@
 
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800">Journal list Page</h1>
+	
 	<!-- Topbar Search -->
 		<form action="/journal/list" method="GET" id="searchForm"
 			class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -31,7 +32,7 @@
 	<div style="margin: 0 auto; width:50%;"><a href='/journal/read?jNo=<c:out value="${dto.JNo}"/>'>${dto.MEmail }</a></div>
 		<div class="card" style="margin: 0 auto; width: 50%;">
 			<c:if test="${not empty dto.imageDTO && dto.imageDTO.IName!='' }">
-				<img src="/image/show?imagePath=${dto.imageDTO.thumbnailPath }" height="450px">
+				<img src="/image/show?imagePath=${dto.imageDTO.imagePath }" height="450px">
 			</c:if>
 			<!--  <img src="/resources/imgs/heart2.svg" class="card-img-top">-->
 			<hr>
@@ -39,6 +40,7 @@
 				<p class="card-text">${dto.JContent }</p>
 			</div>
 			<hr>
+			
 			<div>
 				<a class="btn heart">
            		<img id="heart" src="" width="40px"></a>${dto.LCnt }
@@ -57,9 +59,11 @@
                     <input type="hidden" name="mEmail" value="${dto.MEmail }"/>
                     <input type="hidden" name="jNo" value="${dto.JNo }"/>
                 </div>
-                <div class="mt-3 d-flex flex-row align-items-center p-3 form-color"> <img src="https://i.imgur.com/zQZSWrt.jpg" width="50" class="rounded-circle mr-2"> <textarea type="text" id="reContent" class="form-control" placeholder="Enter your comment..."></textarea><input type="button" id="replybtn" value="등록"></input></div>
+                <div class="mt-3 d-flex flex-row align-items-center p-3 form-color"> <img src="https://i.imgur.com/zQZSWrt.jpg" width="50" class="rounded-circle mr-2"> <textarea type="text" id="reContent" class="form-control" placeholder="Enter your comment..."></textarea>
+                &nbsp;<input type="button" class="btn btn-primary" id="replybtn" value="등록"></input></div>
                 <div class="mt-2">
-                    <div class="d-flex flex-row p-3"> <img src="https://i.imgur.com/zQZSWrt.jpg" width="40" height="40" class="rounded-circle mr-3">
+                    <div class="d-flex flex-row p-3"> 
+                    <img src="https://i.imgur.com/zQZSWrt.jpg" width="40" height="40" class="rounded-circle mr-3">
                         <div class="w-100">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex flex-row align-items-center"> <span class="mr-2">${dto.replyDTO.MEmail }</span> <small class="c-badge">Top Comment</small> </div> <small>12h ago</small>

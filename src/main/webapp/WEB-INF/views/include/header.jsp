@@ -97,7 +97,7 @@
                     <span>CHALLENGE</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/journal/list">
                     <i class="fas fa-newspaper"></i>
                     <span>JOURNAL</span></a>
             </li>
