@@ -9,7 +9,7 @@
 
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">Last 7 Days : TOTAL KCAL</h6>
+			<h6 class="m-0 font-weight-bold text-primary">Last 7 Days : TOTAL KCALORIES</h6>
 		</div>
 		<div class="card-body">
 			<div>
@@ -74,13 +74,37 @@
 										beginAtZero : true
 									}
 								} ]
-							}
+							},
+					    plugins: {
+					        datalabels: {
+					          color: 'grey',
+					          anchor: 'end',
+					          borderWidth: 2,
+					          align: 'end',
+					          offset: 10,
+					          borderColor: '#fff',
+					          borderRadius: 25,
+					          backgroundColor: (context) => {
+					            return context.dataset.backgroundColor;
+					          },
+					          labels: {
+					            title: {
+					              font: {
+					                weight: 'bold'
+						            					              
+					              }
+					            },
+					            value: {
+					              color: 'green'
+					            }
+					          }
+					        }
+					      }//plugins end
+						
+						}//options end
 
 						
-						}
-
-						
-					});
+					});//chart end
 
 					
 		},
