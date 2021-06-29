@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib  prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 
@@ -37,6 +37,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
     
+    <link href="/resources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -68,7 +69,7 @@
                         <a class="collapse-item" href="/member/calendar">Calendar</a>
                         <a class="collapse-item" href="#">MyFood</a>
                         <a class="collapse-item" href="#">MyExercise</a>
-                        <a class="collapse-item" href="#">Mychallenge</a>
+                        <a class="collapse-item" href="/challenge/mychallenge">Mychallenge</a>
                         <a class="collapse-item" href="#">MyFitness</a>
                     </div>
                 </div>
@@ -91,7 +92,7 @@
                     <span>EXERCISE</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/challenge/list">
                     <i class="fas fa-users"></i>
                     <span>CHALLENGE</span></a>
             </li>

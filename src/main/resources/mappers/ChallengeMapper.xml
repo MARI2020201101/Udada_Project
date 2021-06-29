@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="org.ourapp.udada.mapper.ChallengeMapper">
+
+	<resultMap type="org.ourapp.udada.challenge.ChallengeDTO" id="challengeMap">
+			<id column="C_NO" property="cNo"/>
+			<result column="M_EMAIL" property="mEmail"/>
+			<result column="C_TITLE" property="cTitle"/>
+			<result column="C_CONTENT" property="cContent"/>
+			<result column="C_START" property="cStart"/>
+			<result column="C_FINISH" property="cFinish"/>
+			<result column="C_TOTAL" property="cTotal"/>
+	</resultMap>
+	
+	<resultMap type="org.ourapp.udada.challenge.ChallengeGoalDTO" id="challengeGoalMap">
+			<id column="CG_NO" property="cgNo"/>
+			<result column="C_NO" property="cNo"/>
+			<result column="E_NO" property="eNo"/>
+			<result column="CG_TIME" property="cgTime"/>
+	</resultMap>
+
+	<resultMap type="org.ourapp.udada.challenge.ChallengeApplyDTO" id="challengeApplyMap">
+			<id column="CG_NO" property="cgNo"/>
+			<result column="C_NO" property="cNo"/>
+			<result column="E_NO" property="eNo"/>
+			<result column="CG_TIME" property="cgTime"/>
+	</resultMap>
+	
+	<resultMap type="org.ourapp.udada.challenge.ChallengeListDTO" id="challengeListMap">
+			<id column="C_NO" property="cNo"/>
+			<result column="C_TITLE" property="cTitle"/>
+			<result column="C_START" property="cStart"/>
+			<result column="C_FINISH" property="cFinish"/>
+			<result column="C_TOTAL" property="cTotal"/>
+			<result column="C_DATE" property="cDate"/>
+			<result column="CACNT" property="caCnt"/>
+	</resultMap>
+	
+	<resultMap type="org.ourapp.udada.challenge.ChallengeGlistDTO" id="challengeGlistMap">
+			<result column="E_NAME" property="eName"/>
+			<result column="C_NO" property="cNo"/>
+			<result column="E_NO" property="eNo"/>
+			<result column="CG_TIME" property="cgTime"/>
+	</resultMap>
+	
+	<resultMap type="org.ourapp.udada.challenge.ChallengeReadDTO" id="challengeReadMap">
+			<result column="C_NO" property="cNo"/>
+			<result column="C_TITLE" property="cTitle"/>
+			<result column="C_START" property="cStart"/>
+			<result column="C_FINISH" property="cFinish"/>
+			<result column="C_TOTAL" property="cTotal"/>
+			<result column="C_DATE" property="cDate"/>
+			<result column="C_CONTENT" property="cContent"/>
+			<result column="CA_CNT" property="caCnt"/>
+			<result column="M_EMAIL" property="mEmail"/>
+	</resultMap>
+	
+	<resultMap type="org.ourapp.udada.challenge.ChallengeReadGoalDTO" id="challengeReadGoalMap">
+			<result column="E_NAME" property="eName"/>
+			<result column="C_NO" property="cNo"/>
+			<result column="E_NO" property="eNo"/>
+			<result column="CG_TIME" property="cgTime"/>
+			<result column="E_KCAL" property="eKcal"/>
+	</resultMap>
+
+	<insert id="register">
+		<selectKey keyProperty="cNo" resultType="long" order="AFTER">
+			SELECT SEQ_CHALLENGE.CURRVAL FROM DUAL
+		</selectKey>
+		INSERT INTO CHALLENGE ( C_NO, M_EMAIL, C_TITLE, C_CONTENT, C_START, C_FINISH, C_TOTAL )
+		VALUES ( SEQ_CHALLENGE.NEXTVAL, #{mEmail} ,#{cTitle}, #{cContent}, #{cStart}, #{cFinish}, #{cTotal} )
+	</insert>
+	
+	<insert id="registerApply">
+		INSERT INTO CHALLENGE_APPLY ( CA_NO, C_NO, M_EMAIL, CA_ING, CA_MEMO )
+		VALUES ( SEQ_CA.NEXTVAL, #{cNo}, #{mEmail}, 'MASTER', 'MASTER' )
+	</insert>
+	
+	<insert id="registerGoal">
+		INSERT INTO CHALLENGE_GOAL ( CG_NO, C_NO, E_NO, CG_TIME )
+		VALUES ( SEQ_CG.NEXTVAL, #{cNo}, #{eNo}, #{cgTime} ) 
+	</insert>
+	
+	<select id="loadList" resultMap="challengeListMap">
+        SELECT * FROM
+        (SELECT C.*, ROWNUM RN
+        FROM
+        (SELECT A.C_NO, A.C_TITLE, A.C_START, A.C_FINISH, A.C_TOTAL, A.C_DATE, B.CACNT
+		FROM CHALLENGE A
+        INNER JOIN (SELECT C_NO, COUNT(*) CACNT FROM CHALLENGE_APPLY GROUP BY C_NO) B
+		ON A.C_NO = B.C_NO
+		 <where>
+    		<if test="keyword != null and keyword != ''">
+         		(A.C_TITLE LIKE '%'||#{keyword}||'%' OR A.C_CONTENT LIKE '%'||#{keyword}||'%')
+    		</if>
+    		<if test="excsResult != null">
+    			AND A.C_NO IN
+        		<foreach item="item" index="index" collection="excsResult" open="(" separator="," close=")">
+					#{item}
+  				</foreach>
+    		</if>
+				<choose>
+    				<when test="period != null and period != ''">
+      				AND (A.C_START >= #{start} AND A.C_Finish >= #{finish})
+    				</when>
+    				<otherwise>
+      				AND (A.C_START+1)>=SYSDATE
+   					</otherwise>
+  				</choose>
+		</where>
+        ORDER BY A.C_START) C)
+        WHERE RN BETWEEN #{startNo} AND #{endNo}
+	</select>
+	
+	<select id="loadGlist" resultMap="challengeGlistMap">
+		SELECT A.C_NO, A.E_NO, A.CG_TIME, B.E_NAME
+		FROM CHALLENGE_GOAL A
+		INNER JOIN EXERCISE B
+		ON A.E_NO = B.E_NO
+		WHERE C_NO = #{cNo}
+	</select>
+	
+	<select id="read" resultMap="challengeReadMap">
+		SELECT A.C_NO, A.M_EMAIL, A.C_TITLE, A.C_START, A.C_FINISH, A.C_DATE, A.C_TOTAL, A.C_CONTENT, B.CA_CNT
+		FROM CHALLENGE A
+		INNER JOIN (SELECT C_NO, COUNT(*) CA_CNT FROM CHALLENGE_APPLY GROUP BY C_NO) B
+		ON A.C_NO= B.C_NO
+		WHERE A.C_NO=#{cNo}
+	</select>
+	
+	<select id="readGoal" resultMap="challengeReadGoalMap">
+		SELECT A.C_NO, A.E_NO, A.CG_TIME, B.E_NAME, B.E_KCAL
+		FROM CHALLENGE_GOAL A
+		INNER JOIN EXERCISE B
+		ON A.E_NO = B.E_NO
+		WHERE C_NO = #{cNo}
+	</select>
+	
+	<insert id="challengeApply">
+		INSERT INTO CHALLENGE_APPLY ( CA_NO, C_NO, M_EMAIL, CA_ING, CA_MEMO )
+		VALUES ( SEQ_CA.NEXTVAL, #{cNo}, #{sEmail}, 'APPLY', '' )
+	</insert>
+	
+	<update id="modify">
+		UPDATE CHALLENGE 
+		SET C_TITLE=#{cTitle}, C_CONTENT=#{cContent}, C_START=#{cStart}, C_FINISH=#{cFinish}, C_TOTAL=#{cTotal}
+		WHERE C_NO=#{cNo}
+	</update>
+	
+	<delete id="delGoal">
+		DELETE FROM CHALLENGE_GOAL
+		WHERE C_NO=#{cNo}
+	</delete>
+	
+	<insert id="modifyGoal">
+		INSERT INTO CHALLENGE_GOAL ( CG_NO, C_NO, E_NO, CG_TIME )
+		VALUES ( SEQ_CG.NEXTVAL, #{cNo}, #{eNo}, #{cgTime} ) 
+	</insert>
+	
+	<delete id="delete">
+		DELETE FROM CHALLENGE
+		WHERE C_NO=#{cNo}
+	</delete>
+	
+	<select id="searchExcs" resultMap="challengeReadGoalMap">
+		<![CDATA[
+		SELECT ROWNUM, E_NO, E_NAME, E_KCAL FROM EXERCISE
+		WHERE E_NAME LIKE '%'||#{eName}||'%' AND ROWNUM <= 5
+		]]>
+	</select>
+	
+	<select id="applyCheck" resultType="long">
+		SELECT COUNT(*) FROM CHALLENGE_APPLY
+		WHERE M_EMAIL=#{sEmail} AND C_NO=#{cNo}
+	</select>
+	
+	<delete id="challengeCancel">
+		DELETE FROM CHALLENGE_APPLY
+		WHERE M_EMAIL=#{sEmail} AND C_NO=#{cNo}
+	</delete>
+	
+	<select id="eNameSearch" resultType="int" >
+		SELECT A.C_NO FROM (CHALLENGE_GOAL)A
+		INNER JOIN
+		(SELECT E_NO FROM EXERCISE
+		WHERE E_NAME LIKE '%'|| #{exercise} ||'%')B
+		ON A.E_NO=B.E_NO
+		GROUP BY C_NO
+	</select>
+	
+	<select id="myChlgList" resultMap="challengeListMap" >
+		SELECT A.C_NO, B.C_TITLE, B.C_START, B.C_FINISH
+		FROM CHALLENGE_APPLY A
+		INNER JOIN 
+		(SELECT C_NO, C_START, C_FINISH, C_TITLE FROM CHALLENGE) B
+		ON A.C_NO=B.C_NO
+		WHERE A.M_EMAIL=#{sEmail}
+		ORDER BY B.C_START DESC
+	</select>
+	
+</mapper>
