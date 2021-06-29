@@ -6,7 +6,11 @@ public interface FoodService {
 	
 	int countAll() throws Exception;
 	
+	List<FoodDTO> getList(FoodCriteria FCri) throws Exception;
 	
+	int foodCount(FoodCriteria FCri) throws Exception;
+	
+	FoodDTO read(String fNo) throws Exception;
 	
 	
 	

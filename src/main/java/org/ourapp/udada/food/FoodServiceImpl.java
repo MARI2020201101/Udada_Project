@@ -17,7 +17,23 @@ public class FoodServiceImpl implements FoodService{
 		return foodMapper.countAll();
 	}
 
+	@Override
+	public List<FoodDTO> getList(FoodCriteria FCri) throws Exception {
+		// TODO Auto-generated method stub
+		return foodMapper.getList(FCri);
+	}
 	
+	@Override
+	public int foodCount(FoodCriteria FCri) throws Exception {
+		// TODO Auto-generated method stub
+		return foodMapper.foodCount(FCri);
+	}
+	
+	@Override
+	public FoodDTO read(String fNo) throws Exception {
+		// TODO Auto-generated method stub
+		return foodMapper.read(fNo);
+	}
 	
 	
 	

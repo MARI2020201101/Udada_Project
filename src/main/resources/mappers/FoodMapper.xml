@@ -6,7 +6,7 @@
 <mapper namespace="org.ourapp.udada.mapper.FoodMapper">
 
 	<resultMap type="org.ourapp.udada.food.FoodDTO" id="foodMap">
-			<id column="F_NO" property="fNO"/>
+			<id column="F_NO" property="fNo"/>
 			<result column="F_NAME" property="fName"/>
 			<result column="F_MJCLASS" property="fMjclass"/>
 			<result column="F_MNCLASS" property="fMinclass"/>
@@ -16,6 +16,24 @@
 			<result column="F_FAT" property="fFat"/>
 			<result column="F_CARBO" property="fCarbo"/>
 	</resultMap>
+	
+	<select id="getList" resultMap="foodMap">
+		SELECT F_NO, F_NAME, F_MJCLASS, F_MNCLASS FROM FOOD ORDER BY F_NO 
+	</select>
+	
+	<select id="criPage" parameterType="org.ourapp.udada.food.FoodCriteria">
+		SELECT F_NO, F_NAME, F_MJCLASS, F_MNCLASS FROM (select F_NO, F_NAME, F_MJCLASS, F_MNCLASS, ROW_NUMBER() OVER(ORDER BY F_NO DESC) AS R_NUM from FOOD) F_Cri WHERE R_NUM BETWEEN #{rowStart} AND #{rowEnd} ORDER BY F_NO DESC
+	</select>
+	
+	<select id="foodCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(F_NO) FROM FOOD
+		]]>
+	</select>
+
+	<select id="read" parameterType="string" resultMap="foodMap">
+		SELECT F_NAME, F_ONCEOFFER, F_KCAL, F_PROTEIN, F_FAT, F_CARBO FROM FOOD WHERE F_NO = #{fNo} 
+	</select>
 	
 	<select id = "countAll" resultType = "int">
 		SELECT COUNT(*) FROM FOOD
