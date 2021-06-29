@@ -76,6 +76,8 @@
 							</div>
 							<!-- Insert to MyFood Card End-->
 						</sec:authorize>
+						
+						
 					</div>
 
 					<div class="form-group row">
@@ -108,8 +110,18 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="card shadow mb-4 recipeSpecDoughnutBox">
+	<div class="card shadow mb-4 recipeSpecBox">
+		<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary">RECIPE KALORIES
+				SPEC</h6>
+		</div>
+		<div class="card-body">
+			<div >
+				<canvas id="kaloriesSpecBar" ></canvas>
+			</div>
+		</div>
+	</div>
+	<div class="card shadow mb-4 recipeSpecBox">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary">RECIPE NUTRIENT
 				SPEC</h6>
@@ -120,6 +132,9 @@
 			</div>
 		</div>
 	</div>
+
+	
+	
 	<input type="hidden" class="form-control form-control-user" name="pageNum" value=${pageRequestDTO.pageNum }> 
 	<input type="hidden" class="form-control form-control-user" name="keyword" value=${pageRequestDTO.keyword }> 
 	<input type="hidden" class="form-control form-control-user" name="rNo" value="${dto.RNo}">
@@ -177,7 +192,9 @@ $(document).ready(function(){
 	var selectStarOption = $(".selectStarOption");
 	var mEmail = '${loginUser}';
 	var recipeSpecList = [];
+	var kaloriesSpecList = [];
 	var ctx = document.getElementById("recipeSpecChart");
+	var ctx2 = document.getElementById("kaloriesSpecBar");
 	console.log("mEmail>>",mEmail);
 	
 	loadStar();
@@ -194,9 +211,13 @@ $(document).ready(function(){
 					console.log(result.sumCarbo);
 
 					if(result.sumCarbo+ result.sumProtein+ result.sumFat==0){
-						$(".recipeSpecDoughnutBox").remove();
+						$(".recipeSpecBox").remove();
+						
 						return;}
 					else{
+						
+						kaloriesSpecList.push(result.sumKcal,result.sumCarbo,result.sumProtein,result.sumFat );
+						
 						var sums = result.sumCarbo+ result.sumProtein+ result.sumFat ;
 						var sumCarbo = Math.round((result.sumCarbo/sums)*100);
 						var sumProtein = Math.round((result.sumProtein/sums)*100);
@@ -264,6 +285,50 @@ $(document).ready(function(){
 								}//options end
 							});//nutrientDoughutgraph end
 
+							var myChart2 = new Chart(ctx2, {
+						    type: 'horizontalBar',
+						    data: {
+						        labels: ['TotalKcalories', 'Carbo', 'Protein', 'Fat'],
+						        datasets: [{
+						            label: 'Kalories (kcal) & nutrients (g)',
+						            data: kaloriesSpecList,
+						            borderColor: "rgba(130, 24, 32, 1)",
+						            backgroundColor: "rgba(125, 231, 213, 0.5)",
+						            fill: false,
+						        }]
+						    },
+						    options: {
+						        responsive: true,
+						        
+						        tooltips: {
+						            mode: 'index',
+						            intersect: false,
+						        },
+						        hover: {
+						            mode: 'nearest',
+						            intersect: true
+						        },
+						        scales: {
+						            xAxes: [{
+						                display: true,
+						                scaleLabel: {
+						                    display: true
+						                    
+						                },
+						            }],
+						            yAxes: [{
+						                display: true,
+						                ticks: {
+						                    autoSkip: false,
+						                },
+						                scaleLabel: {
+						                    display: true
+						                   
+						                }
+						            }]
+						        }
+						    }
+						});
 
 
 		
