@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 
@@ -30,6 +30,8 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/resources/js/sb-admin-2.min.js"></script>
+    
+    <link href="/resources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -61,7 +63,7 @@
                         <a class="collapse-item" href="#">Calendar</a>
                         <a class="collapse-item" href="#">MyFood</a>
                         <a class="collapse-item" href="#">MyExercise</a>
-                        <a class="collapse-item" href="#">Mychallenge</a>
+                        <a class="collapse-item" href="/challenge/mychallenge">Mychallenge</a>
                         <a class="collapse-item" href="#">MyFitness</a>
                     </div>
                 </div>
@@ -84,7 +86,7 @@
                     <span>EXERCISE</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/challenge/list">
                     <i class="fas fa-users"></i>
                     <span>CHALLENGE</span></a>
             </li>
