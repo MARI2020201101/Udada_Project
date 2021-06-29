@@ -37,7 +37,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
     
-    <link href="/resources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    
 </head>
 
 <body id="page-top">
