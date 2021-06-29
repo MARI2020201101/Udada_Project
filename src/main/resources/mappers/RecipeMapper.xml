@@ -30,6 +30,15 @@
 			<result column="I_DIR" property="iDir"/>
 			<result column="I_DIV" property="iDiv"/>
 	</resultMap>
+	
+	<resultMap type="org.ourapp.udada.recipe.RecipeSpecDTO" id="recipeSpecMap" >
+		  	<id column="R_NO" property="rNo"/>
+		 	<result column="R_TITLE" property="rTitle"/>
+			<result column="SUM_KCAL" property="sumKcal"/>
+			<result column="SUM_PROTEIN" property="sumProtein"/>
+			<result column="SUM_FAT" property="sumFat"/>
+			<result column="SUM_CARBO" property="sumCarbo"/>
+	</resultMap>
 
 	<select id="getList" resultMap="recipeMap">
 		SELECT * FROM RECIPE ORDER BY R_NO DESC
@@ -149,4 +158,9 @@
 		</if>
 	</where>
 	</select>
+	
+	<select id="selectRecipeSpecByRNo" resultMap="recipeSpecMap">	
+		SELECT * FROM V_RECIPE_SPEC WHERE R_NO = #{rNo}
+	</select>
+	
 </mapper>

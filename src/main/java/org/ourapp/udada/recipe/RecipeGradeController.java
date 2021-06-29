@@ -22,7 +22,7 @@ public class RecipeGradeController {
 
 	private final RecipeGradeService recipeGradeService;
 
-	@PreAuthorize("isAuthenticated()")
+
 	@GetMapping("/recipe/grade/{rNo}") 
 	public ResponseEntity<Double> loadAvgByRNo(@PathVariable("rNo")Long rNo) throws Exception{
 	   Double avg = recipeGradeService.loadAvgByRNo(rNo);

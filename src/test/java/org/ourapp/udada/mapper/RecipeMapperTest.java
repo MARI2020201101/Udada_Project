@@ -12,7 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@ContextConfiguration(locations={
+		"file:src/main/webapp/WEB-INF/spring/root-context.xml"		
+		,"file:src/main/webapp/WEB-INF/spring/security-context.xml"
+		,"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"})
 public class RecipeMapperTest {
 
 	@Autowired
@@ -102,5 +105,11 @@ public class RecipeMapperTest {
 	public void countAllWithSearchTest() {
 		recipeMapper.countAllWithSearch(PageRequestDTO.builder().pageNum(1).pageSize(10).keyword("테").build());
 	}
+	
+	@Test
+	public void selectRecipeSpecTest() {
+		recipeMapper.selectRecipeSpecByRNo(18L);
+	}
+	
 	
 }

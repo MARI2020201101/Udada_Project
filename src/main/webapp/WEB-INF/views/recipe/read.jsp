@@ -103,7 +103,20 @@
 							</c:if>
 						</ul>
 					</div>
+
 				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="card shadow mb-4">
+		<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary">RECIPE NUTRIENT
+				SPEC</h6>
+		</div>
+		<div class="card-body">
+			<div>
+				<canvas id="recipeSpecChart"></canvas>
 			</div>
 		</div>
 	</div>
@@ -163,9 +176,108 @@ $(document).ready(function(){
 	var insertStarBtn = $(".insertStarBtn");
 	var selectStarOption = $(".selectStarOption");
 	var mEmail = '${loginUser}';
+	var recipeSpecList = [];
+	var ctx = document.getElementById("recipeSpecChart");
 	console.log("mEmail>>",mEmail);
 	
 	loadStar();
+	loadSpec();
+
+	function loadSpec(){
+
+		$.ajax({
+			 url:"/recipe/spec/"+rNo,
+	           method:"GET",
+	           dataType:"json",
+	           success:function(result){
+		            console.log(result);
+					console.log(result.sumCarbo);
+
+					if(result.sumCarbo+ result.sumProtein+ result.sumFat==0){
+						return;}
+					else{
+						var sums = result.sumCarbo+ result.sumProtein+ result.sumFat ;
+						var sumCarbo = Math.round((result.sumCarbo/sums)*100);
+						var sumProtein = Math.round((result.sumProtein/sums)*100);
+						var sumFat = Math.round((result.sumFat/sums)*100);
+						
+						recipeSpecList.push(sumCarbo, sumProtein, sumFat);
+						console.log("recipeSpecList>> ", recipeSpecList);
+
+
+						var myChart = new Chart(ctx, {
+							  type: 'doughnut',
+							  data: {
+							    labels: ['Carbo % ', 'Protein % ', 'Fat %'],
+							    datasets: [{
+							      label: '# nutrients + %',
+							      data: recipeSpecList,
+							      backgroundColor: [
+							        'rgba(255, 99, 132, 0.5)',					      				        
+							        'rgba(75, 192, 192, 0.2)',
+							        'rgba(255, 206, 86, 0.2)'
+							      ],
+							      borderColor: [
+							        'rgba(255,99,132,1)',					       
+							        'rgba(75, 192, 192, 1)',
+							        'rgba(255, 206, 86, 1)'
+							      ],
+							      borderWidth: 3
+							    }]
+							  },
+							  options : {
+									maintainAspectRatio : true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
+									scales : {
+										yAxes : [ {
+											ticks : {
+												beginAtZero : true
+											}
+										} ]
+									},
+							    plugins: {
+							        datalabels: {
+							          color: 'grey',
+							          anchor: 'center',
+							          borderWidth: 2,
+							          align: 'end',
+							          offset: 10,
+							          borderColor: '#fff',
+							          borderRadius: 25,
+							          backgroundColor: (context) => {
+							            return context.dataset.backgroundColor;
+							          },
+							          labels: {
+							            title: {
+							              font: {
+							                weight: 'bold'
+								            					              
+							              }
+							            },
+							            value: {
+							              color: 'green'
+							            }
+							          }
+							        }
+							      }//plugins end
+								
+								}//options end
+							});//nutrientDoughutgraph end
+
+
+
+		
+						}
+
+					
+		            },
+		        error: function(xhr,status,errorThrown){
+			        console.log("xhr >>",xhr);			
+			        }
+			});
+
+		
+		};
+	
 	
 	insertStarBtn.click(function(e){
 		var starPoint = selectStarOption.val();
