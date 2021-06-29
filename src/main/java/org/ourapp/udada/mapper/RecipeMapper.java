@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.ourapp.udada.recipe.PageRequestDTO;
 import org.ourapp.udada.recipe.RecipeDTO;
+import org.ourapp.udada.recipe.RecipeSpecDTO;
 
 public interface RecipeMapper {
 
@@ -24,4 +25,5 @@ public interface RecipeMapper {
 	List<RecipeDTO> selectWithImageAndPagingAndSearch(PageRequestDTO pageRequestDTO);
 	int countAllWithSearch(PageRequestDTO pageRequestDTO);
 	
+	RecipeSpecDTO selectRecipeSpecByRNo(Long rNo);
 }

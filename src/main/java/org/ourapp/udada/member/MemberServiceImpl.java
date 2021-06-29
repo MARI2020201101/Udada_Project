@@ -3,6 +3,7 @@ package org.ourapp.udada.member;
 import java.util.List;
 
 import org.ourapp.udada.mapper.MemberMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -14,9 +15,11 @@ import lombok.extern.log4j.Log4j;
 public class MemberServiceImpl implements MemberService{
 
 	private final MemberMapper memberMapper;
+	private final PasswordEncoder passwordEncoder;
 	
 	@Override
 	public void join(MemberDTO memberDTO) {
+		memberDTO.setMPw(passwordEncoder.encode(memberDTO.getMPw()));
 		memberMapper.join(memberDTO);
 	}
 

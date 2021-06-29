@@ -6,6 +6,7 @@ import org.ourapp.udada.food.FoodDTO;
 import org.ourapp.udada.food.FoodService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +20,7 @@ public class RecipeIngredientSearchController {
 	
 	private final FoodService foodService;
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/searchForIngredient")
 	public ResponseEntity<List<FoodDTO>> getFoodByFName(String keyword)throws Exception{
 		

@@ -2,8 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib  prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 
@@ -30,6 +31,13 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/resources/js/sb-admin-2.min.js"></script>
+    
+    <!-- cdn chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+    
+    
 </head>
 
 <body id="page-top">
@@ -58,10 +66,10 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Calendar</a>
+                        <a class="collapse-item" href="/member/calendar">Calendar</a>
                         <a class="collapse-item" href="#">MyFood</a>
-                        <a class="collapse-item" href="/exercise/mylist">MyExercise</a>
-                        <a class="collapse-item" href="#">Mychallenge</a>
+                        <a class="collapse-item" href="#">MyExercise</a>
+                        <a class="collapse-item" href="/challenge/mychallenge">Mychallenge</a>
                         <a class="collapse-item" href="#">MyFitness</a>
                     </div>
                 </div>
@@ -84,12 +92,12 @@
                     <span>EXERCISE</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/challenge/list">
                     <i class="fas fa-users"></i>
                     <span>CHALLENGE</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/journal/list">
                     <i class="fas fa-newspaper"></i>
                     <span>JOURNAL</span></a>
             </li>
@@ -100,16 +108,32 @@
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content">
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <li ><a href="#" class="btn btn-secondary">
-                            <span class="text">Login</span>
-                        </a></li>
-                    </ul>
-                </nav>
-                
-                <!-- End of Topbar -->
+			<!-- Main Content -->
+			<div id="content">
+				<!-- Topbar -->
+				<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+					<!-- Topbar Navbar -->
+					<ul class="navbar-nav ml-auto">
+						<sec:authorize access="isAnonymous()">
+							<li><a href="/member/login" class="btn btn-secondary mx-1">
+									<span class="text">Login</span>
+							</a></li>
+						</sec:authorize>
+						<sec:authorize access="isAuthenticated()">
+							<li><a href="/member/logout" class="btn btn-secondary mx-1">
+									<span class="text">Logout</span>
+							</a></li>
+						</sec:authorize>
+					</ul>
+				</nav>
+
+				<!-- End of Topbar -->
+				
+				
+				
+	<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal.memberDTO.mGrade" var="loginUserRole"/> 
+   	<sec:authentication property="principal.memberDTO.mEmail" var="loginUser"/> 
+
+    </sec:authorize>
+    

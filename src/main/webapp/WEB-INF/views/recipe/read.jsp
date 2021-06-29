@@ -28,17 +28,19 @@
 					<div class="form-group row">
 						<p class="starBox"></p>
 					</div>
-					<div class="form-group row">
-						<select class="form-select form-select-sm selectStarOption">
-							<option value=5>5</option>
-							<option value=4>4</option>
-							<option value=3>3</option>
-							<option value=2>2</option>
-							<option value=1>1</option>
-						</select>&nbsp;
-						<button type="button" class="btn btn-primary btn-sm insertStarBtn">평가하기</button>
-					</div>
-
+					<sec:authorize access="isAuthenticated()">
+						<div class="form-group row">
+							<select class="form-select form-select-sm selectStarOption">
+								<option value=5>5</option>
+								<option value=4>4</option>
+								<option value=3>3</option>
+								<option value=2>2</option>
+								<option value=1>1</option>
+							</select>&nbsp;
+							<button type="button"
+								class="btn btn-primary btn-sm insertStarBtn">평가하기</button>
+						</div>
+					</sec:authorize>
 					<div class="form-group row">
 						<c:if test="${not empty dto.imageDTO && dto.imageDTO.IName!='' }">
 							<a href="/image/show?imagePath=${dto.imageDTO.imagePath }"> <img
@@ -46,32 +48,34 @@
 								<p>크게보기</p>
 							</a>
 						</c:if>
-				<!-- Insert to MyFood Card -->
-						<div class="col-xl-4 col-md-6 mb-4">
-							<div class="card border-left-primary shadow h-100 py-2">
-								<div class="card-body">
-									<div class="row no-gutters align-items-center">
-										<div class="col mr-2">
-											<div class="font-weight-bold text-primary text-uppercase mb-1">
-												마이 푸드 다이어리에 추가하기</div>
+
+						<sec:authorize access="isAuthenticated()">
+							<!-- Insert to MyFood Card -->
+							<div class="col-xl-4 col-md-6 mb-4">
+								<div class="card border-left-primary shadow h-100 py-2">
+									<div class="card-body">
+										<div class="row no-gutters align-items-center">
+											<div class="col mr-2">
+												<div
+													class="font-weight-bold text-primary text-uppercase mb-1">
+													마이 푸드 다이어리에 추가하기</div>
 												<br>
-											<div class="form-group my-2">									
-												<b>양 입력 : </b>
-													<select class="form-select">
-														<option value=1> 1 인분 </option>
-														<option value=2> 2 인분 </option>
-														<option value=3> 3 인분 </option>
+												<div class="form-group my-2">
+													<b>양 입력 : </b> <select class="form-select">
+														<option value=1>1 인분</option>
+														<option value=2>2 인분</option>
+														<option value=3>3 인분</option>
 													</select>&nbsp;
-													
-												<button type="button" class="btn btn-primary btn-sm ">추가</button>
+
+													<button type="button" class="btn btn-primary btn-sm ">추가</button>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-				<!-- Insert to MyFood Card End-->    
-                        
+							<!-- Insert to MyFood Card End-->
+						</sec:authorize>
 					</div>
 
 					<div class="form-group row">
@@ -99,7 +103,20 @@
 							</c:if>
 						</ul>
 					</div>
+
 				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="card shadow mb-4 recipeSpecDoughnutBox">
+		<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary">RECIPE NUTRIENT
+				SPEC</h6>
+		</div>
+		<div class="card-body">
+			<div>
+				<canvas id="recipeSpecChart"></canvas>
 			</div>
 		</div>
 	</div>
@@ -116,9 +133,14 @@
 	<a href="/recipe/list?pageNum=${pageRequestDTO.pageNum }&keyword=${pageRequestDTO.keyword}" class="btn btn-secondary">
        <span class="text">LIST</span>
     </a>
+  
+    <c:if test="${loginUser eq dto.MEmail || loginUserRole eq 'ADMIN'}">
     <a href='/recipe/modify?rNo=${dto.RNo}&pageNum=${pageRequestDTO.pageNum }&keyword=${pageRequestDTO.keyword}' class="btn btn-warning">
         <span class="text">MODIFY</span>
     </a>
+    </c:if>
+    
+    
 </div>
 <!-- /.container-fluid -->
 </div>
@@ -153,8 +175,110 @@ $(document).ready(function(){
 	var ingreBox = $(".ingreBox");
 	var insertStarBtn = $(".insertStarBtn");
 	var selectStarOption = $(".selectStarOption");
+	var mEmail = '${loginUser}';
+	var recipeSpecList = [];
+	var ctx = document.getElementById("recipeSpecChart");
+	console.log("mEmail>>",mEmail);
 	
 	loadStar();
+	loadSpec();
+
+	function loadSpec(){
+
+		$.ajax({
+			 url:"/recipe/spec/"+rNo,
+	           method:"GET",
+	           dataType:"json",
+	           success:function(result){
+		            console.log(result);
+					console.log(result.sumCarbo);
+
+					if(result.sumCarbo+ result.sumProtein+ result.sumFat==0){
+						$(".recipeSpecDoughnutBox").remove();
+						return;}
+					else{
+						var sums = result.sumCarbo+ result.sumProtein+ result.sumFat ;
+						var sumCarbo = Math.round((result.sumCarbo/sums)*100);
+						var sumProtein = Math.round((result.sumProtein/sums)*100);
+						var sumFat = Math.round((result.sumFat/sums)*100);
+						
+						recipeSpecList.push(sumCarbo, sumProtein, sumFat);
+						console.log("recipeSpecList>> ", recipeSpecList);
+
+
+						var myChart = new Chart(ctx, {
+							  type: 'doughnut',
+							  data: {
+							    labels: ['Carbo % ', 'Protein % ', 'Fat %'],
+							    datasets: [{
+							      label: '# nutrients + %',
+							      data: recipeSpecList,
+							      backgroundColor: [
+							        'rgba(255, 99, 132, 0.5)',					      				        
+							        'rgba(75, 192, 192, 0.2)',
+							        'rgba(255, 206, 86, 0.2)'
+							      ],
+							      borderColor: [
+							        'rgba(255,99,132,1)',					       
+							        'rgba(75, 192, 192, 1)',
+							        'rgba(255, 206, 86, 1)'
+							      ],
+							      borderWidth: 3
+							    }]
+							  },
+							  options : {
+									maintainAspectRatio : true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
+									scales : {
+										yAxes : [ {
+											ticks : {
+												beginAtZero : true
+											}
+										} ]
+									},
+							    plugins: {
+							        datalabels: {
+							          color: 'grey',
+							          anchor: 'center',
+							          borderWidth: 2,
+							          align: 'end',
+							          offset: 10,
+							          borderColor: '#fff',
+							          borderRadius: 25,
+							          backgroundColor: (context) => {
+							            return context.dataset.backgroundColor;
+							          },
+							          labels: {
+							            title: {
+							              font: {
+							                weight: 'bold'
+								            					              
+							              }
+							            },
+							            value: {
+							              color: 'green'
+							            }
+							          }
+							        }
+							      }//plugins end
+								
+								}//options end
+							});//nutrientDoughutgraph end
+
+
+
+		
+						}
+
+					
+		            },
+		        error: function(xhr,status,errorThrown){
+			        console.log("xhr >>",xhr);			
+			        }
+			});
+
+		
+		};
+	
 	
 	insertStarBtn.click(function(e){
 		var starPoint = selectStarOption.val();
@@ -163,7 +287,7 @@ $(document).ready(function(){
 		console.log("starPoint>>" , starPoint);
 	var recipeGradeDTO = {
 		"rNo" : rNo,
-		"mEmail" : "user04@gmail.com",
+		"mEmail" : mEmail,
 		"rgGrade" : starPoint
 		} 
 		console.log(recipeGradeDTO);

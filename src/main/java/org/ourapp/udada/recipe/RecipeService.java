@@ -26,4 +26,5 @@ public interface RecipeService {
 	
 	int countAllWithSearch(PageRequestDTO pageRequestDTO);
 	List<RecipeDTO> getListWithImageAndPagingAndSearch(PageRequestDTO pageRequestDTO) throws Exception;
+	RecipeSpecDTO getRecipeSpec(Long rNo); 
 }

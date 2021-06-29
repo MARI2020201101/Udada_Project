@@ -118,6 +118,7 @@
 
 	function emailCheck(){
 		
+		
 		if(! (ECheck($("#mEmail").val()))){
 			alert("올바른 이메일을 입력해주세요.");
 			return false;
@@ -128,12 +129,21 @@
 			type : "post",
 			data : {"mEmail" : $("#mEmail").val()},
 			success : function(data){
-				if(data == 1){
-					alert("중복된 아이디 입니다.")
+				console.log(data);
+
+				if(data =='success'){
+
+					$("#emailCheckBtn").attr("value", "Y");
+					alert("사용 가능한 아이디 입니다.");
+					}else{
+						alert("중복된 아이디 입니다.");
+						}
+				/* if(data == 1){
+					alert("중복된 아이디 입니다.");
 				}else if(data == 0){
 					$("#emailCheckBtn").attr("value", "Y");
 					alert("사용 가능한 아이디 입니다.");
-				}
+				} */
 			}
 		})
 	}

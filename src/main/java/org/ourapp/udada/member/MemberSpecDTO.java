@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import lombok.Data;
 
 @Data
-@Component
 public class MemberSpecDTO {
 	private long msNo;
 	private String mEmail;

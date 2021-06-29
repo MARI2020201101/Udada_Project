@@ -179,6 +179,11 @@ public class RecipeServiceImpl implements RecipeService{
 		return recipeMapper.selectWithImageAndPagingAndSearch(pageRequestDTO);
 	}
 
+	@Override
+	public RecipeSpecDTO getRecipeSpec(Long rNo) {
+		return recipeMapper.selectRecipeSpecByRNo(rNo);
+	}
+
 
 	
 	

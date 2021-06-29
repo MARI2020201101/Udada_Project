@@ -27,7 +27,7 @@ public class FoodDTO {
 	 * 
 	 * */
 
-	private String fNO;
+	private String fNo;
 	private String fName;
 	private String fMjclass;
 	private String fMinclass;
