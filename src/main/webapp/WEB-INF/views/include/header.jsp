@@ -87,7 +87,7 @@
                     <span>RECIPE</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/exercise/list">
                     <i class="fas fa-dumbbell"></i>
                     <span>EXERCISE</span></a>
             </li>
