@@ -162,5 +162,8 @@
 	<select id="selectRecipeSpecByRNo" resultMap="recipeSpecMap">	
 		SELECT * FROM V_RECIPE_SPEC WHERE R_NO = #{rNo}
 	</select>
-	
+	<insert id="insertFoodMy">
+		INSERT INTO FOOD_MY(FM_NO, M_EMAIL, FM_AMOUNT, R_NO) 
+		VALUES (SEQ_FM.NEXTVAL, #{mEmail} , #{fmAmount} , #{rNo} )
+	</insert>
 </mapper>

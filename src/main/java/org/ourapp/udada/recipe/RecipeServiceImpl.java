@@ -184,6 +184,12 @@ public class RecipeServiceImpl implements RecipeService{
 		return recipeMapper.selectRecipeSpecByRNo(rNo);
 	}
 
+	@Override
+	public void registerFoodMy(FoodMyDTO foodMyDTO) {
+		recipeMapper.insertFoodMy(foodMyDTO);
+		
+	}
+
 
 	
 	

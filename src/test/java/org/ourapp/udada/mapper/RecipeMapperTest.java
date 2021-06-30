@@ -2,6 +2,7 @@ package org.ourapp.udada.mapper;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.ourapp.udada.recipe.FoodMyDTO;
 import org.ourapp.udada.recipe.PageRequestDTO;
 import org.ourapp.udada.recipe.RecipeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,5 +112,10 @@ public class RecipeMapperTest {
 		recipeMapper.selectRecipeSpecByRNo(18L);
 	}
 	
+	@Test
+	public void insertFoodMyTest() {
+		FoodMyDTO foodMyDTO = FoodMyDTO.builder().fmAmount(2).mEmail("user10@gmail.com").rNo(63L).build();
+		recipeMapper.insertFoodMy(foodMyDTO);
+	}
 	
 }

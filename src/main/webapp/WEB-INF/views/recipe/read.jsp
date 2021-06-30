@@ -61,13 +61,13 @@
 													마이 푸드 다이어리에 추가하기</div>
 												<br>
 												<div class="form-group my-2">
-													<b>양 입력 : </b> <select class="form-select">
+													<b>양 입력 : </b> <select class="form-select fmAmountOption">
 														<option value=1>1 인분</option>
 														<option value=2>2 인분</option>
 														<option value=3>3 인분</option>
 													</select>&nbsp;
 
-													<button type="button" class="btn btn-primary btn-sm ">추가</button>
+													<button type="button" class="btn btn-primary btn-sm insertFoodMyBtn">추가</button>
 												</div>
 											</div>
 										</div>
@@ -190,6 +190,7 @@ $(document).ready(function(){
 	var ingreBox = $(".ingreBox");
 	var insertStarBtn = $(".insertStarBtn");
 	var selectStarOption = $(".selectStarOption");
+	var insertFoodMyBtn =$(".insertFoodMyBtn");
 	var mEmail = '${loginUser}';
 	var recipeSpecList = [];
 	var kaloriesSpecList = [];
@@ -199,6 +200,33 @@ $(document).ready(function(){
 	
 	loadStar();
 	loadSpec();
+
+	insertFoodMyBtn.on("click", function(e){
+			e.preventDefault();
+			console.log($(this));
+			var fmAmount = $(".fmAmountOption").val();		
+			var foodMyDTO = {
+				"mEmail" : mEmail,
+				"rNo" : rNo,
+				"fmAmount" : fmAmount
+					}
+
+			console.log("foodMyDTO>>", foodMyDTO);
+			$.ajax({
+				 url:"/recipe/registerFoodMy",
+		            method:"POST",
+		            data:JSON.stringify(foodMyDTO),
+		            contentType:"application/json; charset=utf-8",
+		            success:function(result){
+			            console.log(result);
+			            alert("MyFood에 저장되었습니다.");
+			            },
+			        error: function(xhr,status,errorThrown){
+				        console.log("xhr >>",xhr);			
+				        }
+				});
+			
+		});
 
 	function loadSpec(){
 
