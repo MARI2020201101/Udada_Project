@@ -14,7 +14,7 @@ public class Exercise_myDTO {
 	private long emNo;	
 	private String mEmail;	
 	private Date emDate;	
-	private int eNo;	
+	private long eNo;	
 	private int emTime;	
 	private String eName;
 	private long eKcal;

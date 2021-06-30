@@ -65,4 +65,19 @@ public class ExerciseController {
 		return "redirect:/exercise/mylist";
 	}
 	
+	@PostMapping("/insert")
+	public String insert(Exercise_myDTO exercise_myDTO) {
+		String mEmail="test01@naver.com";
+		
+		System.out.println("insert..................");
+		System.out.println("eNo:"+exercise_myDTO.getENo());
+		System.out.println("em_time:"+exercise_myDTO.getEmTime());
+		exercise_myDTO.setMEmail(mEmail);
+		
+		//exerciseService.insert(Exercise_myDTO );
+		
+		return "redirect:/exercise/list";
+		
+	}
+	
 }//class end

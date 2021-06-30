@@ -10,5 +10,6 @@ public interface ExerciseService {
 	List<Exercise_myDTO> myList();
 	ExerciseDTO myget(Long eNo);
 	boolean remove(Long eNo) throws Exception;
+	void insert(Exercise_myDTO exercise_myDTO);
 
 }

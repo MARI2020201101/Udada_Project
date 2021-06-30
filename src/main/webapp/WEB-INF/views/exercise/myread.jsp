@@ -16,7 +16,7 @@
                         <th  scope="col">번호</th>
                         <th  scope="col">운동 이름</th>
                         <th  scope="col">운동 강도</th>
-                        <th  scope="col">소모 칼로리</th>
+                        <th  scope="col">소모 칼로리(5분)</th>
                     </tr>
                     </thead>
                     <tbody>

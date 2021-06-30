@@ -14,6 +14,6 @@ public interface ExerciseMapper {
 	List<Exercise_myDTO> myList();
 	ExerciseDTO myget(Long eNo);
 	int delete(Long eNo);
-	
+	void insert(Exercise_myDTO exercise_myDTO);
 
 }

@@ -46,7 +46,10 @@
 		DELETE FROM EXERCISE_MY WHERE E_NO = #{eNo}
 	</delete>
 	
-	
+	<insert id="insert" parameterType="org.ourapp.udada.exercise.Exercise_myDTO">
+		INSERT INTO EXERCISE_MY (EM_NO, M_EMAIL, E_NO, EM_TIME, E_NAME, E_KCAL)
+		VALUES (SEQ_EM.NEXTVAL, #{mEmail}, #{eNo}, #{emTime}, #{eName}, )
+	</insert>
 	
 </mapper>
 

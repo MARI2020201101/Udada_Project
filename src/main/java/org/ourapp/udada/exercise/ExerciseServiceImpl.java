@@ -44,4 +44,12 @@ import org.springframework.stereotype.Service;
 	  return exerciseMapper.delete(eNo)==1;
   }
 
+  @Override
+  public void insert(Exercise_myDTO exercise_myDTO) {
+	  exerciseMapper.insert(exercise_myDTO);
+	
+	}
+  
+  
+
 }
