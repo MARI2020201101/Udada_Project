@@ -2,7 +2,7 @@ package org.ourapp.udada.mapper;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.ourapp.udada.recipe.FoodMyDTO;
+import org.ourapp.udada.foodmy.FoodMyDTO;
 import org.ourapp.udada.recipe.PageRequestDTO;
 import org.ourapp.udada.recipe.RecipeDTO;
 import org.springframework.beans.factory.annotation.Autowired;

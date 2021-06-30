@@ -1,8 +1,11 @@
 package org.ourapp.udada.recipe;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.ourapp.udada.foodmy.FoodMyDTO;
 import org.ourapp.udada.image.ImageController;
 import org.ourapp.udada.image.ImageDTO;
 import org.springframework.http.HttpStatus;
@@ -154,8 +157,13 @@ public class RecipeController {
 			Long rNo = Long.parseLong(params.get("rNo"));
 			String mEmail = params.get("mEmail");
 			int fmAmount = Integer.parseInt(params.get("fmAmount"));
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = new Date();
+			String today = sdf.format(date);
 			
-			FoodMyDTO foodMyDTO = FoodMyDTO.builder().fmAmount(fmAmount).mEmail(mEmail).rNo(rNo).build();
+			FoodMyDTO foodMyDTO = FoodMyDTO.builder().fmAmount(fmAmount).mEmail(mEmail).rNo(rNo).fmDate(today).build();
+			log.info("foodMyDTO : " + foodMyDTO);
 			recipeService.registerFoodMy(foodMyDTO);
 		  
 		  return new ResponseEntity<>("success", HttpStatus.OK);

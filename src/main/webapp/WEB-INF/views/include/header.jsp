@@ -67,7 +67,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/member/calendar">Calendar</a>
-                        <a class="collapse-item" href="#">MyFood</a>
+                        <a class="collapse-item" href="/member/foodMy">MyFood</a>
                         <a class="collapse-item" href="#">MyExercise</a>
                         <a class="collapse-item" href="/challenge/mychallenge">Mychallenge</a>
                         <a class="collapse-item" href="#">MyFitness</a>

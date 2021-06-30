@@ -2,7 +2,7 @@ package org.ourapp.udada.mapper;
 
 import java.util.List;
 
-import org.ourapp.udada.recipe.FoodMyDTO;
+import org.ourapp.udada.foodmy.FoodMyDTO;
 import org.ourapp.udada.recipe.PageRequestDTO;
 import org.ourapp.udada.recipe.RecipeDTO;
 import org.ourapp.udada.recipe.RecipeSpecDTO;

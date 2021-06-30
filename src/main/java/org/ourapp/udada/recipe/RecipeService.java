@@ -2,6 +2,8 @@ package org.ourapp.udada.recipe;
 
 import java.util.List;
 
+import org.ourapp.udada.foodmy.FoodMyDTO;
+
 public interface RecipeService {
 	
 	List<RecipeDTO> getList() throws Exception;

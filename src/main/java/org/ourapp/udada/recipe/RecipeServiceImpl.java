@@ -2,6 +2,7 @@ package org.ourapp.udada.recipe;
 
 import java.util.List;
 
+import org.ourapp.udada.foodmy.FoodMyDTO;
 import org.ourapp.udada.image.ImageDTO;
 import org.ourapp.udada.mapper.ImageMapper;
 import org.ourapp.udada.mapper.RecipeIngredientMapper;

@@ -62,7 +62,7 @@
 												<br>
 												<div class="form-group my-2">
 													<b>양 입력 : </b> <select class="form-select fmAmountOption">
-														<option value=1>1 인분</option>
+														<option value=1 >1 인분</option>
 														<option value=2>2 인분</option>
 														<option value=3>3 인분</option>
 													</select>&nbsp;

@@ -12,6 +12,8 @@
 		<result column="M_BIRTH" property="mBirth"/>
 		<result column="M_GENDER" property="mGender"/>
 		<result column="M_GRADE" property="mGrade"/>
+		<result column="M_MEAL" property="mMeal"/>
+		<result column="M_GOALTYPE" property="mGoaltype"/>
 	</resultMap>
 	
 	<resultMap type="org.ourapp.udada.member.MemberSpecDTO" id="memberSpecMap">

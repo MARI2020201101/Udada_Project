@@ -27,5 +27,7 @@ public class MemberDTO implements Serializable{
 	private Date mBirth;
 	private String mGender;
 	private String mGrade;
+	private String mMeal;
+	private String mGoaltype;
 
 }
