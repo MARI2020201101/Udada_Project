@@ -18,16 +18,36 @@ public class FoodServiceImpl implements FoodService{
 	}
 
 	@Override
-	public List<FoodDTO> getList(FoodCriteria FCri) throws Exception {
+	public List<FoodDTO> getList() throws Exception {
 		// TODO Auto-generated method stub
-		return foodMapper.getList(FCri);
+		return foodMapper.getList();
 	}
 	
 	@Override
-	public int foodCount(FoodCriteria FCri) throws Exception {
+	public List<FoodDTO> getMinList(String fMjclass) throws Exception {
 		// TODO Auto-generated method stub
-		return foodMapper.foodCount(FCri);
+		return foodMapper.getMinList(fMjclass);
 	}
+	
+	@Override
+	public List<FoodDTO> getFoodList(String fMinclass) throws Exception {
+		// TODO Auto-generated method stub
+		return foodMapper.getFoodList(fMinclass);
+	}
+	
+	
+	/*@Override 
+	public int countAllWithSearch(PageRequestDTO pageRequestDTO) {	
+		//TODO Auto-generated method stub return
+		return foodMapper.countAllWithSearch(pageRequestDTO); 
+		
+	}
+	 
+	 @Override
+	 public List<FoodDTO> getListWithPagingAndSearch(PageRequestDTO pageRequestDTO) throws Exception { 
+		 // TODO Auto-generated method stub return
+		 return foodMapper.selectWithPagingAndSearch(pageRequestDTO);
+	 }*/
 	
 	@Override
 	public FoodDTO read(String fNo) throws Exception {

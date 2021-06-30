@@ -10,20 +10,14 @@
 </style>
 
 <div class="container-fluid">
-
-	<!-- Page Heading -->
-	<<!-- h1 class="h3 mb-4 text-gray-800">Food List Page</h1> -->
-	
-		<!-- <a href="/recipe/register" class="btn btn-primary">
-            <span class="text">Register</span>
-        </a> -->
         
         <div class="card-body">
-        
+        	 
         	<h1 class="h3 mb-4 text-gray-800">
-				<a href="/food/list"> Food MjList Page</a>
+				<a href="/food/FoodInfo"> Food Information Page</a>
 			</h1>
         
+        	<%--
         	<form action="/food/list" method="GET" id="searchForm" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
 				
 				<input type="hidden" class="form-control form-control-user" name="pageNum" value=${pageResultDTO.pageRequestDTO.pageNum }>
@@ -41,24 +35,15 @@
 						
 				</div>
 				
-			</form>
+			</form> --%>
         
             <div class="table-responsive">
             
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     
-                    <!-- <thead>
-	                    <tr>
-	                    	<th  scope="col">식품 코드</th>
-	                        <th  scope="col">대분류</th>
-	                        <th  scope="col">소분류</th>
-	                        <th  scope="col">식품 명</th>
-	                    </tr>
-                    </thead> -->
-                    
                     <tbody>
 
-						<c:forEach var="dto" items="${list}">
+						 <c:forEach var="dto" items="${Foodlist}">
 							
 							<div class="card border-left-primary shadow h-100 py-2 px-2">
 								
@@ -67,17 +52,13 @@
 									<div class="col">
 									
 										<div class="card-body">
-										
-											<h5 class="card-title">
-											
-												<a href='/food/MinClassPage?fMjclass=<c:out value="${dto.FMjclass}"/>'><c:out value="${dto.FMjclass}"/></a>
-											
-											</h5>
-											<%-- <p class="card-text">
-												<small class="text-muted"><c:out value="${dto.FMjclass}"></c:out></small>
-												<small class="text-muted"><c:out value="${dto.FMinclass}"></c:out></small>
-											</p> --%>
-											
+											<p class="card-text">
+												<c:out value="${dto.FName}"></c:out></small>
+												<c:out value="${dto.FOnceoffer}"></c:out></small>
+												<c:out value="${dto.FCarbo}"></c:out></small>
+												<c:out value="${dto.FProtein}"></c:out></small>
+												<c:out value="${dto.FFat}"></c:out></small>
+											</p>
 										</div>
 									
 									</div>
@@ -96,7 +77,7 @@
             
         </div>
 
-	 <nav>
+	<%-- <nav>
 							
 		<ul class="pagination">
 						 	
@@ -118,13 +99,13 @@
 							    
 		</ul>
 						  	
-	</nav>
+	</nav> --%>
 
 </div>
 <!-- /.container-fluid -->
 <!-- End of Main Content -->
 
-<script>
+<!-- <script>
 $(document).ready(function(){
 
 	var searchForm = $("#searchForm");
@@ -144,7 +125,7 @@ $(document).ready(function(){
 	}
 });
 	
-</script>
+</script> -->
 
         
 <%@ include file="../include/footer.jsp"%>

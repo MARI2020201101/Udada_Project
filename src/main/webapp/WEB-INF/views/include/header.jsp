@@ -76,7 +76,7 @@
             </li>
             <!-- Nav Item - Food -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/food/list">
                     <i class="fas fa-hamburger"></i>
                     <span>FOOD</span></a>
             </li>

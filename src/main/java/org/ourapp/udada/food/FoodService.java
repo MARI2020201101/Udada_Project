@@ -6,9 +6,14 @@ public interface FoodService {
 	
 	int countAll() throws Exception;
 	
-	List<FoodDTO> getList(FoodCriteria FCri) throws Exception;
+	List<FoodDTO> getList() throws Exception;
+	List<FoodDTO> getMinList(String fMjclass) throws Exception;
+	List<FoodDTO> getFoodList(String fMinclass) throws Exception;
 	
-	int foodCount(FoodCriteria FCri) throws Exception;
+	/*List<FoodDTO> getListWithPagingAndSearch(PageRequestDTO pageRequestDTO) throws Exception;
+	  
+	int countAllWithSearch(PageRequestDTO pageRequestDTO);*/
+	 
 	
 	FoodDTO read(String fNo) throws Exception;
 	
