@@ -110,7 +110,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="card shadow mb-4 recipeSpecBox">
+		<div class="card shadow mb-4 recipeSpecBox">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary">RECIPE KALORIES
 				SPEC</h6>
@@ -276,6 +276,7 @@ $(document).ready(function(){
 							    }]
 							  },
 							  options : {
+								  responsive: true,
 									maintainAspectRatio : true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
 									scales : {
 										yAxes : [ {
@@ -316,7 +317,7 @@ $(document).ready(function(){
 							var myChart2 = new Chart(ctx2, {
 						    type: 'horizontalBar',
 						    data: {
-						        labels: ['TotalKcalories', 'Carbo', 'Protein', 'Fat'],
+						        labels: ['TotalKcal', 'Carbo', 'Protein', 'Fat'],
 						        datasets: [{
 						            label: 'Kalories (kcal) & nutrients (g)',
 						            data: kaloriesSpecList,
@@ -354,7 +355,31 @@ $(document).ready(function(){
 						                   
 						                }
 						            }]
-						        }
+						        },plugins: {
+							        datalabels: {
+								          color: 'grey',
+								          anchor: 'center',
+								          borderWidth: 2,
+								          align: 'end',
+								          offset: 10,
+								          borderColor: '#fff',
+								          borderRadius: 25,
+								          backgroundColor: (context) => {
+								            return context.dataset.backgroundColor;
+								          },
+								          labels: {
+								            title: {
+								              font: {
+								                weight: 'bold'
+									            					              
+								              }
+								            },
+								            value: {
+								              color: 'green'
+								            }
+								          }
+								        }
+								      }//plugins end
 						    }
 						});
 
