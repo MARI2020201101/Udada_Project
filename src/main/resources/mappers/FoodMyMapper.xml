@@ -29,6 +29,29 @@
 			<result column="DAYTOTALFAT" property="dayTotalFat"/>
 	</resultMap>
 	
+	<resultMap type="org.ourapp.udada.foodmy.FoodMyMemberSpecDTO" id="foodMyMemberSpecMap">
+			<association property="memberDTO" resultMap="memberMap" />
+			<association property="memberSpecDTO" resultMap="memberSpecMap" />
+	</resultMap>	
+	<resultMap type="org.ourapp.udada.member.MemberDTO" id="memberMap">
+		<id column="M_EMAIL" property="mEmail"/>
+		<result column="M_NAME" property="mName"/>
+		<result column="M_PW" property="mPw"/>
+		<result column="M_BIRTH" property="mBirth"/>
+		<result column="M_GENDER" property="mGender"/>
+		<result column="M_GRADE" property="mGrade"/>
+		<result column="M_MEAL" property="mMeal"/>
+		<result column="M_GOALTYPE" property="mGoaltype"/>
+	</resultMap>	
+	<resultMap type="org.ourapp.udada.member.MemberSpecDTO" id="memberSpecMap">
+		<id column="MS_NO" property="msNo"/>
+		<result column="M_EMAIL" property="mEmail"/>
+		<result column="MS_DATE" property="msDate"/>
+		<result column="MS_HEIGHT" property="msHeight"/>
+		<result column="MS_WEIGHT" property="msWeight"/>
+		<result column="MS_GOAL" property="msGoal"/>
+	</resultMap>	
+	
 	<select id="select" resultMap="foodMyMap">
 	<![CDATA[
 		SELECT 
@@ -91,6 +114,12 @@
 		WHERE FM.FM_DATE  = TO_DATE( #{day} ,'YYYY-MM-DD')
 		AND FM.M_EMAIL = #{mEmail} ) SUB
 		]]>
+	</select>
+	<select id="selectMemberInfo" resultMap="foodMyMemberSpecMap">
+		SELECT M.*,MS.* FROM MEMBER M
+		LEFT JOIN MEMBER_SPEC MS
+		ON M.M_EMAIL = MS.M_EMAIL
+		WHERE M.M_EMAIL = #{mEmail}
 	</select>
 	
 </mapper>

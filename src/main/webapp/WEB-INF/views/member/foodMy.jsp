@@ -16,7 +16,7 @@
 					<tr>
 						<th scope="col">Food Name</th>
 						<th scope="col">Amount</th>
-						<th scope="col">Kcalories</th>
+						<th scope="col">Calories</th>
 						<th scope="col">Carbo</th>
 						<th scope="col">Protein</th>
 						<th scope="col">Fat</th>
@@ -90,7 +90,38 @@
 		</div>
 
 	</div>
-
+	
+	<div class="card shadow mb-4">
+		<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary">Message For You...</h6>
+		</div>
+		<div class="card-body">
+			<div>
+				<span>${map.recommendDTO.message}</span>
+				<img src="/resources/imgs/foodMy/${map.recommendDTO.img}" style='width:100px;float:right'>
+				
+				<div style='margin-top:10px'>
+				<a href="/recipe/list" class="btn btn-primary"> 
+						<span class="text">레시피 탐색하기</span>
+				</a>
+				<a href="/food/list" class="btn btn-primary my-2"> 
+						<span class="text">음식 탐색하기</span>
+				</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="card shadow mb-4">
+		<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary">About Calories...</h6>
+		</div>
+		<div class="card-body">
+			<div>
+				내용
+			</div>
+		</div>
+	</div>
+	
 	<!-- /.container-fluid -->
 </div>
 <!-- End of Main Content -->
@@ -99,13 +130,9 @@ $(document).ready(function(){
 
 	var fmAmountModify = $(".fmAmountModify");
 	var removeFmBtn = $(".removeFmBtn");
-	//여기부터 다시~~ ajax로 하는 것의 장단점. day에 parameter던졌을 때 생각해보기
-	var dayTotalDTO = '${dayTotalDTO }'
-	var dayTotalDTOKCal = '${dayTotalDTO.dayTotalKcal }'
-	console.log("dayTotalDTO>>", dayTotalDTO);
-	console.log("dayTotalDTOKCal>>",dayTotalDTOKCal);
-	console.log(typeof dayTotalDTO);
-	console.log(typeof dayTotalDTOKCal);
+	var recommendKcal = '${map.recommendDTO.recommendKcal}';
+	console.log(recommendKcal);
+	
 	
 	removeFmBtn.on("click",function(){
 		var target = $(this);

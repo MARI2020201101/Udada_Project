@@ -23,6 +23,6 @@ public class FoodMyDayTotalDTO {
 	private int dayTotalCarbo;
 	private int dayTotalProtein;
 	private int dayTotalFat;
-	
+
 
 }

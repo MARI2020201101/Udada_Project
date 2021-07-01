@@ -31,18 +31,23 @@ public class FoodMyController {
 	@GetMapping("/member/foodMy")
 	public void getList(Authentication auth, Model model) throws Exception{
 
-		log.info("----------------------foodMy-----------------");
+		log.info("----------------------foodMy------------------------\n");
+		
 		String mEmail = auth.getName();
-		log.info("mEmail : "+ mEmail);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date newDate = new Date();
 		String day = sdf.format(newDate);
+		
 		List<FoodMyResultDTO> list = foodMyService.getList(day, mEmail);
-		FoodMyDayTotalDTO dayTotalDTO = foodMyService.getDayTotal(day, mEmail);
+		//FoodMyDayTotalDTO dayTotalDTO = foodMyService.getDayTotal(day, mEmail);
+		Map<String,Object> map = foodMyService.getDayTotalWithRecommend(day, mEmail);	
+		
 		log.info("list : " + list);
+		log.info("map : " + map);
 		
 		model.addAttribute("list", list);
-		model.addAttribute("dayTotalDTO", dayTotalDTO);
+		//model.addAttribute("dayTotalDTO", dayTotalDTO);
+		model.addAttribute("map", map);
 		
 	}
 	
@@ -71,5 +76,6 @@ public class FoodMyController {
 		foodMyService.delete(fmNo);
 	  return new ResponseEntity<>("success", HttpStatus.OK);
 	}
+
 
 }

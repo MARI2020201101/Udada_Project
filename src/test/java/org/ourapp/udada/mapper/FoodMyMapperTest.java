@@ -43,4 +43,10 @@ public class FoodMyMapperTest {
 		
 		foodMyMapper.selectDayTotal("2021-06-30", "user10@gmail.com");
 	}
+	
+	@Test
+	public void selectMemberInfoTest() {
+		
+		foodMyMapper.selectMemberInfo("user41@gmail.com");
+	}
 }
