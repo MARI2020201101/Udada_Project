@@ -104,7 +104,7 @@
 				<a href="/recipe/list" class="btn btn-primary"> 
 						<span class="text">레시피 탐색하기</span>
 				</a>
-				<a href="/food/list" class="btn btn-primary my-2"> 
+				<a href="#" class="btn btn-primary my-2"> 
 						<span class="text">음식 탐색하기</span>
 				</a>
 				</div>

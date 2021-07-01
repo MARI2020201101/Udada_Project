@@ -123,8 +123,8 @@
 						</sec:authorize>
 						<sec:authorize access="isAuthenticated()">
 							<li>						
-							<h3 class="m-0 font-weight-bold ">Hello!
-							 	<sec:authentication property="principal.memberDTO.mName"/></h3>
+							<h4 class="m-0 font-weight-bold my-1">Hello!
+							 	<sec:authentication property="principal.memberDTO.mName"/></h4>
 							</li>
 							&nbsp;&nbsp;&nbsp;
 							<li><a href="/member/logout" class="btn btn-secondary mx-1">
