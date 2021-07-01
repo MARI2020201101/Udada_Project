@@ -83,6 +83,9 @@ public class FoodMyServiceImpl implements FoodMyService{
 		int[] MEDT = {40,30,30};
 		
 		String mealType = memberInfo.getMemberDTO().getMMeal();
+		if(mealType==null) {
+			mealType = "NORMAL";
+		}
 		switch (mealType) {
         case "VEG" :  recommendNutrient = VEG; break;
         case "NORMAL" :  recommendNutrient = NORMAL; break;
