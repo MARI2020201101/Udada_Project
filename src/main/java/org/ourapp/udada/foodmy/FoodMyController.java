@@ -3,6 +3,7 @@ package org.ourapp.udada.foodmy;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
@@ -29,18 +31,23 @@ public class FoodMyController {
 	
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/member/foodMy")
-	public void getList(Authentication auth, Model model) throws Exception{
-
-		log.info("----------------------foodMy------------------------\n");
+	public void getList(Authentication auth, Model model ,@RequestParam(required = false) String day) throws Exception{
+		
+		String today = "";
+		if(day!=null) {
+			if(isValidDate(day)) today = day;
+		}else {
+		
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date newDate = new Date();
+			today = sdf.format(newDate);
+		}
 		
 		String mEmail = auth.getName();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date newDate = new Date();
-		String day = sdf.format(newDate);
-		
-		List<FoodMyResultDTO> list = foodMyService.getList(day, mEmail);
+		List<FoodMyResultDTO> list = foodMyService.getList(today, mEmail);
 		//FoodMyDayTotalDTO dayTotalDTO = foodMyService.getDayTotal(day, mEmail);
-		Map<String,Object> map = foodMyService.getDayTotalWithRecommend(day, mEmail);	
+		Map<String,Object> map = foodMyService.getDayTotalWithRecommend(today, mEmail);	
+		
 		
 		log.info("list : " + list);
 		log.info("map : " + map);
@@ -76,6 +83,17 @@ public class FoodMyController {
 		foodMyService.delete(fmNo);
 	  return new ResponseEntity<>("success", HttpStatus.OK);
 	}
+	
+	private boolean isValidDate(String day) {
+		  SimpleDateFormat dateFormatParser = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
 
+		  dateFormatParser.setLenient(false);
+		  try {
+		      dateFormatParser.parse(day);
+		      return true;
+		  } catch (Exception e) {
+		      return false;
+		  }
+		}
 
 }

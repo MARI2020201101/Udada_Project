@@ -41,6 +41,7 @@ public class FoodMyServiceImpl implements FoodMyService{
 
 	@Override
 	public Map<String, Object> getDayTotalWithRecommend(String day, String mEmail) throws Exception {
+		log.info("day.......: "+ day);
 		FoodMyDayTotalDTO dayTotalDTO = foodMyMapper.selectDayTotal(day, mEmail);
 		FoodMyMemberSpecDTO memberInfo = foodMyMapper.selectMemberInfo(mEmail);
 		
@@ -49,6 +50,7 @@ public class FoodMyServiceImpl implements FoodMyService{
 		Map<String, Object> map = new HashMap<>();
 		map.put("dayTotalDTO", dayTotalDTO);
 		map.put("recommendDTO", recommendDTO);
+		map.put("day", day);
 		return map;
 	}
 
@@ -56,6 +58,7 @@ public class FoodMyServiceImpl implements FoodMyService{
 	
 	private FoodMyRecommendDTO makeRecommend(FoodMyDayTotalDTO dayTotalDTO, FoodMyMemberSpecDTO memberInfo) throws Exception{	
 		int recommendKcal = (int) ((memberInfo.getMemberSpecDTO().getMsHeight()-100)*(0.9)*30);
+		if(recommendKcal<0) recommendKcal = 1800;
 		String message = "";
 		FoodMyRecommendDTO recommendDTO = new FoodMyRecommendDTO();
 		if(dayTotalDTO==null) {
