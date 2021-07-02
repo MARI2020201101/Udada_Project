@@ -33,5 +33,11 @@ public class CalendarMapperTest {
 		List<CalendarDTO> list = calendarMapper.select("user10@gmail.com");
 		log.info(list.toString());
 	}
+	
+	@Test
+	public void selectByMonth() {
+		List<CalendarDTO> list = calendarMapper.selectByMonth("2021-07-01", "user10@gmail.com");
+		log.info(list.toString());
+	}
 
 }

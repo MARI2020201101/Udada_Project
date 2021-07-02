@@ -15,4 +15,6 @@ public interface FoodMyMapper {
 	int delete(Long fmNo);	
 	FoodMyDayTotalDTO selectDayTotal(@Param("day")String day, @Param("mEmail")String mEmail);
 	FoodMyMemberSpecDTO selectMemberInfo(String mEmail);
+	
+	FoodMyDayTotalDTO selectDayTotalWithDay(@Param("day")String day, @Param("mEmail")String mEmail);
 }

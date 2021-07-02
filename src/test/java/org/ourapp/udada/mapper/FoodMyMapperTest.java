@@ -3,6 +3,7 @@ package org.ourapp.udada.mapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ourapp.udada.foodmy.FoodMyDTO;
+import org.ourapp.udada.foodmy.FoodMyDayTotalDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -48,5 +49,12 @@ public class FoodMyMapperTest {
 	public void selectMemberInfoTest() {
 		
 		foodMyMapper.selectMemberInfo("user41@gmail.com");
+	}
+	
+	@Test
+	public void selectDayTotalWithDayTest() {
+		
+		FoodMyDayTotalDTO dto = foodMyMapper.selectDayTotal("2021-06-30", "user20@gmail.com");
+		log.info("FoodMyDayTotalDTO: "+ dto);
 	}
 }

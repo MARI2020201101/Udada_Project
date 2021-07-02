@@ -34,15 +34,23 @@ public class FoodMyController {
 	public void getList(Authentication auth, Model model ,@RequestParam(required = false) String day) throws Exception{
 		
 		String today = "";
-		if(day!=null) {
-			if(isValidDate(day)) today = day;
+		
+		if(day!=null && isValidDate(day)) {
+			today = day;	
+			
+			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+			Date newDate2 = new Date();
+			String compareDay = sdf2.format(newDate2);
+			
+			if(today.compareTo(compareDay)>0){
+				today = compareDay;
+			}
 		}else {
 		
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date newDate = new Date();
 			today = sdf.format(newDate);
 		}
-		
 		String mEmail = auth.getName();
 		List<FoodMyResultDTO> list = foodMyService.getList(today, mEmail);
 		//FoodMyDayTotalDTO dayTotalDTO = foodMyService.getDayTotal(day, mEmail);

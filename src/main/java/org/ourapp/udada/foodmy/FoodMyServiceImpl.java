@@ -51,6 +51,7 @@ public class FoodMyServiceImpl implements FoodMyService{
 		map.put("dayTotalDTO", dayTotalDTO);
 		map.put("recommendDTO", recommendDTO);
 		map.put("day", day);
+
 		return map;
 	}
 

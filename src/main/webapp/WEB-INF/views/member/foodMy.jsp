@@ -174,8 +174,6 @@
 
 
 
-
-
 	</div>
 	
 	<!-- /.container-fluid -->
