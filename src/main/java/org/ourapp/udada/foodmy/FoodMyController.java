@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -31,26 +32,28 @@ public class FoodMyController {
 	
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/member/foodMy")
-	public void getList(Authentication auth, Model model ,@RequestParam(required = false) String day) throws Exception{
+	public String getList(Authentication auth, Model model ,@RequestParam(required = false) String day 
+			,RedirectAttributes rttr) throws Exception{
 		
 		String today = "";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date newDate = new Date();
+		String compareDay = sdf.format(newDate);
 		
-		if(day!=null && isValidDate(day)) {
-			today = day;	
-			
-			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-			Date newDate2 = new Date();
-			String compareDay = sdf2.format(newDate2);
-			
-			if(today.compareTo(compareDay)>0){
-				today = compareDay;
-			}
-		}else {
-		
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Date newDate = new Date();
-			today = sdf.format(newDate);
+		//미래의 날짜 or 비정상적인 날짜 (ex) 2021-06-31 , 20210630 
+		if((day!=null && day.compareTo(compareDay)>0) || (day!=null && (!isValidDate(day)))){
+			return "redirect:/member/foodMy";
 		}
+		//과거의 유효한 날짜
+		if(day!=null && isValidDate(day)) {
+			today = day;
+		}
+		//오늘날짜
+		else {
+			today = compareDay;
+		}
+
+		log.info("normalized today ... : "+today);
 		String mEmail = auth.getName();
 		List<FoodMyResultDTO> list = foodMyService.getList(today, mEmail);
 		//FoodMyDayTotalDTO dayTotalDTO = foodMyService.getDayTotal(day, mEmail);
@@ -63,6 +66,8 @@ public class FoodMyController {
 		model.addAttribute("list", list);
 		//model.addAttribute("dayTotalDTO", dayTotalDTO);
 		model.addAttribute("map", map);
+		
+		return "member/foodMy";
 		
 	}
 	
