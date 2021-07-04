@@ -17,8 +17,18 @@ public interface ChallengeService {
 	void modifyGoal(ChallengeGoalDTO challengeGoalDTO);
 	void delete(Long cNo);
 	List<ChallengeReadGoalDTO> searchExcs(String eName);
-	Long applyCheck(String sEmail, Long cNo);
+	int applyCheck(String sEmail, Long cNo);
 	Boolean challengeCancel(Long cNo, String sEmail);
 	int[] eNameSearch(String exercise);
-	List<ChallengeListDTO> myChlgList(String sEmail);
+	List<MyChallengeProceedDTO> proceedList(String sEmail);
+	List<MyChallengeApplyDTO> applyList(String sEmail);
+	List<MyChallengeEndDTO> endList(String sEmail);
+	MyChallengeInfoDTO myChallengeInfo(Long cNo);
+	List<MyChallengeSuccessCntMDTO> getMemSuccess(MyChallengeInfoDTO myChallengeInfoDTO);
+	List<MyChallengeSuccessCntDDTO> getDaySuccess(MyChallengeInfoDTO myChallengeInfoDTO);
+	int getTodaySuccess(MyChallengeInfoDTO myChallengeInfoDTO);
+	void talkReg(MyChallengeTalkDTO myChallengeTalkDTO);
+	List<MyChallengeGetTalkDTO> getTalk(Long cNo);
+	List<MyChallengeGetTalkDTO> getTalkReply(Long reNo);
+	void talkDel(int reNo, int checkTalk);
 }

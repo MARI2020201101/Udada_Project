@@ -1,7 +1,5 @@
 package org.ourapp.udada.challenge;
 
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,18 +10,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ChallengeReadDTO {
+public class MyChallengeTalkDTO {
 	
-	private Long cNo;
+	private Long oriNo;
 	private String mEmail;
-	private String cTitle;
-	private String cContent;
-	private Date cStart;
-	private Date cFinish;
-	private Long cTotal;
-	private Date cDate;		
-	private Long caCnt;
-	private int checkEnd;
+	private String reContent;
+	private int groupNo;
+	private int reIndent;
+	
+	
+
 	/*
   C_NO NUMBER NOT NULL 
 , M_EMAIL VARCHAR2(100 BYTE)  

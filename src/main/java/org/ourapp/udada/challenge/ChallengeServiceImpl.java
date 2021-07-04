@@ -88,7 +88,7 @@ public class ChallengeServiceImpl implements ChallengeService{
 	}
 
 	@Override
-	public Long applyCheck(String sEmail, Long cNo) {
+	public int applyCheck(String sEmail, Long cNo) {
 
 		return challengeMapper.applyCheck(sEmail, cNo);
 	}
@@ -105,9 +105,59 @@ public class ChallengeServiceImpl implements ChallengeService{
 	}
 
 	@Override
-	public List<ChallengeListDTO> myChlgList(String sEmail) {
-
-		return challengeMapper.myChlgList(sEmail);
+	public List<MyChallengeProceedDTO> proceedList(String sEmail) {
+		return challengeMapper.proceedList(sEmail);
 	}
+	
+	@Override
+	public List<MyChallengeApplyDTO> applyList(String sEmail) {
+		return challengeMapper.applyList(sEmail);
+	}
+	
+	@Override
+	public List<MyChallengeEndDTO> endList(String sEmail) {
+		return challengeMapper.endList(sEmail);
+	}
+
+	@Override
+	public MyChallengeInfoDTO myChallengeInfo(Long cNo) {
+		return challengeMapper.myChallengeInfo(cNo);
+	}
+
+	@Override
+	public List<MyChallengeSuccessCntMDTO> getMemSuccess(MyChallengeInfoDTO challengeInfoDTO) {
+		return challengeMapper.getMemSuccess(challengeInfoDTO);
+	}
+	
+	@Override
+	public List<MyChallengeSuccessCntDDTO> getDaySuccess(MyChallengeInfoDTO challengeInfoDTO) {
+		return challengeMapper.getDaySuccess(challengeInfoDTO);
+	}
+
+	@Override
+	public int getTodaySuccess(MyChallengeInfoDTO challengeInfoDTO) {
+		return challengeMapper.getTodaySuccess(challengeInfoDTO);
+	}
+
+	@Override
+	public void talkReg(MyChallengeTalkDTO myChallengeTalkDTO) {
+		challengeMapper.talkReg(myChallengeTalkDTO);
+	}
+
+	@Override
+	public List<MyChallengeGetTalkDTO> getTalk(Long cNo) {
+		return challengeMapper.getTalk(cNo);
+	}
+
+	@Override
+	public List<MyChallengeGetTalkDTO> getTalkReply(Long reNo) {
+		return challengeMapper.getTalkReply(reNo);
+	}
+
+	@Override
+	public void talkDel(int reNo, int checkTalk) {
+		challengeMapper.talkDel(reNo, checkTalk);
+	}
+
 
 }

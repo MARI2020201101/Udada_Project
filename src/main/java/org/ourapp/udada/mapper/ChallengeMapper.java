@@ -7,9 +7,17 @@ import org.ourapp.udada.challenge.ChallengeDTO;
 import org.ourapp.udada.challenge.ChallengeGetListDTO;
 import org.ourapp.udada.challenge.ChallengeGlistDTO;
 import org.ourapp.udada.challenge.ChallengeGoalDTO;
+import org.ourapp.udada.challenge.MyChallengeInfoDTO;
+import org.ourapp.udada.challenge.MyChallengeSuccessCntMDTO;
+import org.ourapp.udada.challenge.MyChallengeTalkDTO;
 import org.ourapp.udada.challenge.ChallengeListDTO;
 import org.ourapp.udada.challenge.ChallengeReadDTO;
 import org.ourapp.udada.challenge.ChallengeReadGoalDTO;
+import org.ourapp.udada.challenge.MyChallengeApplyDTO;
+import org.ourapp.udada.challenge.MyChallengeEndDTO;
+import org.ourapp.udada.challenge.MyChallengeGetTalkDTO;
+import org.ourapp.udada.challenge.MyChallengeProceedDTO;
+import org.ourapp.udada.challenge.MyChallengeSuccessCntDDTO;
 
 public interface ChallengeMapper {
 
@@ -26,8 +34,18 @@ public interface ChallengeMapper {
 	void modifyGoal(ChallengeGoalDTO challengeGoalDTO);
 	void delete(Long cNo);
 	List<ChallengeReadGoalDTO> searchExcs(String eName);
-	Long applyCheck(@Param("sEmail") String sEmail,@Param("cNo") Long cNo);
+	int applyCheck(@Param("sEmail") String sEmail,@Param("cNo") Long cNo);
 	Boolean challengeCancel(@Param("cNo") Long cNo,@Param("sEmail") String sEmail);
 	int[] eNameSearch(String exercise);
-	List<ChallengeListDTO> myChlgList(@Param("sEmail") String sEmail);
+	List<MyChallengeProceedDTO> proceedList(@Param("sEmail")String sEmail);
+	List<MyChallengeApplyDTO> applyList(String sEmail);
+	List<MyChallengeEndDTO> endList(String sEmail);
+	MyChallengeInfoDTO myChallengeInfo(@Param("cNo")Long cNo);
+	List<MyChallengeSuccessCntMDTO> getMemSuccess(MyChallengeInfoDTO myChallengeInfoDTO);
+	List<MyChallengeSuccessCntDDTO> getDaySuccess(MyChallengeInfoDTO challengeInfoDTO);
+	int getTodaySuccess(MyChallengeInfoDTO myChallengeInfoDTO);
+	void talkReg(MyChallengeTalkDTO myChallengeTalkDTO);
+	List<MyChallengeGetTalkDTO> getTalk(@Param("cNo")Long cNo);
+	List<MyChallengeGetTalkDTO> getTalkReply(@Param("reNo")Long reNo);
+	void talkDel(@Param("reNo")int reNo, @Param("checkTalk")int checkTalk);
 }
