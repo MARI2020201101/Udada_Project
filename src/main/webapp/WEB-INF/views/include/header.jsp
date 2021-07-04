@@ -67,7 +67,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/member/calendar">Calendar</a>
-                        <a class="collapse-item" href="#">MyFood</a>
+                        <a class="collapse-item" href="/member/foodMy">MyFood</a>
                         <a class="collapse-item" href="#">MyExercise</a>
                         <a class="collapse-item" href="/challenge/mychallenge">Mychallenge</a>
                         <a class="collapse-item" href="#">MyFitness</a>
@@ -112,6 +112,8 @@
 			<div id="content">
 				<!-- Topbar -->
 				<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+				
+				<h5 id="today" ></h5>
 					<!-- Topbar Navbar -->
 					<ul class="navbar-nav ml-auto">
 						<sec:authorize access="isAnonymous()">
@@ -120,6 +122,11 @@
 							</a></li>
 						</sec:authorize>
 						<sec:authorize access="isAuthenticated()">
+							<li>						
+							<h4 class="m-0 font-weight-bold my-1">Hello!
+							 	<sec:authentication property="principal.memberDTO.mName"/></h4>
+							</li>
+							&nbsp;&nbsp;&nbsp;
 							<li><a href="/member/logout" class="btn btn-secondary mx-1">
 									<span class="text">Logout</span>
 							</a></li>
@@ -136,4 +143,4 @@
    	<sec:authentication property="principal.memberDTO.mEmail" var="loginUser"/> 
 
     </sec:authorize>
-    
+	<script src="/resources/js/dateCalculator.js"></script>

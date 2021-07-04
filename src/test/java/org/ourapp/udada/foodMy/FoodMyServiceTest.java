@@ -1,10 +1,9 @@
-package org.ourapp.udada.mapper;
-
-import java.util.List;
+package org.ourapp.udada.foodMy;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.ourapp.udada.calendar.CalendarDTO;
+import org.ourapp.udada.foodmy.FoodMyDTO;
+import org.ourapp.udada.foodmy.FoodMyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -17,27 +16,16 @@ import lombok.extern.slf4j.Slf4j;
 		"file:src/main/webapp/WEB-INF/spring/root-context.xml"		
 		,"file:src/main/webapp/WEB-INF/spring/security-context.xml"
 		,"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"})
-public class CalendarMapperTest {
+public class FoodMyServiceTest {
 	
 	@Autowired
-	private CalendarMapper calendarMapper;
+	private FoodMyService foodMyService;
 	
 	@Test
-	public void selectTest1() {
-		List<CalendarDTO> list = calendarMapper.select(null);
-		log.info(list.toString());
-	}
-	
-	@Test
-	public void selectTest2() {
-		List<CalendarDTO> list = calendarMapper.select("user10@gmail.com");
-		log.info(list.toString());
-	}
-	
-	@Test
-	public void selectByMonth() {
-		List<CalendarDTO> list = calendarMapper.selectByMonth("2021-07-01", "user10@gmail.com");
-		log.info(list.toString());
+	public void updateTest() throws Exception{
+		FoodMyDTO foodMyDTO = FoodMyDTO.builder().fmAmount(1).fmNo(58L).build();
+		foodMyService.modify(foodMyDTO);
+		
 	}
 
 }

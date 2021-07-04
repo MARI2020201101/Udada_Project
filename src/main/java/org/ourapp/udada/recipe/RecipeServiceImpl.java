@@ -2,6 +2,7 @@ package org.ourapp.udada.recipe;
 
 import java.util.List;
 
+import org.ourapp.udada.foodmy.FoodMyDTO;
 import org.ourapp.udada.image.ImageDTO;
 import org.ourapp.udada.mapper.ImageMapper;
 import org.ourapp.udada.mapper.RecipeIngredientMapper;
@@ -182,6 +183,12 @@ public class RecipeServiceImpl implements RecipeService{
 	@Override
 	public RecipeSpecDTO getRecipeSpec(Long rNo) {
 		return recipeMapper.selectRecipeSpecByRNo(rNo);
+	}
+
+	@Override
+	public void registerFoodMy(FoodMyDTO foodMyDTO) {
+		recipeMapper.insertFoodMy(foodMyDTO);
+		
 	}
 
 

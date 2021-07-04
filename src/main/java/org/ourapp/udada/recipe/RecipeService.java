@@ -2,6 +2,8 @@ package org.ourapp.udada.recipe;
 
 import java.util.List;
 
+import org.ourapp.udada.foodmy.FoodMyDTO;
+
 public interface RecipeService {
 	
 	List<RecipeDTO> getList() throws Exception;
@@ -27,4 +29,5 @@ public interface RecipeService {
 	int countAllWithSearch(PageRequestDTO pageRequestDTO);
 	List<RecipeDTO> getListWithImageAndPagingAndSearch(PageRequestDTO pageRequestDTO) throws Exception;
 	RecipeSpecDTO getRecipeSpec(Long rNo); 
+	void registerFoodMy(FoodMyDTO foodMyDTO);
 }

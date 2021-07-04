@@ -1,7 +1,11 @@
 package org.ourapp.udada.recipe;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import org.ourapp.udada.foodmy.FoodMyDTO;
 import org.ourapp.udada.image.ImageController;
 import org.ourapp.udada.image.ImageDTO;
 import org.springframework.http.HttpStatus;
@@ -138,11 +142,31 @@ public class RecipeController {
 	  @GetMapping(value = "/spec/{rNo}",produces= {MediaType.APPLICATION_JSON_VALUE}) 
 	  @ResponseBody 
 	  public ResponseEntity<RecipeSpecDTO> getRecipeSpec(@PathVariable("rNo")Long rNo) throws Exception{
-	  log.info("Long rNo : "+rNo);
-	  RecipeSpecDTO result = recipeService.getRecipeSpec(rNo);
-	  log.info("result : "+ result);
-	  return new ResponseEntity<>(result, HttpStatus.OK);	  
+		  log.info("Long rNo : "+rNo);
+	  	  RecipeSpecDTO result = recipeService.getRecipeSpec(rNo);
+	  	  log.info("result : "+ result);
+	  	  
+	  	  return new ResponseEntity<>(result, HttpStatus.OK);	  
 	  }
 	 
+	  @PreAuthorize("isAuthenticated()")
+	  @PostMapping(value = "/registerFoodMy", consumes="application/json" , produces= {MediaType.TEXT_PLAIN_VALUE})
+	  @ResponseBody
+	  public ResponseEntity<String> registerFoodMy(@RequestBody Map<String, String> params)throws Exception {
+			log.info("foodMyDTO params: " + params);
+			Long rNo = Long.parseLong(params.get("rNo"));
+			String mEmail = params.get("mEmail");
+			int fmAmount = Integer.parseInt(params.get("fmAmount"));
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = new Date();
+			String today = sdf.format(date);
+			
+			FoodMyDTO foodMyDTO = FoodMyDTO.builder().fmAmount(fmAmount).mEmail(mEmail).rNo(rNo).fmDate(today).build();
+			log.info("foodMyDTO : " + foodMyDTO);
+			recipeService.registerFoodMy(foodMyDTO);
+		  
+		  return new ResponseEntity<>("success", HttpStatus.OK);
+		}
 
 }

@@ -2,6 +2,7 @@ package org.ourapp.udada.mapper;
 
 import java.util.List;
 
+import org.ourapp.udada.foodmy.FoodMyDTO;
 import org.ourapp.udada.recipe.PageRequestDTO;
 import org.ourapp.udada.recipe.RecipeDTO;
 import org.ourapp.udada.recipe.RecipeSpecDTO;
@@ -26,4 +27,5 @@ public interface RecipeMapper {
 	int countAllWithSearch(PageRequestDTO pageRequestDTO);
 	
 	RecipeSpecDTO selectRecipeSpecByRNo(Long rNo);
+	void insertFoodMy(FoodMyDTO foodMyDTO);
 }

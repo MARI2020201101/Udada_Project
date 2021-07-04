@@ -8,6 +8,7 @@
 
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800">Journal list Page</h1>
+	<a href="/journal/register" class="btn btn-primary"> <span class="text">Register</span></a>
 	
 	<!-- Topbar Search -->
 		<form action="/journal/list" method="GET" id="searchForm"

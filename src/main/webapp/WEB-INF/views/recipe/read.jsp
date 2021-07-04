@@ -61,13 +61,13 @@
 													마이 푸드 다이어리에 추가하기</div>
 												<br>
 												<div class="form-group my-2">
-													<b>양 입력 : </b> <select class="form-select">
-														<option value=1>1 인분</option>
+													<b>양 입력 : </b> <select class="form-select fmAmountOption">
+														<option value=1 >1 인분</option>
 														<option value=2>2 인분</option>
 														<option value=3>3 인분</option>
 													</select>&nbsp;
 
-													<button type="button" class="btn btn-primary btn-sm ">추가</button>
+													<button type="button" class="btn btn-primary btn-sm insertFoodMyBtn">추가</button>
 												</div>
 											</div>
 										</div>
@@ -76,6 +76,8 @@
 							</div>
 							<!-- Insert to MyFood Card End-->
 						</sec:authorize>
+						
+						
 					</div>
 
 					<div class="form-group row">
@@ -108,8 +110,18 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="card shadow mb-4 recipeSpecDoughnutBox">
+		<div class="card shadow mb-4 recipeSpecBox">
+		<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary">RECIPE KALORIES
+				SPEC</h6>
+		</div>
+		<div class="card-body">
+			<div >
+				<canvas id="kaloriesSpecBar" ></canvas>
+			</div>
+		</div>
+	</div>
+	<div class="card shadow mb-4 recipeSpecBox">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary">RECIPE NUTRIENT
 				SPEC</h6>
@@ -120,6 +132,9 @@
 			</div>
 		</div>
 	</div>
+
+	
+	
 	<input type="hidden" class="form-control form-control-user" name="pageNum" value=${pageRequestDTO.pageNum }> 
 	<input type="hidden" class="form-control form-control-user" name="keyword" value=${pageRequestDTO.keyword }> 
 	<input type="hidden" class="form-control form-control-user" name="rNo" value="${dto.RNo}">
@@ -175,13 +190,43 @@ $(document).ready(function(){
 	var ingreBox = $(".ingreBox");
 	var insertStarBtn = $(".insertStarBtn");
 	var selectStarOption = $(".selectStarOption");
+	var insertFoodMyBtn =$(".insertFoodMyBtn");
 	var mEmail = '${loginUser}';
 	var recipeSpecList = [];
+	var kaloriesSpecList = [];
 	var ctx = document.getElementById("recipeSpecChart");
+	var ctx2 = document.getElementById("kaloriesSpecBar");
 	console.log("mEmail>>",mEmail);
 	
 	loadStar();
 	loadSpec();
+
+	insertFoodMyBtn.on("click", function(e){
+			e.preventDefault();
+			console.log($(this));
+			var fmAmount = $(".fmAmountOption").val();		
+			var foodMyDTO = {
+				"mEmail" : mEmail,
+				"rNo" : rNo,
+				"fmAmount" : fmAmount
+					}
+
+			console.log("foodMyDTO>>", foodMyDTO);
+			$.ajax({
+				 url:"/recipe/registerFoodMy",
+		            method:"POST",
+		            data:JSON.stringify(foodMyDTO),
+		            contentType:"application/json; charset=utf-8",
+		            success:function(result){
+			            console.log(result);
+			            alert("MyFood에 저장되었습니다.");
+			            },
+			        error: function(xhr,status,errorThrown){
+				        console.log("xhr >>",xhr);			
+				        }
+				});
+			
+		});
 
 	function loadSpec(){
 
@@ -194,9 +239,13 @@ $(document).ready(function(){
 					console.log(result.sumCarbo);
 
 					if(result.sumCarbo+ result.sumProtein+ result.sumFat==0){
-						$(".recipeSpecDoughnutBox").remove();
+						$(".recipeSpecBox").remove();
+						
 						return;}
 					else{
+						
+						kaloriesSpecList.push(result.sumKcal,result.sumCarbo,result.sumProtein,result.sumFat );
+						
 						var sums = result.sumCarbo+ result.sumProtein+ result.sumFat ;
 						var sumCarbo = Math.round((result.sumCarbo/sums)*100);
 						var sumProtein = Math.round((result.sumProtein/sums)*100);
@@ -227,6 +276,7 @@ $(document).ready(function(){
 							    }]
 							  },
 							  options : {
+								  responsive: true,
 									maintainAspectRatio : true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
 									scales : {
 										yAxes : [ {
@@ -264,6 +314,74 @@ $(document).ready(function(){
 								}//options end
 							});//nutrientDoughutgraph end
 
+							var myChart2 = new Chart(ctx2, {
+						    type: 'horizontalBar',
+						    data: {
+						        labels: ['TotalKcal', 'Carbo', 'Protein', 'Fat'],
+						        datasets: [{
+						            label: 'Kalories (kcal) & nutrients (g)',
+						            data: kaloriesSpecList,
+						            borderColor: "rgba(130, 24, 32, 1)",
+						            backgroundColor: "rgba(125, 231, 213, 0.5)",
+						            fill: false,
+						        }]
+						    },
+						    options: {
+						        responsive: true,
+						        
+						        tooltips: {
+						            mode: 'index',
+						            intersect: false,
+						        },
+						        hover: {
+						            mode: 'nearest',
+						            intersect: true
+						        },
+						        scales: {
+						            xAxes: [{
+						                display: true,
+						                scaleLabel: {
+						                    display: true
+						                    
+						                },
+						            }],
+						            yAxes: [{
+						                display: true,
+						                ticks: {
+						                    autoSkip: false,
+						                },
+						                scaleLabel: {
+						                    display: true
+						                   
+						                }
+						            }]
+						        },plugins: {
+							        datalabels: {
+								          color: 'grey',
+								          anchor: 'center',
+								          borderWidth: 2,
+								          align: 'end',
+								          offset: 10,
+								          borderColor: '#fff',
+								          borderRadius: 25,
+								          backgroundColor: (context) => {
+								            return context.dataset.backgroundColor;
+								          },
+								          labels: {
+								            title: {
+								              font: {
+								                weight: 'bold'
+									            					              
+								              }
+								            },
+								            value: {
+								              color: 'green'
+								            }
+								          }
+								        }
+								      }//plugins end
+						    }
+						});
 
 
 		
