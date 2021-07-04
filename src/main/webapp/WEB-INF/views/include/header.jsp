@@ -66,8 +66,9 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/member/calendar">Calendar</a>
-                        <a class="collapse-item" href="/member/foodMy">MyFood</a>
+                        <a class="collapse-item" href="/member/calendarMonth">Calendar Month</a>
+                        <a class="collapse-item" href="/member/calendar">Calendar Week</a>
+                        <a class="collapse-item" href="/member/foodMy">MyFood Diary</a>
                         <a class="collapse-item" href="#">MyExercise</a>
                         <a class="collapse-item" href="/challenge/mychallenge">Mychallenge</a>
                         <a class="collapse-item" href="#">MyFitness</a>

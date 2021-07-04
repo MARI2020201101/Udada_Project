@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
 <!-- Begin Page Content -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> 
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <div class="container-fluid">
 
 <style>
@@ -51,23 +53,28 @@
 
 						<sec:authorize access="isAuthenticated()">
 							<!-- Insert to MyFood Card -->
-							<div class="col-xl-4 col-md-6 mb-4">
+							<div class="col-xl-4 col-md-4 mb-4">
 								<div class="card border-left-primary shadow h-100 py-2">
+									<div class="card-header py-3">
+										<h6 class="m-0 font-weight-bold text-primary">마이 푸드 다이어리에
+											추가하기</h6>
+									</div>
 									<div class="card-body">
 										<div class="row no-gutters align-items-center">
 											<div class="col mr-2">
-												<div
-													class="font-weight-bold text-primary text-uppercase mb-1">
-													마이 푸드 다이어리에 추가하기</div>
-												<br>
+
 												<div class="form-group my-2">
 													<b>양 입력 : </b> <select class="form-select fmAmountOption">
-														<option value=1 >1 인분</option>
+														<option value=1>1 인분</option>
 														<option value=2>2 인분</option>
 														<option value=3>3 인분</option>
-													</select>&nbsp;
+													</select><br>
+													<br> <b>날짜 입력 : </b> <input type="text" name="fmDate"
+														class="form-control form-control-user daySelector"
+														required>
 
-													<button type="button" class="btn btn-primary btn-sm insertFoodMyBtn">추가</button>
+													<button type="button"
+														class="btn btn-primary insertFoodMyBtn my-3 float-right">추가</button>
 												</div>
 											</div>
 										</div>
@@ -76,8 +83,24 @@
 							</div>
 							<!-- Insert to MyFood Card End-->
 						</sec:authorize>
-						
-						
+
+						<div class="col-xl-6 col-md-6 mb-4">
+							<div
+								class="card border-left-primary shadow h-100 py-2 recipeSpecBox">
+
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">RECIPE
+										KALORIES SPEC</h6>
+								</div>
+								<div class="card-body">
+									<div>
+										<canvas id="kaloriesSpecBar"></canvas>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
 					</div>
 
 					<div class="form-group row">
@@ -110,17 +133,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="card shadow mb-4 recipeSpecBox">
-		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">RECIPE KALORIES
-				SPEC</h6>
-		</div>
-		<div class="card-body">
-			<div >
-				<canvas id="kaloriesSpecBar" ></canvas>
-			</div>
-		</div>
-	</div>
+
 	<div class="card shadow mb-4 recipeSpecBox">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary">RECIPE NUTRIENT
@@ -200,19 +213,30 @@ $(document).ready(function(){
 	
 	loadStar();
 	loadSpec();
+	
+	$(".daySelector").flatpickr(
+			{
+				   dateFormat: "Y-m-d",
+				   maxDate:new Date()
+			}
+		);
 
 	insertFoodMyBtn.on("click", function(e){
 			e.preventDefault();
 			console.log($(this));
-			var fmAmount = $(".fmAmountOption").val();		
+			var fmAmount = $(".fmAmountOption").val();	
+			var fmDate = $(".daySelector").val();
+			console.log("fmDate>>", fmDate);
+			console.log(typeof fmDate);
 			var foodMyDTO = {
 				"mEmail" : mEmail,
 				"rNo" : rNo,
-				"fmAmount" : fmAmount
+				"fmAmount" : fmAmount,
+				"fmDate" : fmDate
 					}
 
 			console.log("foodMyDTO>>", foodMyDTO);
-			$.ajax({
+		$.ajax({
 				 url:"/recipe/registerFoodMy",
 		            method:"POST",
 		            data:JSON.stringify(foodMyDTO),
@@ -224,7 +248,7 @@ $(document).ready(function(){
 			        error: function(xhr,status,errorThrown){
 				        console.log("xhr >>",xhr);			
 				        }
-				});
+				}); 
 			
 		});
 

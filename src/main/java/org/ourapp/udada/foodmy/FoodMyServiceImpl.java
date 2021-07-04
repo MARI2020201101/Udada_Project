@@ -73,7 +73,8 @@ public class FoodMyServiceImpl implements FoodMyService{
 		int tCarbo = dayTotalDTO.getDayTotalCarbo();
 		int tProtein = dayTotalDTO.getDayTotalProtein();
 		int tFat = dayTotalDTO.getDayTotalFat();
-		int tNutrient = tCarbo + tProtein + tFat;
+		int tNutrient = 1;
+		tNutrient += tCarbo + tProtein + tFat;
 		
 		
 		int perCarbo = (tCarbo/tNutrient)*100;

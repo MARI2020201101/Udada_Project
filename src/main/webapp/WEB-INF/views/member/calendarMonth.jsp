@@ -34,10 +34,16 @@
 
 	<!-- Page Heading -->
 
-	<h1>Calendar Month Page</h1>
-	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<div id="calendarForm"></div>
+	<div class="card shadow mb-4">
+		<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary">Calendar : for the Month</h6>
+		</div>
+		<div class="card-body">
+			<div id="calendarForm"></div>
+		</div>
+	</div>
+
 
 </body>
 
@@ -56,7 +62,6 @@ $(document).ready(function(){
 		var calendarDateList =[];
 		var totalKcalList = [];
 		month = (month+1)
-		console.log("--------------------");
 		if(month/10<0){
 			month = "0"+ String(month);
 			}
@@ -77,18 +82,17 @@ $(document).ready(function(){
 			contentType : "application/json; charset=utf-8",
 		    dataType:"json",		            
 		    success:function(result){
-		    	console.log("result >>", result);
 		    	var arr = result;
 				$.each(arr, function(idx, obj){
 
 					var dataMonth = Number((obj.calendarDate).substr(5,2));
-					console.log("month , dataMonth>>", month ,dataMonth);
+					
 					if(month=="01"){
 						totalKcalList.push(obj.totalKcal);
 						calendarDateList.push(obj.calendarDate);
 						}
 					else if(dataMonth!=(month-1)){
-
+						
 						}else{
 							totalKcalList.push(obj.totalKcal);
 							calendarDateList.push(obj.calendarDate);
