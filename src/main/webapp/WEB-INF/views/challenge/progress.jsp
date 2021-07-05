@@ -6,20 +6,10 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<style>
-@font-face {
-	font-family: 'S-CoreDream-4Regular';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-</style>
+
 <!-- Begin Page Content -->
 
-<div class="container-fluid"
-	style="font-family: 'S-CoreDream-4Regular', sans-serif;">
+<div class="container-fluid">
 
 	<!-- Content Row -->
 	<div class="row">
@@ -218,7 +208,7 @@
 	<!-- Content Row -->
 
 	<div class="row">
-		<div class="col-lg-4 mb-4">
+		<div class="col-lg-3 mb-4">
 			<!-- Project Card Example -->
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
@@ -245,7 +235,7 @@
 		</div>
 
 		<!-- Area Chart -->
-		<div class="col-xl-4 col-lg-6">
+		<div class="col-xl-5 col-lg-6">
 			<div class="card shadow mb-4">
 				<!-- Card Header - Dropdown -->
 				<div
@@ -296,7 +286,7 @@
 							</c:choose>
 						${talk.reDate}</div>
 						<div class="font-weight-bold mb-1" style="font-size: small;">${talk.MName}</div>
-						<div class="talkContent">${talk.reContent}
+						<div data-re-no="${talk.reNo}" class="talkContent">${talk.reContent}
 						</div>
 						<c:forEach var="reply" items="${talk.talkReply}">
 							<div>
@@ -326,9 +316,6 @@
 	</div>
 </div>
 <script>
-
-
-
 $(document).ready( function(){
 $("#talkReg").one("click","button",function(){
 	var reContent = $("#talkReg").find("textarea").val();
@@ -353,7 +340,7 @@ $(".talkReplyReg").hide();
 
 $(".talkReplyReg").one("click","button",function(){
 	var reContent = $(this).parent().find("textarea").val();
-	var groupNo = $(this).parent().parent().find(".talkDel").data("reNo")
+	var groupNo = $(this).parent().parent().find(".talkContent").data("reNo")
 	if(!reContent.trim()){
 		var textarea = $(this).parent().find("textarea");
 		textarea.css({"border-color": "red"});	
@@ -372,7 +359,7 @@ $(".talkReplyReg").one("click","button",function(){
 	}
 });
 
-$(".talkContent").one("click", function(){
+$(".talkContent").on("click", function(){
 	$(this).parent().find(".talkReplyReg").toggle();
 });
 
@@ -387,14 +374,19 @@ $(".talkDel").one("click", function(){
 	});
 	location.reload();
 });
-
 </script>
+
 <script>
 var chartLbl = new Array();
 var chartDta = new Array();
-<c:forEach items="${day}" var="day" begin="${info.procDate-5}">
-	chartLbl.push("${day.period}");
-	chartDta.push(<fmt:formatNumber value="${(day.success/info.memCnt)*100}" pattern="0"/>);
+var chartBegin = 0;
+if(${info.procDate}>5){
+	chartBegin=(${info.procDate}-5);
+}
+console.log(chartBegin);
+<c:forEach items="${day}" var="day">
+chartLbl.push("${day.period}");
+chartDta.push(<fmt:formatNumber value="${(day.success/info.memCnt)*100}" pattern="0"/>);
 </c:forEach>
 
 //Set new default font family and font color to mimic Bootstrap's default styling

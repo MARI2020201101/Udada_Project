@@ -34,6 +34,7 @@ public class ChallengeController {
 
 	@GetMapping("/register")
 	public void registerChallenge() {
+		
 	}
 
 	@PostMapping("/register")

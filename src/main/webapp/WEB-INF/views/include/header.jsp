@@ -36,11 +36,22 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+	
+	<style>
+	@font-face {
+	font-family: 'S-CoreDream-4Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+	}
+	</style>
     
     
 </head>
 
-<body id="page-top">
+<body id="page-top" style="font-family: 'S-CoreDream-4Regular', sans-serif;">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -109,27 +120,26 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
 			<!-- Main Content -->
-			<div id="content">
+			<div id="content" >
 				<!-- Topbar -->
 				<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-				
-				<h5 id="today" ></h5>
 					<!-- Topbar Navbar -->
+				<div>
+				<div class="h5 my-0" id="nowDate"></div>
+				<sec:authorize access="isAuthenticated()">
+				<div class="h4 my-0"><strong style="color: black"><sec:authentication property="principal.memberDTO.mName"/></strong>님 안녕하세요</div>
+				</sec:authorize>
+				</div>
 					<ul class="navbar-nav ml-auto">
 						<sec:authorize access="isAnonymous()">
-							<li><a href="/member/login" class="btn btn-secondary mx-1">
-									<span class="text">Login</span>
-							</a></li>
-						</sec:authorize>
-						<sec:authorize access="isAuthenticated()">
-							<li>						
-							<h4 class="m-0 font-weight-bold my-1">Hello!
-							 	<sec:authentication property="principal.memberDTO.mName"/></h4>
+							<li>
+								<button class="btn btn-outline-primary" onclick="location.href='/member/login'"><i class="fas fa-sign-in-alt"></i></button> 
 							</li>
-							&nbsp;&nbsp;&nbsp;
-							<li><a href="/member/logout" class="btn btn-secondary mx-1">
-									<span class="text">Logout</span>
-							</a></li>
+						</sec:authorize>
+						<sec:authorize access="isAuthenticated()">	
+							<li>
+								<button class="btn btn-outline-danger" onclick="location.href='/member/logout'"><i class="fas fa-sign-out-alt"></i></button>
+							</li>
 						</sec:authorize>
 					</ul>
 				</nav>
