@@ -10,10 +10,9 @@
 <div class="container">
 	<div class="col-md-12"></div>
 	<form class="form-material" method="POST">
-		<label>이메일</label>
-		<div class="form-group form-default">
-			<input type="text" name="mEmail" class="form-control" value="${dto.MEmail}" readonly >
-		</div>
+
+			<input type="hidden" name="mEmail" id="mEmail" class="form-control" value="${dto.MEmail}" readonly >
+
 		<label>제목</label>
 		<div class="form-group form-default">
 			<input type="text" name="cTitle" class="form-control" value="${dto.CTitle}" readonly >
@@ -37,11 +36,17 @@
 		<textarea name="cContent" class="form-control" rows="10" readonly>${dto.CContent}</textarea>
     	<br>
 		<div align="center">
+		<sec:authorize access="isAuthenticated()">
 		<input type="hidden" name="cNo" value="${dto.CNo}">
+		<c:if test="${loginUser != dto.MEmail && loginUserRole != 'ADMIN'}">
 		<input type="button" class="btn btn-primary" id="applyChallenge" value="신청">
 		<input type="button" class="btn btn-danger" id="cancelChallenge" value="신청취소">
+		</c:if>
+		<c:if test="${loginUser == dto.MEmail || loginUserRole == 'ADMIN'}">
 		<input type="button" class="btn btn-warning" id="modifyChallenge" value="수정" onclick="modify()">
 		<input type="button" class="btn btn-danger" id="delBtn" value="삭제">
+		</c:if>
+		</sec:authorize>
 		<input type="button" class="btn btn-secondary" style="float: right" onclick="location.href='/challenge/list'" value="목록">
 		</div>
 		<br>
@@ -54,25 +59,32 @@
 <script type="text/javascript">
 
 	$(document).ready( function(e){
-		var sEmail = "user01@gmail.com";
-		if(sEmail=="${dto.MEmail}"){
+		var sEmail = $("#mEmail").val();		
+		var uEmail = "${loginUser}";
+		$.ajax({
+			type : "post",
+			url : "/challenge/applyCheck",
+			data : {sEmail:uEmail, cNo:${dto.CNo}},
+			dataType : "json",
+			async:false,
+			success :
+				function(data){
+					if(data>0){
+						$("#applyChallenge").hide();
+						$("#cancelChallenge").show();
+					}else{
+						$("#applyChallenge").show();
+						$("#cancelChallenge").hide();
+					}
+				}
+		});
+	
+		if(${dto.checkEnd}>0 && "${loginUserRole}" != "ADMIN"){
 			$("#applyChallenge").hide();
 			$("#cancelChallenge").hide();
-			$("#modifyChallenge").show();
-			$("#delBtn").show();
-		}else{
-			if(${applyCheck}>0){
-				$("#applyChallenge").hide();
-				$("#cancelChallenge").show();
-				$("#modifyChallenge").hide();
-				$("#delBtn").hide();				
-			}else{
-				$("#applyChallenge").show();
-				$("#cancelChallenge").hide();
-				$("#modifyChallenge").hide();
-				$("#delBtn").hide();					
-			}
-			}	
+			$("#modifyChallenge").hide();
+			$("#delBtn").hide();
+		}
 	});
 	
 	function modify() {
@@ -80,13 +92,13 @@
 		cnoForm.submit();
 	}
 	
-	$("#delBtn").on("click", function() {
+	$("#delBtn").one("click", function() {
 		$.post("/challenge/delete",{cNo : "${dto.CNo}"});
 		window.location.href = "/challenge/list";
 		  });
 
-	$("#applyChallenge").click(function(e) {
-		var uEmail = "user02@gmail.com";
+	$("#applyChallenge").one("click", function(e) {
+		var uEmail = "${loginUser}";
 		$.ajax({
 			type : "post",
 			url : "/challenge/apply",
@@ -100,9 +112,9 @@
 				}
 		});
 	});
-	
-	$("#cancelChallenge").click(function(e) {
-		var uEmail = "user02@gmail.com";
+
+	$("#cancelChallenge").one("click", function(e) {
+		var uEmail = "${loginUser}";
 		$.ajax({
 			type : "post",
 			url : "/challenge/cancel",

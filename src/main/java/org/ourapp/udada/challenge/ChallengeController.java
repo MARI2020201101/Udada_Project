@@ -2,17 +2,23 @@ package org.ourapp.udada.challenge;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jdk.internal.org.jline.utils.Log;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -28,6 +34,7 @@ public class ChallengeController {
 
 	@GetMapping("/register")
 	public void registerChallenge() {
+		
 	}
 
 	@PostMapping("/register")
@@ -67,40 +74,40 @@ public class ChallengeController {
 	@RequestMapping("/list")
 	public void loadList(Model model, ChallengeGetListDTO challengeGetListDTO) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		if (challengeGetListDTO.getPageNo()==null) {
-			challengeGetListDTO.setPageNo((double)1);
+		if (challengeGetListDTO.getPageNo() == null) {
+			challengeGetListDTO.setPageNo((double) 1);
 		}
-		if(challengeGetListDTO.getExercise()!=null && challengeGetListDTO.getExercise()!="") {
+		if (challengeGetListDTO.getExercise() != null && challengeGetListDTO.getExercise() != "") {
 			int[] excsList = challengeService.eNameSearch(challengeGetListDTO.getExercise());
-			if(excsList.length<1) {
-				excsList = new int[]{0}; 
+			if (excsList.length < 1) {
+				excsList = new int[] { 0 };
 			}
 			challengeGetListDTO.setExcsResult(excsList);
 		}
 		challengeGetListDTO.setStartNo((long) (12 * (challengeGetListDTO.getPageNo() - 1) + 1));
 		challengeGetListDTO.setEndNo((long) (12 * challengeGetListDTO.getPageNo()));
 		String pDate = challengeGetListDTO.getPeriod();
-		if(pDate!=null && pDate!="") {
-		if (pDate.length() < 13) {
-			try {
-				challengeGetListDTO.setStart(sdf.parse(pDate));
-				challengeGetListDTO.setFinish(sdf.parse(pDate));
-			} catch (ParseException e) {
-				e.printStackTrace();
+		if (pDate != null && pDate != "") {
+			if (pDate.length() < 13) {
+				try {
+					challengeGetListDTO.setStart(sdf.parse(pDate));
+					challengeGetListDTO.setFinish(sdf.parse(pDate));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			} else {
+				try {
+					challengeGetListDTO.setStart(sdf.parse(pDate.substring(0, 10)));
+					challengeGetListDTO.setFinish(sdf.parse(pDate.substring(13)));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 			}
-		} else {
-			try {
-				challengeGetListDTO.setStart(sdf.parse(pDate.substring(0, 10)));
-				challengeGetListDTO.setFinish(sdf.parse(pDate.substring(13)));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-		}
 		}
 		List<ChallengeListDTO> list = challengeService.loadList(challengeGetListDTO);
 		Double challengAmount = (double) list.size();
-		challengeGetListDTO.setEndPage(Math.ceil(challengAmount/12));
-		challengeGetListDTO.setStartPage((Math.ceil(challengeGetListDTO.getPageNo()/5)-1)*5+1);
+		challengeGetListDTO.setEndPage(Math.ceil(challengAmount / 12));
+		challengeGetListDTO.setStartPage((Math.ceil(challengeGetListDTO.getPageNo() / 5) - 1) * 5 + 1);
 		Boolean checkEnd;
 		if ((Math.ceil(challengeGetListDTO.getPageNo() / 5) < Math.ceil(challengeGetListDTO.getEndPage() / 5))) {
 			checkEnd = true;
@@ -131,10 +138,10 @@ public class ChallengeController {
 
 	@RequestMapping("/read/{cNo}")
 	public String read(Model model, @PathVariable Long cNo) {
-		String sEmail = "user02@gmail.com";
+
 		model.addAttribute("dto", challengeService.read(cNo));
 		model.addAttribute("goal", challengeService.readGoal(cNo));
-		model.addAttribute("applyCheck", challengeService.applyCheck(sEmail, cNo));
+
 		return "challenge/read";
 	}
 
@@ -152,6 +159,13 @@ public class ChallengeController {
 		return cancel;
 	}
 
+	@ResponseBody
+	@PostMapping("/applyCheck")
+	public int applyCheck(Long cNo, String sEmail) {
+		int applyCheck = challengeService.applyCheck(sEmail, cNo);
+		return applyCheck;
+	}
+
 	@PostMapping("/edit")
 	public String edit(Model model, Long cNo) {
 		model.addAttribute("dto", challengeService.read(cNo));
@@ -161,7 +175,7 @@ public class ChallengeController {
 
 	@PostMapping("/modify")
 	public String modify(ChallengeDTO challengeDTO, ChallengeGoalDTO challengeGoalDTO, String cPeriod, Long[] eNoArray,
-			
+
 			Long[] cgTimeArray, Long cNo) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		if (cPeriod.length() < 13) {
@@ -204,4 +218,84 @@ public class ChallengeController {
 		return list;
 	}
 
+	@PreAuthorize("isAuthenticated()")
+	@RequestMapping("/mychallenge")
+	public void myList(Model model, String sEmail, Authentication auth) {
+		sEmail = auth.getName();
+		List<MyChallengeProceedDTO> proceedList = challengeService.proceedList(sEmail);
+		List<MyChallengeApplyDTO> applyList = challengeService.applyList(sEmail);
+		List<MyChallengeEndDTO> endList = challengeService.endList(sEmail);
+
+		for (int i = 0; i < proceedList.size(); i++) {
+			Long cNo;
+			cNo = proceedList.get(i).getCNo();
+			List<ChallengeGlistDTO> gList = challengeService.loadGlist(cNo);
+			proceedList.get(i).setGList(gList);
+		}
+		for (int i = 0; i < applyList.size(); i++) {
+			Long cNo;
+			cNo = applyList.get(i).getCNo();
+			List<ChallengeGlistDTO> gList = challengeService.loadGlist(cNo);
+			applyList.get(i).setGList(gList);
+		}
+		for (int i = 0; i < endList.size(); i++) {
+			Long cNo;
+			cNo = endList.get(i).getCNo();
+			List<ChallengeGlistDTO> gList = challengeService.loadGlist(cNo);
+			endList.get(i).setGList(gList);
+		}
+		model.addAttribute("proceedList", proceedList);
+		model.addAttribute("applyList", applyList);
+		model.addAttribute("endList", endList);
+	}
+
+	@PreAuthorize("isAuthenticated()")
+	@RequestMapping("/progress/{cNo}")
+	public String progress(Model model, @PathVariable Long cNo, Authentication auth) {
+
+		MyChallengeInfoDTO myChallengeInfoDTO = challengeService.myChallengeInfo(cNo);
+		List<ChallengeReadGoalDTO> readGoal = challengeService.readGoal(cNo);
+		myChallengeInfoDTO.setGoalList(readGoal);
+		myChallengeInfoDTO.setGoalCnt(readGoal.size());
+		List<MyChallengeSuccessCntMDTO> getMemSuccess = challengeService.getMemSuccess(myChallengeInfoDTO);
+		if(myChallengeInfoDTO.getProcDate()>myChallengeInfoDTO.getTotalDate()) {
+			myChallengeInfoDTO.setProcDate(myChallengeInfoDTO.getTotalDate());
+		}
+		List<MyChallengeSuccessCntDDTO> getDaySuccess = challengeService.getDaySuccess(myChallengeInfoDTO);
+		int j = 0;
+		for(int i=0; i<getMemSuccess.size();i++) {
+			j = j + getMemSuccess.get(i).getSuccess();
+		}
+		myChallengeInfoDTO.setTotalScs(j);
+		myChallengeInfoDTO.setMEmail(auth.getName());
+		myChallengeInfoDTO.setMySuccess(challengeService.getTodaySuccess(myChallengeInfoDTO));
+		
+		List<MyChallengeGetTalkDTO> getTalk = challengeService.getTalk(cNo);
+		
+		for(int i=0;i<getTalk.size();i++) {	
+			Long reNo = getTalk.get(i).getReNo();
+			List<MyChallengeGetTalkDTO> getTalkReply = challengeService.getTalkReply(reNo);
+			getTalk.get(i).setTalkReply(getTalkReply);
+		}
+		
+		model.addAttribute("info", myChallengeInfoDTO);
+		model.addAttribute("mem", getMemSuccess);
+		model.addAttribute("day", getDaySuccess);
+		model.addAttribute("talk", getTalk);
+
+		return "challenge/progress";
+	}
+	
+	@ResponseBody
+	@PostMapping("/talkReg")
+	public void talkReg(MyChallengeTalkDTO myChallengeTalkDTO) {
+		challengeService.talkReg(myChallengeTalkDTO);  
+	}
+	
+	
+	@ResponseBody
+	@PostMapping("/talkDel")
+	public void delTalk(int reNo, int checkTalk) {
+		challengeService.talkDel(reNo,checkTalk);
+	}
 }

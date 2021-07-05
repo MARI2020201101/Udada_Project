@@ -49,15 +49,11 @@
 			<div class="col-xl-4 col-md-6 mb-4">
 				<div class="card border-left-${dto.CIng} shadow h-100 py-2">
 					<div class="row no-gutters align-items-center">
-						<div class="col p-4 d-flex flex-column position-static">
-							<strong class="d-inline-block mb-2 text-${dto.CIng}"><fmt:formatDate
-									value="${dto.CDate}" pattern="yyyy.MM.dd" /></strong>
-							<h4 class="mb-0">${dto.CTitle}</h4>
-							<p class="mb-auto">
-								<fmt:formatDate value="${dto.CStart}" pattern="yyyy.MM.dd" />
+						<div class="col p-3 d-flex flex-column position-static">
+							<strong class="d-inline-block mb-1 text-${dto.CIng}"><fmt:formatDate value="${dto.CStart}" pattern="yy.MM.dd" />
 								-
-								<fmt:formatDate value="${dto.CFinish}" pattern="yyyy.MM.dd" />
-							</p>
+								<fmt:formatDate value="${dto.CFinish}" pattern="yy.MM.dd" /></strong>
+							<h4 class="my-2">${dto.CTitle}</h4>
 							<p class="mb-auto">${dto.caCnt}명/ ${dto.CTotal}명</p>
 							<a href="read/${dto.CNo}" class="stretched-link"></a>
 						</div>
@@ -119,7 +115,6 @@
 	
 	$(".selector").flatpickr({
 		mode : "range",
-		minDate : "today",
 		dateFormat : "Y-m-d"
 	});
 </script>

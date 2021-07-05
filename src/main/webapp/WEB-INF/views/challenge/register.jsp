@@ -11,10 +11,8 @@
 <div class="container">
 
 	<form class="form-material" method="POST" action="/challenge/register" onsubmit="return checkForm()">
-		<label>이메일</label>
-		<div class="form-group form-default">
-			<input type="email" name="mEmail" class="form-control" required>
-		</div>
+		<input type="hidden" name="mEmail" class="form-control" value="${loginUser}" required>
+
 		<label>제목</label>
 		<div class="form-group form-default">
 			<input type="text" name="cTitle" class="form-control" required>
@@ -25,7 +23,7 @@
 		</div>
 		<label>최대 인원</label>
 		<div class="form-group form-default">
-			<input type="number" name="cTotal" class="form-control" required>
+			<input type="number" name="cTotal" id="total" class="form-control" required>
 		</div>
 
 		<label>목표 운동 <button type="button" class="btn btn-outline-secondary btn-sm modalBtn"><i class="fas fa-plus"></i></button></label>
@@ -98,18 +96,28 @@
 	function checkForm(){	
 		var cnt=$("#excsCheckCnt").val();
 		var btn=$(".modalBtn");
-		if(cnt>0){	
+		var totalInput=$("#total");
+		var total=$("#total").val();
+		if(cnt>0 && total>0 && total<11){	
 			return true;
 		}else{
-			btn.attr("class","btn btn-outline-danger btn-sm modalBtn")
-			setTimeout(function() { 
-				btn.attr("class","btn btn-outline-secondary btn-sm modalBtn")
-			}, 1000);
+			if(cnt<1){
+				btn.attr("class","btn btn-outline-danger btn-sm modalBtn")
+				setTimeout(function() { 
+					btn.attr("class","btn btn-outline-secondary btn-sm modalBtn")
+					}, 1000);
+			}
+			if(total<1 && total>10){
+				totalInput.css({"border-color": "red"});	
+				setTimeout(function() { 
+					totalInput.css({"border-color": ""});	
+					}, 1000);
+			}
 			return false;
 		}
 	}
-	
-	    $(".modalBtn").click(function(){
+
+		$(".modalBtn").on("click", function(){
 	        $("#goalModal").modal();   
 	        $("#getResultExcs").empty(); 
         	$("#excsTimeDiv").empty();
@@ -117,7 +125,7 @@
         	$(".searchInput").val("");
         });
 
-	   $(".excsSearch").click(function(){
+		$(".excsSearch").on("click", function(){
 	        	var excs = $(".searchInput").val();
 	        	var str = "";
 		        $("#getResultExcs").empty();
@@ -130,6 +138,7 @@
 	                dataType: "json",
 	                success: function (data) {
 	                    var cnt = 1;
+	                    if(data.length>0){
 	                    $.each(data, function (index, excs) {
 	                        str += "<div class='input-group mb-3'>" +
 	                            "<input type='text' class='form-control' aria-describedby='btnAddon" + cnt + "' value='" + excs.ename + " (" + excs.ekcal + "kcal/5분)' readonly>" +
@@ -144,7 +153,13 @@
 	                        cnt++;
 	                    });
 	                    $("#getResultExcs").append(str);
-	             	   },
+	             	   }else{
+                        str += "<div class='input-group mb-3'>" +
+                        "<input type='text' class='form-control' value='검색 결과가 없습니다' disabled readonly>" +
+                        "</div>";
+	                    $("#getResultExcs").append(str);
+	                }
+	                    },
 	                error: function () {
 	                }           
 	        });
@@ -170,17 +185,17 @@
 			minDate : "today",
 			dateFormat : "Y-m-d"
 		});
+		
 		var count = 1;
 		var eCheckCnt=0;
-		
 
-		$("#excsAddBtn").click(function(e){
+		$("#excsAddBtn").on("click", function(e){
 			var eNo = $("#excsSelNo").val();
 			var cgTime = $("#excsSelTime").val();
 			var eName = $("#excsSelName").val();
 			var eKcal = $("#excsSelKcal").val();
 			var totKcal = Math.round(eKcal*cgTime/5);	
-			if(cgTime>=10 && !!cgTime){
+			if(cgTime>=1 && !!cgTime){
 				var str = "<div class='input-group mb-3 excsListDiv'>" +
                 "<input type='text' class='form-control' aria-describedby='btnAddon"+count+"' value='"+eName+" "+cgTime+"분 ("+totKcal+"칼로리)' readonly disabled>" +
                 "<button class='btn btn-outline-secondary delExcs' type='button'> " +
