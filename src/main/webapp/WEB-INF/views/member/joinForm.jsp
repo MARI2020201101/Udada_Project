@@ -4,7 +4,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
+<script src="https://npmcdn.com/flatpickr/dist/l10n/ko.js"></script>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -42,6 +42,30 @@
 			<input type="radio" name="mGender" id="mGender" value="M">남자&emsp;&emsp;
 			<input type="radio" name="mGender" id="mGender" value="F">여자
 		</div>
+		<hr>
+		<div class="form-group row">
+			<label>선호식단</label>
+		</div>
+		<div class="form-group row">
+			<input type="radio" name="mMeal" id="mMeal" value="VEG">VEG&emsp;&emsp;
+			<input type="radio" name="mMeal" id="mMeal" value="KETO">KETO&emsp;&emsp;
+			<input type="radio" name="mMeal" id="mMeal" value="MEDT">MEDT&emsp;&emsp;
+			<input type="radio" name="mMeal" id="mMeal" value="NORMAL">NORMAL&emsp;&emsp;
+		</div>
+		<hr>
+		<div class="form-group row">
+			<label>다이어트 목표</label>
+		</div>
+		<div>
+			<select name="mGoaltype" id="mGoaltype">
+				<option value="느린체중 감소">느린체중 감소</option>
+				<option value="느린체중 증가">느린체중 증가</option>
+				<option value="현재체중 유지">현재체중 유지</option>
+				<option value="체중감소">체중감소</option>
+				<option value="체중증가">체중증가</option>
+			</select>
+		</div>
+		<hr>
 			<input type="hidden" name="mGrade" id="mGrade" value="USER">
 		<div class="form-group row">
 			<input type="submit" id="submit" name="submit" class="btn btn-facebook btn-block" value="다음단계">
@@ -54,6 +78,8 @@
 </div>
 <script>
 
+	flatpickr.localize(flatpickr.l10ns.ko);
+	
 	$(".selector").flatpickr(
 		{
 			   dateFormat: "Y-m-d",

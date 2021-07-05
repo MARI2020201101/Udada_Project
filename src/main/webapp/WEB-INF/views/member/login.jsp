@@ -36,6 +36,9 @@
 								<div class="text-center">
                                      <a class="small" href="/member/joinForm">Create an Account!</a>
                                 </div>
+                                <div class="text-center">
+                                     <a class="small" href="/member/findPw">Forgot Your Password?</a>
+                                </div>
 							</div>
 						</div>
 					</div>

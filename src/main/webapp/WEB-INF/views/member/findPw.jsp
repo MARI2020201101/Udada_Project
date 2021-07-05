@@ -5,21 +5,52 @@
 <div class="container-fluid">
 
 	<!-- Page Heading -->
-	<h1 class="h3 mb-4 text-gray-800">비밀번호 확인</h1>
-	<form action="/member/pwdCheck" method="post" id="memfrm">
-		<div class="form-group row">
-			<label>비밀번호</label>
-			<input type="password" name="mPw" id="mPw" class="form-control form-control-user" required>
+	<h1 class="h3 mb-4 text-gray-800">비밀번호 찾기</h1>
+
+	<form action="/member/findPw" method="post">
+		<div class="form-group">
+			<label>이메일</label>
+			<input type="text" id="mEmail" name="mEmail" class="form-control form-control-user">
+			<div id="error" name="error" class="form-group" style="display:none; color:red;">유효하지 않은 이메일주소 입니다.</div>
 		</div>
-		<div class="form-group row">
-			<input type="submit" id="update" name="update" class="btn btn-facebook btn-block" value="수정하기">
-		</div>
-		<div class="form-group row">
-			<input type="button" id="cancel" name ="cancel" class="btn btn-google btn-block" value="취소">
+		<div>
+			<input type="submit" id="findPwd" name="findPwd" value="비밀번호 찾기" class="btn btn-facebook btn-block" onclick="return checkPwd()">
 		</div>
 	</form>
 
-        <div class="modal" tabindex="-1" role="dialog">
+<script>
+	$(document).ready(function() {
+		var msg = '${msg}';
+		
+		if (!(msg===''||history.state)){
+			var modal= $(".modal");
+			modal.modal();
+		}
+	});	
+	
+	function ECheck(mEmail){
+		var regex = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+		return mEmail != '' && mEmail != 'undefined' && regex.test(mEmail);
+	}
+	
+	function checkPwd(){
+		
+		var mEmail = $("#mEmail").val();
+		mEmail = mEmail.trim();
+		
+		if(! ECheck(mEmail)){
+			$("#error").show();
+			$("#mEmail").focus();
+			return false;
+		}else{
+			$("#error").hide();
+			return true;
+		}
+	
+}
+
+</script>
+		<div class="modal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -38,16 +69,7 @@
                 </div>
             </div>
         </div>
-<script>
-$(document).ready(function(){
-	var msg = '${msg}';
-	if (!(msg===''||history.state)){
-		var modal= $(".modal");
-		modal.modal();
-	}
-});
-	
-</script>
+
 <!-- /.container-fluid -->
 </div>
 <!-- End of Main Content -->

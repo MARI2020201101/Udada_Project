@@ -23,30 +23,31 @@
 		<result column="MS_HEIGHT" property="msHeight"/>
 		<result column="MS_WEIGHT" property="msWeight"/>
 		<result column="MS_GOAL" property="msGoal"/>
+		<result column="MS_DATESTR" property="msDateStr"/>
 	</resultMap>	
 	
-	<select id="pwdCheck" parameterType="org.ourapp.udada.member.MemberDTO" resultType="int">
-		SELECT COUNT(*)
+	<select id="pwdCheck" parameterType="String" resultMap="memberMap">
+		SELECT *
 		FROM member
-		WHERE m_email=#{mEmail} and m_pw=#{mPw}
+		WHERE m_email=#{mEmail}
 	</select>
 	
 	<update id="updateMyProfile" parameterType="org.ourapp.udada.member.MemberDTO">
 		UPDATE MEMBER 
-		SET M_NAME=#{mName}, M_PW=#{mPw}, M_BIRTH=#{mBirth}, M_GENDER=#{mGender}, M_GRADE=#{mGrade}
+		SET M_NAME=#{mName}, M_PW=#{mPw}, M_BIRTH=#{mBirth}, M_GENDER=#{mGender}, M_GRADE=#{mGrade}, M_MEAL=#{mMeal}, M_GOALTYPE=#{mGoaltype}
 		WHERE M_EMAIL=#{mEmail}
 	</update>
 	
 	
 	<select id="myProfile" parameterType="String" resultMap="memberMap">
-		SELECT m_email, m_name, m_pw, m_birth, m_gender, m_grade
+		SELECT m_email, m_name, m_pw, m_birth, m_gender, m_grade, m_meal, m_goaltype
 		FROM member
 		WHERE m_email = #{mEmail}
 	</select>
 	
 	<insert id="join">
-		INSERT INTO member(M_EMAIL, M_NAME, M_PW, M_BIRTH, M_GENDER, M_GRADE)
-		VALUES (#{mEmail}, #{mName}, #{mPw}, #{mBirth}, #{mGender}, #{mGrade})
+		INSERT INTO member(M_EMAIL, M_NAME, M_PW, M_BIRTH, M_GENDER, M_GRADE, M_MEAL, M_GOALTYPE)
+		VALUES (#{mEmail}, #{mName}, #{mPw}, #{mBirth}, #{mGender}, #{mGrade}, #{mMeal}, #{mGoaltype})
 	</insert>
 
 	<select id="duplecateEmail" parameterType="String" resultType="int">
@@ -67,10 +68,15 @@
 	</update>
 	
 	<select id="selectMyWeight" parameterType="String" resultMap="memberSpecMap">
-		SELECT MS_NO, M_EMAIL, MS_DATE, MS_HEIGHT, MS_WEIGHT, MS_GOAL
-		FROM member_spec
-		WHERE M_EMAIL = #{mEmail}
-		ORDER BY MS_NO DESC
+	<![CDATA[
+		SELECT SUB.MS_NO, SUB.M_EMAIL, SUB.MS_DATESTR, SUB.MS_WEIGHT, SUB.MS_HEIGHT, SUB.MS_GOAL
+        FROM 
+       		(SELECT MS_NO, M_EMAIL, TO_CHAR(MS_DATE, 'YYYY-MM-DD') as MS_DATESTR, MS_WEIGHT, MS_HEIGHT, MS_GOAL
+			 FROM member_spec
+			 WHERE M_EMAIL = #{mEmail}
+        	 ORDER BY MS_NO) SUB
+        WHERE SUB.MS_DATESTR BETWEEN TO_CHAR(SYSDATE-15, 'YYYY-MM-DD') AND TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+		]]> 
 	</select>
 	
 	<select id="currentMyWeight" parameterType="String" resultMap="memberSpecMap">
@@ -88,5 +94,34 @@
 		DELETE FROM member_spec
 		WHERE ms_no = ${msNo}
 	</delete>
+	
+	<select id="getMyWeightAndPaging" parameterType="map" resultMap="memberSpecMap">
+			<![CDATA[
+				SELECT SSUB.* FROM
+        			(SELECT SUB.*, ROWNUM AS RN FROM
+        					(SELECT MS_NO, M_EMAIL, MS_DATE, MS_HEIGHT, MS_WEIGHT, MS_GOAL
+					 		 FROM member_spec
+					 		 WHERE M_EMAIL = #{mEmail}
+					 		 ORDER BY MS_NO DESC) SUB
+          			)SSUB    
+          		WHERE SSUB.RN > (#{pageNum}-1) * #{pageSize} AND SSUB.RN <= #{pageNum} * #{pageSize}   
+			]]> 
+	</select>
+	
+	<select id="countAll" parameterType="String" resultType="int">
+		SELECT COUNT(MS_NO) 
+		FROM member_spec
+		WHERE M_EMAIL = #{mEmail}
+	</select>
+	
+	<select id="findMEmail" parameterType="String" resultMap="memberMap">
+		SELECT * FROM member WHERE M_EMAIL = #{mEmail}
+	</select>
+	
+	<update id="updatePwd" parameterType="org.ourapp.udada.member.MemberDTO">
+		UPDATE member 
+		SET M_PW = #{mPw}
+		WHERE M_EMAIL = #{mEmail}
+	</update>
 	
 </mapper>
