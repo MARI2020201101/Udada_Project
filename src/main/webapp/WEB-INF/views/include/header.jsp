@@ -60,11 +60,11 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-                <div class="sidebar-brand-icon rotate-n-15">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+                <div class="sidebar-brand-icon rotate-n-10">
                     <img src="/resources/imgs/logo.png" alt="logo2" width="40">
                 </div>
-                <div class="sidebar-brand-text mx-3">UDADA</div>
+                <div class="sidebar-brand-text mx-2 my-0 h4"><strong>U D A D A</strong></div>
             </a>
 
             <!-- Nav Item - Utilities Collapse Menu -->
