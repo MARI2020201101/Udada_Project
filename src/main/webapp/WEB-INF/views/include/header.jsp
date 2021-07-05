@@ -125,9 +125,9 @@
 				<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 					<!-- Topbar Navbar -->
 				<div>
-				<div class="h5 my-0" id="nowDate"></div>
+				<div class="h5 my-1" id="nowDate"></div>
 				<sec:authorize access="isAuthenticated()">
-				<div class="h4 my-0"><strong style="color: black"><sec:authentication property="principal.memberDTO.mName"/></strong>님 안녕하세요</div>
+				<div class="h4 my-0"><strong style="color: black"><sec:authentication property="principal.memberDTO.mName"/></strong>님 환영합니다</div>
 				</sec:authorize>
 				</div>
 					<ul class="navbar-nav ml-auto">

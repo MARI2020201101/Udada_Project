@@ -10,5 +10,4 @@
  var ndDay=nowDate.getDay();
  var nowWeek = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
  $("#nowDate").text(ndYear+"년 "+ ndMonth+"월 "+ ndDate+"일 "+nowWeek[ndDay]);
-
  
