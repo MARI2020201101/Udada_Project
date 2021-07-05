@@ -159,5 +159,6 @@ public class ChallengeServiceImpl implements ChallengeService{
 		challengeMapper.talkDel(reNo, checkTalk);
 	}
 
+	
 
 }

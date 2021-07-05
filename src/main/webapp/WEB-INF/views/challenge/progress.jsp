@@ -123,7 +123,7 @@
 								챌린지
 								<div style="display: inline-block; color: #F36C1F">${info.procDate}일
 									째</div>
-								날입니다!<br> 남은
+								날입니다<br> 남은
 								<div style="display: inline-block; color: #F36C1F">${info.totalDate-info.procDate}일</div>
 								힘내세요!
 							</div>
@@ -280,14 +280,19 @@
 						<div style="display: inline-block; float: right; font-size: small;">
 							<c:choose>
 							<c:when test="${talk.MEmail==loginUser || loginUserRole=='ADMIN'}">
-							<i class="far fa-edit"></i>
+							<i class="far fa-edit talkEdit"></i>
 							<i data-re-no="${talk.reNo}" data-check-talk="0" class="far fa-trash-alt talkDel"></i>
 							</c:when>
 							</c:choose>
 						${talk.reDate}</div>
 						<div class="font-weight-bold mb-1" style="font-size: small;">${talk.MName}</div>
-						<div data-re-no="${talk.reNo}" class="talkContent">${talk.reContent}
-						</div>
+						<div data-re-no="${talk.reNo}" class="talkContent">${talk.reContent}</div>
+					<div class="input-group talkModify">
+  					<textarea rows="1" class="form-control">${talk.reContent}</textarea>
+  					<button data-re-no="${talk.reNo}" class="btn btn-outline-secondary applyEdit" type="button"><i class="fas fa-check"></i></button>
+  					<button class="btn btn-outline-secondary cancelEdit" type="button"><i class="fas fa-times"></i></button>
+					</div>
+						
 						<c:forEach var="reply" items="${talk.talkReply}">
 							<div>
 							<div class="mt-1" style="font-size: small;">&nbsp;└ ${reply.MName} : ${reply.reContent}
@@ -336,6 +341,8 @@ $("#talkReg").one("click","button",function(){
 	}
 });
 $(".talkReplyReg").hide();
+$(".talkModify").hide();
+
 });
 
 $(".talkReplyReg").one("click","button",function(){
@@ -374,17 +381,47 @@ $(".talkDel").one("click", function(){
 	});
 	location.reload();
 });
+
+$(".talkEdit").on("click",function(){
+	$(this).parent().parent().find(".talkModify").toggle();
+	$(this).parent().parent().find(".talkContent").toggle();
+});
+
+/* $(".talkModify").one("click",".applyEdit",function(){
+	var reContent = $(this).find("textarea").val();
+	var reNo = $(this).parent().parent().find(".talkContent").data("reNo")
+	if(!reContent.trim()){
+		var textarea = $(this).find("textarea");
+		textarea.css({"border-color": "red"});	
+		setTimeout(function() { 
+			textarea.css({"border-color": ""});	
+			}, 1000);
+	}else{
+	$.ajax({
+		type : "post",
+		url : "/challenge/talkEdit",
+		data : {reNo:reNo,
+		dataType : "json",
+		async:false
+	});
+	location.reload();
+	}
+}); */
+
 </script>
 
 <script>
 var chartLbl = new Array();
 var chartDta = new Array();
-var chartBegin = 0;
-if(${info.procDate}>5){
-	chartBegin=(${info.procDate}-5);
-}
-console.log(chartBegin);
-<c:forEach items="${day}" var="day">
+<c:choose>
+<c:when test="${info.procDate>7}">
+<c:set var="chartBegin" value="${info.procDate-7}"></c:set>
+</c:when>
+<c:otherwise>
+<c:set var="chartBegin" value="0"></c:set>
+</c:otherwise>
+</c:choose>
+<c:forEach items="${day}" var="day" begin="${chartBegin}">
 chartLbl.push("${day.period}");
 chartDta.push(<fmt:formatNumber value="${(day.success/info.memCnt)*100}" pattern="0"/>);
 </c:forEach>
@@ -511,6 +548,3 @@ var myLineChart = new Chart(ctx, {
 </script>
 <!-- End of Main Content -->
 <%@ include file="../include/footer.jsp"%>
-
-
-

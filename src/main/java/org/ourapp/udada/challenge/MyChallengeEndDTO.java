@@ -22,4 +22,5 @@ public class MyChallengeEndDTO {
 	private Date cFinish;
 	private List<ChallengeGlistDTO> gList;
 
+	
 }

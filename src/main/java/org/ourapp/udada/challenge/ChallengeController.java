@@ -145,6 +145,7 @@ public class ChallengeController {
 		return "challenge/read";
 	}
 
+
 	@ResponseBody
 	@PostMapping("/apply")
 	public Boolean apply(Long cNo, String sEmail) {

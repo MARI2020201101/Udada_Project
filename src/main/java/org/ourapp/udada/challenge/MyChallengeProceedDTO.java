@@ -23,4 +23,5 @@ public class MyChallengeProceedDTO {
 	private List<ChallengeGlistDTO> gList;
 	private String progress;
 
+	
 }
