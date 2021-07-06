@@ -145,6 +145,7 @@ public class ChallengeController {
 		return "challenge/read";
 	}
 
+
 	@ResponseBody
 	@PostMapping("/apply")
 	public Boolean apply(Long cNo, String sEmail) {
@@ -292,10 +293,15 @@ public class ChallengeController {
 		challengeService.talkReg(myChallengeTalkDTO);  
 	}
 	
-	
 	@ResponseBody
 	@PostMapping("/talkDel")
 	public void delTalk(int reNo, int checkTalk) {
-		challengeService.talkDel(reNo,checkTalk);
+			challengeService.talkDel(reNo,checkTalk); 
+	}
+	
+	@ResponseBody
+	@PostMapping("/talkEdit")
+	public void editTalk(int reNo, String reContent) {
+		challengeService.editTalk(reNo,reContent);
 	}
 }

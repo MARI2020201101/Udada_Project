@@ -9,10 +9,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class MemberSpecDTO {
 	private long msNo;
 	private String mEmail;
@@ -20,4 +20,6 @@ public class MemberSpecDTO {
 	private double msHeight;
 	private double msWeight;
 	private double msGoal;
+	
+	private String msDateStr;
 }

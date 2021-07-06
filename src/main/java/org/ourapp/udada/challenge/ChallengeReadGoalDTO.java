@@ -18,15 +18,6 @@ public class ChallengeReadGoalDTO {
 	private Long eKcal;
 
 
-
-
-	
-	/*
-  CG_NO NUMBER NOT NULL 
-, C_NO NUMBER 
-, E_NO NUMBER 
-	 * */
-
 	
 	
 }

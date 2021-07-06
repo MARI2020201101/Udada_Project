@@ -24,7 +24,7 @@
 								class="text-lg font-weight-bold text-primary text-uppercase mb-0">
 								제목</div>
 							<div class="mb-0 text-lg font-weight-bold"
-								style="text-align: center;">${info.CTitle}</div>
+								style="text-align: center; color:#005780;">${info.CTitle}</div>
 							<a href="/challenge/read/${info.CNo}" class="stretched-link"></a>
 						</div>
 					</div>
@@ -40,7 +40,7 @@
 								class="text-lg font-weight-bold text-primary text-uppercase mb-0">
 								기간</div>
 							<div class="mb-0 text-lg font-weight-bold"
-								style="text-align: center;">
+								style="text-align: center; color:#005780;">
 								<fmt:formatDate value="${info.CStart}" pattern="yyyy-MM-dd" />
 								~
 								<fmt:formatDate value="${info.CFinish}" pattern="yyyy-MM-dd" />
@@ -61,7 +61,7 @@
 								class="text-lg font-weight-bold text-primary text-uppercase mb-0">
 								운동</div>
 							<div class="mb-0 text-lg font-weight-bold"
-								style="text-align: center;">
+								style="text-align: center; color:#005780;">
 								<c:forEach var="goal" items="${info.goalList}" varStatus="i">
 									<c:choose>
 										<c:when test="${i.last}">
@@ -91,7 +91,7 @@
 							<div class="row no-gutters align-items-center">
 								<div class="col-auto">
 									<div class="mb-0 mr-3 text-lg font-weight-bold"
-										style="text-align: center; color: #216b21;">
+										style="text-align: center; color: #008c4e;">
 										<c:choose>
 											<c:when test="${info.progress<=100}">${info.progress}%</c:when>
 											<c:otherwise>종료</c:otherwise>
@@ -121,10 +121,10 @@
 							<div
 								class="text-lg font-weight-bold text-warning text-uppercase mb-0">
 								챌린지
-								<div style="display: inline-block; color: #F36C1F">${info.procDate}일
+								<div style="display: inline-block; color: #dc793a">${info.procDate}일
 									째</div>
-								날입니다!<br> 남은
-								<div style="display: inline-block; color: #F36C1F">${info.totalDate-info.procDate}일</div>
+								날입니다<br> 남은
+								<div style="display: inline-block; color: #dc793a">${info.totalDate-info.procDate}일</div>
 								힘내세요!
 							</div>
 						</div>
@@ -140,7 +140,7 @@
 							<div
 								class="text-lg font-weight-bold text-info text-uppercase mb-0">
 								나의 성공률
-								<div style="display: inline-block; color: #40777C">
+								<div style="display: inline-block; color: #926aa6">
 									<c:forEach var="mem" items="${mem}">
 										<c:choose>
 											<c:when test="${mem.MEmail==loginUser}">
@@ -150,7 +150,7 @@
 									</c:forEach>
 								</div>
 								<br>챌린지 평균 성공률
-								<div style="display: inline-block; color: #40777C">
+								<div style="display: inline-block; color: #926aa6">
 									<fmt:formatNumber
 										value="${(info.totalScs/(info.procDate*info.memCnt))*100}"
 										pattern="0" />%
@@ -225,7 +225,7 @@
 							</c:otherwise>
 						</c:choose>
 						<div class="progress mb-4">
-							<div class="progress-bar bg-info" role="progressbar"
+							<div class="progress-bar bg-primary" role="progressbar"
 								style="width: ${(mem.success/info.procDate)*100}%">${mem.success}일
 								성공!</div>
 						</div>
@@ -273,38 +273,47 @@
   					<button class="btn btn-outline-secondary" type="button"><i class="far fa-comment"></i></button>
 				</div>
 				</div>
-				<div class="card-body pt-0 pb-2">
+				<div class="card-body pt-0 pb-2" style="overflow:auto; height: 400px;">
 				<c:forEach var="talk" items="${talk}">
 					<div>
 						<hr class="my-2">
 						<div style="display: inline-block; float: right; font-size: small;">
 							<c:choose>
 							<c:when test="${talk.MEmail==loginUser || loginUserRole=='ADMIN'}">
-							<i class="far fa-edit"></i>
+							<i class="far fa-edit talkEdit"></i>
 							<i data-re-no="${talk.reNo}" data-check-talk="0" class="far fa-trash-alt talkDel"></i>
 							</c:when>
 							</c:choose>
 						${talk.reDate}</div>
 						<div class="font-weight-bold mb-1" style="font-size: small;">${talk.MName}</div>
-						<div data-re-no="${talk.reNo}" class="talkContent">${talk.reContent}
-						</div>
+						<div data-re-no="${talk.reNo}" class="talkContent">${talk.reContent}</div>
+					<div class="input-group talkModify">
+  					<textarea rows="1" class="form-control">${talk.reContent}</textarea>
+  					<button data-re-no="${talk.reNo}" class="btn btn-outline-secondary applyEdit" type="button"><i class="fas fa-check"></i></button>
+  					<button class="btn btn-outline-secondary btn-sm cancelEdit" type="button"><i class="fas fa-times"></i></button>
+					</div>	
 						<c:forEach var="reply" items="${talk.talkReply}">
-							<div>
-							<div class="mt-1" style="font-size: small;">&nbsp;└ ${reply.MName} : ${reply.reContent}
-							<input type="hidden" value="${reply.reNo}">	
-							<div style="display: inline-block; float: right; font-size: x-small;"> 
+							<div>			
+							<div class="mt-1 talkReply" style="font-size: small;">&nbsp;└ ${reply.MName} : ${reply.reContent}
+							<div class="mt-1" style="display: inline-block; float: right; font-size: x-small;"> 
 								<c:choose>
 								<c:when test="${reply.MEmail==loginUser || loginUserRole=='ADMIN'}">
-								<i class="far fa-edit"></i>
+								<i class="far fa-edit talkReplyEditBtn"></i>
 								<i data-re-no="${reply.reNo}" data-check-talk="1" class="far fa-trash-alt talkDel"></i>
 								</c:when>
 								</c:choose>
 							${reply.reDate}</div></div>
-							</div>
+							<div class="input-group talkReplyEdit">
+		  					<textarea rows="1" class="form-control">${reply.reContent}</textarea>
+		  					<button data-re-no="${reply.reNo}" class="btn btn-outline-secondary applyEdit" type="button"><i class="fas fa-check"></i></button>
+		  					<button class="btn btn-outline-secondary btn-sm reCancelEdit" type="button"><i class="fas fa-times"></i></button>
+		  					</div>
+		  					</div>
 						</c:forEach>
 						<div class="input-group talkReplyReg">
   						<textarea rows="1" class="form-control" ></textarea>
   						<button class="btn btn-outline-secondary" type="button"><i class="far fa-comment"></i></button>
+  						<button class="btn btn-outline-secondary btn-sm cancelTalkReg" type="button"><i class="fas fa-times"></i></button>
 						</div>
 					</div>
 				</c:forEach>
@@ -336,6 +345,9 @@ $("#talkReg").one("click","button",function(){
 	}
 });
 $(".talkReplyReg").hide();
+$(".talkModify").hide();
+$(".talkReplyEdit").hide();
+
 });
 
 $(".talkReplyReg").one("click","button",function(){
@@ -374,17 +386,87 @@ $(".talkDel").one("click", function(){
 	});
 	location.reload();
 });
+
+$(".talkEdit").on("click",function(){
+	$(this).parent().parent().find(".talkModify").toggle();
+	$(this).parent().parent().find(".talkContent").toggle();
+});
+
+$(".cancelEdit").on("click",function(){
+	$(this).parent().parent().find(".talkModify").toggle();
+	$(this).parent().parent().find(".talkContent").toggle();
+});
+
+$(".talkReplyEditBtn").on("click",function(){
+	$(this).parent().parent().toggle();
+	$(this).parent().parent().parent().find(".talkReplyEdit").toggle();
+});
+
+$(".reCancelEdit").on("click",function(){
+	$(this).parent().toggle();
+	$(this).parent().parent().find(".talkReply").toggle();
+});
+
+$(".cancelTalkReg").on("click",function(){
+	$(this).parent().toggle();
+});
+
+	$(".talkModify").one("click",".applyEdit",function(){
+	var reContent = $(this).parent().find("textarea").val();
+	var reNo = $(this).data("reNo")
+	if(!reContent.trim()){
+		var textarea = $(this).parent().find("textarea");
+		textarea.css({"border-color": "red"});	
+		setTimeout(function() { 
+			textarea.css({"border-color": ""});	
+			}, 1000);
+	}else{
+	$.ajax({
+		type : "post",
+		url : "/challenge/talkEdit",
+		data : {reNo:reNo, reContent:reContent},
+		dataType : "json",
+		async:false
+	});
+	location.reload();
+	}
+	});
+	
+	$(".talkReplyEdit").one("click",".applyEdit",function(){
+		var reContent = $(this).parent().find("textarea").val();
+		var reNo = $(this).data("reNo")
+		if(!reContent.trim()){
+			var textarea = $(this).parent().find("textarea");
+			textarea.css({"border-color": "red"});	
+			setTimeout(function() { 
+				textarea.css({"border-color": ""});	
+				}, 1000);
+		}else{
+		$.ajax({
+			type : "post",
+			url : "/challenge/talkEdit",
+			data : {reNo:reNo, reContent:reContent},
+			dataType : "json",
+			async:false
+		});
+		location.reload();
+		}
+	});
+
 </script>
 
 <script>
 var chartLbl = new Array();
 var chartDta = new Array();
-var chartBegin = 0;
-if(${info.procDate}>5){
-	chartBegin=(${info.procDate}-5);
-}
-console.log(chartBegin);
-<c:forEach items="${day}" var="day">
+<c:choose>
+<c:when test="${info.procDate>7}">
+<c:set var="chartBegin" value="${info.procDate-7}"></c:set>
+</c:when>
+<c:otherwise>
+<c:set var="chartBegin" value="0"></c:set>
+</c:otherwise>
+</c:choose>
+<c:forEach items="${day}" var="day" begin="${chartBegin}">
 chartLbl.push("${day.period}");
 chartDta.push(<fmt:formatNumber value="${(day.success/info.memCnt)*100}" pattern="0"/>);
 </c:forEach>
@@ -428,13 +510,13 @@ var myLineChart = new Chart(ctx, {
       label: "Earnings",
       lineTension: 0.3,
       backgroundColor: "rgba(78, 115, 223, 0.05)",
-      borderColor: "rgba(78, 115, 223, 1)",
+      borderColor: "#007CB8",
       pointRadius: 3,
-      pointBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointBorderColor: "rgba(78, 115, 223, 1)",
+      pointBackgroundColor: "#007CB8",
+      pointBorderColor: "#007CB8",
       pointHoverRadius: 3,
-      pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+      pointHoverBackgroundColor: "#007CB8",
+      pointHoverBorderColor: "#007CB8",
       pointHitRadius: 10,
       pointBorderWidth: 2,
       data: chartDta,
@@ -511,6 +593,3 @@ var myLineChart = new Chart(ctx, {
 </script>
 <!-- End of Main Content -->
 <%@ include file="../include/footer.jsp"%>
-
-
-

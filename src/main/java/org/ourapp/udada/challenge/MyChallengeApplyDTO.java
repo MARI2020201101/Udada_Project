@@ -23,4 +23,5 @@ public class MyChallengeApplyDTO {
 	private List<ChallengeGlistDTO> gList;
 	private int dDay;
 
+	
 }

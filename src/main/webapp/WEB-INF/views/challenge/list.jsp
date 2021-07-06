@@ -8,6 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://npmcdn.com/flatpickr/dist/l10n/ko.js"></script>
 
+
 <!-- Begin Page Content -->
 
 <div class="container-fluid">
@@ -40,9 +41,10 @@
 	</div>
 </form>
 	<div class="col-md-1 mb-4" style="text-align:right">
-		<button type="button" class="btn btn-primary btn-lg" onclick="location.href='register'"><i class="bi bi-journal-plus"></i></button>
+		<button type="button" class="btn btn-primary" onclick="location.href='register'"><i class="bi bi-journal-plus"></i></button>
 	</div>
 </div>
+<hr class="mt-0 mb-4">
 
 	<div class="row">
 		<c:forEach var="dto" items="${list}">

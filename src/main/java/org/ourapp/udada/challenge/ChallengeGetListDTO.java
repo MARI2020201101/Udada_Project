@@ -28,4 +28,5 @@ public class ChallengeGetListDTO {
 	private Date finish;
 	private int[] excsResult;
 
+	
 }

@@ -17,16 +17,6 @@ public class ChallengeGoalDTO {
 	private Long eNo;
 	private Long cgTime;
 
-
-
-
-	
-	/*
-  CG_NO NUMBER NOT NULL 
-, C_NO NUMBER 
-, E_NO NUMBER 
-	 * */
-
 	
 	
 }

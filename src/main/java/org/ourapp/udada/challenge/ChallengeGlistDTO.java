@@ -16,16 +16,6 @@ public class ChallengeGlistDTO {
 	private String eName;
 	private Long cgTime;
 
-
-
-
-	
-	/*
-  CG_NO NUMBER NOT NULL 
-, C_NO NUMBER 
-, E_NO NUMBER 
-	 * */
-
 	
 	
 }

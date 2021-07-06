@@ -48,4 +48,5 @@ public interface ChallengeMapper {
 	List<MyChallengeGetTalkDTO> getTalk(@Param("cNo")Long cNo);
 	List<MyChallengeGetTalkDTO> getTalkReply(@Param("reNo")Long reNo);
 	void talkDel(@Param("reNo")int reNo, @Param("checkTalk")int checkTalk);
+	void editTalk(@Param("reNo")int reNo, @Param("reContent")String reContent);
 }

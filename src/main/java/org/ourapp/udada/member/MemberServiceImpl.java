@@ -34,10 +34,11 @@ public class MemberServiceImpl implements MemberService{
 		memberMapper.joinStep2(memberSpecDTO);
 	}
 
-	@Override
-	public int pwdCheck(MemberDTO memberDTO) {
-		return memberMapper.pwdCheck(memberDTO);
-	}
+	/*
+	 * @Override public int pwdCheck(MemberDTO memberDTO) {
+	 * //memberDTO.setMPw(passwordEncoder.encode(memberDTO.getMPw())); return
+	 * memberMapper.pwdCheck(memberDTO); }
+	 */
 
 	@Override
 	public MemberDTO myProfile(String mEmail) {
@@ -54,6 +55,7 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void updateMyProfile(MemberDTO memberDTO) {
 		//System.out.println("#"+memberDTO.getMEmail()+"#");
+		memberDTO.setMPw(passwordEncoder.encode(memberDTO.getMPw()));
 		memberMapper.updateMyProfile(memberDTO);
 	}
 
@@ -77,5 +79,32 @@ public class MemberServiceImpl implements MemberService{
 		memberMapper.deleteWeight(msNo);
 	}
 
+	@Override
+	public List<MemberSpecDTO> getMyWeightAndPaging(int pageNum, int pageSize, String mEmail) throws Exception {
+		return memberMapper.getMyWeightAndPaging(pageNum, pageSize, mEmail);
+	}
+
+	@Override
+	public int countAll(int pageNum, int pageSize, String mEmail) {
+		return memberMapper.countAll(pageNum, pageSize, mEmail);
+	}
+
+	@Override
+	public MemberDTO pwdCheck(String mEmail) {
+		
+		return memberMapper.pwdCheck(mEmail);
+	}
+
+	@Override
+	public MemberDTO findMEmail(String mEmail) {
+		return memberMapper.findMEmail(mEmail);
+	}
+
+	@Override
+	public void updatePwd(MemberDTO memberDTO) {
+		memberMapper.updatePwd(memberDTO);
+	}
+
+	
 	
 }
