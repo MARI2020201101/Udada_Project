@@ -18,7 +18,7 @@
 	
 	<insert id="insert">
 		INSERT INTO REPLY(RE_NO, ORI_NO, M_EMAIL, RE_CONTENT, RE_DIV, RE_GROUP, RE_INDENT)
-		VALUES(SEQ_REPLY.NEXTVAL, #{oriNo}, #{mEmail}, #{reContent}, #{reDiv}, #{reGroup}, #{reIndent})
+		VALUES(SEQ_REPLY.NEXTVAL, #{oriNo}, #{mEmail}, #{reContent}, #{reDiv}, SEQ_REPLY.CURRVAL, 0)
 	</insert>
 	
 	<delete id="delete">

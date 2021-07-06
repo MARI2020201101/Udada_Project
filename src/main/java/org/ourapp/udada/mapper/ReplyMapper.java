@@ -7,8 +7,8 @@ import org.ourapp.udada.reply.ReplyDTO;
 
 public interface ReplyMapper {
 
-	int insert(String mEmail, String reContent, Long jNo);
-	int delete(@Param("reNo") Long reNo, @Param("mEmail")String mEmail);
-	List<ReplyDTO> replyList(Long jNo) throws Exception;
+	int insert(@Param("reContent")String reContent, @Param("oriNo")Long oriNo, @Param("mEmail")String mEmail, @Param("reDiv")String reDiv);
+	int delete(@Param("mEmail")String mEmail, @Param("reNo") Long reNo);
+	
 	
 }

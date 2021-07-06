@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface ReplyService {
 
-	int insertReply(String mEmail, String reContent, Long jNo) throws Exception;
-	List<ReplyDTO>replyList(Long jNo) throws Exception;
+	int insertReply(String reContent, Long oriNo, String mEmail, String reDiv) throws Exception;
+	int deleteReply(String mEmail, Long reNo) throws Exception;
 	
 }//interface end

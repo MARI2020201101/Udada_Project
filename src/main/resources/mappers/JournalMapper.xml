@@ -99,11 +99,10 @@
 		SELECT SSUB.* FROM
         (SELECT SUB.*, ROWNUM AS RN FROM
         (SELECT 
-		J.J_NO , J.M_EMAIL , J.J_CONTENT, J.J_DATE ,I.*, RE.RE_CONTENT
+		J.J_NO , J.M_EMAIL, J.J_CONTENT, J.J_DATE,J.L_CNT ,I.*
 		FROM JOURNAL J 
         LEFT JOIN IMAGE I
-        ON J.J_NO = I.ORI_NO LEFT JOIN REPLY RE
-        ON J.J_NO = RE.ORI_NO
+        ON J.J_NO = I.ORI_NO
           
        ]]>     		
     <where>  
@@ -132,14 +131,12 @@
         (SELECT SUB.*, ROWNUM AS RN FROM
         (SELECT 
 		J.J_NO , J.M_EMAIL , J.J_CONTENT, J.J_DATE ,I.*
-		FROM (SELECT * FROM JOURNAL WHERE M_EMAIL= 'user01@gmail.com')J
+		FROM (SELECT * FROM JOURNAL WHERE M_EMAIL= #{mEmail})J
         LEFT JOIN IMAGE I
-        ON J.J_NO = I.ORI_NO 
+        ON J.J_NO = I.ORI_NO
        ]]>     		
     <where>  
-	<if test = "keyword != null">
-		J.J_CONTENT LIKE '%'||#{keyword}||'%'
-	</if>
+	
 	</where>   
     <![CDATA[
 		ORDER BY J_NO DESC)SUB )SSUB    
@@ -156,18 +153,22 @@
 	</where>
 	</select>
 	
-	<insert id="insertReply" parameterType="org.ourapp.udada.reply.ReplyDTO">
-		INSERT INTO REPLY(RE_NO, ORI_NO, M_EMAIL, RE_CONTENT, RE_DIV, RE_GROUP, RE_INDENT)
-		VALUES(SEQ_REPLY.NEXTVAL, #{oriNo}, #{mEmail}, #{reContent}, #{reDiv}, #{reGroup}, #{reIndent})
-	</insert>
+	<select id="mycountAllWithSearch" resultType="int">
 	
-	<select id="replyList" parameterType="long">
-		SELECT * FROM REPLY
-		WHERE ORI_NO = #{oriNo}
-		ORDER BY RE_NO DESC
+		SELECT COUNT(J_NO) FROM JOURNAL
+	<where>  
+		<if test = "keyword != null">
+		J_CONTENT LIKE '%'||#{keyword}||'%'
+		</if>
+		<if test="keyword !=null">
+		<![CDATA[
+		AND M_EMAIL = 'user01@gmail.com'
+		]]>
+		</if>
+	</where>
+
 	</select>
-	
-	 
+ 
 	<insert id="createLike">
  		INSERT INTO LIKEYOU (L_NO, J_NO, M_EMAIL)
  		VALUES (SEQ_LIKEYOU.NEXTVAL, ${jNo}, #{mEmail})
@@ -178,7 +179,7 @@
  		WHERE J_NO=${jNo} AND M_EMAIL=#{mEmail}
  	</delete>
  	
- 	<select id="updateLike">
+ 	<select id="updateLike" resultMap="likeyouMap">
  		UPDATE JOURNAL
  		SET
  		L_CNT = (SELECT COUNT(*)
@@ -188,7 +189,18 @@
  	</select>
  	
  	<select id="getLike" resultType="int">
+ 		SELECT COUNT(L_NO) FROM LIKEYOU WHERE J_NO = #{jNo} AND M_EMAIL = #{loginEmail}
+ 	</select>
+ 	
+ 	<select id="getLikeList" resultMap="likeyouMap">
  		SELECT COUNT(L_NO) FROM LIKEYOU WHERE J_NO = #{jNo} AND M_EMAIL = #{mEmail}
  	</select>
+ 	
+ 	<select id="replyList" resultMap="replyMap">
+		SELECT RE_NO, ORI_NO, M_EMAIL, RE_CONTENT, RE_DATE
+		FROM REPLY
+		WHERE ORI_NO=#{oriNo} AND RE_INDENT=0 AND RE_DIV=#{reDiv}
+		ORDER BY re_date
+	</select>
 	
 </mapper>

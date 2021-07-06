@@ -26,12 +26,12 @@ public class ReplyController {
 	
 	@ResponseBody
 	@PostMapping("/replyinsert") //댓글 등록
-	public int insertReply(String mEmail, String reContent, Long jNo) {
+	public int insertReply(String reContent, Long oriNo, String mEmail, String reDiv) {
 	
 		
 		int result = 0;
 		try {
-			result = replyService.insertReply(mEmail, reContent, jNo);
+			result = replyService.insertReply(reContent, oriNo, mEmail, reDiv);
 		}catch(Exception e) {
 			System.out.println("댓글 실패 :" +e);
 			result = 2;
@@ -39,12 +39,20 @@ public class ReplyController {
 		return result;
 	}
 	
+	
 	@ResponseBody
-	@PostMapping(value = "/replylist", produces = "application/json; charset=utf-8")
-	public String replyList(Long jNo) throws Exception{
-		List<ReplyDTO> rList = replyService.replyList(jNo);
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
-		return gson.toJson(rList);
+	@PostMapping("/replyDelete")
+	public int deleteReply(String mEmail, Long reNo) {
+		
+		int result = 0;
+		try {
+			result = replyService.deleteReply(mEmail, reNo);
+		}catch(Exception e) {
+			System.out.println("댓글 삭제 실패 :" +e);
+			result = 2;
+		}
+		return result;
+		
 	}
 	
 }

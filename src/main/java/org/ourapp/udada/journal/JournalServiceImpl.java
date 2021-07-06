@@ -2,6 +2,7 @@ package org.ourapp.udada.journal;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.ourapp.udada.image.ImageDTO;
 import org.ourapp.udada.mapper.ImageMapper;
 import org.ourapp.udada.mapper.JournalMapper;
@@ -88,14 +89,20 @@ public class JournalServiceImpl implements JournalService{
 	}
 	
 	@Override
+	public int mycountAllWithSearch(PageRequestDTO pageRequestDTO) {
+
+		return journalMapper.mycountAllWithSearch(pageRequestDTO);
+	}
+	
+	@Override
 	public JournalDTO getWithIngreAndFoodAndImage(Long jNo) throws Exception {
 		return journalMapper.selectWithIngreAndFoodAndImage(jNo);
 	}
 	
 	
 	@Override
-	public List<JournalDTO> mygetListWithImageAndPagingAndSearch(PageRequestDTO pageRequestDTO) throws Exception {
-		return journalMapper.myselectWithImageAndPagingAndSearch(pageRequestDTO);
+	public List<JournalDTO> mygetListWithImageAndPagingAndSearch(PageRequestDTO pageRequestDTO, String loginUser) throws Exception {
+		return journalMapper.myselectWithImageAndPagingAndSearch(pageRequestDTO, loginUser);
 	}
 	
 	@Override
@@ -120,40 +127,46 @@ public class JournalServiceImpl implements JournalService{
 		
 		return journalMapper.delete(jNo)==1;
 	}
-	
-	@Override
-	public int insertReply(ReplyDTO replyDTO) throws Exception {
-		return journalMapper.insertReply(replyDTO);
-	}
-	
-	@Override
-	public List<ReplyDTO> replyList(Long jNo) throws Exception {
-		return journalMapper.replyList(jNo);
-	}
+
 	
 	
 	@Override
-	public void insertLike(LikeyouDTO dto) throws Exception {
-		journalMapper.createLike(dto);
+	public void insertLike(Long jNo, String mEmail) throws Exception {
+		journalMapper.createLike(jNo, mEmail);
+		journalMapper.updateLike(jNo);
 		
 	}
 	
 	@Override
-	public void deleteLike(LikeyouDTO dto) throws Exception {
-		journalMapper.deleteLike(dto);
+	public void deleteLike(Long jNo, String mEmail) throws Exception {
+		journalMapper.deleteLike(jNo, mEmail);
+		journalMapper.updateLike(jNo);
 		
 	}
 	
 	@Override
-	public void updateLike(LikeyouDTO dto) throws Exception {
-		journalMapper.updateLike(dto);
+	public void updateLike(Long jNo) throws Exception {
+		journalMapper.updateLike(jNo);
 		
 	}
 	
 	@Override
-	public int getLike(LikeyouDTO dto) throws Exception {
-		return journalMapper.getLike(dto);
+	public int getLike(Long jNo, String loginEmail) throws Exception {
+		return journalMapper.getLike(jNo, loginEmail);
 	}
+	
+	@Override
+	public List<LikeyouDTO> getLikeList(Long jNo, String mEmail) {
+
+		return journalMapper.getLikeList(jNo, mEmail);
+	}
+
+	@Override
+	public List<ReplyDTO> replyList(Long oriNo, String reDiv) {
+
+		return journalMapper.replyList(oriNo, reDiv);
+	}
+
 	
 	
 	

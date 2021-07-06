@@ -3,6 +3,9 @@
 <%@ include file="../include/header.jsp"%>
 <!-- Begin Page Content -->
 <div class="container-fluid">
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal.memberDTO.mGrade" var="loginUserRole"/>
+<sec:authentication property="principal.memberDTO.mEmail" var="loginUser"/>
 
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800">Journal Register Page</h1>
@@ -16,7 +19,7 @@
       </div>
       <div class="form-group row">
         <label>WRITER</label>
-        <input type="text" class="form-control form-control-user" name="mEmail" >
+        <input type="text" class="form-control form-control-user" name="mEmail" value="${loginUser }" readonly>
       </div>
       <div class="form-group row">
       	<label>IMAGE</label>
@@ -29,6 +32,7 @@
 	</form>
 </div>
 <!-- /.container-fluid -->
+</sec:authorize>
 </div>
 <!-- End of Main Content -->
 
