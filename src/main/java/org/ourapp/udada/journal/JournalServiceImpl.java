@@ -101,8 +101,8 @@ public class JournalServiceImpl implements JournalService{
 	
 	
 	@Override
-	public List<JournalDTO> mygetListWithImageAndPagingAndSearch(PageRequestDTO pageRequestDTO, String loginUser) throws Exception {
-		return journalMapper.myselectWithImageAndPagingAndSearch(pageRequestDTO, loginUser);
+	public List<JournalDTO> mygetListWithImageAndPagingAndSearch(PageRequestDTO pageRequestDTO) throws Exception {
+		return journalMapper.myselectWithImageAndPagingAndSearch(pageRequestDTO);
 	}
 	
 	@Override

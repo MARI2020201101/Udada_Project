@@ -25,7 +25,7 @@ public interface JournalMapper {
 	int mycountAllWithSearch(PageRequestDTO pageRequestDTO);
 	List<JournalDTO> selectWithImageAndPagingAndSearch(PageRequestDTO pageRequestDTO);
 	JournalDTO selectWithIngreAndFoodAndImage(Long jNo);
-	List<JournalDTO> myselectWithImageAndPagingAndSearch(PageRequestDTO pageRequestDTO, String loginUser);
+	List<JournalDTO> myselectWithImageAndPagingAndSearch(PageRequestDTO pageRequestDTO);
 	
 	int getLike(@Param("jNo") Long jNo, @Param("loginEmail") String loginEmail);
 	List<LikeyouDTO> getLikeList(@Param("jNo") Long jNo, @Param("mEmail") String mEmail);

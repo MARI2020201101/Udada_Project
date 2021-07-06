@@ -92,8 +92,11 @@ public class JouranlController {
 		
 		String loginUser = auth.getName();
 		log.info("로그인 아이디"+loginUser);
+		//PageRequestDTO pagedto = new PageRequestDTO();
+		//System.out.println(pagedto);
+		pageRequestDTO.setLoginUser(loginUser);
 		
-		List<JournalDTO> mylist=journalService.mygetListWithImageAndPagingAndSearch(pageRequestDTO, loginUser);
+		List<JournalDTO> mylist=journalService.mygetListWithImageAndPagingAndSearch(pageRequestDTO);
 		model.addAttribute("mylist", mylist);
 		
 		int total = journalService.mycountAllWithSearch(pageRequestDTO);

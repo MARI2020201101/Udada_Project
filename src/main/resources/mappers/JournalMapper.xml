@@ -131,13 +131,11 @@
         (SELECT SUB.*, ROWNUM AS RN FROM
         (SELECT 
 		J.J_NO , J.M_EMAIL , J.J_CONTENT, J.J_DATE ,I.*
-		FROM (SELECT * FROM JOURNAL WHERE M_EMAIL= #{mEmail})J
+		FROM (SELECT * FROM JOURNAL WHERE M_EMAIL= #{loginUser})J
         LEFT JOIN IMAGE I
         ON J.J_NO = I.ORI_NO
        ]]>     		
-    <where>  
-	
-	</where>   
+       
     <![CDATA[
 		ORDER BY J_NO DESC)SUB )SSUB    
         WHERE SSUB.RN > (#{pageNum}-1) * #{pageSize} AND SSUB.RN <= #{pageNum} * #{pageSize}  

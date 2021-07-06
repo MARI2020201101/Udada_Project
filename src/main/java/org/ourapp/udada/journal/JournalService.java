@@ -26,7 +26,7 @@ public interface JournalService {
 	int mycountAllWithSearch(PageRequestDTO pageRequestDTO);
 	List<JournalDTO> getListWithImageAndPagingAndSearch(PageRequestDTO pageRequestDTO) throws Exception;
 	JournalDTO getWithIngreAndFoodAndImage(Long jNo) throws Exception;
-	List<JournalDTO> mygetListWithImageAndPagingAndSearch(PageRequestDTO pageRequestDTO, String loginUser) throws Exception;
+	List<JournalDTO> mygetListWithImageAndPagingAndSearch(PageRequestDTO pageRequestDTO) throws Exception;
 	boolean modifyWithIngreAndImage(JournalDTO journalDTO)throws Exception;
 	boolean removeWithIngreAndImage(Long jNo)throws Exception;
 
