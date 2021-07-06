@@ -140,7 +140,7 @@
                      <div id="recipe" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/recipe/list">레시피</a>
+                        <a class="collapse-item" href="/recipe/list">레시피 리스트</a>
                         <a class="collapse-item" href="/recipe/myRecipe">마이 레시피</a>
                     </div>
                 </div>

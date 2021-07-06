@@ -20,24 +20,24 @@
 						<div class="col-lg-6">
 							<div class="p-5">
 								<div class="text-center">
-									<h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+									<h1 class="h4 text-gray-900 mb-4">환영합니다!</h1>
 								</div>													
 								<form class="user" action="/login" method="post">
 									<div class="form-group">
 										<input type="email" name="username" class="form-control form-control-user"
-											placeholder="Enter Email Address...">
+											placeholder="이메일 주소">
 									</div>
 									<div class="form-group">
-										<input type="password" name="password" class="form-control form-control-user" placeholder="Password">
+										<input type="password" name="password" class="form-control form-control-user" placeholder="비밀번호">
 									</div>
-									<button type="submit" class="btn btn-primary btn-lg btn-block btn-user">Login</button>						
+									<button type="submit" class="btn btn-primary btn-lg btn-block btn-user">로그인</button>						
 								</form>
 								<br>
 								<div class="text-center">
-                                     <a class="small" href="/member/joinForm">Create an Account!</a>
+                                     <a class="small" href="/member/joinForm">회원가입 하기</a>
                                 </div>
                                 <div class="text-center">
-                                     <a class="small" href="/member/findPw">Forgot Your Password?</a>
+                                     <a class="small" href="/member/findPw">비밀번호 찾기</a>
                                 </div>
 							</div>
 						</div>
@@ -59,11 +59,11 @@
 						<div class="col-lg-6">
 							<div class="p-5">
 								<div class="text-center">
-									<h1 class="h4 text-gray-900 mb-4">Welcome!</h1>
+									<h1 class="h4 text-gray-900 mb-4">환영합니다!</h1>
 								</div>
 								<div class="text-center">
 								<h3 class="h4 text-gray-900 mb-4">
-									How was your today?<b> <sec:authentication property="principal.memberDTO.mName" /></b>
+									오늘 하루 어떠신가요?<b> <sec:authentication property="principal.memberDTO.mName" /></b> 님
 								</h3>
 								</div>
 							</div>
