@@ -36,8 +36,8 @@
 	
 	<style>
 @font-face {
-     font-family: 'S-CoreDream-3Light';
-     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+     font-family: 'S-CoreDream-4Regular';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
      font-weight: normal;
      font-style: normal;
 }
@@ -46,7 +46,7 @@
     
 </head>
 
-<body id="page-top" style="font-family: 'S-CoreDream-3Light', sans-serif;">
+<body id="page-top" style="font-family: 'S-CoreDream-4Regular', sans-serif;">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -61,31 +61,38 @@
                 <div class="sidebar-brand-text mx-2 mb-0 h4"><strong>UDADA</strong></div>
             </a>
 
-            <hr class="sidebar-divider my-0">
+            <hr class="sidebar-divider">
 
-            <li class="nav-item">
-                <a class="nav-link" href="/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span >대시보드</span></a>
-            </li>
-
-            <hr class="sidebar-divider mb-0 pb-0">
-
+            <div class="sidebar-heading">
+                내 정보
+            </div>
             <li class="nav-item mt-0">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#myPage"
+                    aria-expanded="true" aria-controls="myPage">
                     <i class="fas fa-fw fa-user"></i>
                     <span>마이페이지</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                <div id="myPage" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/member/calendarMonth">마이 월간 캘린더</a>
-                        <a class="collapse-item" href="/member/calendar">마이 주간 캘린더</a>
-                        <a class="collapse-item" href="/member/foodMy">마이 음식</a>
+                    	<a class="collapse-item" href="/member/myWeight">마이 프로필</a>
+                    	<a class="collapse-item" href="/member/foodMy">마이 푸드</a>
                         <a class="collapse-item" href="#">마이 운동</a>
-                        <a class="collapse-item" href="/challenge/mychallenge">마이 챌린지</a>
-                        <a class="collapse-item" href="#">MyFitness</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item mt-0">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#calendar"
+                    aria-expanded="true" aria-controls="calendar">
+                    <i class="fas fa-fw fa-calendar"></i>
+                    <span>캘린더</span>
+                </a>
+                <div id="calendar" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/member/calendar">주간 캘린더</a>
+                        <a class="collapse-item" href="/member/calendarMonth">월간 캘린더</a>
                     </div>
                 </div>
             </li>
@@ -95,22 +102,40 @@
             <div class="sidebar-heading">
                 커뮤니티
             </div>
-            <li class="nav-item">
-                <a class="nav-link" href="/journal/list">
+            <li class="nav-item mt-0">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#journal"
+                    aria-expanded="true" aria-controls="journal">
                     <i class="fas fa-fw fa-file-alt"></i>
-                    <span>저널</span></a>
+                    <span>저널</span>
+                </a>
+                <div id="journal" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/journal/list">저널 리스트</a>
+                        <a class="collapse-item" href="#">마이 저널</a>
+                    </div>
+                </div>
+            </li>
+            
+            <li class="nav-item mt-0">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#challenge"
+                    aria-expanded="true" aria-controls="challenge">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>챌린지</span>
+                </a>
+                <div id="challenge" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/challenge/list">챌린지 리스트</a>
+                        <a class="collapse-item" href="/challenge/mychallenge">마이 챌린지</a>
+                    </div>
+                </div>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="/recipe/list">
                     <i class="fas fa-fw fa-utensils"></i>
                     <span>레시피</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/challenge/list">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>챌린지</span></a>
             </li>
 
             <hr class="sidebar-divider">
@@ -202,10 +227,6 @@
 		                                <a class="dropdown-item" href="/member/pwdCheck">
 		                                    <i class="fas fa-user-edit fa-sm fa-fw mr-2"></i>
 		                                    정보수정
-		                                </a>
-		                                <a class="dropdown-item" href="/member/myWeight">
-		                                    <i class="fas fa-user-tag fa-sm fa-fw mr-2"></i>
-		                                    내 몸무게
 		                                </a>
 		                                <a class="dropdown-item" href="/member/logout">
 		                                    <i class="fas fa-user-times fa-sm fa-fw mr-2"></i>
