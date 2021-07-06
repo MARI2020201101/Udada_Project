@@ -89,8 +89,7 @@
 								class="card border-left-primary shadow h-100 py-2 recipeSpecBox">
 
 								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">RECIPE
-										KALORIES SPEC</h6>
+									<h6 class="m-0 font-weight-bold text-primary">레시피 칼로리 정보</h6>
 								</div>
 								<div class="card-body">
 									<div>
@@ -136,8 +135,7 @@
 
 	<div class="card shadow mb-4 recipeSpecBox">
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">RECIPE NUTRIENT
-				SPEC</h6>
+			<h6 class="m-0 font-weight-bold text-primary">레시피 영양소 정보</h6>
 		</div>
 		<div class="card-body">
 			<div>
@@ -243,7 +241,7 @@ $(document).ready(function(){
 		            contentType:"application/json; charset=utf-8",
 		            success:function(result){
 			            console.log(result);
-			            alert("MyFood에 저장되었습니다.");
+			            alert("마이 푸드에 저장되었습니다.");
 			            },
 			        error: function(xhr,status,errorThrown){
 				        console.log("xhr >>",xhr);			
@@ -282,7 +280,7 @@ $(document).ready(function(){
 						var myChart = new Chart(ctx, {
 							  type: 'doughnut',
 							  data: {
-							    labels: ['Carbo % ', 'Protein % ', 'Fat %'],
+							    labels: ['탄수화물 % ', '단백질 % ', '지방 %'],
 							    datasets: [{
 							      label: '# nutrients + %',
 							      data: recipeSpecList,
@@ -341,7 +339,7 @@ $(document).ready(function(){
 							var myChart2 = new Chart(ctx2, {
 						    type: 'horizontalBar',
 						    data: {
-						        labels: ['TotalKcal', 'Carbo', 'Protein', 'Fat'],
+						        labels: ['총 칼로리', '탄수화물', '단백질', '지방'],
 						        datasets: [{
 						            label: 'Kalories (kcal) & nutrients (g)',
 						            data: kaloriesSpecList,
