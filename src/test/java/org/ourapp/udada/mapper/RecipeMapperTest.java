@@ -118,4 +118,18 @@ public class RecipeMapperTest {
 		recipeMapper.insertFoodMy(foodMyDTO);
 	}
 	
+	@Test
+	public void selectByMEmailTest() {
+		PageRequestDTO pageRequestDTO = PageRequestDTO.builder().pageNum(2).pageSize(5).keyword("user07@gmail.com").build();
+		recipeMapper.selectByMEmail(pageRequestDTO);
+	}
+	
+	@Test
+	public void countAllByMEmailTest() {
+		PageRequestDTO pageRequestDTO = PageRequestDTO.builder().pageNum(2).pageSize(5).keyword("user01@gmail.com").build();
+		int result = recipeMapper.countAllWithMEmail(pageRequestDTO);
+		log.info("result count :"+result);
+	}
+
+	
 }

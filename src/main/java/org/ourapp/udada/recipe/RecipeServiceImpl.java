@@ -171,7 +171,7 @@ public class RecipeServiceImpl implements RecipeService{
 	}
 
 	@Override
-	public int countAllWithSearch(PageRequestDTO pageRequestDTO) {
+	public int countAllWithSearch(PageRequestDTO pageRequestDTO) throws Exception{
 		return recipeMapper.countAllWithSearch(pageRequestDTO);
 	}
 
@@ -181,14 +181,24 @@ public class RecipeServiceImpl implements RecipeService{
 	}
 
 	@Override
-	public RecipeSpecDTO getRecipeSpec(Long rNo) {
+	public RecipeSpecDTO getRecipeSpec(Long rNo) throws Exception{
 		return recipeMapper.selectRecipeSpecByRNo(rNo);
 	}
 
 	@Override
-	public void registerFoodMy(FoodMyDTO foodMyDTO) {
+	public void registerFoodMy(FoodMyDTO foodMyDTO) throws Exception{
 		recipeMapper.insertFoodMy(foodMyDTO);
 		
+	}
+
+	@Override
+	public List<RecipeDTO> getByKewordMEmail(PageRequestDTO pageRequestDTO) throws Exception {
+		return recipeMapper.selectByMEmail(pageRequestDTO);
+	}
+
+	@Override
+	public int countAllWithMEmail(PageRequestDTO pageRequestDTO) throws Exception {
+		return recipeMapper.countAllWithMEmail(pageRequestDTO);
 	}
 
 

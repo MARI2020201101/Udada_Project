@@ -2,6 +2,7 @@ package org.ourapp.udada.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.ourapp.udada.foodmy.FoodMyDTO;
 import org.ourapp.udada.recipe.PageRequestDTO;
 import org.ourapp.udada.recipe.RecipeDTO;
@@ -28,4 +29,6 @@ public interface RecipeMapper {
 	
 	RecipeSpecDTO selectRecipeSpecByRNo(Long rNo);
 	void insertFoodMy(FoodMyDTO foodMyDTO);
+	List<RecipeDTO> selectByMEmail(PageRequestDTO pageRequestDTO);
+	int countAllWithMEmail(PageRequestDTO pageRequestDTO);
 }

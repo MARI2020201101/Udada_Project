@@ -131,11 +131,19 @@
                     </div>
                 </div>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/recipe/list">
+             <li class="nav-item mt-0">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#recipe"
+                    aria-expanded="true" aria-controls="recipe">
                     <i class="fas fa-fw fa-utensils"></i>
-                    <span>레시피</span></a>
+                     <span>레시피</span>
+                </a>
+                     <div id="recipe" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/recipe/list">레시피</a>
+                        <a class="collapse-item" href="/recipe/myRecipe">마이 레시피</a>
+                    </div>
+                </div>
             </li>
 
             <hr class="sidebar-divider">

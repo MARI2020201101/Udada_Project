@@ -174,5 +174,17 @@ public class RecipeController {
 		  
 		  return new ResponseEntity<>("success", HttpStatus.OK);
 		}
+	  
+		@PreAuthorize("isAuthenticated()")
+		@GetMapping("/myRecipe")
+		public void myRecipe(PageRequestDTO pageRequestDTO, Authentication auth, Model model) throws Exception {
+			String mEmail = auth.getName();
+			pageRequestDTO.setKeyword(mEmail);
+			
+			List<RecipeDTO> list = recipeService.getByKewordMEmail(pageRequestDTO);
+			int total = recipeService.countAllWithMEmail(pageRequestDTO);
+			model.addAttribute("pageResultDTO", new PageResultDTO(pageRequestDTO, total));
+			model.addAttribute("list", list);
+		}
 
 }

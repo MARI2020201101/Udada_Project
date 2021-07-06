@@ -166,4 +166,31 @@
 		INSERT INTO FOOD_MY(FM_NO, M_EMAIL, FM_DATE, FM_AMOUNT, R_NO) 
 		VALUES (SEQ_FM.NEXTVAL, #{mEmail} , TO_DATE( #{fmDate} , 'YYYY-MM-DD') ,#{fmAmount} , #{rNo} )
 	</insert>
+	
+	<select id="selectByMEmail" resultMap="recipeMap">
+		<![CDATA[
+	 SELECT * FROM(
+		SELECT SSUB.*,I.* FROM (SELECT 
+		/*+ INDEX_DESC(R PK_RECIPE)*/
+		R.R_NO, R.M_EMAIL ,R.R_TITLE, R.R_CONTENT, R.R_DATE, ROWNUM RN 
+		
+		FROM RECIPE R 
+        WHERE M_EMAIL = #{keyword}
+		ORDER BY R_NO DESC
+		) SSUB
+		LEFT JOIN IMAGE I
+		ON SSUB.R_NO = I.ORI_NO
+		) SUB 
+		WHERE SUB.RN > (#{pageNum}-1) * #{pageSize}  AND SUB.RN <= #{pageNum} * #{pageSize}
+	
+	       ]]> 
+	</select>
+	<select id="countAllWithMEmail"  resultType="int">
+		SELECT COUNT(R_NO) FROM RECIPE
+	<where>
+		<if test="keyword != null">
+			M_EMAIL = #{keyword}
+		</if>
+	</where>	
+	</select>
 </mapper>
