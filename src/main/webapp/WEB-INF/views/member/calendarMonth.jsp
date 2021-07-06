@@ -8,11 +8,11 @@
     border: none;
 }
 .table thead.cal_week th {
-    background-color: rgb(10,186,181,0.3);
+   
     color: grey;
 }
 .table thead {
-    background-color: rgb(10,186,181,0.3);
+    
     color: grey;
 }
 .table tbody td {
