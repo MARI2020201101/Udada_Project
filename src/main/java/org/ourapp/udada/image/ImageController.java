@@ -24,7 +24,7 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Slf4j
 public class ImageController {
 
-	public static String uploadFolder ="F:/Project/Udada_Project/src/main/webapp/resources/imgs";
+	public static String uploadFolder ="C:/study/upload";
 	
 	public static ImageDTO uploadImage(MultipartFile image) throws Exception {
 

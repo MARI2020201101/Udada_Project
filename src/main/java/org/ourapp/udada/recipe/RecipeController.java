@@ -158,12 +158,16 @@ public class RecipeController {
 			String mEmail = params.get("mEmail");
 			int fmAmount = Integer.parseInt(params.get("fmAmount"));
 			String fmDate = params.get("fmDate");
-			
+			if (fmDate=="" || fmDate==null) {
+				
+				  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+				  Date date = new Date(); 
+				  String today = sdf.format(date);
+				  fmDate = today;
+				 
+			}
 
-			/*
-			 * SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); Date date = new
-			 * Date(); String today = sdf.format(date);
-			 */
+
 			FoodMyDTO foodMyDTO = FoodMyDTO.builder().fmAmount(fmAmount).mEmail(mEmail).rNo(rNo).fmDate(fmDate).build();
 			log.info("foodMyDTO : " + foodMyDTO);
 			recipeService.registerFoodMy(foodMyDTO);

@@ -116,10 +116,14 @@
 		]]>
 	</select>
 	<select id="selectMemberInfo" resultMap="foodMyMemberSpecMap">
-		SELECT M.*,MS.* FROM MEMBER M
+		SELECT M.M_EMAIL, MAX(M.M_NAME) AS M_NAME, MAX(M.M_PW) AS M_PW ,MAX(M.M_BIRTH) AS M_BIRTH ,
+        MAX(M.M_GENDER) AS M_GENDER ,MAX(M.M_GRADE) AS M_GRADE ,MAX(M.M_MEAL)AS M_MEAL ,MAX(M.M_GOALTYPE)AS M_GOALTYPE ,
+        MAX(MS.MS_NO) AS MS_NO, MAX(MS.MS_HEIGHT)AS MS_HEIGHT, MAX(MS.MS_WEIGHT)AS MS_WEIGHT , MAX(MS.MS_GOAL)AS MS_GOAL
+        FROM MEMBER M
 		LEFT JOIN MEMBER_SPEC MS
 		ON M.M_EMAIL = MS.M_EMAIL
-		WHERE M.M_EMAIL = #{mEmail}
+        GROUP BY M.M_EMAIL
+		HAVING M.M_EMAIL = #{mEmail}
 	</select>
 	<select id="selectDayTotalWithDay" resultMap="foodMyDayTotalMap">
 	<![CDATA[
