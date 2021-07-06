@@ -293,10 +293,15 @@ public class ChallengeController {
 		challengeService.talkReg(myChallengeTalkDTO);  
 	}
 	
-	
 	@ResponseBody
 	@PostMapping("/talkDel")
 	public void delTalk(int reNo, int checkTalk) {
-		challengeService.talkDel(reNo,checkTalk);
+			challengeService.talkDel(reNo,checkTalk); 
+	}
+	
+	@ResponseBody
+	@PostMapping("/talkEdit")
+	public void editTalk(int reNo, String reContent) {
+		challengeService.editTalk(reNo,reContent);
 	}
 }

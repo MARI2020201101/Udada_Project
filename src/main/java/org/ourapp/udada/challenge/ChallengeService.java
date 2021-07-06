@@ -31,5 +31,6 @@ public interface ChallengeService {
 	List<MyChallengeGetTalkDTO> getTalk(Long cNo);
 	List<MyChallengeGetTalkDTO> getTalkReply(Long reNo);
 	void talkDel(int reNo, int checkTalk);
+	void editTalk(int reNo, String reContent);
 
 }

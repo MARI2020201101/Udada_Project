@@ -29,89 +29,112 @@
     <!-- Core plugin JavaScript-->
     <script src="/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="/resources/js/sb-admin-2.min.js"></script>
-    
     <!-- cdn chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
 	
 	<style>
-	@font-face {
-	font-family: 'S-CoreDream-4Regular';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-	}
+@font-face {
+     font-family: 'S-CoreDream-3Light';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+}
 	</style>
     
     
 </head>
 
-<body id="page-top" style="font-family: 'S-CoreDream-4Regular', sans-serif;">
+<body id="page-top" style="font-family: 'S-CoreDream-3Light', sans-serif;">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav sidebar sidebar-dark accordion bg-gradient-primary" id="accordionSidebar">
 
-            <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-                <div class="sidebar-brand-icon rotate-n-10">
-                    <img src="/resources/imgs/logo.png" alt="logo2" width="40">
+                <div class="sidebar-brand-icon">
+                    <img src="/resources/imgs/logo2.svg" width="30">
                 </div>
-                <div class="sidebar-brand-text mx-2 my-0 h4"><strong>U D A D A</strong></div>
+                <div class="sidebar-brand-text mx-2 mb-0 h4"><strong>UDADA</strong></div>
             </a>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
+            <hr class="sidebar-divider my-0">
+
             <li class="nav-item">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span >대시보드</span></a>
+            </li>
+
+            <hr class="sidebar-divider mb-0 pb-0">
+
+            <li class="nav-item mt-0">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-user"></i>
-                    <span>MY PAGE</span>
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>마이페이지</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/member/calendar">Calendar</a>
-                        <a class="collapse-item" href="/member/foodMy">MyFood</a>
-                        <a class="collapse-item" href="#">MyExercise</a>
-                        <a class="collapse-item" href="/challenge/mychallenge">Mychallenge</a>
-                        <a class="collapse-item" href="#">MyFitness</a>
+                        <a class="collapse-item" href="/member/calendar">마이 캘린더</a>
+                        <a class="collapse-item" href="/member/foodMy">마이 음식</a>
+                        <a class="collapse-item" href="#">마이 운동</a>
+                        <a class="collapse-item" href="/challenge/mychallenge">마이 챌린지</a>
                     </div>
                 </div>
             </li>
-            <!-- Nav Item - Food -->
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-hamburger"></i>
-                    <span>FOOD</span></a>
-            </li>
-            <!-- Nav Item - Recipe -->
-            <li class="nav-item">
-                <a class="nav-link" href="/recipe/list">
-                    <i class="fas fa-utensils"></i>
-                    <span>RECIPE</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/exercise/list">
-                    <i class="fas fa-dumbbell"></i>
-                    <span>EXERCISE</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/challenge/list">
-                    <i class="fas fa-users"></i>
-                    <span>CHALLENGE</span></a>
-            </li>
+
+            <hr class="sidebar-divider">
+
+            <div class="sidebar-heading">
+                커뮤니티
+            </div>
             <li class="nav-item">
                 <a class="nav-link" href="/journal/list">
-                    <i class="fas fa-newspaper"></i>
-                    <span>JOURNAL</span></a>
+                    <i class="fas fa-fw fa-file-alt"></i>
+                    <span>저널</span></a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/recipe/list">
+                    <i class="fas fa-fw fa-utensils"></i>
+                    <span>레시피</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/challenge/list">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>챌린지</span></a>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <div class="sidebar-heading">
+                데이터베이스
+            </div>
+            <li class="nav-item">
+                <a class="nav-link" href="/food/list">
+                    <i class="fas fa-fw fa-hamburger"></i>
+                    <span>푸드</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/exercise/list">
+                    <i class="fas fa-fw fa-running"></i>
+                    <span>운동</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button id="sidebarToggle" style="background-color: transparent; outline-color: transparent; border-color: transparent;"></button>
+            </div>
 
         </ul>
         <!-- End of Sidebar -->
@@ -123,52 +146,74 @@
 			<div id="content" >
 				<!-- Topbar -->
 				<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+				    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3" style="color: gray;">
+                        <i class="fa fa-bars"></i>
+                    </button>
 					<!-- Topbar Navbar -->
 				<div>
-				<div class="h5 my-1" id="nowDate"></div>
+				<div class="h6 my-1" id="nowDate"></div>
 				<sec:authorize access="isAuthenticated()">
-				<div class="h4 my-0"><strong style="color: black"><sec:authentication property="principal.memberDTO.mName"/></strong>님 환영합니다</div>
+				<div class="h5 my-0"><strong style="color: black"><sec:authentication property="principal.memberDTO.mName"/></strong>님 환영합니다</div>
 				</sec:authorize>
 				</div>
-					<ul class="navbar-nav ml-auto">
-						<sec:authorize access="isAnonymous()">
-							<li>
-								<button class="btn btn-outline-primary" onclick="location.href='/member/login'"><i class="fas fa-sign-in-alt"></i></button> 
-							</li>
-						</sec:authorize>
-						<sec:authorize access="isAuthenticated()">	
-							<li>
-								<button class="btn btn-outline-danger" onclick="location.href='/member/logout'"><i class="fas fa-sign-out-alt"></i></button>
-							</li>
-						</sec:authorize>
+					<ul class="navbar-nav ml-auto">		
 					</ul>
-					<sec:authorize access="isAuthenticated()">
-					<div class="topbar-divider d-none d-sm-block"></div>
+					
+					<div class="topbar-divider d-none d-sm-block" ></div>
 							<ul class="navbar-nav">
+							<sec:authorize access="isAnonymous()">
 							 <li class="nav-item dropdown no-arrow">
 		                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-		                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+		                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #d0342c;">
+		                                <span class="mr-2 d-none d-lg-inline">
+		                                	게스트
+		                                </span>
+		                                <i class="fas fa-user-times fa-lg"></i>
+		                            </a>
+		                            <!-- Dropdown - User Information -->
+		                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+		                                aria-labelledby="userDropdown">
+		                                <a class="dropdown-item" href="/member/login">
+		                                    <i class="fas fa-user-check fa-sm fa-fw mr-2"></i>
+		                                    로그인
+		                                </a>
+		                                <a class="dropdown-item" href="/member/joinForm">
+		                                    <i class="fas fa-user-plus fa-sm fa-fw mr-2"></i>
+		                                    회원가입
+		                                </a>
+		                            </div>
+		                        </li>
+							</sec:authorize>
+							<sec:authorize access="isAuthenticated()">
+
+							 <li class="nav-item dropdown no-arrow">
+		                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+		                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #007cb8;">
+		                                <span class="mr-2 d-none d-lg-inline">
 		                                	<sec:authentication property="principal.memberDTO.mName" />
 		                                </span>
-		                                <img class="img-profile rounded-circle"
-		                                    src="/resources/imgs/user-cog-solid.svg">
+		                                <i class="fas fa-user-circle fa-lg"></i>
 		                            </a>
 		                            <!-- Dropdown - User Information -->
 		                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 		                                aria-labelledby="userDropdown">
 		                                <a class="dropdown-item" href="/member/pwdCheck">
-		                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-		                                    Profile
+		                                    <i class="fas fa-user-edit fa-sm fa-fw mr-2"></i>
+		                                    정보수정
 		                                </a>
 		                                <a class="dropdown-item" href="/member/myWeight">
-		                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-		                                    My Weight
+		                                    <i class="fas fa-user-tag fa-sm fa-fw mr-2"></i>
+		                                    내 몸무게
+		                                </a>
+		                                <a class="dropdown-item" href="/member/logout">
+		                                    <i class="fas fa-user-times fa-sm fa-fw mr-2"></i>
+		                                    로그아웃
 		                                </a>
 		                            </div>
 		                        </li>
+		                        </sec:authorize>
 							</ul>
-						</sec:authorize>
+						
 					
 				</nav>
 

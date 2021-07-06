@@ -159,6 +159,11 @@ public class ChallengeServiceImpl implements ChallengeService{
 		challengeMapper.talkDel(reNo, checkTalk);
 	}
 
+	@Override
+	public void editTalk(int reNo, String reContent) {
+		challengeMapper.editTalk(reNo, reContent);
+	}
+
 	
 
 }

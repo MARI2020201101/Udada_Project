@@ -410,4 +410,10 @@
 		</where>
 	</delete>
 	
+	<update id="editTalk">
+	UPDATE REPLY
+	SET RE_CONTENT=#{reContent}
+	WHERE RE_NO=#{reNo}
+	</update>
+	
 </mapper>
