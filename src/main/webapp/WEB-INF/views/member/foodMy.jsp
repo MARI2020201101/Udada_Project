@@ -13,7 +13,7 @@
 					<div class="col mr-2">
 						<div
 							class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-							Date</div>
+							날짜</div>
 						<div class="h5 mb-0 font-weight-bold text-gray-800">${map.day }</div>
 					</div>
 					<div class="col-auto">
@@ -30,7 +30,7 @@
 					<div class="col mr-2">
 						<div
 							class="text-xs font-weight-bold text-info text-uppercase mb-1">
-							Total Caloreis</div>
+							총 섭취 칼로리</div>
 						<div class="h5 mb-0 font-weight-bold text-gray-800">
 								<c:if test="${empty map.dayTotalDTO.dayTotalKcal}">
 									<span>0 </span>
@@ -52,7 +52,7 @@
 					<div class="col mr-2">
 						<div
 							class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-							Recommemd Caloreis</div>
+							권장 칼로리</div>
 						<div class="h5 mb-0 font-weight-bold text-gray-800">
 
 							<span>	${map.recommendDTO.recommendKcal} Kcal</span>
@@ -68,19 +68,19 @@
 </div>
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">My Food Diary</h6>
+			<h6 class="m-0 font-weight-bold text-primary">마이 푸드 다이어리</h6>
 		</div>
 		<div class="card-body">
 			<table class="table table-bordered table-hover" width="100%"
 				cellspacing="0">
 				<thead>
 					<tr>
-						<th scope="col">Food Name</th>
-						<th scope="col">Amount</th>
-						<th scope="col">Calories</th>
-						<th scope="col">Carbo</th>
-						<th scope="col">Protein</th>
-						<th scope="col">Fat</th>
+						<th scope="col">푸드 이름</th>
+						<th scope="col">양 (인분)</th>
+						<th scope="col">칼로리</th>
+						<th scope="col">탄수화물</th>
+						<th scope="col">단백질</th>
+						<th scope="col">지방</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -153,7 +153,7 @@
 	
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">Message For You...</h6>
+			<h6 class="m-0 font-weight-bold text-primary">당신을 위한 메시지</h6>
 		</div>
 		<div class="card-body">
 			<div>
@@ -179,7 +179,7 @@
 				<!-- Card Header-->
 				<div
 					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-					<h6 class="m-0 font-weight-bold text-primary">Nutrient Percentage...</h6>
+					<h6 class="m-0 font-weight-bold text-primary">영양소 섭취 정보</h6>
 
 				</div>
 				<!-- Card Body -->
@@ -208,7 +208,7 @@
 				<!-- Card Header-->
 				<div
 					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-					<h6 class="m-0 font-weight-bold text-primary">Calories...</h6>
+					<h6 class="m-0 font-weight-bold text-primary">칼로리 정보</h6>
 
 				</div>
 				<!-- Card Body -->
@@ -321,7 +321,7 @@
 		var myChart2 = new Chart(ctx2, {
 		  type: 'doughnut',
 		  data: {
-		    labels: ['Carbo % ', 'Protein % ', 'Fat %'],
+		    labels: ['탄수화물 % ', '단백질 % ', '지방 %'],
 		    datasets: [{
 		      label: '# nutrients + %',
 		      data: nutrientList,

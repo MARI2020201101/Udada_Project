@@ -37,7 +37,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">Calendar : for the Month</h6>
+			<h6 class="m-0 font-weight-bold text-primary">마이 월간 캘린더</h6>
 		</div>
 		<div class="card-body">
 			<div id="calendarForm"></div>

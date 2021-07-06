@@ -12,10 +12,10 @@
 			<div class="card mb-4 py-3">
 				<div class="card-body">
 					<h1 class="h3 mb-4 text-gray-800">
-						<a href="/recipe/list"> Recipe list Page</a>
+						<a href="/recipe/list">레시피 탐색하기</a>
 					</h1>
 					<a href="/recipe/register" class="btn btn-primary"> 
-						<span class="text">Register</span>
+						<span class="text">등록하기</span>
 					</a>
 
 					<!-- Topbar Search -->

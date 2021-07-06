@@ -8,7 +8,7 @@
 
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">Last 7 Days : TOTAL KCALORIES</h6>
+			<h6 class="m-0 font-weight-bold text-primary">지난 7일 총 칼로리 정보</h6>
 		</div>
 		<div class="card-body">
 			<div>
@@ -19,7 +19,7 @@
 	
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">Last 7 Days : TOTAL NUTRIENT</h6>
+			<h6 class="m-0 font-weight-bold text-primary">지난 7일 영양소 섭취 정보</h6>
 		</div>
 		<div class="card-body">
 			<div>
@@ -72,9 +72,9 @@
 					var myChart2 = new Chart(ctx2, {
 					  type: 'doughnut',
 					  data: {
-					    labels: ['Carbo % ', 'Protein % ', 'Fat %'],
+					    labels: ['탄수화물 % ', '단백질 % ', '지방 %'],
 					    datasets: [{
-					      label: '# nutrients + %',
+					      label: '# 영양소 + %',
 					      data: nutrientList,
 					      backgroundColor: [
 					        'rgba(255, 99, 132, 0.5)',					      				        
@@ -133,7 +133,7 @@
 						data : {
 							labels : calendarDateList,
 							datasets : [ {
-								label : '# kcalories',
+								label : '# 칼로리',
 								data : totalKcalList,
 								backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
 										'rgba(54, 162, 235, 0.2)',

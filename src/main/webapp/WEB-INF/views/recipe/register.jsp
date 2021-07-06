@@ -5,7 +5,7 @@
 <div class="container-fluid">
 
 	<!-- Page Heading -->
-	<h1 class="h3 mb-4 text-gray-800">Recipe Register Page</h1>
+	<h1 class="h3 mb-4 text-gray-800">새 레시피 등록하기</h1>
 
 <form method="POST" action="/recipe/register" enctype="multipart/form-data">
       <div class="form-group row">
@@ -14,11 +14,10 @@
       </div>
       <div class="form-group row">
         <label>조리법</label>
-        <textarea cols="5" class="form-control form-control-user" name="rContent" 
-                       placeholder="Content"></textarea>
+        <textarea cols="5" class="form-control form-control-user" name="rContent" ></textarea>
       </div>
       <div class="form-group row">
-        <button class="btn btn-secondary addIngreBtn"><span class="text">ADD INGREDINT</span></button>
+        <button class="btn btn-secondary addIngreBtn"><span class="text">재료 추가하기</span></button>
       </div>
       <div class="ingreBox"></div>
       <br>
@@ -32,7 +31,7 @@
         	value='<sec:authentication property="principal.memberDTO.mEmail" />' readonly>
       </div>
 		<button class="btn btn-primary registerBtn">
-			<span class="text">Register</span>
+			<span class="text">등록하기</span>
 		</button>
 	</form>
 	
@@ -46,17 +45,18 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Add Ingredient</h5>
+                        <h5 class="modal-title">재료 추가하기</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">                 
                     <div class="form-group">
-              			<input class="form-control searchInput" type="text" placeholder="Search Food...">
+              			<input class="form-control searchInput" type="text" placeholder="추가할 재료 이름을 검색해 주십시오...">
            			 </div>
            			<div class="form-group amountDiv">
-              			<input class="form-control amountInput" type="text" value=1.0 placeholder="Add Amount...">
+           			<b>양 (인분) 입력:</b>
+              			<input class="form-control amountInput" type="text" value=1.0 placeholder="양을 입력해 주십시오...">
            			 </div>
            			 <div class="searchResult">
            			 	<ul></ul>
@@ -64,7 +64,7 @@
 					</div>
                     <div class="modal-footer">
                     	<button type="button" class="btn btn-success searchBtn">SEARCH</button>
-                     	<button type="button" class="btn btn-success amountBtn">ADD AMOUNT</button>         
+                     	<button type="button" class="btn btn-success amountBtn">재료 추가하기</button>         
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -165,7 +165,7 @@ $(document).ready(function(){
 			console.log("amount>>" ,amount);
 		 	str2 = "<li data-amount='"+ amount +"' data-fno='"+ fnoInselected +"'><div class='card w-80'>"
 				+ "<div class='card-body'><b class='card-title'>" + fnameInselected + "</b>"
-		    	+ "<p class='card-text' >selected amount : "+amount +" </p>"
+		    	+ "<p class='card-text' >양 (인분) : "+amount +" </p>"
 		    	+ "<button type='button' class='btn btn-danger btn-sm cancelIngre' >&times;</button>"
 		  		+ "</div></div></li>" 
  
@@ -203,11 +203,11 @@ $(document).ready(function(){
 						//console.log(obj);
 						str+="<li data-fno='"+ obj.fno +"' data-fname='" + obj.fname+ "'>"
 						  + "<div class='card w-80'><div class='card-body'><b class='card-title'>"+obj.fname+"</b>"
-						  +  "<p class='card-text'><span>carbo : "+ obj.fcarbo +"</span>&nbsp;"
-						  + "<span>protein : "+ obj.fprotein +"</span>&nbsp;"
-					      + "<span>fat : "+ obj.ffat +"</span>&nbsp;"
-					      +   "<span>kcal : "+ obj.fkcal +"</span></p>"
-						  + "<button type='button' class='btn btn-success btn-sm addBtn'>ADD INGREDINET</button>"
+						  +  "<p class='card-text'><span>탄수화물 : "+ obj.fcarbo +"</span>&nbsp;"
+						  + "<span>단백질 : "+ obj.fprotein +"</span>&nbsp;"
+					      + "<span>지방 : "+ obj.ffat +"</span>&nbsp;"
+					      +   "<span>칼로리 : "+ obj.fkcal +"</span></p>"
+						  + "<button type='button' class='btn btn-success btn-sm addBtn'>재료 추가하기</button>"
 						  + "</div></div></li><br>"
 						
 						});
