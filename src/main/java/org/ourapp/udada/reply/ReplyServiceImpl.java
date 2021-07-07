@@ -14,15 +14,16 @@ public class ReplyServiceImpl implements ReplyService{
 	private final ReplyMapper replyMapper;
 
 	@Override
-		public int insertReply(String mEmail, String reContent, Long jNo) throws Exception {
+		public int insertReply(String reContent, Long oriNo, String mEmail, String reDiv) throws Exception {
 
-			return replyMapper.insert(mEmail, reContent, jNo);
+			return replyMapper.insert(reContent, oriNo, mEmail, reDiv);
 		}
 	
+	
 	@Override
-	public List<ReplyDTO> replyList(Long jNo) throws Exception {
-
-		return replyMapper.replyList(jNo);
-	}
+		public int deleteReply(String mEmail, Long reNo) throws Exception{
+			
+			return replyMapper.delete(mEmail, reNo);
+		}
 	
 }//class end

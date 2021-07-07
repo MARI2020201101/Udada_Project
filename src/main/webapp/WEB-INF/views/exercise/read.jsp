@@ -1,14 +1,69 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
+<style>
+table.type03 {
+  border-collapse: collapse;
+  text-align: center;
+  line-height: 1.5;
+  border-top: 1px solid #ccc;
+  border-left: 4.4px solid #697491;
+  margin : 20px 10px;
+}
+table.type03 th {
+  width: 80px;
+  padding: 7px;
+  font-weight: bold;
+  vertical-align: top;
+  color: #a9b0c4;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+
+}
+table.type03 td {
+  width: 100px; 
+  padding: 7px;
+  vertical-align: top;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+</style>
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800">운동 상세</h1>
+	
 <form action="/exercise/insert" method="post">
 	<img class="h3 mb-4 text-gray-800" height="95px" width="95px"
 		src="/resources/imgs/${dto.EName}.png" style="clear: left" />
+		
+		
+		<table class="type03">
+  <tr>
+    <th scope="row">5분 당</th>
+    <td id="eKcal" name="eKcal" class="type03" align="right">${dto.EKcal}칼로리</td>
+  </tr>
+  <tr>
+    <th scope="row">10분 당</th>
+    <td id="eKcal" name="eKcal" class="type03" align="right">${dto.EKcal*2}칼로리</td>
+  </tr>
+  <tr>
+    <th scope="row">15분 당</th>
+    <td id="eKcal" name="eKcal" class="type03" align="right">${dto.EKcal*3}칼로리</td>
+  </tr>
+  <tr>
+    <th scope="row">30분 당</th>
+    <td id="eKcal" name="eKcal" class="type03" align="right">${dto.EKcal*6}칼로리</td>
+  </tr>
+  <tr>
+    <th scope="row">1시간 당</th>
+    <td id="eKcal" name="eKcal" class="type03" align="right">${dto.EKcal*12}칼로리</td>
+  </tr>
+</table>
+		
+		
+			
 	<div class="form-group row">
 		<label>번호</label> 
 		<input type="text" id="eNo" name="eNo" class="form-control form-control-user" value="${dto.ENo}" readonly>
@@ -21,41 +76,18 @@
 		<label>운동 강도</label> 
 		<input type="text" id="eStr" name="eStr" class="form-control form-control-user" value="${dto.EStr}" readonly>
 	</div>
-	<div>
-		<label>예상 소모 칼로리</label>
-		<table class="borderBottom">
-			<tr>
-				<td class="borderBottom">5 분</td>
-				<td id="eKcal" name="eKcal" class="borderBottom" align="right">${dto.EKcal}칼로리</td>
-			</tr>
-			<tr>
-				<td class="borderBottom">10 분</td>
-				<td id="eKcal" name="eKcal" class="borderBottom" align="right">${dto.EKcal*2}칼로리</td>
-			</tr>
-			<tr>
-				<td class="borderBottom">15 분</td>
-				<td id="eKcal" name="eKcal" class="borderBottom" align="right">${dto.EKcal*3}칼로리</td>
-			</tr>
-			<tr>
-				<td class="borderBottom">30 분</td>
-				<td id="eKcal" name="eKcal" class="borderBottom" align="right">${dto.EKcal*6}칼로리</td>
-			</tr>
-			<tr>
-				<td class="borderBottom">1 시간</td>
-				<td id="eKcal" name="eKcal" class="borderBottom" align="right">${dto.EKcal*12}칼로리</td>
-			</tr>
-		</table>
-	</div>
+
+	<div class="form-group row">
+	<label>운동 시간 </label> 
+	
 	<br>
-	<div class="form-group my-2">
-	<label>운동 시간 </label> <br>
 		<select class="form-select" id="emTime" name="emTime">
 			<option value=1>5 분</option>
 			<option value=2>10 분</option>
 			<option value=3>15 분</option>
 			<option value=6>30 분</option>
 			<option value=12>1 시간</option>
-		</select>&nbsp;
+		</select>&nbsp;&nbsp;
 
 		<input type="submit" class="btn btn-primary btn-sm" value="추가">
 		</div>

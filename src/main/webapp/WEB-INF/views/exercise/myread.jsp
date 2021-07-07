@@ -9,7 +9,7 @@
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800">상세페이지</h1>
 	
-	    <form method="post" action="/exercise/remove?eNo=${dto.ENo}">
+	    <form method="post" action="/exercise/remove?emNo=${emNo}">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                     <tr>
@@ -41,6 +41,7 @@
    
 <script>
  $(document).ready(function(){
+	 
 	var form = $("form");
 	$(".removeBtn").on("click",function(e){
 		e.preventDefault();

@@ -31,11 +31,13 @@
 		SELECT * FROM EXERCISE WHERE E_NO = #{eNo}
 	</select>
 	
-	<select id="myList" resultMap="myexerciseMap"><!-- parameterType  -->
+	<select id="myList" parameterType="String" resultMap="myexerciseMap"><!-- parameterType  -->
 		SELECT A.EM_NO, A.M_EMAIL, A.EM_DATE, B.E_NAME, B.E_KCAL, A.E_NO, A.EM_TIME
 		FROM EXERCISE_MY A
 		INNER JOIN EXERCISE B
 		ON A.E_NO = B.E_NO
+		WHERE A.M_EMAIL = #{mEmail}
+		ORDER BY A.EM_NO DESC
 	</select>
 	
 	<select id="myget" parameterType="long" resultMap="exerciseMap">
@@ -43,13 +45,41 @@
 	</select>
 	
 	<delete id="delete" parameterType="long">
-		DELETE FROM EXERCISE_MY WHERE E_NO = #{eNo}
+		DELETE FROM EXERCISE_MY WHERE EM_NO = #{emNo}
 	</delete>
 	
 	<insert id="insert" parameterType="org.ourapp.udada.exercise.Exercise_myDTO">
-		INSERT INTO EXERCISE_MY (EM_NO, M_EMAIL, E_NO, EM_TIME, E_NAME, E_KCAL)
-		VALUES (SEQ_EM.NEXTVAL, #{mEmail}, #{eNo}, #{emTime}, #{eName}, )
+		INSERT INTO EXERCISE_MY (EM_NO, M_EMAIL, E_NO, EM_TIME)
+		VALUES (SEQ_EM.NEXTVAL, #{mEmail}, #{eNo}, #{emTime})
 	</insert>
+	
+	<select id="selectWithImageAndPagingAndSearch" resultMap="exerciseMap">
+	<![CDATA[
+		SELECT SSUB.* FROM
+		(SELECT SUB.*, ROWNUM AS RN FROM
+		(SELECT 
+		E.E_NO, E.E_NAME, E.E_STR, E.E_KCAL
+		FROM EXERCISE E  
+       ]]>     		
+    <where>  
+	<if test = "keyword != null">
+		E.E_NAME LIKE '%'||#{keyword}||'%'
+	</if>
+	</where>   
+    <![CDATA[
+		ORDER BY E_NO DESC) SUB) SSUB
+		WHERE SSUB.RN > (#{pageNum}-1) * #{pageSize} AND SSUB.RN <= #{pageNum} * #{pageSize}         
+	]]>
+	</select>
+	
+	<select id="countAllWithSearch" resultType="int">
+		SELECT COUNT(E_NO) FROM EXERCISE
+	<where>  
+		<if test = "keyword != null">
+		E_NAME LIKE '%'||#{keyword}||'%'
+		</if>
+	</where>
+	</select>
 	
 </mapper>
 

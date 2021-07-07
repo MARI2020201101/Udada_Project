@@ -17,7 +17,7 @@
 						<th scope="col">나의 운동 코드</th>
 						<th scope="col">등록일</th>
 						<th scope="col">운동 코드</th>
-						<th scope="col">칼로리소모</th>
+						<th scope="col">총 소모 칼로리</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -25,12 +25,12 @@
 					<c:forEach var="dto" items="${mylist}">
 						<tr>
 							<th scope="row"><a
-								href='/exercise/myread?eNo=<c:out value="${dto.ENo}"/>'><c:out
+								href='/exercise/myread?eNo=<c:out value="${dto.ENo}"/>&emNo=<c:out value="${dto.emNo}"/>'><c:out
 										value="${dto.emNo}" /></a></th>
 							<td><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${dto.emDate}" /></td>
 							<td><c:out value="${dto.ENo}" /></td>
-							<td><fmt:formatNumber value="${dto.emTime/5*dto.EKcal}"
+							<td><fmt:formatNumber value="${dto.emTime*dto.EKcal}"
 									pattern="0" /></td>
 						</tr>
 

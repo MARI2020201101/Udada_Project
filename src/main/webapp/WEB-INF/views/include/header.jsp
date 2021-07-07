@@ -112,7 +112,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/journal/list">저널 리스트</a>
-                        <a class="collapse-item" href="#">마이 저널</a>
+                        <a class="collapse-item" href="/journal/mylist">마이 저널</a>
                     </div>
                 </div>
             </li>
