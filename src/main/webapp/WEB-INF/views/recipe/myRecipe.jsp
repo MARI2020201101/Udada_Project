@@ -1,26 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
-
+<%@ page import="org.ourapp.udada.recipe.RecipeDTO" %>
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
 	
 <!-- Page Heading -->
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="card mb-4 py-3">
-				<div class="card-body">
-					<h1 class="h3 mb-4 text-gray-800">
-						<a href="/recipe/myRecipe">마이 레시피</a>
-					</h1>
-				</div>
-			</div>
-		</div>
-	</div>
 
-
-
+	<h1 class="h3 mb-4 text-gray-800">
+		<a href="/recipe/myRecipe">마이 레시피</a>
+	</h1>
 	<c:forEach var="dto" items="${list}">
 		<div class="card mb-3">
 			<div class="card border-left-primary shadow h-100 py-2 px-2">
@@ -39,8 +29,9 @@
 								</a>
 							</h5>
 							<p class="card-text">
-								<small class="text-muted"><c:out value="${dto.MEmail}"></c:out></small>
+							<%-- 	<small class="text-muted"><c:out value="${dto.MEmail}"></c:out></small> --%>
 							</p>
+							${RecipeDTO.dateFormatter(dto.RDate) }
 						</div>
 					</div>
 				</div>
