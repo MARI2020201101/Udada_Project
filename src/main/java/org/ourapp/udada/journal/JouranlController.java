@@ -64,16 +64,26 @@ public class JouranlController {
 			 List<ReplyDTO> replyList = journalService.replyList(oriNo,reDiv);
 			 list.get(i).setReplyList(replyList);
 			 
+			
+				 for(int a=0; a<replyList.size(); a++) {
+					 Long reNo=replyList.get(a).getReNo();
+					 List<ReplyDTO> commentList = journalService.commentList(reNo);
+					 replyList.get(a).setCommentList(commentList);
+				 }
+			 
+			 
+			 
+			 
 			 int likeCount = journalService.getLike(jNo, loginEmail);
 			 list.get(i).setLikeCount(likeCount);
 			 
 			 int lCnt = list.get(i).getLCnt();
 			 list.get(i).setLCnt(lCnt);
-			 //log.info("댓글 :" +replyList);
+			 log.info("댓글 :" +replyList);
 			 
 			 }
 
-		 log.info("하트값" + list);
+		 //log.info("하트값" + list);
 		 
 		 
 		//System.out.println("total:"+total);

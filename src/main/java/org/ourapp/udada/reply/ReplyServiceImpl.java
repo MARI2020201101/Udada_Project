@@ -19,11 +19,23 @@ public class ReplyServiceImpl implements ReplyService{
 			return replyMapper.insert(reContent, oriNo, mEmail, reDiv);
 		}
 	
+	@Override
+	public int commentinsert(String reContent, Long oriNo, String mEmail, String reDiv, int reGroup) throws Exception {
+		
+		return replyMapper.commentinsert(reContent, oriNo, mEmail, reDiv, reGroup);
+	}
+	
 	
 	@Override
-		public int deleteReply(String mEmail, Long reNo) throws Exception{
+		public int deleteReply(Long reNo, int commentCheck) throws Exception{
 			
-			return replyMapper.delete(mEmail, reNo);
+			return replyMapper.delete(reNo, commentCheck);
 		}
+	
+	@Override
+	public void replyModify(String reContent, Long reNo) throws Exception {
+		
+		replyMapper.update(reContent, reNo);
+	}
 	
 }//class end

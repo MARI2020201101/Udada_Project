@@ -166,6 +166,12 @@ public class JournalServiceImpl implements JournalService{
 
 		return journalMapper.replyList(oriNo, reDiv);
 	}
+	
+	@Override
+	public List<ReplyDTO> commentList(Long reNo) {
+		
+		return journalMapper.commentList(reNo);
+	}
 
 	
 	

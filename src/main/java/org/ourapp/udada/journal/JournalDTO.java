@@ -38,4 +38,5 @@ public class JournalDTO {
 	
 	
 	
+	
 }//class end
