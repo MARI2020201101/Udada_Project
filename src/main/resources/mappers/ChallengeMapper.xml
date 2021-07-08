@@ -92,6 +92,8 @@
 			<result column="C_TITLE" property="cTitle"/>
 			<result column="C_START" property="cStart"/>
 			<result column="C_FINISH" property="cFinish"/>
+			<result column="CHAR_START" property="charStart"/>
+			<result column="CHAR_FINISH" property="charFinish"/>
 			<result column="PROGRESS" property="progress"/>
 			<result column="TOTALDATE" property="totalDate"/>
 			<result column="PROCDATE" property="procDate"/>
@@ -115,6 +117,12 @@
 			<result column="RE_CONTENT" property="reContent"/>				
 			<result column="REDATE" property="reDate"/>	
 			<result column="M_EMAIL" property="mEmail"/>	
+	</resultMap>
+	
+	<resultMap type="org.ourapp.udada.challenge.MyChallengeGetMySuccessDayDTO" id="myChallengeGetMySuccessDayMap">
+			<result column="TITLE" property="title"/>				
+			<result column="PERIOD" property="start"/>		
+			<result column="COLOR" property="color"/>				
 	</resultMap>
 	
 	
@@ -250,7 +258,7 @@
         INNER JOIN
         (SELECT C_NO, M_EMAIL, C_TITLE, C_START, C_FINISH, ROUND((CURRENT_DATE-C_START)/(C_FINISH-C_START+1)*100)PROGRESS
 		FROM CHALLENGE
-		WHERE C_START<=CURRENT_DATE AND CURRENT_DATE<=C_FINISH)B
+		WHERE C_START<CURRENT_DATE AND CURRENT_DATE<C_FINISH+1)B
         ON A.C_NO=B.C_NO
         WHERE A.M_EMAIL=#{sEmail}
 		ORDER BY B.C_START
@@ -278,7 +286,7 @@
         INNER JOIN
         (SELECT C_NO, M_EMAIL, C_TITLE, C_START, C_FINISH
 		FROM CHALLENGE
-		WHERE C_FINISH<CURRENT_DATE)B
+		WHERE C_FINISH<CURRENT_DATE-1)B
         ON A.C_NO=B.C_NO
         WHERE A.M_EMAIL=#{sEmail}
 		ORDER BY B.C_START
@@ -286,7 +294,8 @@
 	</select>
 
 	<select id="myChallengeInfo" resultMap="myChallengeInfoMap" >
-		SELECT A.C_NO, A.C_TITLE, A.C_START, A.C_FINISH, ROUND((CEIL(CURRENT_DATE-A.C_START))/(A.C_FINISH-A.C_START+1)*100)PROGRESS, (A.C_FINISH-A.C_START+1)TOTALDATE, CEIL(CURRENT_DATE-A.C_START)PROCDATE, B.MEMCNT
+		SELECT A.C_NO, A.C_TITLE, A.C_START, A.C_FINISH, TO_CHAR(A.C_START,'YYYY-MM-DD')CHAR_START, TO_CHAR(A.C_FINISH+1,'YYYY-MM-DD')CHAR_FINISH,
+        ROUND((CEIL(CURRENT_DATE-A.C_START))/(A.C_FINISH-A.C_START+1)*100)PROGRESS, (A.C_FINISH-A.C_START+1)TOTALDATE, CEIL(CURRENT_DATE-A.C_START)PROCDATE, B.MEMCNT
 		FROM (CHALLENGE)A
         INNER JOIN
         (SELECT COUNT(*)MEMCNT, C_NO
@@ -303,13 +312,17 @@
 		FROM 
 		(SELECT M_EMAIL FROM CHALLENGE_APPLY
 		WHERE C_NO=#{cNo})A,
-		(SELECT M_EMAIL, COUNT(*)SUCCESS FROM (SELECT M_EMAIL, EM_DATE, COUNT(*)CNT FROM (SELECT M_EMAIL, TO_CHAR(EM_DATE,'YY-MM-DD')EM_DATE FROM EXERCISE_MY
-		WHERE (EM_DATE BETWEEN #{cStart} AND #{cFinish}+1)
-		AND
+		(SELECT M_EMAIL, COUNT(*)SUCCESS FROM (SELECT M_EMAIL, EM_DATE, COUNT(*)CNT FROM 	
+		(SELECT M_EMAIL, EM_DATE, E_NO, SUM(EM_TIME)EM_TIME FROM
+        (SELECT M_EMAIL, TO_CHAR(EM_DATE,'YY-MM-DD')EM_DATE, E_NO, EM_TIME FROM EXERCISE_MY
+        WHERE (EM_DATE BETWEEN #{cStart} AND #{cFinish}+1)
+		AND (M_EMAIL IN (SELECT M_EMAIL FROM CHALLENGE_APPLY WHERE C_NO=#{cNo})))       
+        GROUP BY M_EMAIL, EM_DATE, E_NO)
+		<where>
 		<foreach item="goal" index="index" collection="goalList" open="(" separator="OR" close=")">
 			(E_NO=#{goal.eNo} AND EM_TIME>=#{goal.cgTime})
 		</foreach>
-		)
+		</where>
 		GROUP BY M_EMAIL, EM_DATE)
 		WHERE CNT>=#{goalCnt}
 		GROUP BY M_EMAIL)B
@@ -328,14 +341,18 @@
 		,
 		(SELECT B.EM_DATE,NVL(B.SUCCESS,0)SUCCESS
 		FROM 
-		(SELECT EM_DATE, COUNT(*)SUCCESS FROM (SELECT M_EMAIL, EM_DATE, COUNT(*)CNT FROM (SELECT M_EMAIL, TO_CHAR(EM_DATE,'YY-MM-DD')EM_DATE FROM EXERCISE_MY
-		WHERE (EM_DATE BETWEEN #{cStart} AND #{cFinish}+1)
-		AND (M_EMAIL IN (SELECT M_EMAIL FROM CHALLENGE_APPLY WHERE C_NO=${cNo}))
-		AND
+		(SELECT EM_DATE, COUNT(*)SUCCESS FROM 
+		(SELECT M_EMAIL, EM_DATE, COUNT(*)CNT FROM 	
+		(SELECT M_EMAIL, EM_DATE, E_NO, SUM(EM_TIME)EM_TIME FROM
+        (SELECT M_EMAIL, TO_CHAR(EM_DATE,'YY-MM-DD')EM_DATE, E_NO, EM_TIME FROM EXERCISE_MY
+        WHERE (EM_DATE BETWEEN #{cStart} AND #{cFinish}+1)
+		AND (M_EMAIL IN (SELECT M_EMAIL FROM CHALLENGE_APPLY WHERE C_NO=#{cNo})))       
+        GROUP BY M_EMAIL, EM_DATE, E_NO)
+		<where>
 		<foreach item="goal" index="index" collection="goalList" open="(" separator="OR" close=")">
 			(E_NO=#{goal.eNo} AND EM_TIME>=#{goal.cgTime})
 		</foreach>
-		)
+		</where>
 		GROUP BY M_EMAIL, EM_DATE)
 		WHERE CNT>=#{goalCnt}
 		GROUP BY EM_DATE)B)C
@@ -346,13 +363,15 @@
 	<select id="getTodaySuccess" resultType="int">
 		SELECT COUNT(*) FROM
 		(SELECT COUNT(*)CNT FROM
-		EXERCISE_MY
+		(SELECT M_EMAIL, EM_DATE, E_NO, SUM(EM_TIME)EM_TIME FROM
+        (SELECT M_EMAIL, TO_CHAR(EM_DATE,'YY-MM-DD')EM_DATE, E_NO, EM_TIME FROM EXERCISE_MY
+        WHERE M_EMAIL=#{mEmail} AND EM_DATE>TRUNC(CURRENT_DATE) AND TRUNC(CURRENT_DATE)+1>EM_DATE)
+        GROUP BY M_EMAIL, EM_DATE, E_NO)
 		WHERE
 		<foreach item="goal" index="index" collection="goalList" open="(" separator="OR" close=")">
 			(E_NO=#{goal.eNo} AND EM_TIME>=#{goal.cgTime})
 		</foreach>
-		AND (TRUNC(EM_DATE) = TRUNC(CURRENT_DATE))
-		AND M_EMAIL=#{mEmail})
+		)
 		WHERE CNT>=#{goalCnt}
 	</select>
 	
@@ -378,7 +397,7 @@
 		(MEMBER)B
 		ON A.M_EMAIL = B.M_EMAIL
 		WHERE A.RE_DIV='CHG' AND A.RE_INDENT=0 AND A.ORI_NO=#{cNo}
-		ORDER BY A.RE_DATE DESC
+		ORDER BY A.RE_DATE
 	</select>
 	
 	<select id="getTalkReply" resultMap="myChallengeGetTalkMap">
@@ -415,5 +434,42 @@
 	SET RE_CONTENT=#{reContent}
 	WHERE RE_NO=#{reNo}
 	</update>
+	
+	<select id="getMySuccessDay" resultMap="myChallengeGetMySuccessDayMap">
+		SELECT A.PERIOD,
+        CASE WHEN C.SUCCESS=1 THEN
+		'성공'
+		WHEN A.PERIOD=TO_CHAR(CURRENT_DATE,'YYYY-MM-DD') THEN '진행중'
+		ELSE'실패'END AS TITLE,
+        CASE WHEN C.SUCCESS=1 THEN
+		'GREEN'
+		WHEN A.PERIOD=TO_CHAR(CURRENT_DATE,'YYYY-MM-DD') THEN 'ORANGE'
+		ELSE'RED'END AS COLOR
+		FROM
+		(SELECT TO_CHAR(#{cStart}-1+LEVEL, 'YYYY-MM-DD')PERIOD
+		FROM DUAL
+		CONNECT BY #{procDate} >= LEVEL)A
+		,
+		(SELECT B.EM_DATE,NVL(B.SUCCESS,0)SUCCESS
+		FROM (SELECT EM_DATE, COUNT(*)SUCCESS FROM 
+
+		(SELECT EM_DATE, COUNT(*)CNT FROM 	
+		(SELECT EM_DATE, E_NO, SUM(EM_TIME)EM_TIME FROM
+        (SELECT TO_CHAR(EM_DATE,'YYYY-MM-DD')EM_DATE, E_NO, EM_TIME FROM EXERCISE_MY
+        WHERE (EM_DATE BETWEEN #{cStart} AND #{cFinish}+1)
+		AND (M_EMAIL = #{mEmail}))       
+        GROUP BY EM_DATE, E_NO)
+		<where>
+		<foreach item="goal" index="index" collection="goalList" open="(" separator="OR" close=")">
+			(E_NO=#{goal.eNo} AND EM_TIME>=#{goal.cgTime})
+		</foreach>
+		</where>
+		GROUP BY EM_DATE)
+
+		WHERE CNT>=#{goalCnt}
+		GROUP BY EM_DATE)B)C
+		WHERE A.PERIOD=C.EM_DATE(+)
+		ORDER BY A.PERIOD ASC
+	</select>
 	
 </mapper>

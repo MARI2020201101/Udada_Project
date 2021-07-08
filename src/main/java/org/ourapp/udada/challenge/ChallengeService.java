@@ -32,5 +32,6 @@ public interface ChallengeService {
 	List<MyChallengeGetTalkDTO> getTalkReply(Long reNo);
 	void talkDel(int reNo, int checkTalk);
 	void editTalk(int reNo, String reContent);
+	List<MyChallengeGetMySuccessDayDTO> getMySuccessDay(MyChallengeInfoDTO myChallengeInfoDTO);
 
 }

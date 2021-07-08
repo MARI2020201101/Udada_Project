@@ -15,6 +15,7 @@ import org.ourapp.udada.challenge.ChallengeReadDTO;
 import org.ourapp.udada.challenge.ChallengeReadGoalDTO;
 import org.ourapp.udada.challenge.MyChallengeApplyDTO;
 import org.ourapp.udada.challenge.MyChallengeEndDTO;
+import org.ourapp.udada.challenge.MyChallengeGetMySuccessDayDTO;
 import org.ourapp.udada.challenge.MyChallengeGetTalkDTO;
 import org.ourapp.udada.challenge.MyChallengeProceedDTO;
 import org.ourapp.udada.challenge.MyChallengeSuccessCntDDTO;
@@ -49,4 +50,5 @@ public interface ChallengeMapper {
 	List<MyChallengeGetTalkDTO> getTalkReply(@Param("reNo")Long reNo);
 	void talkDel(@Param("reNo")int reNo, @Param("checkTalk")int checkTalk);
 	void editTalk(@Param("reNo")int reNo, @Param("reContent")String reContent);
+	List<MyChallengeGetMySuccessDayDTO> getMySuccessDay(MyChallengeInfoDTO myChallengeInfoDTO);
 }

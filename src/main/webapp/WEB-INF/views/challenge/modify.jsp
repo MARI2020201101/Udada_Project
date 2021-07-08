@@ -14,25 +14,23 @@
 	<div class="col-md-12"></div>
 	<form class="form-material" method="POST" onsubmit="return checkForm()"
 		action="/challenge/modify">
-		<label>이메일</label>
 		<div class="form-group form-default">
-			<input type="email" name="mEmail" class="form-control"
-				value="${dto.MEmail}" required readonly>
+			<input type="hidden" name="mEmail" class="form-control"
+				value="${dto.MEmail}">
 		</div>
 		<label>제목</label>
 		<div class="form-group form-default">
-			<input type="text" name="cTitle" class="form-control"
-				value="${dto.CTitle}" required>
+			<input type="text" name="cTitle" id="cTitle" class="form-control" placeholder="5글자 이상"
+				value="${dto.CTitle}">
 		</div>
 		<label>기간</label>
 		<div class="form-group form-default flatpickr">
-			<input type="text" name="cPeriod" class="selector form-control"
-				required>
+			<input type="text" name="cPeriod" id="cPeriod" class="selector form-control" placeholder="2주(14일) 이내">
 		</div>
 		<label>최대 인원</label>
 		<div class="form-group form-default">
-			<input type="text" name="cTotal" class="form-control"
-				value="${dto.CTotal}" required>
+			<input type="text" name="cTotal" class="form-control" id="cTotal" class="form-control" placeholder="10명 이하"
+				value="${dto.CTotal}">
 		</div>
 
 		<label>목표 운동
@@ -63,7 +61,7 @@
 		<input type="hidden" id="excsCheckCnt" value="${checkCnt}"> <label>상세
 			내용</label>
 		<div class="form-group form-default">
-			<textarea name="cContent" class="form-control" rows="10" required>${dto.CContent}</textarea>
+			<textarea name="cContent" class="form-control" rows="10" id="cContent" rows="10" placeholder="15글자 이상">${dto.CContent}</textarea>
 			<br> <input type="hidden" name="cNo" value="${dto.CNo}">
 		</div>
 		<div align="center">
@@ -126,13 +124,61 @@
 	function checkForm(){	
 		var cnt=$("#excsCheckCnt").val();
 		var btn=$(".modalBtn");
-		if(cnt>0){	
+		var total=$("#total").val();
+		var cContent=$("#cContent").val();
+		var cTitle=$("#cTitle").val();
+		var cPeriod=$("#cPeriod").val();
+		var checkPeriod = 0;
+		if(cPeriod.length<13 && cPeriod.length>1){
+			checkPeriod=1;
+		}else{
+			var startDateStr=cPeriod.substring(0,10);
+			var finishDateStr=cPeriod.substring(13,23);
+			var startArray = startDateStr.split("-");          
+			var finishArray = finishDateStr.split("-");
+			var startDate = new Date(startArray[0], Number(startArray[1])-1, startArray[2]);   
+			var finishDate = new Date(finishArray[0], Number(finishArray[1])-1, finishArray[2]);
+			var betweenDay = (finishDate.getTime() - startDate.getTime())/1000/60/60/24; 
+			if(betweenDay<14){
+				checkPeriod=1;
+			}
+		}
+		if(cnt>0 && total>0 && total<11 && cTitle.length>=5 && cContent.length>=15 && checkPeriod==1){	
 			return true;
 		}else{
-			btn.attr("class","btn btn-outline-danger btn-sm modalBtn")
-			setTimeout(function() { 
-				btn.attr("class","btn btn-outline-secondary btn-sm modalBtn")
-			}, 1000);
+			if(cnt<1){
+				btn.attr("class","btn btn-outline-danger btn-sm modalBtn")
+				setTimeout(function() { 
+					btn.attr("class","btn btn-outline-secondary btn-sm modalBtn")
+					}, 1000);
+			}
+			if(total<1 || total>10 || !total){
+				$("#cTotal").css({"border-color": "red"});	
+				setTimeout(function() { 
+					$("#cTotal").css({"border-color": ""});	
+					}, 1000);
+			}
+			if(cTitle.length<5){
+				$("#cTitle").css({"border-color": "red"});	
+				setTimeout(function() { 
+					$("#cTitle").css({"border-color": ""});	
+					}, 1000);
+			}
+			
+			if(cContent.length<15){
+				$("#cContent").css({"border-color": "red"});	
+				setTimeout(function() { 
+					$("#cContent").css({"border-color": ""});	
+					}, 1000);
+			}
+			
+			if(checkPeriod==0){
+				$("#cPeriod").css({"border-color": "red"});	
+				setTimeout(function() { 
+					$("#cPeriod").css({"border-color": ""});	
+					}, 1000);
+			}
+			
 			return false;
 		}
 	}
