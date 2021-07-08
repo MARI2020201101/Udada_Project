@@ -76,6 +76,7 @@
 													<button type="button"
 														class="btn btn-primary insertFoodMyBtn my-3 float-right">추가</button>
 												</div>
+												<div class="goToFoodMyBox"></div>
 											</div>
 										</div>
 									</div>
@@ -226,6 +227,13 @@ $(document).ready(function(){
 			var fmDate = $(".daySelector").val();
 			console.log("fmDate>>", fmDate);
 			console.log(typeof fmDate);
+	
+			//이거 살릴까요 말까요? 선택 안하면 자동으로 오늘날짜라서 에러는 없긴 함...
+			if(!fmDate){
+				alert("날짜를 선택해 주십시오..");
+				return;
+				}
+			
 			var foodMyDTO = {
 				"mEmail" : mEmail,
 				"rNo" : rNo,
@@ -242,6 +250,10 @@ $(document).ready(function(){
 		            success:function(result){
 			            console.log(result);
 			            alert("마이 푸드에 저장되었습니다.");
+			            var str = "";
+			            str += "<a href='/member/foodMy?day="+ fmDate +"'>마이 푸드로 이동하기</a>";
+			            $(".goToFoodMyBox").append(str);
+			            
 			            },
 			        error: function(xhr,status,errorThrown){
 				        console.log("xhr >>",xhr);			

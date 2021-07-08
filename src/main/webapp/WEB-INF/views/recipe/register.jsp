@@ -191,15 +191,23 @@ $(document).ready(function(){
 		modal.find(".amountDiv").hide();
 		modal.modal();
 
-		searchBtn.click(function(e){
-			e.preventDefault();			
-			var keyword = searchInput.val();
-			var str = "";
- 			$.getJSON("/searchForIngredient?keyword="+keyword, function(array){
- 					
-					searchBtn.hide();				
-					
-						$.each(array, function(idx,obj){
+			
+		});
+
+	searchBtn.click(function(e){
+		e.preventDefault();			
+		var keyword = searchInput.val();
+		
+			$.getJSON("/searchForIngredient?keyword="+keyword, function(array){
+				var str = "";
+				searchBtn.hide();				
+				console.log("searchForIngredient result >>",array);
+				if(array.length==0){
+					str += "<p>검색 결과가 없습니다. </p>"
+					}
+				else{
+
+					$.each(array, function(idx,obj){
 						//console.log(obj);
 						str+="<li data-fno='"+ obj.fno +"' data-fname='" + obj.fname+ "'>"
 						  + "<div class='card w-80'><div class='card-body'><b class='card-title'>"+obj.fname+"</b>"
@@ -211,13 +219,13 @@ $(document).ready(function(){
 						  + "</div></div></li><br>"
 						
 						});
+					}
 				
-						$(".searchResult ul").append(str);
-						
-				}); 
- 			
-			});
-		
+			
+					$(".searchResult ul").append(str);
+					
+			}); 
+			
 		});
 });
 	
