@@ -13,7 +13,7 @@ public class PageRequestDTO {
 	private String keyword;
 	
 	public PageRequestDTO() {
-		this(1,30,"");
+		this(1,20,"");
 	}
 
 	public PageRequestDTO(int pageNum, int pageSize) {

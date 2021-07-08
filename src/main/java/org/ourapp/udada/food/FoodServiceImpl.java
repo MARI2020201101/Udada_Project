@@ -12,10 +12,6 @@ import lombok.RequiredArgsConstructor;
 public class FoodServiceImpl implements FoodService{
 
 	private final FoodMapper foodMapper;
-	
-	public int countAll() throws Exception{
-		return foodMapper.countAll();
-	}
 
 	@Override
 	public List<FoodDTO> getList() throws Exception {
@@ -30,9 +26,41 @@ public class FoodServiceImpl implements FoodService{
 	}
 	
 	@Override
-	public List<FoodDTO> getFoodList(String fMinclass) throws Exception {
+	public FoodDTO getFoodList(String fNo) throws Exception {
 		// TODO Auto-generated method stub
-		return foodMapper.getFoodList(fMinclass);
+		return foodMapper.getFoodList(fNo);
+	}
+	
+	@Override
+	public int countAll() throws Exception {
+		// TODO Auto-generated method stub
+		return foodMapper.countAll();
+	}
+	
+	@Override
+	public List<FoodDTO> getList(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return foodMapper.getMjPagination(cri);
+	}
+	
+	/*
+	@Override
+	public List<FoodDTO> MjPagination(PageRequestDTO pageRequestDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return foodMapper.getMjPagination(pageRequestDTO);
+	}
+	
+	
+	@Override
+	public List<FoodDTO> MjPagination(PagingDTO pagingDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return foodMapper.getMjPagination(pagingDTO);
+	}
+	*/
+	@Override
+	public int countAllWithSearch(PageRequestDTO pageRequestDTO) {
+		// TODO Auto-generated method stub
+		return foodMapper.countAllWithSearch(pageRequestDTO);
 	}
 	
 	

@@ -23,7 +23,7 @@ public class PageResultDTO {
 
 		int realEnd = (int)(Math.ceil((total*1.0)/pageRequestDTO.getPageSize()));
 		this.end = (int)(Math.ceil(pageRequestDTO.getPageNum()/10.0))*10;
-		this.start = end-155 <= 0 ? 1 : end-155;
+		this.start = end-9 <= 0 ? 1 : end-9;
 		if(realEnd < this.end) {
 			this.end = realEnd;
 		}

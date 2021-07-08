@@ -11,121 +11,107 @@
 
 <div class="container-fluid">
         
-        <div class="card-body">
+    <div class="row">
         	 
-        	<h1 class="h3 mb-4 text-gray-800">
-				<a href="/food/FoodInfo"> Food Information Page</a>
-			</h1>
-        
-        	<%--
-        	<form action="/food/list" method="GET" id="searchForm" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <!-- <h1 class="h3 mb-4 text-gray-800">
+			<a href="/food/FoodInfo"> Food Information Page</a>
+			<h1 class="h3 mb-0 text-gray-800"><c:out value="${dto.FName}"></c:out></h1>
+		</h1> -->
+		
+		<div class="col-xl-3 col-md-6 mb-4">
+		
+			<div class="card border-left-primary shadow h-100 py-2">
+			
+				<div class="card-body">
 				
-				<input type="hidden" class="form-control form-control-user" name="pageNum" value=${pageResultDTO.pageRequestDTO.pageNum }>
-
-				<div class="input-group">
-						
-					<input type="text" class="form-control bg-light border- small" name="keyword" value="${pageRequestDTO.keyword }"
-						placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-						
-					<div class="input-group-append">
-						<button class="btn btn-primary searchBtn" type="button">
-							<i class="fas fa-search fa-sm"></i>
-						</button>
-					</div>
-						
-				</div>
-				
-			</form> --%>
-        
-            <div class="table-responsive">
-            
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    
-                    <tbody>
-
-						 <c:forEach var="dto" items="${Foodlist}">
-							
-							<div class="card border-left-primary shadow h-100 py-2 px-2">
-								
-								<div class="row g-0">
-									
-									<div class="col">
-									
-										<div class="card-body">
-											<p class="card-text">
-												<c:out value="${dto.FName}"></c:out></small>
-												<c:out value="${dto.FOnceoffer}"></c:out></small>
-												<c:out value="${dto.FCarbo}"></c:out></small>
-												<c:out value="${dto.FProtein}"></c:out></small>
-												<c:out value="${dto.FFat}"></c:out></small>
-											</p>
-										</div>
-									
-									</div>
-								
-								</div>
-							
-							</div>
-							
-						</c:forEach>
-						
-					</tbody>
+					<div class="row no-gutters align-items-center">
 					
-                </table>
-                
-            </div>
+						<div class="col mr-2">
+						
+							<div class="text-xs" font-weight-bold text-primary text-uppercase mb-1"> 식품 칼로리 </div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800"><c:out value="${dto.FKcal}"/></div>
+						
+						</div>
+					
+					</div>
+				
+				</div>
+			
+			</div>
+		
+		</div>
+		
+		<div class="col-xl-3 col-md-6 mb-4">
+		
+			<div class="card border-left-success shadow h-100 py-2">
+		
+				<div class="card-body">
+				
+					<div class="row no-gutters align-items-center">
+					
+						<div class="col mr-2">
+						
+							<div class="text-xs" font-weight-bold text-primary text-uppercase mb-1"> 식품 탄수화물 </div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800"><c:out value="${dto.FCarbo}"/></div>
+						
+						</div>
+					
+					</div>
+				
+				</div>
+			
+			</div>
+		
+		</div>
+		
+		<div class="col-xl-3 col-md-6 mb-4">
+		
+			<div class="card border-left-success shadow h-100 py-2">
+		
+				<div class="card-body">
+				
+					<div class="row no-gutters align-items-center">
+					
+						<div class="col mr-2">
+						
+							<div class="text-xs" font-weight-bold text-primary text-uppercase mb-1"> 식품 단백질 </div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800"><c:out value="${dto.FProtein}"/></div>
+						
+						</div>
+					
+					</div>
+				
+				</div>
+			
+			</div>	
+		
+		</div>
+		
+		<div class="col-xl-3 col-md-6 mb-4">
+		
+			<div class="card border-left-success shadow h-100 py-2">
+		
+			<div class="card-body">
+			
+				<div class="row no-gutters align-items-center">
+				
+					<div class="col mr-2">
+					
+						<div class="text-xs" font-weight-bold text-primary text-uppercase mb-1"> 식품 지방 </div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800"><c:out value="${dto.FFat}"/></div>
+					
+					</div>
+				
+				</div>
+			
+			</div>
+		
+		</div>	
+		
+		</div>	
             
-        </div>
-
-	<%-- <nav>
-							
-		<ul class="pagination">
-						 	
-			<li class="page-item ${pageResultDTO.prev ? "":'disabled' }">
-				<a class="page-link" href="/food/list?pageNum=${pageResultDTO.pageRequestDTO.pageNum-1}&keyword=${pageResultDTO.pageRequestDTO.keyword}" tabindex="-1" aria-disabled="true">Prev</a>
-			</li>
-						    
-			<c:forEach var="page" begin="${pageResultDTO.start}" end="${pageResultDTO.end }">
-				<li class="page-item ${page==pageResultDTO.pageRequestDTO.pageNum? 'active' : '' }">
-					<a class="page-link" href="/food/list?pageNum=${page}&keyword=${pageResultDTO.pageRequestDTO.keyword}">
-						<c:out value="${page}"/>
-					</a>
-				</li>
-			</c:forEach>
-						   
-			<li class="page-item ${pageResultDTO.next ? "":'disabled' }">
-				<a class="page-link" href="/food/list?pageNum=${pageResultDTO.pageRequestDTO.pageNum+1}&keyword=${pageResultDTO.pageRequestDTO.keyword}">Next</a>
-			</li>
-							    
-		</ul>
-						  	
-	</nav> --%>
+    </div>
 
 </div>
-<!-- /.container-fluid -->
-<!-- End of Main Content -->
-
-<!-- <script>
-$(document).ready(function(){
-
-	var searchForm = $("#searchForm");
-	var msg = '${msg}';
-	console.log("msg>>",msg);
-
-	$("#searchForm button").on("click",function(e){
-
-		searchForm.find("input[name='pageNum']").val(1);
-		searchForm.submit();		
-		});
-
-	if (!(msg===''||history.state)){
-		var modal= $(".modal");
-		console.log(modal);	
-		modal.modal();
-	}
-});
-	
-</script> -->
-
         
 <%@ include file="../include/footer.jsp"%>

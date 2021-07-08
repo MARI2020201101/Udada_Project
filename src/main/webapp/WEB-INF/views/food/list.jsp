@@ -12,7 +12,7 @@
 <div class="container-fluid">
 
 	<!-- Page Heading -->
-	<<!-- h1 class="h3 mb-4 text-gray-800">Food List Page</h1> -->
+	<!-- h1 class="h3 mb-4 text-gray-800">Food List Page</h1> -->
 	
 		<!-- <a href="/recipe/register" class="btn btn-primary">
             <span class="text">Register</span>
@@ -24,6 +24,7 @@
 				<a href="/food/list"> Food MjList Page</a>
 			</h1>
         
+        	<%-- --%>
         	<form action="/food/list" method="GET" id="searchForm" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
 				
 				<input type="hidden" class="form-control form-control-user" name="pageNum" value=${pageResultDTO.pageRequestDTO.pageNum }>
@@ -41,63 +42,36 @@
 						
 				</div>
 				
-			</form>
+			</form> 
         
-            <div class="table-responsive">
+            <c:forEach items="${list}" var="dto">
             
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    
-                    <!-- <thead>
-	                    <tr>
-	                    	<th  scope="col">식품 코드</th>
-	                        <th  scope="col">대분류</th>
-	                        <th  scope="col">소분류</th>
-	                        <th  scope="col">식품 명</th>
-	                    </tr>
-                    </thead> -->
-                    
-                    <tbody>
-
-						<c:forEach var="dto" items="${list}">
-							
-							<div class="card border-left-primary shadow h-100 py-2 px-2">
+            	<div class="card border-left-primary shadow h-100 py-2 px-2">
 								
-								<div class="row g-0">
+					<div class="row g-0">
 									
-									<div class="col">
+						<div class="col">
 									
-										<div class="card-body">
+							<div class="card-body">
 										
-											<h5 class="card-title">
+								<h5 class="card-title">
+									<a href='/food/MinClassPage?fMjclass=<c:out value="${dto.FMjclass}"/>'><c:out value="${dto.FMjclass}"/></a>
+								</h5>
 											
-												<a href='/food/MinClassPage?fMjclass=<c:out value="${dto.FMjclass}"/>'><c:out value="${dto.FMjclass}"/></a>
-											
-											</h5>
-											<%-- <p class="card-text">
-												<small class="text-muted"><c:out value="${dto.FMjclass}"></c:out></small>
-												<small class="text-muted"><c:out value="${dto.FMinclass}"></c:out></small>
-											</p> --%>
-											
-										</div>
-									
-									</div>
-								
-								</div>
-							
 							</div>
-							
-						</c:forEach>
+									
+						</div>
 						
-					</tbody>
-					
-                </table>
-                
-            </div>
+					</div>
+							
+				</div>
+            
+            </c:forEach>
             
         </div>
 
-	 <nav>
-							
+	 <nav>			
+		
 		<ul class="pagination">
 						 	
 			<li class="page-item ${pageResultDTO.prev ? "":'disabled' }">
@@ -116,7 +90,62 @@
 				<a class="page-link" href="/food/list?pageNum=${pageResultDTO.pageRequestDTO.pageNum+1}&keyword=${pageResultDTO.pageRequestDTO.keyword}">Next</a>
 			</li>
 							    
+		</ul> 
+		 
+		<%--
+		<ul class="pagination">		
+			
+			<li class="page-item">
+				
+				<c:if test="${paging.startPage != 1 }">
+					<a href="/food/list?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+				</c:if>
+			
+			</li>
+
+			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
+				<c:choose>
+				
+					<c:when test="${p == paging.nowPage }">
+						<b>${p}</b>
+					</c:when>
+		
+					<c:when test="${p != paging.nowPage }">
+						<a href="/food/list?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p}</a>
+					</c:when>
+					
+				</c:choose>
+			</c:forEach>
+	
+			<li class="page-item">
+			
+				<c:if test="${paging.endPage != paging.lastPage}">
+					<a href="/food/list?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+				</c:if>
+			
+			</li>
+	
 		</ul>
+		
+		
+		<div>
+			
+		  	<ul>
+		    	<c:if test="${pageMaker.prev}">
+		    		<li><a href="/food/list${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+			    </c:if> 
+		
+			    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+			    	<li><a href="/food/list${pageMaker.makeQuery(idx)}">${idx}</a></li>
+			    </c:forEach>
+			
+			    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+			    	<li><a href="/food/list${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+			    </c:if> 
+			 </ul>
+			 
+		</div>
+		--%>
 						  	
 	</nav>
 
