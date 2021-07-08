@@ -472,4 +472,9 @@
 		ORDER BY A.PERIOD ASC
 	</select>
 	
+	<select id="checkMem" resultType="int" >
+		SELECT COUNT(*) FROM CHALLENGE_APPLY
+		WHERE C_NO=#{cNo} AND M_EMAIL=#{mEmail}
+	</select>
+	
 </mapper>

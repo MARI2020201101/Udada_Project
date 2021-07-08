@@ -51,4 +51,5 @@ public interface ChallengeMapper {
 	void talkDel(@Param("reNo")int reNo, @Param("checkTalk")int checkTalk);
 	void editTalk(@Param("reNo")int reNo, @Param("reContent")String reContent);
 	List<MyChallengeGetMySuccessDayDTO> getMySuccessDay(MyChallengeInfoDTO myChallengeInfoDTO);
+	int checkMem(@Param("cNo")Long cNo, @Param("mEmail")String mEmail);
 }

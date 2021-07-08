@@ -143,7 +143,7 @@
 				checkPeriod=1;
 			}
 		}
-		if(cnt>0 && total>0 && total<11 && cTitle.length>=5 && cContent.length>=15 && checkPeriod==1){	
+		if(cnt>0 && cTotal>0 && cTotal<11 && cTitle.length>=5 && cContent.length>=15 && checkPeriod==1){	
 			return true;
 		}else{
 			if(cnt<1){
@@ -152,7 +152,7 @@
 					btn.attr("class","btn btn-outline-secondary btn-sm modalBtn")
 					}, 1000);
 			}
-			if(total<1 || total>10 || !total){
+			if(cTotal<1 || cTotal>10 || !cTotal){
 				$("#cTotal").css({"border-color": "red"});	
 				setTimeout(function() { 
 					$("#cTotal").css({"border-color": ""});	

@@ -11,6 +11,9 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css">
 
+<c:choose>
+<c:when test="${checkMem>0}">
+
 <div class="container-fluid">
 
 	<div class="row">
@@ -99,7 +102,7 @@
 								</div>
 								<div class="col">
 									<div class="progress progress-sm mr-2">
-										<div class="progress-bar bg-success" role="progressbar"
+										<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar"
 											style="width: <c:choose><c:when test="${info.progress<=100}">${info.progress}</c:when><c:otherwise>100</c:otherwise></c:choose>%"></div>
 									</div>
 								</div>
@@ -336,61 +339,60 @@
 	</div>
 
 	</div>
+	
+</c:when>
+</c:choose>
 </div>
 
 <script>
 $("#challengeTalkDiv").scrollTop($("#challengeTalkDiv")[0].scrollHeight); 
 
-$(document).ready( function(){
-	 $('#calendar').css('font-size','10px !important');
-	 var mySuccessDay = new Array();
-	 var challengePeriod = {title:'챌린지 기간', start:"${info.charStart}", end:"${info.charFinish}"};
-		$.ajax({
-			type : "post",
-			url : "/challenge/getMySuccessDay",
-			data : {mEmail:"${loginUser}", cNo:${info.CNo} },
-			dataType : "json",
-			async:false,
-			success:function(data){
-				mySuccessDay = data;
-				mySuccessDay.push(challengePeriod);
-			}
-		});
-	    var calendarEl = document.getElementById('calendar');
-	    var calendar = new FullCalendar.Calendar(calendarEl, {
-	      themeSystem: 'bootstrap',
-	      initialView: 'dayGridMonth',
-	      contentHeight:'auto',
-	      locale: 'ko',
-	      events: mySuccessDay    
-	    });
-	    calendar.render();
-	    calendar.gotoDate("${info.charStart}");
-	    $('#calendar').find("button").addClass("btn-sm");
-	    
-$("#talkReg").one("click","button",function(){
-	var reContent = $("#talkReg").find("textarea").val();
-	if(!reContent.trim()){
-		$("#talkReg").find("textarea").css({"border-color": "red"});	
-		setTimeout(function() { 
-			$("#talkReg").find("textarea").css({"border-color": ""});	
-			}, 1000);
-	}else{
-		$.ajax({
-			type : "post",
-			url : "/challenge/talkReg",
-			data : {mEmail:"${loginUser}", oriNo:${info.CNo}, reContent:reContent, reIndent:0},
-			dataType : "json",
-			async:false
-		});
-		location.reload();
-	}
-});
-$(".talkReplyReg").hide();
-$(".talkModify").hide();
-$(".talkReplyEdit").hide();
-  
-});
+$('#calendar').css('font-size','10px !important');
+var mySuccessDay = new Array();
+var challengePeriod = {title:'챌린지 기간', start:"${info.charStart}", end:"${info.charFinish}"};
+	$.ajax({
+		type : "post",
+		url : "/challenge/getMySuccessDay",
+		data : {mEmail:"${loginUser}", cNo:${info.CNo} },
+		dataType : "json",
+		async:false,
+		success:function(data){
+			mySuccessDay = data;
+			mySuccessDay.push(challengePeriod);
+		}
+	});
+   var calendarEl = document.getElementById('calendar');
+   var calendar = new FullCalendar.Calendar(calendarEl, {
+     themeSystem: 'bootstrap',
+     initialView: 'dayGridMonth',
+     contentHeight:'auto',
+     locale: 'ko',
+     events: mySuccessDay    
+   });
+   calendar.render();
+   calendar.gotoDate("${info.charStart}");
+   $('#calendar').find("button").addClass("btn-sm");
+   
+
+   $("#talkReg").one("click","button",function(){
+		var reContent = $("#talkReg").find("textarea").val();
+		if(!reContent.trim()){
+			$("#talkReg").find("textarea").css({"border-color": "red"});	
+			setTimeout(function() { 
+				$("#talkReg").find("textarea").css({"border-color": ""});	
+				}, 1000);
+		}else{
+			$.ajax({
+				type : "post",
+				url : "/challenge/talkReg",
+				data : {mEmail:"${loginUser}", oriNo:${info.CNo}, reContent:reContent, reIndent:0},
+				dataType : "json",
+				async:false
+			});
+			location.reload();
+		}
+	});
+
 
 $(".talkReplyReg").one("click","button",function(){
 	var reContent = $(this).parent().find("textarea").val();
@@ -495,12 +497,8 @@ $(".cancelTalkReg").on("click",function(){
 		}
 	});
 
-
-
-</script>
-<script>
-Chart.defaults.global.defaultFontFamily = 'S-CoreDream-4Regular';
-Chart.defaults.global.defaultFontColor = '#363945';
+/* Chart.defaults.global.defaultFontFamily = 'S-CoreDream-4Regular';
+Chart.defaults.global.defaultFontColor = '#363945'; */
 var chartLbl = new Array();
 var chartDta = new Array();
 <c:choose>

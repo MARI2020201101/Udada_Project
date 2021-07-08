@@ -170,6 +170,11 @@ public class ChallengeServiceImpl implements ChallengeService{
 		return challengeMapper.getMySuccessDay(myChallengeInfoDTO);
 	}
 
+	@Override
+	public int checkMem(Long cNo, String mEmail) {
+		return challengeMapper.checkMem(cNo, mEmail);
+	}
+
 	
 
 }

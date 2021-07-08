@@ -251,8 +251,8 @@ public class ChallengeController {
 	}
 
 	@PreAuthorize("isAuthenticated()")
-	@PostMapping("/progress")
-	public void progress(Model model, Long cNo, Authentication auth) {
+	@RequestMapping("/progress/{cNo}")
+	public String progress(Model model,@PathVariable Long cNo, Authentication auth) {
 		
 		MyChallengeInfoDTO myChallengeInfoDTO = challengeService.myChallengeInfo(cNo);
 		List<ChallengeReadGoalDTO> readGoal = challengeService.readGoal(cNo);
@@ -278,11 +278,16 @@ public class ChallengeController {
 			List<MyChallengeGetTalkDTO> getTalkReply = challengeService.getTalkReply(reNo);
 			getTalk.get(i).setTalkReply(getTalkReply);
 		}
+		
+		int checkMem = challengeService.checkMem(cNo, auth.getName());
 
 		model.addAttribute("info", myChallengeInfoDTO);
 		model.addAttribute("mem", getMemSuccess);
 		model.addAttribute("day", getDaySuccess);
 		model.addAttribute("talk", getTalk);
+		model.addAttribute("checkMem", checkMem);
+		
+		return "challenge/progress";
 
 	}
 	

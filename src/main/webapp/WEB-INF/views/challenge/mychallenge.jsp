@@ -37,7 +37,7 @@
 								-
 								<fmt:formatDate value="${list.CFinish}" pattern="yyyy.MM.dd" />
 							</p>
-							<a href="#" data-c-no="${list.CNo}" class="stretched-link linkProgress"></a>
+							<a href="/challenge/progress/${list.CNo}" data-c-no="${list.CNo}" class="stretched-link linkProgress"></a>
 						</div>
 						<div class="col-auto" style="margin: 20px">
 						<c:forEach var="excs" items="${list.GList}">
@@ -105,7 +105,7 @@
 								-
 								<fmt:formatDate value="${list.CFinish}" pattern="yyyy.MM.dd" />
 							</p>
-							<a href="#" data-c-no="${list.CNo}" class="stretched-link linkProgress"></a>
+							<a href="/challenge/progress/${list.CNo}" data-c-no="${list.CNo}" class="stretched-link linkProgress"></a>
 						</div>
 						<div class="col-auto" style="margin: 20px">
 						<c:forEach var="excs" items="${list.GList}">
