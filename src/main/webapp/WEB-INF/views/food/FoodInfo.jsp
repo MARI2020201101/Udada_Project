@@ -8,6 +8,8 @@
 </head>
 <body>
 
+	<c:out value="${dto.FNo}"></c:out>
+
 	<sec:authorize access="isAuthenticated()">
 							<!-- Insert to MyFood Card -->
 							<div class="col-xl-4 col-md-4 mb-4">

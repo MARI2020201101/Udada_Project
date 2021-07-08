@@ -2,6 +2,7 @@ package org.ourapp.udada.food;
 
 import java.util.List;
 
+import org.ourapp.udada.foodmy.FoodMyDTO;
 import org.ourapp.udada.mapper.FoodMapper;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +43,8 @@ public class FoodServiceImpl implements FoodService{
 		// TODO Auto-generated method stub
 		return foodMapper.getMjPagination(cri);
 	}
+	
+	
 	
 	/*
 	@Override
@@ -106,6 +109,12 @@ public class FoodServiceImpl implements FoodService{
 	@Override
 	public List<FoodDTO> getByFName(String keyword) throws Exception {
 		return foodMapper.selectByFName(keyword);
+	}
+
+	@Override
+	public void registerFoodMy(FoodMyDTO foodMyDTO) throws Exception {
+		// TODO Auto-generated method stub
+		foodMapper.insertFoodMy(foodMyDTO);
 	}
 	
 }

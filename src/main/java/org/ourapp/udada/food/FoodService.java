@@ -2,6 +2,8 @@ package org.ourapp.udada.food;
 
 import java.util.List;
 
+import org.ourapp.udada.foodmy.FoodMyDTO;
+
 public interface FoodService {
 	
 	List<FoodDTO> getList() throws Exception;
@@ -24,7 +26,7 @@ public interface FoodService {
 	FoodDTO read(String fNo) throws Exception;
 	
 	
-	
+	void registerFoodMy(FoodMyDTO foodMyDTO) throws Exception;
 	
 	
 	

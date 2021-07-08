@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.ourapp.udada.food.Criteria;
 import org.ourapp.udada.food.FoodDTO;
 import org.ourapp.udada.food.PageRequestDTO;
-import org.ourapp.udada.food.PagingDTO;
+import org.ourapp.udada.foodmy.FoodMyDTO;
 
 
 @Mapper
@@ -32,7 +32,7 @@ public interface FoodMapper {
 	
 	FoodDTO read(String fNo);
 	
-	
+	void insertFoodMy(FoodMyDTO foodMyDTO);
 	
 	
 	

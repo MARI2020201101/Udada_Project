@@ -92,7 +92,10 @@
 	</select>
 	
 	
-	
+	<insert id="insertFoodMy">
+		INSERT INTO FOOD_MY(FM_NO, M_EMAIL, FM_DATE, FM_AMOUNT, F_NO) 
+		VALUES (SEQ_FM.NEXTVAL, #{mEmail} , TO_DATE( #{fmDate} , 'YYYY-MM-DD') ,#{fmAmount} , #{fNo} )
+	</insert>
 	
 	
 	
