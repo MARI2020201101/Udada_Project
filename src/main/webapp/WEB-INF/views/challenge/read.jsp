@@ -61,7 +61,7 @@
                                             <div class="h5 mb-0">
                                             <c:forEach var="goal" items="${goal}" varStatus="status">
                                             <div class="my-1">${status.count}. ${goal.EName} ${goal.cgTime}분 &nbsp;(<fmt:formatNumber value="${goal.cgTime/5*goal.EKcal}" pattern="0" />칼로리)
-                                             <button type="button" onclick="location.href='/exercise/read?eNo=12'" style="background-color:transparent; border-color: transparent; color: secondary;"><i class="fas fa-search fa-sm"></i></button>
+                                             <button type="button" onclick="location.href='/exercise/read?eNo=${goal.ENo}'" style="background-color:transparent; border-color: transparent; color: secondary;"><i class="fas fa-search fa-sm"></i></button>
                                             </div>
                                             </c:forEach>
                                             </div>
