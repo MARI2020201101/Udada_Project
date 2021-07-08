@@ -21,14 +21,36 @@
 		VALUES(SEQ_REPLY.NEXTVAL, #{oriNo}, #{mEmail}, #{reContent}, #{reDiv}, SEQ_REPLY.CURRVAL, 0)
 	</insert>
 	
+	<insert id="commentinsert">
+		INSERT INTO REPLY(RE_NO, ORI_NO, M_EMAIL, RE_CONTENT, RE_DIV, RE_GROUP, RE_INDENT)
+		VALUES(SEQ_REPLY.NEXTVAL, #{oriNo}, #{mEmail}, #{reContent}, #{reDiv}, #{reGroup}, 1)
+	</insert>
+	
 	<delete id="delete">
-		DELETE FROM REPLY WHERE RE_NO=#{reNo} AND M_EMAIL=#{mEmail}
+		DELETE FROM REPLY
+		<where>
+		<choose>
+		<when test="commentCheck==0">
+		RE_GROUP=#{reNo}
+		</when>
+		<otherwise>
+		RE_NO=#{reNo}
+		</otherwise>
+		</choose>
+		</where>
 	</delete>
+	
+	<update id="update">
+		UPDATE REPLY
+		SET RE_CONTENT = #{reContent}
+		WHERE RE_NO = #{reNo}
+	</update>
 	
 	<select id="replyList" parameterType="long">
 		SELECT * FROM REPLY
 		WHERE ORI_NO = #{oriNo}
 		ORDER BY RE_NO DESC
 	</select>
+	
 
 </mapper>

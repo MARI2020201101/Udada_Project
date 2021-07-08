@@ -157,11 +157,7 @@
 	<where>  
 		<if test = "keyword != null">
 		J_CONTENT LIKE '%'||#{keyword}||'%'
-		</if>
-		<if test="keyword !=null">
-		<![CDATA[
-		AND M_EMAIL = 'user01@gmail.com'
-		]]>
+		AND M_EMAIL = #{loginUser}
 		</if>
 	</where>
 
@@ -199,6 +195,13 @@
 		FROM REPLY
 		WHERE ORI_NO=#{oriNo} AND RE_INDENT=0 AND RE_DIV=#{reDiv}
 		ORDER BY re_date
+	</select>
+	
+	<select id="commentList" resultMap="replyMap">
+		SELECT RE_NO, ORI_NO, M_EMAIL, RE_CONTENT, RE_DATE
+		FROM REPLY
+		WHERE RE_NO!=#{reNo} AND RE_GROUP=#{reNo}
+		ORDER BY RE_DATE
 	</select>
 	
 </mapper>

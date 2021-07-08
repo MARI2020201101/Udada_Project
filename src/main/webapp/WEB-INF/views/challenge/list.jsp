@@ -41,7 +41,9 @@
 	</div>
 </form>
 	<div class="col-md-1 mb-4" style="text-align:right">
+	<sec:authorize access="isAuthenticated()">
 		<button type="button" class="btn btn-primary" onclick="location.href='register'"><i class="bi bi-journal-plus"></i></button>
+	</sec:authorize>
 	</div>
 </div>
 <hr class="mt-0 mb-4">

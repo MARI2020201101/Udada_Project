@@ -37,7 +37,7 @@
 								-
 								<fmt:formatDate value="${list.CFinish}" pattern="yyyy.MM.dd" />
 							</p>
-							<a href="progress/${list.CNo}" class="stretched-link"></a>
+							<a href="#" data-c-no="${list.CNo}" class="stretched-link linkProgress"></a>
 						</div>
 						<div class="col-auto" style="margin: 20px">
 						<c:forEach var="excs" items="${list.GList}">
@@ -98,14 +98,14 @@
 				<div class="card border-left-danger shadow h-100 py-1">
 					<div class="row no-gutters align-items-center">
 						<div class="col p-3 d-flex flex-column position-static">
-							<strong class="d-inline-block mb-2 text-danger">90% 성공</strong>
+							<strong class="d-inline-block mb-2 text-danger">종료</strong>
 							<h5 class="py-1 mb-1">${list.CTitle}</h5>
 							<p class="mb-auto">
 								<fmt:formatDate value="${list.CStart}" pattern="yyyy.MM.dd" />
 								-
 								<fmt:formatDate value="${list.CFinish}" pattern="yyyy.MM.dd" />
 							</p>
-							<a href="read/${list.CNo}" class="stretched-link"></a>
+							<a href="#" data-c-no="${list.CNo}" class="stretched-link linkProgress"></a>
 						</div>
 						<div class="col-auto" style="margin: 20px">
 						<c:forEach var="excs" items="${list.GList}">
@@ -141,6 +141,21 @@
 		mode : "range",
 		minDate : "today",
 		dateFormat : "Y-m-d"
+	});
+	
+	$(".linkProgress").on("click", function(e){
+		var cNo = $(this).data("cNo");
+        var tempForm = document.createElement("form");
+        var tempInput;
+        tempInput = document.createElement("input");
+        tempInput.setAttribute("type", "hidden");
+        tempInput.setAttribute("name", "cNo");
+        tempInput.setAttribute("value", cNo);
+        tempForm.appendChild(tempInput);
+        tempForm.setAttribute("method", "post");
+        tempForm.setAttribute("action", "/challenge/progress");
+        document.body.appendChild(tempForm);
+        tempForm.submit();
 	});
 </script>
 <!-- End of Main Content -->
