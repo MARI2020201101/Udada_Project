@@ -1,6 +1,7 @@
 package org.ourapp.udada.journal;
 
 import java.util.Date;
+import java.util.List;
 
 import org.ourapp.udada.image.ImageDTO;
 import org.ourapp.udada.reply.ReplyDTO;
@@ -25,9 +26,16 @@ public class JournalDTO {
 	private String jContent;
 	private Date jDate;
 	private int lCnt;
+	private ReplyDTO replyDTO;
+	private int heart;
+	private String loginUser;
 	
 	private ImageDTO imageDTO;
-	private ReplyDTO replyDTO;
+	private List<LikeyouDTO> likeyouList;
+	private int likeCount;
+	
+	private List<ReplyDTO> replyList;
+	
 	
 	
 	

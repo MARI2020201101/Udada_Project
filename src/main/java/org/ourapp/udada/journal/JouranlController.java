@@ -6,9 +6,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.ourapp.udada.image.ImageController;
 import org.ourapp.udada.image.ImageDTO;
+import org.ourapp.udada.member.MemberDTO;
 import org.ourapp.udada.recipe.PageRequestDTO;
 import org.ourapp.udada.recipe.PageResultDTO;
 import org.ourapp.udada.reply.ReplyDTO;
+import org.ourapp.udada.reply.ReplyService;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,53 +43,85 @@ public class JouranlController {
 
 	private final JournalService journalService;
 
-	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/list")
-	public void getList(Model model, PageRequestDTO pageRequestDTO) throws Exception{
+	public void getList(Model model, PageRequestDTO pageRequestDTO, Authentication auth) throws Exception{
+		
+		
 		List<JournalDTO> list=journalService.getListWithImageAndPagingAndSearch(pageRequestDTO);
-		model.addAttribute("list", list);
+		
 		
 		int total = journalService.countAllWithSearch(pageRequestDTO);
+		
+		 String reDiv="JRN";
+		 
+		 String loginEmail = auth.getName();
+		 
+		 for(int i=0; i<list.size(); i++) { 
+			 Long oriNo = list.get(i).getJNo();
+			 Long jNo = list.get(i).getJNo();
+			 String mEmail = list.get(i).getMEmail();
+			 List<ReplyDTO> replyList = journalService.replyList(oriNo,reDiv);
+			 list.get(i).setReplyList(replyList);
+			 
+			
+				 for(int a=0; a<replyList.size(); a++) {
+					 Long reNo=replyList.get(a).getReNo();
+					 List<ReplyDTO> commentList = journalService.commentList(reNo);
+					 replyList.get(a).setCommentList(commentList);
+				 }
+			 
+			 
+			 
+			 
+			 int likeCount = journalService.getLike(jNo, loginEmail);
+			 list.get(i).setLikeCount(likeCount);
+			 
+			 int lCnt = list.get(i).getLCnt();
+			 list.get(i).setLCnt(lCnt);
+			 log.info("댓글 :" +replyList);
+			 
+			 }
+
+		 //log.info("하트값" + list);
+		 
+		 
+		//System.out.println("total:"+total);
+		model.addAttribute("list", list);
 		model.addAttribute("pageResultDTO", new PageResultDTO(pageRequestDTO, total));
 		
+		
+
 	}//list() end
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/mylist")
-	public void myList(Model model, PageRequestDTO pageRequestDTO) throws Exception{
+	public void myList(Model model, PageRequestDTO pageRequestDTO, Authentication auth) throws Exception{
+		
+		log.info("security"+auth);
+		
+		String loginUser = auth.getName();
+		log.info("로그인 아이디"+loginUser);
+		//PageRequestDTO pagedto = new PageRequestDTO();
+		//System.out.println(pagedto);
+		pageRequestDTO.setLoginUser(loginUser);
+		
 		List<JournalDTO> mylist=journalService.mygetListWithImageAndPagingAndSearch(pageRequestDTO);
 		model.addAttribute("mylist", mylist);
 		
-		int total = journalService.countAllWithSearch(pageRequestDTO);
+		int total = journalService.mycountAllWithSearch(pageRequestDTO);
 		log.info("페이지" + total);
 		model.addAttribute("pageResultDTO", new PageResultDTO(pageRequestDTO, total));
 		
 	}
-	@ResponseBody
-	@PostMapping("/replyinsert") //댓글 등록
-	public int insertReply(ReplyDTO replyDTO) {
-		int result = 0;
-		try {
-			result = journalService.insertReply(replyDTO);
-		}catch(Exception e) {
-			System.out.println("댓글 실패 :" +e);
-			result = -1;
-		}
-		return result;
-	}
-	
-	@ResponseBody
-	@PostMapping(value = "/replylist", produces = "application/json; charset=utf-8")
-	public String replyList(Long jNo) throws Exception{
-		List<ReplyDTO> rList = journalService.replyList(jNo);
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
-		return gson.toJson(rList);
-	}
+
 	
 	@GetMapping("/register")
 	public void registerForm() {
 		
 	}
 	
+	@PreAuthorize("authentication.principal.username == #journalDTO.mEmail or hasRole('ROLE_ADMIN')")
 	@PostMapping("/register")
 	public String register(JournalDTO journalDTO, RedirectAttributes rttr, MultipartFile image) throws Exception{
 		
@@ -107,17 +143,19 @@ public class JouranlController {
 		
 	}//register() end
 	
-	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/read")
 	public void read(Long jNo, Model model, PageRequestDTO pageRequestDTO) throws Exception{
 		model.addAttribute("dto", journalService.getWithIngreAndFoodAndImage(jNo));
 	}//read() end
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/modify")
 	public void modifyForm(Long jNo, Model model) {
 		model.addAttribute("dto", journalService.read(jNo));
 	}
 	
+	@PreAuthorize("authentication.principal.username == #journalDTO.mEmail or hasRole('ROLE_ADMIN')")
 	@PostMapping("/modify")
 	public String modify(JournalDTO journalDTO, MultipartFile image, Model model, RedirectAttributes rttr, PageRequestDTO pageRequestDTO) throws Exception{
 		log.info(journalDTO);
@@ -138,6 +176,7 @@ public class JouranlController {
 		
 	}
 	
+	@PreAuthorize("authentication.principal.username == #journalDTO.mEmail or hasRole('ROLE_ADMIN')")
 	@PostMapping("/remove")
 	public String remove(JournalDTO journalDTO, RedirectAttributes rttr) throws Exception{
 		if(journalDTO.getImageDTO()!=null && journalDTO.getImageDTO().getIName()!="") {
@@ -149,43 +188,6 @@ public class JouranlController {
 		
 		return "redirect:/journal/mylist";
 	}
-	
-	@PostMapping("/insertlike")
-	public void likeinsert(LikeyouDTO likeyouDTO, RedirectAttributes rttr) throws Exception{
-		journalService.insertLike(likeyouDTO);
-	}
-	
-	
-	/*
-	@RequestMapping(value = "/readlike", method = RequestMethod.GET)
-    public void read(LikeyouDTO likeyouDTO, Model model) throws Exception {
 
-
-        int likecnt = journalService.getLike(likeyouDTO);
-        model.addAttribute("heart", likecnt);
-    }
-*/
-  @ResponseBody
-    @RequestMapping(value = "/heart", method = RequestMethod.POST, produces = "application/json")
-    public int heart(LikeyouDTO likeyouDTO, Model model) throws Exception {
-
-        int heart = journalService.getLike(likeyouDTO);
-
-
-
-        System.out.println("여기에요"+heart);
-
-        if(heart >= 1) {
-            journalService.deleteLike(likeyouDTO);
-            heart=0;
-        } else {
-            journalService.insertLike(likeyouDTO);
-            heart=1;
-        }
-
-        return heart;
-
-    }
-	
 	
 }//class end

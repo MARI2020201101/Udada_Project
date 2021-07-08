@@ -5,6 +5,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- Begin Page Content -->
 <div class="container-fluid">
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal.memberDTO.mGrade" var="loginUserRole"/>
+<sec:authentication property="principal.memberDTO.mEmail" var="loginUser"/>
 
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800">My Journal list Page</h1>
@@ -16,6 +19,7 @@
 		<form action="/journal/mylist" method="GET" id="searchForm"
 			class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
 			<input type="hidden" class="form-control form-control-user" name="pageNum" value=${pageResultDTO.pageRequestDTO.pageNum }>
+			<input type="hidden" value="${loginUser }">
 			
 			<div class="input-group">
 				<input type="text" class="form-control bg-light border- small" name="keyword" value="${pageRequestDTO.keyword }"
@@ -31,6 +35,7 @@
         
         <div class="card-body">
             <div class="table-responsive">
+               
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                     <tr>
@@ -73,7 +78,7 @@
 		  </ul>
 		</nav>
 
-
+</sec:authorize>
 </div>
 <!-- /.container-fluid -->
 </div>

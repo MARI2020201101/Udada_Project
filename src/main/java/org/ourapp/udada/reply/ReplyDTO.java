@@ -1,6 +1,7 @@
 package org.ourapp.udada.reply;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,5 +20,7 @@ public class ReplyDTO {
 	private String reDiv; //RCP, CHG, JRN
 	private int reGroup;
 	private int reIndent;
+	
+	private List<ReplyDTO> commentList;
 	
 }//class end

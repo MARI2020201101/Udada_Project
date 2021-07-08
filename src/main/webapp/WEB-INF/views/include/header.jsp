@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib  prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<% response.setHeader("Cache-Control","no-store"); response.setHeader("Pragma","no-cache"); response.setDateHeader("Expires",0); if (request.getProtocol().equals("HTTP/1.1")) response.setHeader("Cache-Control", "no-cache"); %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -46,7 +47,7 @@
     
 </head>
 
-<body id="page-top" style="font-family: 'S-CoreDream-4Regular', sans-serif;">
+<body id="page-top" style="font-family: 'S-CoreDream-4Regular', sans-serif; ">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -83,12 +84,12 @@
             </li>
 
             <li class="nav-item mt-0">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#calendar"
-                    aria-expanded="true" aria-controls="calendar">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#myCalendar"
+                    aria-expanded="true" aria-controls="myCalendar">
                     <i class="fas fa-fw fa-calendar"></i>
                     <span>캘린더</span>
                 </a>
-                <div id="calendar" class="collapse" aria-labelledby="headingUtilities"
+                <div id="myCalendar" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/member/calendar">주간 캘린더</a>
@@ -112,7 +113,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/journal/list">저널 리스트</a>
-                        <a class="collapse-item" href="#">마이 저널</a>
+                        <a class="collapse-item" href="/journal/mylist">마이 저널</a>
                     </div>
                 </div>
             </li>
@@ -175,10 +176,10 @@
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content-wrapper" class="d-flex flex-column" style="background-color: #FAFCFF">
 
 			<!-- Main Content -->
-			<div id="content" >
+			<div id="content">
 				<!-- Topbar -->
 				<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 				    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3" style="color: gray;">

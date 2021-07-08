@@ -6,9 +6,14 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
+<sec:authorize access="isAuthenticated()">
+
+<sec:authentication property="principal.memberDTO.mGrade" var="loginUserRole"/>
+<sec:authentication property="principal.memberDTO.mEmail" var="loginUser"/>
+
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800">Journal list Page</h1>
-	<a href="/journal/register" class="btn btn-primary"> <span class="text">Register</span></a>
+
 	
 	<!-- Topbar Search -->
 		<form action="/journal/list" method="GET" id="searchForm"
@@ -42,41 +47,89 @@
 			</div>
 			<hr>
 			
-			<div>
-				<a class="btn heart">
-           		<img id="heart" src="" width="40px"></a>${dto.LCnt }
-           		<a class="btn">
-           		<img id="comment" src="/resources/imgs/comment.svg" width="40px"></a>
-			</div>
+			<!-- 좋아요 -->
 
 			
-
+				<div class="heart">
+					<input type="hidden" class="mEmail" value="${loginUser}"/>
+	                <input type="hidden" class="heartJno" name="jNo" value="${dto.JNo}"/>
+	                <input type="hidden" class="heartval" value="${dto.likeCount}"/>
+	                <c:choose>
+	                	<c:when test="${dto.likeCount>0}">
+						<a class="btn heartbtn" data-jno="${dto.JNo}">
+	           			<img class="heartimg" src="/resources/imgs/heart1.svg" width="30px"></a>${dto.LCnt}
+	           			</c:when>
+	           			<c:otherwise>
+	           			<a class="btn heartbtn" data-jno="${dto.JNo}">
+	           			<img class="heartimg" src="/resources/imgs/heart2.svg" width="30px"></a>${dto.LCnt}
+	           			</c:otherwise>
+	           		
+	           		</c:choose>
+	           		<a class="btn">
+	           		<img class="comment" src="/resources/imgs/comment.svg" width="30px"></a>
+				</div>
 			
-    <div class="row height d-flex justify-content-center align-items-center">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="p-3">
-                    <h6>Comments</h6>
-                    <input type="hidden" name="mEmail" value="${dto.MEmail }"/>
-                    <input type="hidden" name="jNo" value="${dto.JNo }"/>
-                </div>
-                <div class="mt-3 d-flex flex-row align-items-center p-3 form-color"> <img src="https://i.imgur.com/zQZSWrt.jpg" width="50" class="rounded-circle mr-2"> <textarea type="text" id="reContent" class="form-control" placeholder="Enter your comment..."></textarea>
-                &nbsp;<input type="button" class="btn btn-primary" id="replybtn" value="등록"></input></div>
-                <div class="mt-2">
-                    <div class="d-flex flex-row p-3"> 
-                    <img src="https://i.imgur.com/zQZSWrt.jpg" width="40" height="40" class="rounded-circle mr-3">
-                        <div class="w-100">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex flex-row align-items-center"> <span class="mr-2">${dto.replyDTO.MEmail }</span> <small class="c-badge">Top Comment</small> </div> <small>12h ago</small>
-                            </div>
-                            <p>${dto.replyDTO.reContent }12333</p>
-                            <div class="d-flex flex-row user-feed"> <span class="wish"><i class="fa fa-heartbeat mr-2"></i>24</span><span class="ml-3"><i class="fa fa-comments-o mr-2"></i>Reply</span> </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+			<!-- 댓글 -->
+			    <div class="row height d-flex justify-content-center align-items-center">
+			        <div class="col-md-12">
+			            <div class="replycard">
+			                <div class="p-3">
+			                    <h6>Comments</h6>
+			                    <input type="hidden" name="mEmail" value="${dto.MEmail }"/>
+			                    <input type="hidden" id="reJno" name="jNo" value="${dto.JNo }"/>
+			   
+			
+			                </div>
+			                <div class="mt-3 d-flex flex-row align-items-center p-3 form-color"> <textarea type="text" id="reContent" class="form-control" placeholder="Enter your comment..."></textarea>
+			                &nbsp;<input type="button" class="btn btn-primary replybtn" value="등록"></input></div>
+			                
+			                <div class="mt-2">
+							<c:forEach var="reply" items="${dto.replyList}">
+			                    <div class="d-flex flex-row p-3"> 
+			                        <div class="w-100 commentHome">
+			                            <div class="d-flex justify-content-between align-items-center">
+			                                <div class="d-flex flex-row align-items-center">
+			                                 <span class="mr-2">${reply.MEmail}</span>
+			                                </div> <small>${reply.reDate }</small>
+			                            </div>
+			                            <p data-comment-check="0">${reply.reContent}</p>
+				                        <div class="input-group replyModify" data-reno="${reply.reNo }">
+						  					<textarea rows="1" class="form-control">${reply.reContent}</textarea>
+						  					<span><input type="button" class="btn btn-primary replyModifybtn" value="등록"></input></span>
+										</div>
+			                            <c:forEach var="comment" items="${reply.commentList}">
+			                            	<div class="mt-1 commentContent" style="font-size: small;">&nbsp;└ ${comment.MEmail} : ${comment.reContent}
+			                            		<div class="input-group commentModify" data-reno="${comment.reNo }">
+								  					<textarea rows="1" class="form-control">${comment.reContent}</textarea>
+								  					<span><input type="button" class="btn btn-primary commentModifybtn" value="등록"></input></span>
+												</div>
+			                            		<span>
+												&nbsp;&nbsp;&nbsp;<a class="commentmodify" data-commentcheck="1" data-reno="${comment.reNo }"><small>수정</small></a>
+			                            		&nbsp;&nbsp;&nbsp;<span><a class="commentdel" data-commentcheck="1" data-reno="${comment.reNo }"><small>삭제</small></a></span>
+			                            		</span>
+												<div class="mt-1" style="display: inline-block; float: right; font-size: x-small;">
+	
+												${comment.reDate}
+												</div>
+											</div>
+			                            </c:forEach>
+			                            	<div>
+			                            		<div class="input-group commentTxt" data-reno="${reply.reNo}">
+				                            	<textarea rows="1" class="form-control"></textarea>&nbsp;
+				                            	<span><input type="button" class="btn btn-primary commentinsertbtn" value="등록" data-reno="${reply.reNo}"></input></span>
+				                            	</div>
+			                            		<div class="d-flex flex-row user-feed"><a class="commentinsert" data-comment-check="0" data-reno="${reply.reNo }"><small>답글작성</small></a>
+			                            		&nbsp;&nbsp;&nbsp;<span class="replymodify"><a class="replymodifybtn" data-commentcheck="0" data-reno="${reply.reNo }"><small>수정</small></a></span>
+			                            		&nbsp;&nbsp;&nbsp;<span><a class="commentdel" data-commentcheck="0" data-reno="${reply.reNo }"><small>삭제</small></a></span></div>
+			                            	</div>
+			                        </div>
+			                    </div>
+							</c:forEach>
+			                </div>
+			                
+			            </div>
+			        </div>
+			    </div>
 
 		</div>
 		<br>
@@ -102,8 +155,9 @@
 		    </li>
 		  </ul>
 		</nav>
-
+</sec:authorize>
 </div>
+
 <!-- /.container-fluid -->
 </div>
 <!-- End of Main Content -->
@@ -129,65 +183,36 @@
 </div>
 <script>
 $(document).ready(function(){
-	/*
-	function replySave(mEmail, jNo){
-		console.log($("#reContent").text());
-		console.log($("#reContent").val());
-		
-		var data={
-				mEmail : mEmail,
-				jNo : jNo,
-				reContent : $("#reContent").text()
-		}
-		
-		$.ajax({  
-			type : "post",
-			url : "/reply/replyinsert",
-			data : JSON.stringify(data),
-			contentType : "application/json; charset=utf-8",
-			dataType : "json"
-		}).done(function(result){
-			console.log(result);
-			});	
-		}
-	*/
+
 	
 	
-	$("#replybtn").on("click", function(e) {
-		alert("클릭");
-		var mEmail = "user01@gmail.com"; //회원 아이디
-		var jNo = "${dto.JNo}"; //글번호
-		var reContent = $("#reContent").val(); //댓글 내용
+	
+	$(".replybtn").on("click", function(e) {
 		
+		
+		
+		var mEmail = '${loginUser}'; //회원 아이디
+		var reContent = $(this).closest(".replycard").find("#reContent").val(); //댓글 내용
+		//var oriNo = $("#reJno").val();
+		var oriNo = $(this).closest(".replycard").find("#reJno").val();
+		var result= "";
 		$.ajax({
 			type : "POST",
 			url : "/reply/replyinsert",
 			data : {reContent : reContent,
-					jNo : jNo,
-					mEmail : mEmail},
+					oriNo : oriNo,
+					mEmail : mEmail,
+					reDiv : "JRN"},
 			dataType : "json",
 			success :
 				function(data){
-				var msg;
-				var result= result;
-				
-				switch(result){
-				case 1 : //성공
-					msg = "댓글 등록 성공";
-					//작성한 textarea를 지워줌
-					$("#reContent").val("");
-					selectRlist();
-					break;
-					
-				case 0 : //등록 실패
-					msg = "댓글 등록 실패";
-					break;
-				
-				case 2 :
-					msg = "댓글 등록 오류 발생";
-					break;
+				result= data;
+				if(reContent=="" || reContent==null){
+					alert("작성안됨");
+				} else if(result==1){
+					alert("등록되었습니다");
+					location.reload(); //새로고침
 				}
-				alert(msg);
 				},
 				error : function(){
 					console.log("ajax 댓글 실패");
@@ -195,50 +220,184 @@ $(document).ready(function(){
 		});
 	});
 	
-	//댓글 목록 조회
-	function selectRlist(){
-		var jNo = "${dto.JNo}";
+	
+	$(".commentinsertbtn").on("click", function(e) {
+		
+		var mEmail = '${loginUser}';
+		var oriNo = $(this).closest(".replycard").find("#reJno").val();
+		var commentTxt = $(this).closest("div").find("textarea").val();
+		var targetreNo = $(this).data('reno');
+		var result= "";
+		console.log(targetreNo);
+		console.log(commentTxt);
 		
 		$.ajax({
-			url : "reply/replylist",
 			type : "POST",
-			data : {"jNo" : jNo},
+			url : "/reply/commentinsert",
+			data : {reContent : commentTxt,
+					oriNo : oriNo,
+					mEmail : mEmail,
+					reDiv : "JRN",
+					reGroup : targetreNo},
 			dataType : "json",
-			success : function(rList){
-				var $rArea = $("#reListArea");
-				//console.log(rList);
-				
-				if(rList = ""){ //조회할 댓글이 없는 경우
-					$rArea.html("<li>등록된 댓글이 없습니다</li>")
-				}else{
-					$rArea.html(""); //기존 댓글 목록 삭제
+			success :
+				function(data){
+				result= data;
+				if(reContent=="" || reContent==null){
+					alert("대댓글실패");
+				} else if(result==1){
+					alert("대댓글성공");
+					location.reload();
+				}
+				},
+				error : function(){
+					console.log("ajax 대댓글 실패");
+				}
+		});
+	});
+	
+	
+	
+
+$(".commentTxt").hide();
+$(".replyModify").hide();
+$(".commentModify").hide();
+
+	
+	$(".commentinsert").on("click", function(e) {
+			
+				$(this).parent().parent().parent().find(".commentTxt").toggle();
 					
-					$.each(rList : function(i){
-						var $li = $("<li>");
-						var $rWriter = $("<span>").prop(
-										"class", "rWriter").html(rList[i].mEmail);
-						var $rDate = $("<span>").prop(
-									"class", "wDate").html(rList[i].reDate);
-						var $rContent = $("<p>").prop("class", "reContent").html(rList[i].reContent);
-						var $hr = $("<hr>");
+		});
+	
+	
+	
+	
+	$(".commentdel").on("click", function(e) {
+	
+		var reNo = $(this).data('reno');
+		var commentCheck = $(this).data('commentcheck');
+		
+		
+		$.ajax({
+			type : "POST",
+			url : "/reply/replyDelete",
+			data : {reNo : reNo,
+					commentCheck : commentCheck},
+			dataType : "json",
+			success :
+				function(data){
+				var data = data;
+				console.log(data);
+				if(data >= 1){
+					alert("삭제되었습니다.")
+
+					
+				}else{
+					alert("본인이 작성한 댓글만 삭제 할 수 있습니다.")
+
+				}
+				location.reload();
+				
+			}
+			
+		});
+		
+		
+	});
+	
+	$(".replymodifybtn").on("click", function(e){
+		$(this).parent().parent().parent().parent().find(".replyModify").toggle();
+	});
+	
+	$(".commentmodify").on("click", function(e){
+		$(this).parent().parent().find(".commentModify").toggle();
+	});
+
+	
+	
+	$(".replyModifybtn").on("click", function(e) {
+		
+		var reNo = $(this).parent().parent().data('reno');
+		var reContent = $(this).closest(".commentHome").find("textarea").val();
+		
+		//console.log(reNo);
+		//console.log(reContent);
+		
+		
+		$.ajax({
+			type : "POST",
+			url : "/reply/replyModify",
+			data : {reContent : reContent,
+					reNo : reNo},
+			dataType : "json",
+			async:false
+		});
+			
+		location.reload();
+		
+	});
+	
+	
+	$(".commentModifybtn").on("click", function(e) {
+			
+			var reNo = $(this).parent().parent().data('reno');
+			var reContent = $(this).parent().parent().find("textarea").val();
+			
+			console.log(reNo);
+			console.log(reContent);
+			
+			
+			$.ajax({
+				type : "POST",
+				url : "/reply/replyModify",
+				data : {reContent : reContent,
+						reNo : reNo},
+				dataType : "json",
+				async:false
+			});
+				
+			location.reload();
+			
+		});
+	
+	
+	
+	$(".heartbtn").on("click", function(e) {
+			
+			var target = $(this);
+			var targetJno = $(this).data('jno');
+			console.log("targetJno>>",targetJno);
+			var heartval = $(".heartval").val;
+			var mEmail = '${loginUser}';
+			var result = "";
+	
+			
+			$.ajax({
+				type : "POST",
+				url : "/likeyou/insertLike",
+				data : {jNo : targetJno,
+						mEmail : mEmail},
+				dataType : "json",
+				success :
+					function(data){
+					var data = data;
+					//console.log(typeof data);
+					if(data >= 1){
+						$(".heartimg").prop("src", "/resources/imgs/heart2.svg");
+	
 						
-						//메소드 체이닝
-						$li.append($rWriter).append($rDate).append("$rContent");
-						
-						$rArea.append($li).append($hr);
-					});
+					}else{
+						$(".heartimg").prop("src", "/resources/imgs/heart1.svg");
+	
+					}
+					location.reload();
+					
 				}
 				
-			},
-			error : function(){
-				console.log("댓글 목록 조회 ajax 실패");
-			}
+			});
+			
 		});
-	}
-	
-	$(function(){
-		selectRlist();
-	});
 
 
 	var searchForm = $("#searchForm");
@@ -307,5 +466,6 @@ $(document).ready(function(){
 	*/
 </script>
 <!-- 좋아요 버튼 끝 -->
+
 
 <%@ include file="../include/footer.jsp"%>

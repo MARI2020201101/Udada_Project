@@ -27,6 +27,8 @@ public class MyChallengeInfoDTO {
 	private int totalScs;
 	private int mySuccess;
 	private String mEmail;
+	private String charStart;
+	private String charFinish;
 	List<ChallengeReadGoalDTO> goalList;
 	
 	

@@ -1,5 +1,7 @@
 package org.ourapp.udada.recipe;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,6 +38,11 @@ public class RecipeDTO {
 	private ImageDTO imageDTO;
 	
 	
+	public static String dateFormatter(Date rDate) {
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd (E)");
+		String formatedRDate = format.format(rDate);
+		return formatedRDate;
+	}
 
 	
 }
