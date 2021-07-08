@@ -124,7 +124,7 @@
 	function checkForm(){	
 		var cnt=$("#excsCheckCnt").val();
 		var btn=$(".modalBtn");
-		var total=$("#total").val();
+		var cTotal=$("#cTotal").val();
 		var cContent=$("#cContent").val();
 		var cTitle=$("#cTitle").val();
 		var cPeriod=$("#cPeriod").val();
