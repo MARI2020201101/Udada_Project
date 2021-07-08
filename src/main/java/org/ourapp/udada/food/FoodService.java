@@ -17,7 +17,6 @@ public interface FoodService {
 	
 	
 	
-	
 	List<FoodDTO> getByFName(String keyword) throws Exception;
 
 }
