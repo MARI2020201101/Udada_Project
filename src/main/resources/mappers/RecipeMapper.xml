@@ -13,6 +13,7 @@
 			<result column="R_DATE" property="rDate"/>
 			<association property="imageDTO" resultMap="imageMap" />
 			<collection property="ingredientList" resultMap="recipeIngredientMap"></collection>
+			<collection property="replyList" resultMap="replyMap"></collection>
 	</resultMap>
 	
 	<resultMap type="org.ourapp.udada.recipe.RecipeIngredientDTO" id="recipeIngredientMap">
@@ -40,6 +41,17 @@
 			<result column="SUM_CARBO" property="sumCarbo"/>
 	</resultMap>
 
+	<resultMap type="org.ourapp.udada.reply.ReplyDTO" id="replyMap">
+		<id column="RE_NO" property="reNo"/>
+		<result column="ORI_NO" property="oriNo"/>
+		<result column="M_EMAIL" property="mEmail"/>
+		<result column="RE_CONTENT" property="reContent"/>
+		<result column="RE_DATE" property="reDate"/>
+		<result column="RE_DIV" property="reDiv"/>
+		<result column="RE_GROUP" property="reGroup"/>
+		<result column="RE_INDENT" property="reIndent"/>
+	</resultMap>
+	
 	<select id="getList" resultMap="recipeMap">
 		SELECT * FROM RECIPE ORDER BY R_NO DESC
 	</select>
@@ -192,5 +204,19 @@
 			M_EMAIL = #{keyword}
 		</if>
 	</where>	
+	</select>
+	
+	<select id="selectWithIngreAndFoodAndImageAndReply" resultMap="recipeMap">
+		SELECT R.*, RI.*, F.* , I.*, RE.* FROM RECIPE R
+		LEFT JOIN RECIPE_INGREDIENT RI 
+		ON R.R_NO = RI.R_NO
+		LEFT JOIN FOOD F
+		ON RI.F_NO = F.F_NO
+        LEFT JOIN IMAGE I
+        ON R.R_NO = I.ORI_NO
+        LEFT JOIN REPLY RE
+        ON RE.ORI_NO = R.R_NO
+		WHERE R.R_NO = #{rNo}
+	
 	</select>
 </mapper>

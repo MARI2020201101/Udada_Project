@@ -210,7 +210,7 @@ $(document).ready(function(){
 				if(reContent=="" || reContent==null){
 					alert("작성안됨");
 				} else if(result==1){
-					alert("등록되었습니다");
+					//alert("등록되었습니다");
 					location.reload(); //새로고침
 				}
 				},
@@ -246,7 +246,7 @@ $(document).ready(function(){
 				if(reContent=="" || reContent==null){
 					alert("대댓글실패");
 				} else if(result==1){
-					alert("대댓글성공");
+					//alert("대댓글성공");
 					location.reload();
 				}
 				},

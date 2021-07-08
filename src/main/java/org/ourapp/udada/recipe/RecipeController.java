@@ -57,7 +57,8 @@ public class RecipeController {
 		// model.addAttribute("dto", recipeService.get(rNo));
 		// model.addAttribute("dto", recipeService.getWithIngredient(rNo));
 		// model.addAttribute("dto", recipeService.getWithIngredientAndFood(rNo));
-		model.addAttribute("dto", recipeService.getWithIngreAndFoodAndImage(rNo));
+		//model.addAttribute("dto", recipeService.getWithIngreAndFoodAndImage(rNo));
+		model.addAttribute("dto", recipeService.getWithIngreAndFoodAndImageAndReply(rNo));
 	}
 
 	@PreAuthorize("isAuthenticated()")

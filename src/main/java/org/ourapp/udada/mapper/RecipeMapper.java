@@ -31,4 +31,6 @@ public interface RecipeMapper {
 	void insertFoodMy(FoodMyDTO foodMyDTO);
 	List<RecipeDTO> selectByMEmail(PageRequestDTO pageRequestDTO);
 	int countAllWithMEmail(PageRequestDTO pageRequestDTO);
+	
+	RecipeDTO selectWithIngreAndFoodAndImageAndReply(Long rNo);
 }

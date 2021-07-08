@@ -145,6 +145,84 @@
 		</div>
 	</div>
 
+
+	<!-- 댓글 -->
+			    <div class="row height d-flex justify-content-center align-items-center">
+			        <div class="col-md-12">
+			            <div class="replycard">
+			          
+			                    
+			                    <b>Comments</b>&nbsp;&nbsp;<img class="comment" src="/resources/imgs/comment.svg" width="30px">
+			                    <input type="hidden" name="mEmail" value="${dto.MEmail }"/>
+			                    <input type="hidden" id="reRno" name="rNo" value="${dto.RNo }"/>
+		
+			                <div class="mt-3 d-flex flex-row align-items-center p-3 form-color"> <textarea type="text" id="reContent" class="form-control" placeholder="Enter your comment..."></textarea>
+			                &nbsp;<input type="button" class="btn btn-primary replybtn" value="등록"></input></div>
+	
+	                
+			                <div class="mt-2">
+				                
+							<c:forEach var="reply" items="${dto.replyList}">
+			                    <div class="d-flex flex-row p-3"> 
+			                        <div class="w-100 commentHome" data-redate="${reply.reDate }">
+			                            <div class="d-flex justify-content-between align-items-center">
+			                                <div class="d-flex flex-row align-items-center">
+			                                 <span class="mr-2">${reply.MEmail}</span>
+			                                </div> <small>${reply.reDate }</small>
+			                            </div>
+			                            <p data-comment-check="0">${reply.reContent}</p>
+				                        <div class="input-group replyModify" data-reno="${reply.reNo }">
+						  					<textarea rows="1" class="form-control">${reply.reContent}</textarea>
+						  					<span><input type="button" class="btn btn-primary replyModifybtn" value="등록"></input></span>
+										</div>
+								
+
+			                            <c:forEach var="comment" items="${reply.commentList}">
+			                            	<div class="mt-1 commentContent" style="font-size: small;" >&nbsp;└ ${comment.MEmail} : ${comment.reContent}
+			                            		<div class="input-group commentModify" data-reno="${comment.reNo }">
+								  					<textarea rows="1" class="form-control">${comment.reContent}</textarea>
+								  					<span><input type="button" class="btn btn-primary commentModifybtn" value="등록"></input></span>
+												</div>
+			                            		<span>
+												&nbsp;&nbsp;&nbsp;<a class="commentmodify" data-commentcheck="1" data-reno="${comment.reNo }"><small>수정</small></a>
+			                            		&nbsp;&nbsp;&nbsp;<span><a class="commentdel" data-commentcheck="1" data-reno="${comment.reNo }"><small>삭제</small></a></span>
+			                            		</span>
+												<div class="mt-1" style="display: inline-block; float: right; font-size: x-small;">
+	
+												${comment.reDate}
+												</div>
+											</div>
+			                            </c:forEach>
+			                            
+		                     
+			                     
+			                            
+			                            	<div>
+			                            		<div class="input-group commentTxt" data-reno="${reply.reNo}">
+				                            	<textarea rows="1" class="form-control"></textarea>&nbsp;
+				                            	<span><input type="button" class="btn btn-primary commentinsertbtn" value="등록" data-reno="${reply.reNo}"></input></span>
+				                            	</div>
+			                            		<div class="d-flex flex-row user-feed">
+			                            		
+			                            		<%-- <a class="commentinsert" data-comment-check="0" data-reno="${reply.reNo }"><small>답글작성</small></a> --%>
+			                            		&nbsp;&nbsp;&nbsp;<span class="replymodify"><a class="replymodifybtn" data-commentcheck="0" data-reno="${reply.reNo }"><small>수정</small></a></span>
+			                            		&nbsp;&nbsp;&nbsp;<span><a class="commentdel" data-commentcheck="0" data-reno="${reply.reNo }"><small>삭제</small></a></span></div>
+			                            	</div>
+			                        </div>
+			                    </div>
+							</c:forEach>
+							
+							
+							
+							       
+			                </div>
+			                
+			            </div>
+			        </div>
+			    </div>
+			    <!-- 댓글 end -->
+
+
 	
 	
 	<input type="hidden" class="form-control form-control-user" name="pageNum" value=${pageRequestDTO.pageNum }> 
@@ -196,6 +274,9 @@
 $(document).ready(function(){
 
 	var rNo = "${dto.RNo}";
+	var commentList = "${reply.commentList}";
+	var commentHome = $(".commentHome").data('redate');
+	
 	var starBox = $( ".starBox" );
 	var msg = '${msg}';
 	var ingreName = $(".ingreName");
@@ -209,9 +290,202 @@ $(document).ready(function(){
 	var ctx = document.getElementById("recipeSpecChart");
 	var ctx2 = document.getElementById("kaloriesSpecBar");
 	console.log("mEmail>>",mEmail);
+	console.log("commentHome>>",commentHome);
+
 	
 	loadStar();
 	loadSpec();
+
+
+if(!commentHome){
+		
+		$(".commentHome").hide();
+		} 
+
+	
+$(".replybtn").on("click", function(e) {
+		
+		
+		
+		var mEmail = '${loginUser}'; //회원 아이디
+		var reContent = $(this).closest(".replycard").find("#reContent").val(); //댓글 내용
+		//var oriNo = $("#reJno").val();
+		var oriNo = $(this).closest(".replycard").find("#reRno").val();
+		var result= "";
+		$.ajax({
+			type : "POST",
+			url : "/reply/replyinsert",
+			data : {reContent : reContent,
+					oriNo : oriNo,
+					mEmail : mEmail,
+					reDiv : "RCP"},
+			dataType : "json",
+			success :
+				function(data){
+				result= data;
+				if(reContent=="" || reContent==null){
+					alert("작성안됨");
+				} else if(result==1){
+					//alert("등록되었습니다");
+					location.reload(); //새로고침
+				}
+				},
+				error : function(){
+					console.log("ajax 댓글 실패");
+				}
+		});
+	});
+	
+	
+	$(".commentinsertbtn").on("click", function(e) {
+		
+		var mEmail = '${loginUser}';
+		var oriNo = $(this).closest(".replycard").find("#reRno").val();
+		var commentTxt = $(this).closest("div").find("textarea").val();
+		var targetreNo = $(this).data('reno');
+		var result= "";
+		console.log(targetreNo);
+		console.log(commentTxt);
+		
+		$.ajax({
+			type : "POST",
+			url : "/reply/commentinsert",
+			data : {reContent : commentTxt,
+					oriNo : oriNo,
+					mEmail : mEmail,
+					reDiv : "RCP",
+					reGroup : targetreNo},
+			dataType : "json",
+			success :
+				function(data){
+				result= data;
+				if(reContent=="" || reContent==null){
+					alert("대댓글실패");
+				} else if(result==1){
+					alert("대댓글성공");
+					location.reload();
+				}
+				},
+				error : function(){
+					console.log("ajax 대댓글 실패");
+				}
+		});
+	});
+	
+	
+	
+
+$(".commentTxt").hide();
+$(".replyModify").hide();
+$(".commentModify").hide();
+
+	
+	$(".commentinsert").on("click", function(e) {
+			
+				$(this).parent().parent().parent().find(".commentTxt").toggle();
+					
+		});
+	
+	
+	
+	
+	$(".commentdel").on("click", function(e) {
+	
+		var reNo = $(this).data('reno');
+		var commentCheck = $(this).data('commentcheck');
+		
+		
+		$.ajax({
+			type : "POST",
+			url : "/reply/replyDelete",
+			data : {reNo : reNo,
+					commentCheck : commentCheck},
+			dataType : "json",
+			success :
+				function(data){
+				var data = data;
+				console.log(data);
+				if(data >= 1){
+					alert("삭제되었습니다.")
+
+					
+				}else{
+					alert("본인이 작성한 댓글만 삭제 할 수 있습니다.")
+
+				}
+				location.reload();
+				
+			}
+			
+		});
+		
+		
+	});
+	
+	$(".replymodifybtn").on("click", function(e){
+		$(this).parent().parent().parent().parent().find(".replyModify").toggle();
+	});
+	
+	$(".commentmodify").on("click", function(e){
+		$(this).parent().parent().find(".commentModify").toggle();
+	});
+
+	
+	
+	$(".replyModifybtn").on("click", function(e) {
+		
+		var reNo = $(this).parent().parent().data('reno');
+		var reContent = $(this).closest(".commentHome").find("textarea").val();
+		
+		//console.log(reNo);
+		//console.log(reContent);
+		
+		
+		$.ajax({
+			type : "POST",
+			url : "/reply/replyModify",
+			data : {reContent : reContent,
+					reNo : reNo},
+			dataType : "json",
+			async:false
+		});
+			
+		location.reload();
+		
+	});
+	
+	
+	$(".commentModifybtn").on("click", function(e) {
+			
+			var reNo = $(this).parent().parent().data('reno');
+			var reContent = $(this).parent().parent().find("textarea").val();
+			
+			console.log(reNo);
+			console.log(reContent);
+			
+			
+			$.ajax({
+				type : "POST",
+				url : "/reply/replyModify",
+				data : {reContent : reContent,
+						reNo : reNo},
+				dataType : "json",
+				async:false
+			});
+				
+			location.reload();
+			
+		});
+
+
+
+
+
+
+
+
+
+	
 	
 	$(".daySelector").flatpickr(
 			{

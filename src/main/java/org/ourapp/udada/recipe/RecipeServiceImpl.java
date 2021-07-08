@@ -201,6 +201,11 @@ public class RecipeServiceImpl implements RecipeService{
 		return recipeMapper.countAllWithMEmail(pageRequestDTO);
 	}
 
+	@Override
+	public RecipeDTO getWithIngreAndFoodAndImageAndReply(Long rNo) throws Exception {
+		return recipeMapper.selectWithIngreAndFoodAndImageAndReply(rNo);
+	}
+
 
 	
 	
