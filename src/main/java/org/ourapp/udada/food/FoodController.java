@@ -20,7 +20,7 @@ public class FoodController {
 	
 	
 	@GetMapping("/list")
-	public String getMjList(Model model) throws Exception{
+	public String getMjList(Model model, Criteria cri) throws Exception{
 		log.info("Food_MjListController.......................");
 		
 		//List<FoodDTO> list = foodService.getList();
@@ -36,16 +36,13 @@ public class FoodController {
 		int total = foodService.countAllWithSearch(pageRequestDTO);
 		model.addAttribute("pageResultDTO", new PageResultDTO(pageRequestDTO, total));*/
 		
-		//model.addAttribute("list", foodService.getList(cri));
+		model.addAttribute("list", foodService.getList(cri));
 		
-		/*
-		 * PageMaker pageMaker = new PageMaker(); pageMaker.setCri(cri);
-		 * pageMaker.setTotalCount(foodService.countAll());
-		 */
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(foodService.countAll());
 		
-		
-		
-		//model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("pageMaker", pageMaker);
 		
 		return "food/list";
 		
@@ -85,9 +82,9 @@ public class FoodController {
 		
 		log.info("Food_MinListController.......................");
 		
-		//List<FoodDTO> Minlist = foodService.getMinList(fMjclass);
+		List<FoodDTO> Minlist = foodService.getMinList(fMjclass);
 		
-		//model.addAttribute("Minlist", Minlist);
+		model.addAttribute("Minlist", Minlist);
 		
 	}
 	
@@ -97,9 +94,9 @@ public class FoodController {
 		
 		log.info("Food_NameListController.......................");
 		
-		//FoodDTO dto = foodService.getFoodList(fNo);
-		//log.info("Foodlist : "+dto);
-		//model.addAttribute("dto", dto);
+		FoodDTO dto = foodService.getFoodList(fNo);
+		log.info("Foodlist : "+dto);
+		model.addAttribute("dto", dto);
 		
 	}
 	

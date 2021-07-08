@@ -12,7 +12,7 @@
 <div class="container-fluid">
 
 	<!-- Page Heading -->
-	<h1 class="h3 mb-4 text-gray-800">Food List Page</h1>
+	<!-- h1 class="h3 mb-4 text-gray-800">Food List Page</h1> -->
 	
 		<!-- <a href="/recipe/register" class="btn btn-primary">
             <span class="text">Register</span>
@@ -20,92 +20,160 @@
         
         <div class="card-body">
         
-            <div class="table-responsive">
-            
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    
-                    <thead>
-	                    <tr>
-	                    	<th  scope="col">식품 코드</th>
-	                        <th  scope="col">대분류</th>
-	                        <th  scope="col">소분류</th>
-	                        <th  scope="col">식품 명</th>
-	                    </tr>
-                    </thead>
-                    
-                    <tbody>
+        	<h1 class="h3 mb-4 text-gray-800">
+				<a href="/food/list"> Food MjList Page</a>
+			</h1>
+        
+        	<%-- --%>
+        	<form action="/food/list" method="GET" id="searchForm" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+				
+				<input type="hidden" class="form-control form-control-user" name="pageNum" value=${pageResultDTO.pageRequestDTO.pageNum }>
 
-						<c:forEach var="dto" items="${list}">
-							<tr>
-							
-								<th scope="row"><c:out value="${dto.FNo}"></c:out></th>
-								<td><c:out value="${dto.FMjclass}" /></td>
-								<td><c:out value="${dto.FMinclass}"></c:out></td>
-								<td><a href='/food/read?fNo=<c:out value="${dto.FNo}"/>'><c:out value="${dto.FName}"/></a></td>
-							
-							</tr>
-							
-						</c:forEach>
+				<div class="input-group">
 						
-						<!-- <td class="rightCell">
+					<input type="text" class="form-control bg-light border- small" name="keyword" value="${pageRequestDTO.keyword }"
+						placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
 						
-							<div class="rightCellContent">
-							
-								<div class="quickSearchMiddle">
-								
-									<table width="100%" cellpadding="0" cellspacing="0">
-									
-										<tr>
-											<td><div class="title">음식 검색</div></td>
-										</tr>
-										
-										<tr style="height:42px">
-											<td>
-												<div>
-													<input type="text" class="searchinput" id="ByFood" value="검색 입력" onclick="SearchOnclick" autocomplete="off" maxlength="50" />
-													<img src="/resources/imgs/food/searchInput.png" onmouseover="this.src='/resources/imgs/food/searchInput.png'" onclick="foodSearch()" title="영양정보 검색" />
-												</div>
-											</td>
-										</tr>
-									
-									</table>
-								
-								</div>
-							
-							</div>
-						
-						</td> -->
-						
-					</tbody>
-					
-					<div>
-						
-				  		<ul>
-				    		<c:if test="${pageMaker.prev}">
-				    			<li><a href="list${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
-				    		</c:if> 
-				
-				    		<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-				    			<li><a href="list${pageMaker.makeQuery(idx)}">${idx}</a></li>
-				    		</c:forEach>
-				
-						    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-						    	<li><a href="list${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
-						    </c:if> 
-				  		</ul>
-				  		
+					<div class="input-group-append">
+						<button class="btn btn-primary searchBtn" type="button">
+							<i class="fas fa-search fa-sm"></i>
+						</button>
 					</div>
-					
-                </table>
-                
-            </div>
+						
+				</div>
+				
+			</form> 
+        
+            <c:forEach items="${list}" var="dto">
+            
+            	<div class="card border-left-primary shadow h-100 py-2 px-2">
+								
+					<div class="row g-0">
+									
+						<div class="col">
+									
+							<div class="card-body">
+										
+								<h5 class="card-title">
+									<a href='/food/MinClassPage?fMjclass=<c:out value="${dto.FMjclass}"/>'><c:out value="${dto.FMjclass}"/></a>
+								</h5>
+											
+							</div>
+									
+						</div>
+						
+					</div>
+							
+				</div>
+            
+            </c:forEach>
             
         </div>
 
+	 <nav>			
+		
+		<ul class="pagination">
+						 	
+			<li class="page-item ${pageResultDTO.prev ? "":'disabled' }">
+				<a class="page-link" href="/food/list?pageNum=${pageResultDTO.pageRequestDTO.pageNum-1}&keyword=${pageResultDTO.pageRequestDTO.keyword}" tabindex="-1" aria-disabled="true">Prev</a>
+			</li>
+						    
+			<c:forEach var="page" begin="${pageResultDTO.start}" end="${pageResultDTO.end }">
+				<li class="page-item ${page==pageResultDTO.pageRequestDTO.pageNum? 'active' : '' }">
+					<a class="page-link" href="/food/list?pageNum=${page}&keyword=${pageResultDTO.pageRequestDTO.keyword}">
+						<c:out value="${page}"/>
+					</a>
+				</li>
+			</c:forEach>
+						   
+			<li class="page-item ${pageResultDTO.next ? "":'disabled' }">
+				<a class="page-link" href="/food/list?pageNum=${pageResultDTO.pageRequestDTO.pageNum+1}&keyword=${pageResultDTO.pageRequestDTO.keyword}">Next</a>
+			</li>
+							    
+		</ul> 
+		 
+		<%--
+		<ul class="pagination">		
+			
+			<li class="page-item">
+				
+				<c:if test="${paging.startPage != 1 }">
+					<a href="/food/list?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+				</c:if>
+			
+			</li>
+
+			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
+				<c:choose>
+				
+					<c:when test="${p == paging.nowPage }">
+						<b>${p}</b>
+					</c:when>
+		
+					<c:when test="${p != paging.nowPage }">
+						<a href="/food/list?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p}</a>
+					</c:when>
+					
+				</c:choose>
+			</c:forEach>
+	
+			<li class="page-item">
+			
+				<c:if test="${paging.endPage != paging.lastPage}">
+					<a href="/food/list?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+				</c:if>
+			
+			</li>
+	
+		</ul>
+		
+		
+		<div>
+			
+		  	<ul>
+		    	<c:if test="${pageMaker.prev}">
+		    		<li><a href="/food/list${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+			    </c:if> 
+		
+			    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+			    	<li><a href="/food/list${pageMaker.makeQuery(idx)}">${idx}</a></li>
+			    </c:forEach>
+			
+			    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+			    	<li><a href="/food/list${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+			    </c:if> 
+			 </ul>
+			 
+		</div>
+		--%>
+						  	
+	</nav>
 
 </div>
 <!-- /.container-fluid -->
 <!-- End of Main Content -->
+
+<script>
+$(document).ready(function(){
+
+	var searchForm = $("#searchForm");
+	var msg = '${msg}';
+	console.log("msg>>",msg);
+
+	$("#searchForm button").on("click",function(e){
+
+		searchForm.find("input[name='pageNum']").val(1);
+		searchForm.submit();		
+		});
+
+	if (!(msg===''||history.state)){
+		var modal= $(".modal");
+		console.log(modal);	
+		modal.modal();
+	}
+});
+	
+</script>
 
         
 <%@ include file="../include/footer.jsp"%>

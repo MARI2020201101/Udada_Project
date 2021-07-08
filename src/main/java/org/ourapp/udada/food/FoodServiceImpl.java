@@ -12,22 +12,70 @@ import lombok.RequiredArgsConstructor;
 public class FoodServiceImpl implements FoodService{
 
 	private final FoodMapper foodMapper;
-	
-	public int countAll() throws Exception{
-		return foodMapper.countAll();
-	}
 
 	@Override
-	public List<FoodDTO> getList(FoodCriteria FCri) throws Exception {
+	public List<FoodDTO> getList() throws Exception {
 		// TODO Auto-generated method stub
-		return foodMapper.getList(FCri);
+		return foodMapper.getList();
 	}
 	
 	@Override
-	public int foodCount(FoodCriteria FCri) throws Exception {
+	public List<FoodDTO> getMinList(String fMjclass) throws Exception {
 		// TODO Auto-generated method stub
-		return foodMapper.foodCount(FCri);
+		return foodMapper.getMinList(fMjclass);
 	}
+	
+	@Override
+	public FoodDTO getFoodList(String fNo) throws Exception {
+		// TODO Auto-generated method stub
+		return foodMapper.getFoodList(fNo);
+	}
+	
+	@Override
+	public int countAll() throws Exception {
+		// TODO Auto-generated method stub
+		return foodMapper.countAll();
+	}
+	
+	@Override
+	public List<FoodDTO> getList(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return foodMapper.getMjPagination(cri);
+	}
+	
+	/*
+	@Override
+	public List<FoodDTO> MjPagination(PageRequestDTO pageRequestDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return foodMapper.getMjPagination(pageRequestDTO);
+	}
+	
+	
+	@Override
+	public List<FoodDTO> MjPagination(PagingDTO pagingDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return foodMapper.getMjPagination(pagingDTO);
+	}
+	*/
+	@Override
+	public int countAllWithSearch(PageRequestDTO pageRequestDTO) {
+		// TODO Auto-generated method stub
+		return foodMapper.countAllWithSearch(pageRequestDTO);
+	}
+	
+	
+	/*@Override 
+	public int countAllWithSearch(PageRequestDTO pageRequestDTO) {	
+		//TODO Auto-generated method stub return
+		return foodMapper.countAllWithSearch(pageRequestDTO); 
+		
+	}
+	 
+	 @Override
+	 public List<FoodDTO> getListWithPagingAndSearch(PageRequestDTO pageRequestDTO) throws Exception { 
+		 // TODO Auto-generated method stub return
+		 return foodMapper.selectWithPagingAndSearch(pageRequestDTO);
+	 }*/
 	
 	@Override
 	public FoodDTO read(String fNo) throws Exception {
