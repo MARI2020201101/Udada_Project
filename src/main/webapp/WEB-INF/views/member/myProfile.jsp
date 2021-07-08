@@ -8,56 +8,58 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <!-- Begin Page Content -->
-<div class="container-fluid">
+<div class="container">
 
 	<!-- Page Heading -->
-	<h1 class="h3 mb-4 text-gray-800">MY PROFILE</h1>
+<div class="row justify-content-center" style="display: flex; align-items: center; min-height: 500px;">
+	<div class="col-xl-5 col-lg-5 col-md-5">
+	<h1 class="h3 mb-4 text-gray-800">내 정보 수정</h1>
 
 	<form action="/member/updateMyProfile" method="post" id="memfrm" name="memfrm">
 	
-		<div class="form-group row">
+		<div class="form-group">
 			<label>이메일</label>
 			<input type="text" name="mEmail" id="mEmail" class="form-control form-control-user" value ="${dto.MEmail}" readonly>
 		</div>
-		<div class="form-group row">
+		<div class="form-group">
 			<label>이름</label>
 			<input type="text" name="mName" id="mName" class="form-control form-control-user" value ="${dto.MName }" required>
 		</div>
-		<div class="form-group row">
+		<div class="form-group">
 			<label>새 비밀번호</label>
 			<input type="password" name="mPw" id="mPw" class="form-control form-control-user">
 		</div>
-		<div class="form-group row">
+		<div class="form-group">
 			<label>새 비밀번호 확인</label>
 			<input type="password" name="mPw2" id="mPw2" class="form-control form-control-user">
 		</div>
-		<div class="form-group row">
+		<div class="form-group">
 			<label>생년월일</label>
 			<input type="text" name="mBirthStr" id="mBirthStr" class="form-control form-control-user selector" value ="<fmt:formatDate value="${dto.MBirth}" pattern="yyyy-MM-dd" />" required>
 		</div>
-		<div class="form-group row">
+		<div class="form-group">
 			<label>성별</label>
 		</div>
-		<div class="form-group row">
+		<div class="form-group">
 			<input type="radio" name="mGender" id="mGender" value="M">남자&emsp;&emsp;
 			<input type="radio" name="mGender" id="mGender" value="F">여자
 		</div>
 		<hr>
-		<div class="form-group row">
+		<div class="form-group">
 			<label>선호식단</label>
 		</div>
-		<div class="form-group row">
+		<div class="form-group">
 			<input type="radio" name="mMeal" id="mMeal" value="VEG">VEG&emsp;&emsp;
 			<input type="radio" name="mMeal" id="mMeal" value="KETO">KETO&emsp;&emsp;
 			<input type="radio" name="mMeal" id="mMeal" value="MEDT">MEDT&emsp;&emsp;
 			<input type="radio" name="mMeal" id="mMeal" value="NORMAL">NORMAL&emsp;&emsp;
 		</div>
 		<hr>
-		<div class="form-group row">
+		<div class="form-group">
 			<label>다이어트 목표</label>
 		</div>
-		<div>
-			<select name="mGoaltype" id="mGoaltype">
+		<div class="form-group">
+			<select name="mGoaltype" id="mGoaltype" style="width:100%;">
 				<option value="느린체중 감소">느린체중 감소</option>
 				<option value="느린체중 증가">느린체중 증가</option>
 				<option value="현재체중 유지">현재체중 유지</option>
@@ -67,17 +69,20 @@
 		</div>
 		<hr>
 		<input type="hidden" name="mGrade" id="mGrade" value="${dto.MGrade }">
-		<div class="form-group row">
+		<div class="form-group">
 			<input type="submit" id="update" name="update" class="btn btn-facebook btn-block" value="수정하기">
 		</div>
-		<div class="form-group row">
+		<div class="form-group">
 			<input type="button" id="leave" name="leave" class="btn btn-google btn-block" value="탈퇴하기">
 		</div>
-		<div class="form-group row">
-			<input type="button" id="cancel" name ="cancel" class="btn btn-google btn-block" value="취소">
+		<div class="form-group">
+			<input type="button" id="cancel" name ="cancel" class="btn btn-warning btn-block" value="취소">
 		</div>
 	</form>
+	</div>
+</div>
 <!-- /.container-fluid -->
+
 </div>
 <script>
 
@@ -173,4 +178,5 @@
                 </div>
             </div>
         </div>
+</div>
 <%@ include file="../include/footer.jsp"%>
