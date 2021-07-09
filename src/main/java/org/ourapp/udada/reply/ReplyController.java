@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.ourapp.udada.journal.JournalDTO;
 import org.ourapp.udada.journal.JournalService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ public class ReplyController {
 	
 	private final ReplyService replyService;
 	
+	@PreAuthorize("isAuthenticated()")
 	@ResponseBody
 	@PostMapping("/replyinsert") //댓글 등록
 	public int insertReply(String reContent, Long oriNo, String mEmail, String reDiv) {
@@ -38,6 +40,7 @@ public class ReplyController {
 		return result;
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@ResponseBody
 	@PostMapping("/commentinsert")
 	public int commentinsert(String reContent, Long oriNo, String mEmail, String reDiv, int reGroup) {
@@ -52,7 +55,7 @@ public class ReplyController {
 		return result;
 	}
 	
-	
+	@PreAuthorize("isAuthenticated()")
 	@ResponseBody
 	@PostMapping("/replyDelete")
 	public int deleteReply(Long reNo, int commentCheck) {
@@ -68,6 +71,7 @@ public class ReplyController {
 		
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@ResponseBody
 	@PostMapping("/replyModify")
 	public void replyModify(String reContent, Long reNo) throws Exception{

@@ -164,6 +164,17 @@ public class ChallengeServiceImpl implements ChallengeService{
 		challengeMapper.editTalk(reNo, reContent);
 	}
 
+	@Override
+	public List<MyChallengeGetMySuccessDayDTO> getMySuccessDay(MyChallengeInfoDTO myChallengeInfoDTO) {
+
+		return challengeMapper.getMySuccessDay(myChallengeInfoDTO);
+	}
+
+	@Override
+	public int checkMem(Long cNo, String mEmail) {
+		return challengeMapper.checkMem(cNo, mEmail);
+	}
+
 	
 
 }

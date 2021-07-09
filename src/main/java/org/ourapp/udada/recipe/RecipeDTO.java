@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.ourapp.udada.image.ImageDTO;
+import org.ourapp.udada.reply.ReplyDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,6 +37,8 @@ public class RecipeDTO {
 	
 	private List<RecipeIngredientDTO> ingredientList = new ArrayList<>();
 	private ImageDTO imageDTO;
+	
+	private List<ReplyDTO> replyList;
 	
 	
 	public static String dateFormatter(Date rDate) {

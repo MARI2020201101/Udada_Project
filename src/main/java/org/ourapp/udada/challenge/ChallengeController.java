@@ -27,7 +27,7 @@ import lombok.extern.log4j.Log4j;
 public class ChallengeController {
 
 	private final ChallengeService challengeService;
-
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
 	public void registerChallenge() {
 		
@@ -248,8 +248,8 @@ public class ChallengeController {
 
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping("/progress/{cNo}")
-	public String progress(Model model, @PathVariable Long cNo, Authentication auth) {
-
+	public String progress(Model model,@PathVariable Long cNo, Authentication auth) {
+		
 		MyChallengeInfoDTO myChallengeInfoDTO = challengeService.myChallengeInfo(cNo);
 		List<ChallengeReadGoalDTO> readGoal = challengeService.readGoal(cNo);
 		myChallengeInfoDTO.setGoalList(readGoal);
@@ -275,12 +275,16 @@ public class ChallengeController {
 			getTalk.get(i).setTalkReply(getTalkReply);
 		}
 		
+		int checkMem = challengeService.checkMem(cNo, auth.getName());
+
 		model.addAttribute("info", myChallengeInfoDTO);
 		model.addAttribute("mem", getMemSuccess);
 		model.addAttribute("day", getDaySuccess);
 		model.addAttribute("talk", getTalk);
-
+		model.addAttribute("checkMem", checkMem);
+		
 		return "challenge/progress";
+
 	}
 	
 	@ResponseBody
@@ -299,5 +303,23 @@ public class ChallengeController {
 	@PostMapping("/talkEdit")
 	public void editTalk(int reNo, String reContent) {
 		challengeService.editTalk(reNo,reContent);
+	}
+	
+	@ResponseBody
+	@PostMapping("/getMySuccessDay")
+	public List<MyChallengeGetMySuccessDayDTO> getMySuccessDay(Long cNo, String mEmail) {
+ 
+		MyChallengeInfoDTO myChallengeInfoDTO = challengeService.myChallengeInfo(cNo);
+		List<ChallengeReadGoalDTO> readGoal = challengeService.readGoal(cNo);
+		myChallengeInfoDTO.setGoalList(readGoal);
+		myChallengeInfoDTO.setGoalCnt(readGoal.size());
+		myChallengeInfoDTO.setMEmail(mEmail);
+		if(myChallengeInfoDTO.getProcDate()>myChallengeInfoDTO.getTotalDate()) {
+			myChallengeInfoDTO.setProcDate(myChallengeInfoDTO.getTotalDate());
+		}
+		  List<MyChallengeGetMySuccessDayDTO> list =
+		  challengeService.getMySuccessDay(myChallengeInfoDTO);
+		 	 
+		return list;
 	}
 }

@@ -33,4 +33,6 @@ public interface RecipeService {
 	List<RecipeDTO> getByKewordMEmail(PageRequestDTO pageRequestDTO) throws Exception;
 	int countAllWithMEmail(PageRequestDTO pageRequestDTO) throws Exception;
 	
+	RecipeDTO  getWithIngreAndFoodAndImageAndReply(Long rNo)throws Exception;
+	
 }

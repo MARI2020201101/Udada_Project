@@ -34,7 +34,7 @@
 		<!-- Area Chart -->
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">My Weight Chart</h6>
+				<h6 class="m-0 font-weight-bold text-primary">체중 기록 그래프</h6>
 			</div>
 			<div class="card-body">
 				<div class="chart-area">
@@ -62,7 +62,7 @@
 									<th>목표 체중</th>
 									<th rowspan="2"><a
 										href="/member/deleteWeight?msNo=${dto.msNo }"
-										class="btn btn-secondary"><span class="text">삭제하기</span></a></th>
+										class="btn btn-danger"><span class="text">삭제하기</span></a></th>
 								</tr>
 								<tr>
 									<td><fmt:formatDate pattern="yyyy-MM-dd"
@@ -77,34 +77,30 @@
 				</div>
 			</c:forEach>
 		</div>
-
-		<div>
+	<c:if test="${not empty list}">
+		<div class="row justify-content-center">
 			<nav>
 				<ul class="pagination">
-					<li class="page-item ${pageResultDTO.prev ? "":'disabled' }"><a
-						class="page-link"
-						href="/member/myWeight?pageNum=${pageResultDTO.pageRequestDTO.pageNum-1}&mEmail=${dto.MEmail}"
-						tabindex="-1" aria-disabled="true">Prev</a></li>
+					<li class="page-item ${pageResultDTO.prev ? "":'disabled' }">
+						<a class="page-link" href="/member/myWeight?pageNum=${pageResultDTO.pageRequestDTO.pageNum-1}&mEmail=${dto.MEmail}"
+							tabindex="-1" aria-disabled="true">Prev</a>
+					</li>
 
-					<c:forEach var="page" begin="${pageResultDTO.start}"
-						end="${pageResultDTO.end }">
-						<li
-							class="page-item ${page==pageResultDTO.pageRequestDTO.pageNum? 'active' : '' }">
-							<a class="page-link"
-							href="/member/myWeight?pageNum=${page}&mEmail=${dto.MEmail}">
+					<c:forEach var="page" begin="${pageResultDTO.start}" end="${pageResultDTO.end }">
+						<li class="page-item ${page==pageResultDTO.pageRequestDTO.pageNum? 'active' : '' }">
+							<a class="page-link" href="/member/myWeight?pageNum=${page}&mEmail=${dto.MEmail}">
 								<c:out value="${page}" />
-						</a>
+							</a>
 						</li>
 					</c:forEach>
 
-					<li class="page-item ${pageResultDTO.next ? "":'disabled' }"><a
-						class="page-link"
-						href="/member/myWeight?pageNum=${pageResultDTO.pageRequestDTO.pageNum+1}&mEmail=${dto.MEmail}">Next</a>
+					<li class="page-item ${pageResultDTO.next ? "":'disabled' }">
+					<a class="page-link" href="/member/myWeight?pageNum=${pageResultDTO.pageRequestDTO.pageNum+1}&mEmail=${dto.MEmail}">Next</a>
 					</li>
 				</ul>
 			</nav>
 		</div>
-
+	</c:if>
 		<!-- /.container-fluid -->
 	</div>
 </div>

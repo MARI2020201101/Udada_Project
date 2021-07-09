@@ -77,7 +77,7 @@ table.type03 td {
 		<input type="text" id="eStr" name="eStr" class="form-control form-control-user" value="${dto.EStr}" readonly>
 	</div>
 
-	<div class="form-group row">
+	<div class="form-group">
 	<label>운동 시간 </label> 
 	
 	<br>
