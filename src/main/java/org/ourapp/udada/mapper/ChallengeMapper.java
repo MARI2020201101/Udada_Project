@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.ourapp.udada.challenge.ChallengeDTO;
 import org.ourapp.udada.challenge.ChallengeGetListDTO;
+import org.ourapp.udada.challenge.ChallengeGetMyListDTO;
 import org.ourapp.udada.challenge.ChallengeGlistDTO;
 import org.ourapp.udada.challenge.ChallengeGoalDTO;
 import org.ourapp.udada.challenge.MyChallengeInfoDTO;
@@ -52,4 +53,7 @@ public interface ChallengeMapper {
 	void editTalk(@Param("reNo")int reNo, @Param("reContent")String reContent);
 	List<MyChallengeGetMySuccessDayDTO> getMySuccessDay(MyChallengeInfoDTO myChallengeInfoDTO);
 	int checkMem(@Param("cNo")Long cNo, @Param("mEmail")String mEmail);
+	List<ChallengeListDTO> loadMyList(ChallengeGetMyListDTO challengeGetListDTO);
+	int getListSize(ChallengeGetListDTO challengeGetListDTO);
+	int getMyListSize(ChallengeGetMyListDTO challengeGetListDTO);
 }

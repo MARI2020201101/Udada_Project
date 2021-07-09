@@ -175,6 +175,21 @@ public class ChallengeServiceImpl implements ChallengeService{
 		return challengeMapper.checkMem(cNo, mEmail);
 	}
 
+	@Override
+	public List<ChallengeListDTO> loadMyList(ChallengeGetMyListDTO challengeGetListDTO) {
+		return challengeMapper.loadMyList(challengeGetListDTO);
+	}
+
+	@Override
+	public int getListSize(ChallengeGetListDTO challengeGetListDTO) {
+		return challengeMapper.getListSize(challengeGetListDTO);
+	}
+
+	@Override
+	public int getMyListSize(ChallengeGetMyListDTO challengeGetListDTO) {
+		return challengeMapper.getMyListSize(challengeGetListDTO);
+	}
+	
 	
 
 }

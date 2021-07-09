@@ -153,17 +153,17 @@
         INNER JOIN (SELECT C_NO, COUNT(*) CACNT FROM CHALLENGE_APPLY GROUP BY C_NO) B
 		ON A.C_NO = B.C_NO
 		 <where>
-    		<if test="keyword != null and keyword != ''">
+    		<if test='keyword != null and keyword != ""'>
          		(A.C_TITLE LIKE '%'||#{keyword}||'%' OR A.C_CONTENT LIKE '%'||#{keyword}||'%')
     		</if>
-    		<if test="excsResult != null">
+    		<if test='excsResult != null'>
     			AND A.C_NO IN
         		<foreach item="item" index="index" collection="excsResult" open="(" separator="," close=")">
 					#{item}
   				</foreach>
     		</if>
 				<choose>
-    				<when test="period != null and period != ''">
+    				<when test='period != null and period != ""'>
       				AND (A.C_START>=#{start} AND #{finish}>=A.C_Finish)
     				</when>
     				<otherwise>
@@ -173,6 +173,30 @@
 		</where>
         ORDER BY A.C_START) C)
         WHERE RN BETWEEN #{startNo} AND #{endNo}
+	</select>
+	
+		<select id="getListSize" resultType="int">
+		SELECT COUNT(*)
+		FROM CHALLENGE A
+		 <where>
+    		<if test='keyword != null and keyword != ""'>
+         		(A.C_TITLE LIKE '%'||#{keyword}||'%' OR A.C_CONTENT LIKE '%'||#{keyword}||'%')
+    		</if>
+    		<if test='excsResult != null'>
+    			AND A.C_NO IN
+        		<foreach item="item" index="index" collection="excsResult" open="(" separator="," close=")">
+					#{item}
+  				</foreach>
+    		</if>
+				<choose>
+    				<when test='period != null and period != ""'>
+      				AND (A.C_START>=#{start} AND #{finish}>=A.C_Finish)
+    				</when>
+    				<otherwise>
+      				AND (A.C_START+1)>=CURRENT_DATE
+   					</otherwise>
+  				</choose>
+		</where>
 	</select>
 	
 	<select id="loadGlist" resultMap="challengeGlistMap">
@@ -279,9 +303,10 @@
 		]]>
 	</select>
 	
-	<select id="endList" resultMap="myChallengeEndMap" >
+	<select id="endList" resultMap="myChallengeEndMap">
 		<![CDATA[
-        SELECT A.C_NO, B.M_EMAIL, B.C_TITLE, B.C_START, B.C_FINISH
+        SELECT C.* FROM
+        (SELECT A.C_NO, B.M_EMAIL, B.C_TITLE, B.C_START, B.C_FINISH
         FROM (CHALLENGE_APPLY)A
         INNER JOIN
         (SELECT C_NO, M_EMAIL, C_TITLE, C_START, C_FINISH
@@ -289,7 +314,8 @@
 		WHERE C_FINISH<CURRENT_DATE-1)B
         ON A.C_NO=B.C_NO
         WHERE A.M_EMAIL=#{sEmail}
-		ORDER BY B.C_START
+		ORDER BY B.C_FINISH DESC)C
+        WHERE ROWNUM<=3
 		]]>
 	</select>
 
@@ -475,6 +501,58 @@
 	<select id="checkMem" resultType="int" >
 		SELECT COUNT(*) FROM CHALLENGE_APPLY
 		WHERE C_NO=#{cNo} AND M_EMAIL=#{mEmail}
+	</select>
+	
+	<select id="loadMyList" resultMap="challengeListMap">
+        SELECT * FROM
+        (SELECT C.*, ROWNUM RN
+        FROM
+        (SELECT A.C_NO, A.C_TITLE, A.C_START, A.C_FINISH, A.C_TOTAL, A.C_DATE, B.CACNT
+		FROM CHALLENGE A
+        INNER JOIN (SELECT C_NO, COUNT(*) CACNT FROM CHALLENGE_APPLY GROUP BY C_NO) B
+		ON A.C_NO = B.C_NO
+		 <where>
+		 		A.C_NO IN (SELECT C_NO FROM CHALLENGE_APPLY WHERE M_EMAIL=#{mEmail})
+    		<if test='keyword != null and keyword != ""'>
+         		AND (A.C_TITLE LIKE '%'||#{keyword}||'%' OR A.C_CONTENT LIKE '%'||#{keyword}||'%')
+    		</if>
+    		<if test="excsResult != null">
+    			AND A.C_NO IN
+        		<foreach item="item" index="index" collection="excsResult" open="(" separator="," close=")">
+					#{item}
+  				</foreach>
+    		</if>
+				<choose>
+    				<when test='period != null and period != ""'>
+      				AND (A.C_START>=#{start} AND #{finish}>=A.C_Finish)
+    				</when>
+  				</choose>
+		</where>
+        ORDER BY A.C_START DESC) C)
+        WHERE RN BETWEEN #{startNo} AND #{endNo}
+	</select>
+	
+		<select id="getMyListSize" 	resultType="int">
+        SELECT COUNT(*)
+		FROM CHALLENGE A
+		 <where>
+		 		A.C_NO IN (SELECT C_NO FROM CHALLENGE_APPLY WHERE M_EMAIL=#{mEmail})
+    		<if test='keyword != null and keyword != ""'>
+         		AND (A.C_TITLE LIKE '%'||#{keyword}||'%' OR A.C_CONTENT LIKE '%'||#{keyword}||'%')
+    		</if>
+    		<if test="excsResult != null">
+    			AND A.C_NO IN
+        		<foreach item="item" index="index" collection="excsResult" open="(" separator="," close=")">
+					#{item}
+  				</foreach>
+    		</if>
+				<choose>
+    				<when test='period != null and period != ""'>
+      				AND (A.C_START>=#{start} AND #{finish}>=A.C_Finish)
+    				</when>
+  				</choose>
+		</where>
+
 	</select>
 	
 </mapper>
