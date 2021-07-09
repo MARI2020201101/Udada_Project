@@ -1,13 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
-
-
-<!-- Begin Page Content -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://npmcdn.com/flatpickr/dist/l10n/ko.js"></script>
+<style>
+.modalBtn {
+  color: #939597;
+}
+.modalBtn:hover {
+  color: #363945;
+}
+</style>
 
 <div class="container">
 
@@ -27,7 +32,7 @@
 			<input type="number" name="cTotal" id="cTotal" class="form-control" placeholder="10명 이하">
 		</div>
 
-		<label>목표 운동 <button type="button" class="btn btn-outline-secondary btn-sm modalBtn"><i class="fas fa-plus"></i></button></label>
+		<label>목표 운동 <i role="button" class="fas fa-plus-circle modalBtn"></i></label>
 
 		
 		<div class="form-group form-default" id="excsDiv">
@@ -108,9 +113,9 @@
 			return true;
 		}else{
 			if(cnt<1){
-				btn.attr("class","btn btn-outline-danger btn-sm modalBtn")
+				btn.css({"color": "red"});	
 				setTimeout(function() { 
-					btn.attr("class","btn btn-outline-secondary btn-sm modalBtn")
+					btn.css({"color": ""});	
 					}, 1000);
 			}
 			if(cTotal<1 || cTotal>10 || !cTotal){

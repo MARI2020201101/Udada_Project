@@ -19,19 +19,19 @@
 		<div class="col-md-4">
 			<div class="input-group">
   			<span class="input-group-text"><i class="fas fa-font"></i></span>
- 			<input type="text" name="keyword" class="form-control">
+ 			<input type="text" name="keyword" class="form-control" placeholder="제목">
 			</div>
 		</div>
 		<div class="col-md-4">
 			<div class="input-group">
   			<span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
- 			<input type="text" name="period" class="form-control selector" readonly>
+ 			<input type="text" name="period" class="form-control selector" readonly placeholder="기간">
 			</div>
 		</div>
 		<div class="col-md-3">
 			<div class="input-group">
   			<span class="input-group-text"><i class="fas fa-dumbbell"></i></span>
- 			<input type="text" name="exercise" class="form-control">
+ 			<input type="text" name="exercise" class="form-control" placeholder="운동">
 			</div>
 		</div>
 		<div class="col-md-1">
@@ -42,7 +42,7 @@
 </form>
 	<div class="col-md-1 mb-4" style="text-align:right">
 	<sec:authorize access="isAuthenticated()">
-		<button type="button" class="btn btn-primary" onclick="location.href='register'"><i class="bi bi-journal-plus"></i></button>
+		<button type="button" class="btn btn-primary" onclick="location.href='register'">등록</button>
 	</sec:authorize>
 	</div>
 </div>

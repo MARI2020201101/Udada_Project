@@ -108,7 +108,7 @@
 				
 
 				$("#cancel").on("click", function() {
-					location.href = "/member/calendar";
+					location.href = "/member/myWeight";
 				})
 
 				$("#update").on("click", function() {
