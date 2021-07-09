@@ -15,7 +15,7 @@
 	<div class="col-xl-5 col-lg-5 col-md-5">
 	<h1 class="h3 mb-4 text-gray-800">내 정보 수정</h1>
 
-	<form action="/member/updateMyProfile" method="post" id="memfrm" name="memfrm">
+	<form action="/member/updateMyProfile" method="post" id="memfrm" name="memfrm" class="user">
 	
 		<div class="form-group">
 			<label>이메일</label>
@@ -27,11 +27,11 @@
 		</div>
 		<div class="form-group">
 			<label>새 비밀번호</label>
-			<input type="password" name="mPw" id="mPw" class="form-control form-control-user">
+			<input type="password" name="mPw" id="mPw" class="form-control form-control-user" placeholder="비밀번호 변경을 원하시면 입력하세요">
 		</div>
 		<div class="form-group">
 			<label>새 비밀번호 확인</label>
-			<input type="password" name="mPw2" id="mPw2" class="form-control form-control-user">
+			<input type="password" name="mPw2" id="mPw2" class="form-control form-control-user" placeholder="비밀번호 변경을 원하시면 입력하세요">
 		</div>
 		<div class="form-group">
 			<label>생년월일</label>
@@ -70,13 +70,13 @@
 		<hr>
 		<input type="hidden" name="mGrade" id="mGrade" value="${dto.MGrade }">
 		<div class="form-group">
-			<input type="submit" id="update" name="update" class="btn btn-facebook btn-block" value="수정하기">
+			<input type="submit" id="update" name="update" class="btn btn-facebook btn-block" style="border-radius: 30px;" value="수정하기">
 		</div>
 		<div class="form-group">
-			<input type="button" id="leave" name="leave" class="btn btn-google btn-block" value="탈퇴하기">
+			<input type="button" id="leave" name="leave" class="btn btn-google btn-block" style="border-radius: 30px;" value="탈퇴하기">
 		</div>
 		<div class="form-group">
-			<input type="button" id="cancel" name ="cancel" class="btn btn-warning btn-block" value="취소">
+			<input type="button" id="cancel" name ="cancel" class="btn btn-warning btn-block" style="border-radius: 30px;" value="취소">
 		</div>
 	</form>
 	</div>
@@ -119,10 +119,7 @@
 						return false;
 					}
 
-					if ($("#mPw").val() == "") {
-						$("#mPw").val('${dto.MPw}')
-
-					} else if ($("#mPw").val() != "") {
+					if ($("#mPw").val() != "") {
 						if ($("#mPw").val() != $("#mPw2").val()) {
 							alert("비밀번호가 일치하지 않습니다.");
 							$("#mPw2").focus();

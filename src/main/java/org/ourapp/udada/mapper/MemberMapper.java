@@ -40,4 +40,6 @@ public interface MemberMapper {
 	MemberDTO findMEmail(String mEmail);
 	
 	void updatePwd(MemberDTO memberDTO);
+	
+	void updateMyProfileWithoutPwd(MemberDTO memberDTO);
 }

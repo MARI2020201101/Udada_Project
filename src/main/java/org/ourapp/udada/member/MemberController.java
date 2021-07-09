@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
+import org.ourapp.udada.mapper.MemberMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -159,12 +160,25 @@ public class MemberController {
 			memberDTO.setMBirth(sdf.parse(mBirthStr));
 		} catch (ParseException e) {
 			e.printStackTrace();
-		}
-		//log.info(memberDTO);
+		}		
 		
-		memberService.updateMyProfile(memberDTO);
+		System.out.println("입력한 비밀번호:"+memberDTO.getMPw());
+		
+		if(memberDTO.getMPw()!=null && memberDTO.getMPw().trim().length()!=0) {//새 비밀번호를 입력한 경우
+			
+			System.out.println("새비밀번호 입력함");
+
+			memberService.updateMyProfile(memberDTO);
+			
+		}else if(memberDTO.getMPw().equals("")){//새 비밀번호를 입력하지 않은 경우
+			
+			System.out.println("새비밀번호 입력하지않음");
+
+			memberService.updateMyProfileWithoutPwd(memberDTO);
+		}
+		
 		rttr.addFlashAttribute("msg", "수정되었습니다.");
-		return "redirect:/member/myProfile";
+		return "redirect:/member/pwdCheck";
 	}
 	
 
@@ -172,7 +186,7 @@ public class MemberController {
 	public void myProfile(String mEmail, Model model, Authentication auth) {
 		
 		mEmail = auth.getName();
-		log.info("myProfile:"+mEmail);
+		//log.info("myProfile:"+mEmail);
 		MemberDTO memberDTO = memberService.myProfile(mEmail);
 		model.addAttribute("dto", memberDTO);
 	}

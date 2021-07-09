@@ -8,16 +8,16 @@
 	<div class="col-xl-5 col-lg-5 col-md-5">
 		<!-- Page Heading -->
 		<h1 class="h3 mb-4 text-gray-800">비밀번호 확인</h1>
-		<form action="/member/pwdCheck" method="post" id="memfrm">
+		<form action="/member/pwdCheck" method="post" id="memfrm" class="user">
 			<div class="form-group">
 				<label>비밀번호</label>
 				<input type="password" name="mPw" id="mPw" class="form-control form-control-user" required>
 			</div>
 			<div class="form-group">
-				<input type="submit" id="update" name="update" class="btn btn-facebook btn-block" value="수정하기">
+				<input type="submit" id="update" name="update" class="btn btn-facebook btn-block" style="border-radius: 30px;" value="수정하기">
 			</div>
 			<div class="form-group">
-				<input type="button" id="cancel" name ="cancel" class="btn btn-google btn-block" value="취소">
+				<input type="button" id="cancel" name ="cancel" class="btn btn-google btn-block" style="border-radius: 30px;" value="취소">
 			</div>
 		</form>
 	</div>

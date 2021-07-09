@@ -105,6 +105,11 @@ public class MemberServiceImpl implements MemberService{
 		memberMapper.updatePwd(memberDTO);
 	}
 
+	@Override
+	public void updateMyProfileWithoutPwd(MemberDTO memberDTO) {
+		memberMapper.updateMyProfileWithoutPwd(memberDTO);
+	}
+
 	
 	
 }

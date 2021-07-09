@@ -21,4 +21,5 @@ public interface MemberService {
 	int countAll(int pageNum, int pageSize, String mEmail);
 	MemberDTO findMEmail(String mEmail);
 	void updatePwd(MemberDTO memberDTO);
+	void updateMyProfileWithoutPwd(MemberDTO memberDTO);
 }
