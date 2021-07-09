@@ -86,6 +86,7 @@
 				<tbody>
 
 					<c:forEach var="dto" items="${list}">
+
 						<tr>
 							<th scope="row"><c:choose>
 									<c:when test="${not empty dto.RTitle}">
@@ -95,7 +96,10 @@
 										</a>
 									</c:when>
 									<c:otherwise>
+									<a
+										href='/food/FoodInfo?fNo=<c:out value="${dto.FNo}"/>'>
 										<c:out value="${dto.FName}" />
+										</a>
 									</c:otherwise>
 								</c:choose></th>
 							<td><select class="form-select fmAmountModify"
@@ -164,8 +168,8 @@
 				<a href="/recipe/list" class="btn btn-primary"> 
 						<span class="text">레시피 탐색하기</span>
 				</a>
-				<a href="#" class="btn btn-primary my-2"> 
-						<span class="text">음식 탐색하기</span>
+				<a href="/food/list" class="btn btn-primary my-2"> 
+						<span class="text">푸드 탐색하기</span>
 				</a>
 				</div>
 			</div>

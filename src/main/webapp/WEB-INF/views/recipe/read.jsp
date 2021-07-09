@@ -215,10 +215,13 @@
 
 								<c:forEach var="ingredient" items="${dto.ingredientList}"
 									varStatus="status">
+								
 									<li>
 										<div class='card w-80'>
 											<div class='card-body'>
+											<a href='/food/FoodInfo?fNo=<c:out value="${ingredient.FNo}"/>'>
 												<b class='card-title ingreName'>${ingredient.FName}</b>
+												</a>
 												<p class='card-text'>
 													<span>selected amount : </span>${ingredient.riAmount}</p>
 											</div>
