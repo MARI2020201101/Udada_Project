@@ -62,10 +62,10 @@ table.type03 td {
 											<div style="color:orange;">중간</div>
 											</c:when>
 											<c:when test="${dto.EStr=='HIGH'}">
-											<div style="color:red;">중간</div>
+											<div style="color:red;">강함</div>
 											</c:when>
 											<c:when test="${dto.EStr=='LOW'}">
-											<div style="color:blue;">중간</div>
+											<div style="color:blue;">낮음</div>
 											</c:when>
 											<c:when test="${dto.EStr=='REST'}">
 											<div style="color:green;">휴식</div>
