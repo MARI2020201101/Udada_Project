@@ -97,18 +97,16 @@
 		</div>
 	
 	</div>
-	
-	<!-- <div class="secHolder">
-	
-		<h2></h2>
-	
-	</div> -->
+
+</div>
 
 </div>
 <!-- /.container-fluid -->
 <!-- End of Main Content -->
 
 <script>
+
+	
 
 	$(".search_FoodDetail").on("click", function(){
 		
@@ -128,16 +126,31 @@
 				console.log(data);
 					
 				$.each(data, function (index, list){
-					str += /* "<h4>"+
+					str += "<h4>"+
 						   "<a href='/food/FoodInfo?fName="+list.fname+"'>"+list.fname+"</a>"+
-					       "</h4>"; */
+					       "</h4>"; 
 					       
-					       "<div class=food_links>" + 
+					       /*"<div class=food_links>" + 
 					       "	<a href='/food/FoodInfo?fNo=" + list.fno + "'> <b>" + list.fname + "</b></a>" + 
 					       "</div>";
+					       
+					       "<div class=col-xl-3 col-md-6 mb-4>" + 
+					       "	<div class=card border-left-success shadow h-100 py-0>" + 
+					       "		<div class=card-body>" +
+					       "			<div class=row no-gutters align-items-center>" + 
+					       "				<div class=col mt-2>" + 
+					       "					<div class=text-xs font-weight-bold text-success text-uppercase mb-1>" +
+					       "						<a href='food/FoodInfo?fNo=" + list.fno + "'><b>" + list.fname + "</b></a>";
+					       "					</div>" +
+					       "				</div>" +
+					       "			</div>" +
+					       "		</div>" +
+					       "	</div>" +
+					       "</div>";
+							*/"";
 				});
 					
-				$(".secHolder").append(str);		
+				$(".집어넣어야 할 클래스").append(str);		
 					
 			},
 			error:function(xhr,status,errorThrown){

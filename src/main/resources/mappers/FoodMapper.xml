@@ -31,108 +31,15 @@
 		
 	</select>
 	
-	<!-- <select id="getList" resultMap="foodMap">
-		SELECT F_NO, F_NAME, F_MJCLASS, F_MNCLASS FROM FOOD ORDER BY F_NO 
-	</select> 
-
-	<select id="read" parameterType="string" resultMap="foodMap">
-		SELECT F_NO, F_NAME, F_ONCEOFFER, F_KCAL, F_PROTEIN, F_FAT, F_CARBO FROM FOOD WHERE F_NO = #{fNo} 
-	</select>-->
-	
-	<select id="getMjPagination" resultMap="foodMap">
-	
-		<![CDATA[
-		
-			SELECT F_MJCLASS
-			FROM
-    			(SELECT F_MJCLASS, ROWNUM AS RNUM
-     		 	FROM
-        			(SELECT DISTINCT(F_MJCLASS)
-         			 FROM FOOD ORDER BY F_MJCLASS
-        			) FD
-    			) DIFD
-			WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
-		
-		]]>
-	
-	</select>
-	
-	<select id="countAllWithSearch" resultType="int">
-		SELECT COUNT(F_MJCLASS) FROM FOOD
-		<where>  
-			<if test = "keyword != null">
-			F_MJCLASS LIKE '%'||#{keyword}||'%'
-			</if>
-		</where>
-	</select>
-	
-	 <!-- <select id="selectWithPagingAndSearch" resultMap="foodMap">
-	
-		<![CDATA[
-			SELECT F_NO, F_NAME, F_MJCLASS, F_MNCLASS 
-			FROM (SELECT ROWNUM AS RNUM, F_NO, F_NAME, F_MJCLASS, F_MNCLASS FROM FOOD) fd
-			WHERE RNUM BETWEEN #{pageNum} AND #{pageSize}; 
-			
-			BETWEEN #{start} AND #{end}
-		]]>
-		
-	</select>
-	
-	 <select id="countAllWithSearch" resultType="int">
-		SELECT COUNT(F_NO) FROM FOOD
-		<where>  
-			<if test = "keyword != null">
-			F_NAME LIKE '%'||#{keyword}||'%'
-			</if>
-		</where>
-	</select> -->
-	
-	<select id = "countAll" resultType = "int">
-		SELECT COUNT(*) FROM FOOD
-	</select>
-	
-	
 	<insert id="insertFoodMy">
 		INSERT INTO FOOD_MY(FM_NO, M_EMAIL, FM_DATE, FM_AMOUNT, F_NO) 
 		VALUES (SEQ_FM.NEXTVAL, #{mEmail} , TO_DATE( #{fmDate} , 'YYYY-MM-DD') ,#{fmAmount} , #{fNo} )
 	</insert>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	<select id="selectByFName" resultMap="foodMap">
-	<![CDATA[
-	SELECT * FROM FOOD WHERE F_NAME LIKE '%'||#{keyword}||'%'  AND ROWNUM <= 8
+		<![CDATA[
+			SELECT * FROM FOOD WHERE F_NAME LIKE '%'||#{keyword}||'%'  AND ROWNUM <= 8
 	    ]]>
 	</select>
+	
 </mapper>

@@ -1,15 +1,10 @@
 package org.ourapp.udada.mapper;
 
-
-
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.ourapp.udada.food.Criteria;
 import org.ourapp.udada.food.FoodDTO;
-import org.ourapp.udada.food.PageRequestDTO;
 import org.ourapp.udada.foodmy.FoodMyDTO;
-
 
 @Mapper
 public interface FoodMapper {
@@ -20,23 +15,7 @@ public interface FoodMapper {
 	List<FoodDTO> getMinList(String fMjclass);
 	FoodDTO getFoodList(String fNo);
 	
-	List<FoodDTO> getMjPagination(Criteria cri);
-	//List<FoodDTO> getMjPagination(PageRequestDTO pageRequestDTO);
-	//List<FoodDTO> getMjPagination(PagingDTO pagingDTO);
-	
-	int countAllWithSearch(PageRequestDTO pageRequestDTO);
-	
-	/*List<FoodDTO> selectWithPagingAndSearch(PageRequestDTO pageRequestDTO);
-	
-	int countAllWithSearch(PageRequestDTO pageRequestDTO);*/
-	
-	FoodDTO read(String fNo);
-	
 	void insertFoodMy(FoodMyDTO foodMyDTO);
-	
-	
-	
-	
 	
 	List<FoodDTO> selectByFName(String keyword);
 	

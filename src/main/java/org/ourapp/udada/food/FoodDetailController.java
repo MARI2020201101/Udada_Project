@@ -20,23 +20,9 @@ public class FoodDetailController {
 	@GetMapping("/food/foodname")
 	public List<FoodDetailDTO> getNameList(FoodDetailDTO foodDetailDTO) throws Exception{
 		
-
-		/*
-		List<FoodDetailDTO> foodDetailList = foodDetailService.getFoodList(fMinclass);
-		
-		model.addAttribute("foodDetailList", foodDetailList);
-		
-		
-		String fName = params.get("fName");
-		String fMinclass = params.get("fMinclass");*/
-		
-		//FoodDetailDTO foodDetailDTO = FoodDetailDTO.builder().fName(fName).fMinclass(fMinclass).build();
-		
 		List<FoodDetailDTO> list = foodDetailService.getNameList(foodDetailDTO);
 		
 		log.info(list);
-		
-		//return new ResponseEntity<>("success", HttpStatus.OK);
 		
 		return list;
 		
