@@ -140,11 +140,13 @@ public class JouranlController {
 	
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/modify")
-	public void modifyForm(Long jNo, Model model) {
+	public void modifyForm(JournalDTO journalDTO, Long jNo, Model model, Authentication auth) {
+		//log.info("수정문제찾기"+auth);
+		//log.info("journalDTO"+journalDTO);
 		model.addAttribute("dto", journalService.read(jNo));
 	}
 	
-	@PreAuthorize("authentication.principal.username == #journalDTO.mEmail or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/modify")
 	public String modify(JournalDTO journalDTO, MultipartFile image, Model model, RedirectAttributes rttr, PageRequestDTO pageRequestDTO) throws Exception{
 		log.info(journalDTO);
@@ -161,11 +163,11 @@ public class JouranlController {
 		}
 		journalService.modifyWithIngreAndImage(journalDTO);
 		rttr.addFlashAttribute("msg", "저널이 수정되었습니다");
-		return "redirect:/journal/read?jNo="+journalDTO.getJNo();	
+		return "redirect:/journal/mylist";	
 		
 	}
 	
-	@PreAuthorize("authentication.principal.username == #journalDTO.mEmail or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/remove")
 	public String remove(JournalDTO journalDTO, RedirectAttributes rttr) throws Exception{
 		if(journalDTO.getImageDTO()!=null && journalDTO.getImageDTO().getIName()!="") {
