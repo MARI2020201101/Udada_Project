@@ -12,10 +12,10 @@
 </style>
 
 <div class="container-fluid">
-        <div class="h3 mb-4 text-gray-800">
-	
-			<h1 class="h3 mb-0 text-gray-800"><c:out value="${dto.FName}"></c:out></h1>
-		</div>
+
+    <div class="h3 mb-4 text-gray-800">
+		<h1 class="h3 mb-0 text-gray-800"><c:out value="${dto.FName}"></c:out></h1>
+	</div>
 		
     <div class="row">
         	 
@@ -31,7 +31,7 @@
 						<div class="col mr-2">
 						
 							<div class="text-xs" font-weight-bold text-primary text-uppercase mb-1"> 식품 칼로리 </div>
-							<div class="h5 mb-0 font-weight-bold text-gray-800"><c:out value="${dto.FKcal}"/></div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800"><c:out value="${dto.FKcal}"/>kcal</div>
 						
 						</div>
 					
@@ -54,7 +54,7 @@
 						<div class="col mr-2">
 						
 							<div class="text-xs" font-weight-bold text-primary text-uppercase mb-1"> 식품 탄수화물 </div>
-							<div class="h5 mb-0 font-weight-bold text-gray-800"><c:out value="${dto.FCarbo}"/></div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800"><c:out value="${dto.FCarbo}"/>g</div>
 						
 						</div>
 					
@@ -77,7 +77,7 @@
 						<div class="col mr-2">
 						
 							<div class="text-xs" font-weight-bold text-primary text-uppercase mb-1"> 식품 단백질 </div>
-							<div class="h5 mb-0 font-weight-bold text-gray-800"><c:out value="${dto.FProtein}"/></div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800"><c:out value="${dto.FProtein}"/>g</div>
 						
 						</div>
 					
@@ -100,7 +100,7 @@
 					<div class="col mr-2">
 					
 						<div class="text-xs" font-weight-bold text-primary text-uppercase mb-1"> 식품 지방 </div>
-						<div class="h5 mb-0 font-weight-bold text-gray-800"><c:out value="${dto.FFat}"/></div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800"><c:out value="${dto.FFat}"/>g</div>
 					
 					</div>
 				

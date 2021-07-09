@@ -5,14 +5,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- Begin Page Content -->
 
-<style type="text/css">
-	li {list-style: none; float: left; padding: 6px;}
-</style>
-
 	<div class="container-fluid">
 	
 		<h1 class="h3 mb-4 text-gray-800">
-			<a href="/food/list"> Food MjList Page</a>
+			<a href="/food/list"> 식품 대분류 탐색 </a>
 		</h1>
 		<!-- Page Heading -->
 		
