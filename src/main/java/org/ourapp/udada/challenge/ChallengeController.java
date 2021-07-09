@@ -101,7 +101,7 @@ public class ChallengeController {
 			}
 		}
 		List<ChallengeListDTO> list = challengeService.loadList(challengeGetListDTO);
-		Double challengAmount = (double) list.size();
+		Double challengAmount = (double) challengeService.getListSize(challengeGetListDTO);
 		challengeGetListDTO.setEndPage(Math.ceil(challengAmount / 12));
 		challengeGetListDTO.setStartPage((Math.ceil(challengeGetListDTO.getPageNo() / 5) - 1) * 5 + 1);
 		Boolean checkEnd;
@@ -127,6 +127,7 @@ public class ChallengeController {
 				list.get(i).setCIng("warning");
 			}
 		}
+
 		model.addAttribute("page", challengeGetListDTO);
 		model.addAttribute("list", list);
 		model.addAttribute("checkEnd", checkEnd);
@@ -321,5 +322,72 @@ public class ChallengeController {
 		  challengeService.getMySuccessDay(myChallengeInfoDTO);
 		 	 
 		return list;
+	}
+	
+	@PreAuthorize("isAuthenticated()")	
+	@RequestMapping("/mylist")
+	public void loadMyList(Model model, ChallengeGetMyListDTO challengeGetListDTO, Authentication auth) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		if (challengeGetListDTO.getPageNo() == null) {
+			challengeGetListDTO.setPageNo((double) 1);
+		}
+		if (challengeGetListDTO.getExercise() != null && challengeGetListDTO.getExercise() != "") {
+			int[] excsList = challengeService.eNameSearch(challengeGetListDTO.getExercise());
+			if (excsList.length < 1) {
+				excsList = new int[] { 0 };
+			}
+			challengeGetListDTO.setExcsResult(excsList);
+		}
+		challengeGetListDTO.setStartNo((long) (12 * (challengeGetListDTO.getPageNo() - 1) + 1));
+		challengeGetListDTO.setEndNo((long) (12 * challengeGetListDTO.getPageNo()));
+		String pDate = challengeGetListDTO.getPeriod();
+		if (pDate != null && pDate != "") {
+			if (pDate.length() < 13) {
+				try {
+					challengeGetListDTO.setStart(sdf.parse(pDate));
+					challengeGetListDTO.setFinish(sdf.parse(pDate));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			} else {
+				try {
+					challengeGetListDTO.setStart(sdf.parse(pDate.substring(0, 10)));
+					challengeGetListDTO.setFinish(sdf.parse(pDate.substring(13)));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		challengeGetListDTO.setMEmail(auth.getName());
+		List<ChallengeListDTO> list = challengeService.loadMyList(challengeGetListDTO);
+		Double challengAmount = (double) challengeService.getMyListSize(challengeGetListDTO);
+		challengeGetListDTO.setEndPage(Math.ceil(challengAmount / 12));
+		challengeGetListDTO.setStartPage((Math.ceil(challengeGetListDTO.getPageNo() / 5) - 1) * 5 + 1);
+		Boolean checkEnd;
+		if ((Math.ceil(challengeGetListDTO.getPageNo() / 5) < Math.ceil(challengeGetListDTO.getEndPage() / 5))) {
+			checkEnd = true;
+		} else {
+			checkEnd = false;
+		}
+		Date nowDate = new Date();
+		for (int i = 0; i < list.size(); i++) {
+			Long cNo;
+			cNo = list.get(i).getCNo();
+			List<ChallengeGlistDTO> gList = challengeService.loadGlist(cNo);
+			list.get(i).setGList(gList);
+		}
+		for (int i = 0; i < list.size(); i++) {
+			Date chgDate = list.get(i).getCStart();
+			Long cTotal = list.get(i).getCTotal();
+			Long caCnt = list.get(i).getCaCnt();
+			if (nowDate.before(chgDate) && caCnt < cTotal) {
+				list.get(i).setCIng("primary");
+			} else {
+				list.get(i).setCIng("warning");
+			}
+		}
+		model.addAttribute("page", challengeGetListDTO);
+		model.addAttribute("list", list);
+		model.addAttribute("checkEnd", checkEnd);
 	}
 }

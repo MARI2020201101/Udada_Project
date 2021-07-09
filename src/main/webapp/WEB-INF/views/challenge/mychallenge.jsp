@@ -87,13 +87,13 @@
 	<hr>
 	<div class="card my-3 border-left-danger">
     	<div class="card-body py-2">
-    	    <label class="h4 my-0">종료</label>
+    	    <label class="h4 my-0">최근 종료</label>
     		<div class="float-right">
     		<i role="button" id="endIcn" class="fas fa-chevron-up stretched-link"></i>
     		</div>
     	</div>
    	</div>
-	<div class="row" id="end" style="display: none;">
+	<div class="row" id="end">
 		<c:forEach var="list" items="${endList}">
 			<div class="col-xl-4 col-md-6 mb-4">
 				<div class="card border-left-danger shadow h-100 py-1">
@@ -118,11 +118,9 @@
 			</div>
 		</c:forEach>
 	</div>
-	<c:if test="${fn:length(endList)>6}">
-		<div align="center">
-		<button class="btn btn-primary btn-sm">더보기</button>
+		<div align="center" class="mb-3">
+		<button class="btn btn-primary moreChallenge" onclick="location.href='/challenge/mylist'">챌린지 전체 내역 <i class="fas fa-arrow-right"></i></button>
 		</div>
-	</c:if>
 
 </div>
 </div>
