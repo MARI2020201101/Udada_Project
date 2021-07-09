@@ -44,8 +44,7 @@
         	<span class="text">삭제</span>
       </a>
      </c:if>
-	</sec:authorize>
-        
+		</sec:authorize>
 	</form>      
 </sec:authorize>
 </div>
