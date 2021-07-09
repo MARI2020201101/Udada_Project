@@ -123,11 +123,12 @@ public class JouranlController {
 			 log.info(imageDTO);
 		}
 		
-		journalService.registerWithImage(journalDTO);
-		log.info(journalDTO);
-		rttr.addFlashAttribute("msg", "저널이 등록되었습니다");
 		
-		return "redirect:/journal/mylist";
+			journalService.registerWithImage(journalDTO);
+			log.info(journalDTO);
+			rttr.addFlashAttribute("msg", "저널이 등록되었습니다");
+			
+			return "redirect:/journal/mylist";
 		
 	}//register() end
 	

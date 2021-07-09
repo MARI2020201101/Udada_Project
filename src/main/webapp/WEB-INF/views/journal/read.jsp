@@ -16,29 +16,88 @@
 		</a>
 	  	</c:if>
 	  </div>
+	  
+	  <div class="col-xl-4 col-md-4 mb-4">
+		<div class="card border-left-primary shadow h-100 py-2">
+			<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary">작성자</h6>
+	  		</div>
+	  		<div class="card-body">
+				<div class="row no-gutters align-items-center">
+				<div class="col mr-2">
 
-	  <div class="form-group row">
-        <label>작성자</label>
-        <input type="text" class="form-control form-control-user"  value="${dto.MEmail}" readonly>
-      </div>
-      <div class="form-group row">
-        <label>내용</label>
-        <textarea rows="5" class="form-control form-control-user" readonly>${dto.JContent}</textarea>
-      </div>
-      <div class="form-group row">
-        <label>좋아요</label>
-        <input type="text" class="form-control form-control-user"  value="${dto.LCnt}" readonly>
-      </div>
-      <div class="form-group row">
-        <label>작성일</label>
-        <input type="text" class="form-control form-control-user"  value="${dto.JDate}" readonly>
-      </div>
+				<div class="h2 mb-0 font-weight-bold text-gray-800 my-3"></div>
+				</div>
+				</div>
+				${dto.MEmail }
+				<img src="/resources/imgs/user-solid.svg" style='width: 40px; float: right; margin-right: 20px'>
+			</div>
+	  	</div>
+	  </div>
+	  
+	  <div class="col-xl-4 col-md-4 mb-4">
+		<div class="card border-left-primary shadow h-100 py-2">
+			<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary">내용</h6>
+	  		</div>
+	  		<div class="card-body">
+				<div class="row no-gutters align-items-center">
+				<div class="col mr-2">
+
+				<div class="h2 mb-0 font-weight-bold text-gray-800 my-3"></div>
+				</div>
+				</div>
+				${dto.JContent }
+				<img src="/resources/imgs/edit-solid.svg" style='width: 40px; float: right; margin-right: 20px'>
+			</div>
+	  	</div>
+	  </div>
+	  
+	  <div class="col-xl-4 col-md-4 mb-4">
+		<div class="card border-left-primary shadow h-100 py-2">
+			<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary">좋아요</h6>
+	  		</div>
+	  		<div class="card-body">
+				<div class="row no-gutters align-items-center">
+				<div class="col mr-2">
+
+				<div class="h2 mb-0 font-weight-bold text-gray-800 my-3"></div>
+				</div>
+				</div>
+				${dto.LCnt }
+				<img src="/resources/imgs/heart1.svg" style='width: 40px; float: right; margin-right: 20px'>
+			</div>
+	  	</div>
+	  </div>
+	  
+	  <div class="col-xl-4 col-md-4 mb-4">
+		<div class="card border-left-primary shadow h-100 py-2">
+			<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary">날짜</h6>
+	  		</div>
+	  		<div class="card-body">
+				<div class="row no-gutters align-items-center">
+				<div class="col mr-2">
+
+				<div class="h2 mb-0 font-weight-bold text-gray-800 my-3"></div>
+				</div>
+				</div>
+				<fmt:formatDate pattern="yyyy-MM-dd" value="${dto.JDate}" />
+				<img src="/resources/imgs/calendar-alt-regular.svg" style='width: 40px; float: right; margin-right: 20px'>
+			</div>
+	  	</div>
+	  </div>
+
       
 		<a href="/journal/mylist" class="btn btn-secondary">
             <span class="text">목록보기</span>
         </a>
         <a href='/journal/modify?jNo=${dto.JNo}' class="btn btn-warning">
         	<span class="text">수정하기</span>
+        </a>
+        <a href='/journal/modify?jNo=${dto.JNo}' class="btn btn-danger removeBtn">
+        	<span class="text">삭제하기</span>
         </a>
 </div>
 <!-- /.container-fluid -->
@@ -72,6 +131,7 @@ $(document).ready(function(){
 		console.log(modal);	
 		modal.modal();
 	}
+	
 });
 	
 </script>
