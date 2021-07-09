@@ -11,6 +11,7 @@
 <sec:authentication property="principal.memberDTO.mGrade" var="loginUserRole"/>
 <sec:authentication property="principal.memberDTO.mEmail" var="loginUser"/>
 
+
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800"></h1>
 
@@ -36,7 +37,7 @@
 
 	<c:forEach var="dto" items="${list}">
 		<div class="card" style="margin: 0 auto; width: 50%;">
-		<div class="mt-1">&nbsp;<b>${dto.MEmail }</b></div><hr class="my-1">
+		<div class="d-flex justify-content-between align-items-center"><b>&nbsp;${dto.MEmail }</b><small><fmt:formatDate pattern="yyyy-MM-dd" value="${dto.JDate}" /></small></div><hr class="my-1">
 			<c:if test="${not empty dto.imageDTO && dto.imageDTO.IName!='' }">
 				<img src="/image/show?imagePath=${dto.imageDTO.imagePath }" height="450px">
 			<hr>
@@ -65,23 +66,23 @@
 	           		
 	           		</c:choose>
 	           		<a class="btn">
-	           		<img class="comment" src="/resources/imgs/comment.svg" width="30px"></a>
+	           		<img class="commentimg" src="/resources/imgs/comment.svg" width="30px"></a>
+	           		<hr>
 				</div>
 			
 			<!-- 댓글 -->
-			    <div class="row height d-flex justify-content-center align-items-center">
+				<div class="reply">
+			     <div class="row height d-flex justify-content-center align-items-center">
 			        <div class="col-md-12">
 			            <div class="replycard">
 			                <div class="p-3">
-			                    <h6>Comments</h6>
+			                    <h6>댓글목록</h6>
 			                    <input type="hidden" name="mEmail" value="${dto.MEmail }"/>
 			                    <input type="hidden" id="reJno" name="jNo" value="${dto.JNo }"/>
-			   
-			
 			                </div>
 			                
 			                <sec:authorize access="isAuthenticated()">
-			                <div class="mt-3 d-flex flex-row align-items-center p-3 form-color"> <textarea type="text" id="reContent" class="form-control" placeholder="Enter your comment..."></textarea>
+			                <div class="mt-3 d-flex flex-row align-items-center p-3 form-color"> <textarea type="text" id="reContent" class="form-control" placeholder="댓글을 입력해보세요..."></textarea>
 			                &nbsp;<input type="button" class="btn btn-primary replybtn" value="등록"></input></div>
 			                
 	     					</sec:authorize>  
@@ -137,8 +138,8 @@
 			                
 			            </div>
 			        </div>
-			    </div>
-
+			     </div>
+				</div>
 		</div>
 		<br>
 	</c:forEach>
@@ -270,6 +271,11 @@ $(document).ready(function(){
 $(".commentTxt").hide();
 $(".replyModify").hide();
 $(".commentModify").hide();
+$(".reply").hide();
+
+	$(".commentimg").on("click", function(e) {
+		$(this).parent().parent().parent().find(".reply").toggle();
+	});
 
 	
 	$(".commentinsert").on("click", function(e) {
