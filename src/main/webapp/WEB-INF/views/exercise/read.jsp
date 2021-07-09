@@ -115,6 +115,7 @@ table.type03 td {
 	
 	<div class="row">
 	<div class="col-4">
+	<sec:authorize access="isAuthenticated()">
 	<form action="/exercise/insert" method="post" id="emInsert">
 	<div class="input-group">
 	<input type="hidden" id="mEmail" name="mEmail" class="form-control" value="${loginUser}" readonly>
@@ -123,8 +124,9 @@ table.type03 td {
 	<input type="text" class="form-control" name="emTime" placeholder="시간(분) 입력">
 	<button class="btn btn-primary" type="submit" id="btnAddon">추가</button>
 	</div>
-	</div>
 	</form>
+	</sec:authorize>
+	</div>
 	<div class="col-7">
 	</div>
 	<div class="col-1 mr-0">
