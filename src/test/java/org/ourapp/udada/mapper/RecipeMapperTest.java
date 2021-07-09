@@ -99,7 +99,7 @@ public class RecipeMapperTest {
 	
 	@Test
 	public void selectWithImageAndPagingAndSearchTest() {
-		recipeMapper.selectWithImageAndPagingAndSearch(PageRequestDTO.builder().pageNum(1).pageSize(10).keyword("테").build());
+		recipeMapper.selectWithImageAndPagingAndSearch(PageRequestDTO.builder().pageNum(2).pageSize(10).keyword("테").build());
 	}
 	
 	@Test

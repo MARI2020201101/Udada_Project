@@ -39,6 +39,7 @@ public class RecipeDTO {
 	private ImageDTO imageDTO;
 	
 	private List<ReplyDTO> replyList;
+	private int replyCnt;
 	
 	
 	public static String dateFormatter(Date rDate) {

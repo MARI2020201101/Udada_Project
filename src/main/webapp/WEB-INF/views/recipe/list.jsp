@@ -58,6 +58,10 @@
 								<a
 									href='/recipe/read?rNo=<c:out value="${dto.RNo}"/>&pageNum=${pageResultDTO.pageRequestDTO.pageNum}&keyword=${pageResultDTO.pageRequestDTO.keyword }'>
 									<c:out value="${dto.RTitle}" />
+									<c:if test="${ dto.replyCnt gt 0}">
+									<span>---- [<c:out value="${dto.replyCnt}" />]</span>
+									</c:if>
+									
 								</a>
 							</h5>
 							<p class="card-text">

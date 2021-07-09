@@ -11,6 +11,7 @@
 			<result column="R_TITLE" property="rTitle"/>
 			<result column="R_CONTENT" property="rContent"/>
 			<result column="R_DATE" property="rDate"/>
+			<result column="REPLYCNT" property="replyCnt"/>
 			<association property="imageDTO" resultMap="imageMap" />
 			<collection property="ingredientList" resultMap="recipeIngredientMap"></collection>
 			<collection property="replyList" resultMap="replyMap"></collection>
@@ -147,18 +148,24 @@
 		SELECT SSUB.* FROM
         (SELECT SUB.*, ROWNUM AS RN FROM
         (SELECT 
-		R.R_NO , R.M_EMAIL ,R.R_TITLE, R.R_CONTENT, R.R_DATE ,I.*
+		R.R_NO , R.M_EMAIL ,R.R_TITLE, R.R_CONTENT, R.R_DATE ,I.I_UUID, I.I_DIV, I.ORI_NO, I.I_NAME, I.I_DIR,
+        COUNT(RE.RE_NO)AS REPLYCNT
 		FROM RECIPE R 
         LEFT JOIN IMAGE I
-        ON R.R_NO = I.ORI_NO  
+        ON R.R_NO = I.ORI_NO 
+        LEFT JOIN REPLY RE
+        ON R.R_NO = RE.ORI_NO 
+        
        ]]>     		
     <where>  
 	<if test = "keyword != null">
 		R.R_TITLE LIKE '%'||#{keyword}||'%'
 	</if>
-	</where>   
+	</where>  
+	
+	 GROUP BY R.R_NO,R.M_EMAIL ,R.R_TITLE, R.R_CONTENT, R.R_DATE ,I.I_UUID, I.I_DIV, I.ORI_NO, I.I_NAME, I.I_DIR
     <![CDATA[
-		ORDER BY R_NO DESC)SUB )SSUB    
+		ORDER BY R.R_NO DESC)SUB )SSUB    
         WHERE SSUB.RN > (#{pageNum}-1) * #{pageSize} AND SSUB.RN <= #{pageNum} * #{pageSize}          
 	]]>
 	</select>
