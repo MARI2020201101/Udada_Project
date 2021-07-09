@@ -130,7 +130,7 @@ table.type03 td {
 	<div class="col-7">
 	</div>
 	<div class="col-1 mr-0">
-	<button class="btn btn-secondary">목록</button>
+	<button class="btn btn-secondary" onclick="location.href='/exercise/list'">목록</button>
 	<div>
 	</div>
 
