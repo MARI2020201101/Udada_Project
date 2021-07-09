@@ -17,7 +17,7 @@
 				<input type="submit" id="update" name="update" class="btn btn-facebook btn-block" style="border-radius: 30px;" value="수정하기">
 			</div>
 			<div class="form-group">
-				<input type="button" id="cancel" name ="cancel" class="btn btn-google btn-block" style="border-radius: 30px;" value="취소">
+				<input type="button" id="cancel" name ="cancel" class="btn btn-google btn-block" onClick="location.href='/member/myWeight'" style="border-radius: 30px;" value="취소">
 			</div>
 		</form>
 	</div>
