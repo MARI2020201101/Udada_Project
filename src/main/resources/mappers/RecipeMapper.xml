@@ -44,7 +44,7 @@
 	<resultMap type="org.ourapp.udada.reply.ReplyDTO" id="replyMap">
 		<id column="RE_NO" property="reNo"/>
 		<result column="ORI_NO" property="oriNo"/>
-		<result column="M_EMAIL" property="mEmail"/>
+		<result column="REMEMAIL" property="mEmail"/>
 		<result column="RE_CONTENT" property="reContent"/>
 		<result column="RE_DATE" property="reDate"/>
 		<result column="RE_DIV" property="reDiv"/>
@@ -52,6 +52,7 @@
 		<result column="RE_INDENT" property="reIndent"/>
 	</resultMap>
 	
+
 	<select id="getList" resultMap="recipeMap">
 		SELECT * FROM RECIPE ORDER BY R_NO DESC
 	</select>
@@ -207,7 +208,8 @@
 	</select>
 	
 	<select id="selectWithIngreAndFoodAndImageAndReply" resultMap="recipeMap">
-		SELECT R.*, RI.*, F.* , I.*, RE.* FROM RECIPE R
+		SELECT R.*, RI.*, F.* , I.*, RE.M_EMAIL AS REMEMAIL,RE.RE_NO,RE.ORI_NO,RE.RE_CONTENT, RE.RE_DATE, RE.RE_DIV,
+    	RE.RE_GROUP, RE.RE_INDENT FROM RECIPE R
 		LEFT JOIN RECIPE_INGREDIENT RI 
 		ON R.R_NO = RI.R_NO
 		LEFT JOIN FOOD F

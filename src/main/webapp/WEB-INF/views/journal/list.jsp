@@ -80,16 +80,19 @@
 			   
 			
 			                </div>
+			                
+			                <sec:authorize access="isAuthenticated()">
 			                <div class="mt-3 d-flex flex-row align-items-center p-3 form-color"> <textarea type="text" id="reContent" class="form-control" placeholder="Enter your comment..."></textarea>
 			                &nbsp;<input type="button" class="btn btn-primary replybtn" value="등록"></input></div>
 			                
+	     					</sec:authorize>  
 			                <div class="mt-2">
 							<c:forEach var="reply" items="${dto.replyList}">
 			                    <div class="d-flex flex-row p-3"> 
 			                        <div class="w-100 commentHome">
 			                            <div class="d-flex justify-content-between align-items-center">
 			                                <div class="d-flex flex-row align-items-center">
-			                                 <span class="mr-2">${reply.MEmail}</span>
+			                                 <b>${reply.MEmail}</b>
 			                                </div> <small>${reply.reDate }</small>
 			                            </div>
 			                            <p data-comment-check="0">${reply.reContent}</p>
@@ -104,8 +107,10 @@
 								  					<span><input type="button" class="btn btn-primary commentModifybtn" value="등록"></input></span>
 												</div>
 			                            		<span>
+			                            		<c:if test="${loginUser eq comment.MEmail}">
 												&nbsp;&nbsp;&nbsp;<a class="commentmodify" data-commentcheck="1" data-reno="${comment.reNo }"><small>수정</small></a>
 			                            		&nbsp;&nbsp;&nbsp;<span><a class="commentdel" data-commentcheck="1" data-reno="${comment.reNo }"><small>삭제</small></a></span>
+			                            		</c:if>	
 			                            		</span>
 												<div class="mt-1" style="display: inline-block; float: right; font-size: x-small;">
 	
@@ -119,8 +124,12 @@
 				                            	<span><input type="button" class="btn btn-primary commentinsertbtn" value="등록" data-reno="${reply.reNo}"></input></span>
 				                            	</div>
 			                            		<div class="d-flex flex-row user-feed"><a class="commentinsert" data-comment-check="0" data-reno="${reply.reNo }"><small>답글작성</small></a>
+			                            		<c:if test="${loginUser eq reply.MEmail}">
 			                            		&nbsp;&nbsp;&nbsp;<span class="replymodify"><a class="replymodifybtn" data-commentcheck="0" data-reno="${reply.reNo }"><small>수정</small></a></span>
-			                            		&nbsp;&nbsp;&nbsp;<span><a class="commentdel" data-commentcheck="0" data-reno="${reply.reNo }"><small>삭제</small></a></span></div>
+			                            		&nbsp;&nbsp;&nbsp;<span><a class="commentdel" data-commentcheck="0" data-reno="${reply.reNo }"><small>삭제</small></a></span>
+			                            		</c:if>	
+			                            		
+			                            		</div>
 			                            	</div>
 			                        </div>
 			                    </div>
