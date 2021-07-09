@@ -25,6 +25,7 @@
 				<div class="card-body">
 					<h1 class="h3 mb-4 text-gray-800">
 						<c:out value="${dto.RTitle}"></c:out>
+						
 					</h1>
 
 					<div class="form-group row">
@@ -51,6 +52,11 @@
 							</a>
 						</c:if>
 
+
+
+
+
+
 						<sec:authorize access="isAuthenticated()">
 							<!-- Insert to MyFood Card -->
 							<div class="col-xl-4 col-md-4 mb-4">
@@ -68,8 +74,8 @@
 														<option value=1>1 인분</option>
 														<option value=2>2 인분</option>
 														<option value=3>3 인분</option>
-													</select><br>
-													<br> <b>날짜 입력 : </b> <input type="text" name="fmDate"
+													</select><br> <br> <b>날짜 입력 : </b> <input type="text"
+														name="fmDate"
 														class="form-control form-control-user daySelector"
 														required>
 
@@ -85,25 +91,120 @@
 							<!-- Insert to MyFood Card End-->
 						</sec:authorize>
 
-						<div class="col-xl-6 col-md-6 mb-4">
-							<div
-								class="card border-left-primary shadow h-100 py-2 recipeSpecBox">
 
+
+
+
+						<div class="col-xl-3 col-md-6 mb-4 totalKcalCard">
+							<div class="card border-left-info shadow h-100 py-2">
 								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">레시피 칼로리 정보</h6>
+									<h6 class="m-0 font-weight-bold text-primary">총 칼로리</h6>
 								</div>
 								<div class="card-body">
-									<div>
-										<canvas id="kaloriesSpecBar"></canvas>
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+
+											<div class="h2 mb-0 font-weight-bold text-gray-800 my-3"
+												id="sumTotalKal"></div>
+										</div>
 									</div>
+									<img src="/resources/imgs/recipe/recipe-kcal.svg"
+										style='width: 80px; float: right; margin-right: 20px'>
+
+								</div>
+							</div>
+						</div>
+						
+						
+			<div class="col-xl-3 col-md-6 mb-4">
+							<div class="card border-left-warning shadow h-100 py-2">
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">영양소 정보</h6>
+								</div>
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+
+											<div class="h3 mb-0  text-gray-800 my-3"
+												id="nutrientsSpec"></div>
+										</div>
+									</div>
+									
 
 								</div>
 							</div>
 						</div>
 
+
+
+
 					</div>
 
-					<div class="form-group row">
+
+					<!-- chart start -->
+					<div class="row">
+						<div class="col-xl-5 col-lg-5">
+							<div class="card shadow mb-4 recipeSpecBox">
+								<!-- Card Header-->
+								<div
+									class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+									<h6 class="m-0 font-weight-bold text-primary">레시피 영양소 정보</h6>
+
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="chart-area">
+										<div class="chartjs-size-monitor">
+											<div class="chartjs-size-monitor-expand">
+												<div class=""></div>
+											</div>
+											<div class="chartjs-size-monitor-shrink">
+												<div class=""></div>
+											</div>
+										</div>
+										<canvas id="kaloriesSpecBar"
+											style="display: block; height: 160px; width: 540px;"
+											width="1080" height="320" class="chartjs-render-monitor">
+										</canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+						<div class="col-xl-7 col-lg-7">
+							<div class="card shadow mb-4 recipeSpecBox">
+								<!-- Card Header-->
+								<div
+									class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+									<h6 class="m-0 font-weight-bold text-primary">레시피 영양소 비율</h6>
+
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="chart-area">
+										<div class="chartjs-size-monitor">
+											<div class="chartjs-size-monitor-expand">
+												<div class=""></div>
+											</div>
+											<div class="chartjs-size-monitor-shrink">
+												<div class=""></div>
+											</div>
+										</div>
+										<canvas id="recipeSpecChart"
+											style="display: block; height: 160px; width: 540px;"
+											width="1080" height="320" class="chartjs-render-monitor">
+										</canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+	<!-- chart end -->
+		
+		<div class="form-group row">
 						<b><label>조리법</label></b>
 						<textarea cols="5" class="form-control form-control-user" readonly>${dto.RContent}</textarea>
 					</div>
@@ -134,81 +235,86 @@
 		</div>
 	</div>
 
-	<div class="card shadow mb-4 recipeSpecBox">
-		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">레시피 영양소 정보</h6>
-		</div>
-		<div class="card-body">
-			<div>
-				<canvas id="recipeSpecChart"></canvas>
-			</div>
-		</div>
-	</div>
+
 
 
 	<!-- 댓글 -->
-			    <div class="row height d-flex justify-content-center align-items-center">
-			        <div class="col-md-12">
-			            <div class="replycard">
-			          
-			                    
-			                    <b>Comments</b>&nbsp;&nbsp;<img class="comment" src="/resources/imgs/comment.svg" width="30px">
-			                   <%--  <input type="hidden" name="mEmail" value="${dto.MEmail }"/> --%>
-			                    <input type="hidden" id="reRno" name="rNo" value="${dto.RNo }"/>
-				<sec:authorize access="isAuthenticated()">
-			                <div class="mt-3 d-flex flex-row align-items-center p-3 form-color"> <textarea type="text" id="reContent" class="form-control" placeholder="Enter your comment..."></textarea>
-			                &nbsp;<input type="button" class="btn btn-primary replybtn" value="등록"></input></div>
-	
-	     		</sec:authorize>          
-					    <div class="mt-2">
-				      
-							<c:forEach var="reply" items="${dto.replyList}">
-			                    <div class="d-flex flex-row p-3"> 
-			                        <div class="w-100 commentHome" data-redate="${reply.reDate }">
-			                            <div class="d-flex justify-content-between align-items-center">
-			                                <div class="d-flex flex-row align-items-center">
-			                                 <b>${reply.MEmail}</b>
-			                                </div> <small>${reply.reDate }</small>
-			                            </div>
-			                            <p data-comment-check="0">${reply.reContent}</p>
-				                        <div class="input-group replyModify" data-reno="${reply.reNo }">
-						  					<textarea rows="1" class="form-control">${reply.reContent}</textarea>
-						  					<span><input type="button" class="btn btn-primary replyModifybtn" value="등록"></input></span>
+	<div class="card mb-4 py-3">
+		<div
+			class="row height d-flex justify-content-center align-items-center">
+			<div class="col-md-12">
+				<div class="replycard ">
+
+
+					<b class="mx-3">Comments</b>&nbsp;&nbsp;<img class="comment"
+						src="/resources/imgs/comment.svg" width="30px">
+					<%--  <input type="hidden" name="mEmail" value="${dto.MEmail }"/> --%>
+					<input type="hidden" id="reRno" name="rNo" value="${dto.RNo }" />
+					<sec:authorize access="isAuthenticated()">
+						<div
+							class="mt-3 d-flex flex-row align-items-center p-3 form-color">
+							<textarea type="text" id="reContent" class="form-control"
+								placeholder="Enter your comment..."></textarea>
+							&nbsp;<input type="button" class="btn btn-primary replybtn"
+								value="등록"></input>
+						</div>
+
+					</sec:authorize>
+					<div class="mt-2" >
+
+						<c:forEach var="reply" items="${dto.replyList}">
+							<div class="d-flex flex-row p-3" >
+								<div class="w-100 commentHome border-left-primary py-2 px-2" data-redate="${reply.reDate }" >
+									<div class="d-flex justify-content-between align-items-center " >
+										<div class="d-flex flex-row align-items-center">
+											<b>${reply.MEmail}</b>
 										</div>
-							
-                            
-			                            	<div>
-			                            		<div class="input-group commentTxt" data-reno="${reply.reNo}">
-				                            	<textarea rows="1" class="form-control"></textarea>&nbsp;
-				                            	<span><input type="button" class="btn btn-primary commentinsertbtn" value="등록" data-reno="${reply.reNo}"></input></span>
-				                            	</div>
-			                            		<div class="d-flex flex-row user-feed">
- 											<c:if test="${loginUser eq reply.MEmail}">
-			                            		&nbsp;&nbsp;&nbsp;<span class="replymodify"><a class="replymodifybtn" data-commentcheck="0" data-reno="${reply.reNo }"><small>수정</small></a></span>
-			                            		&nbsp;&nbsp;&nbsp;<span><a class="commentdel" data-commentcheck="0" data-reno="${reply.reNo }"><small>삭제</small></a></span>
-			                            		
-	 										</c:if>		                            		
-			                            		</div>
-			                            		
+										<small>${reply.reDate }</small>
+									</div>
+									<p data-comment-check="0">${reply.reContent}</p>
+									<div class="input-group replyModify" data-reno="${reply.reNo }">
+										<textarea rows="1" class="form-control">${reply.reContent}</textarea>
+										<span><input type="button"
+											class="btn btn-primary replyModifybtn" value="등록"></input></span>
+									</div>
 
-			                            	</div>
-			                        </div>
-			                    </div>
-							</c:forEach>
-							
-							
-							
-							       
-			                </div>
-			                
-			            </div>
-			        </div>
-			    </div>
-			    <!-- 댓글 end -->
 
+									<div>
+										<div class="input-group commentTxt" data-reno="${reply.reNo}">
+											<textarea rows="1" class="form-control"></textarea>
+											&nbsp; <span><input type="button"
+												class="btn btn-primary commentinsertbtn" value="등록"
+												data-reno="${reply.reNo}"></input></span>
+										</div>
+										<div class="d-flex flex-row user-feed">
+											<c:if test="${loginUser eq reply.MEmail}">
+			                            		&nbsp;&nbsp;&nbsp;<span
+													class="replymodify"><a class="replymodifybtn"
+													data-commentcheck="0" data-reno="${reply.reNo }"><small>수정</small></a></span>
+			                            		&nbsp;&nbsp;&nbsp;<span><a
+													class="commentdel" data-commentcheck="0"
+													data-reno="${reply.reNo }"><small>삭제</small></a></span>
+
+											</c:if>
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+		</div>
+		<!-- 댓글 end -->
 
 	
-	
+
+
 	<input type="hidden" class="form-control form-control-user" name="pageNum" value=${pageRequestDTO.pageNum }> 
 	<input type="hidden" class="form-control form-control-user" name="keyword" value=${pageRequestDTO.keyword }> 
 	<input type="hidden" class="form-control form-control-user" name="rNo" value="${dto.RNo}">
@@ -529,14 +635,37 @@ $(".commentModify").hide();
 	           success:function(result){
 		            console.log(result);
 					console.log(result.sumCarbo);
+					console.log(result.sumKcal);
 
+					
 					if(result.sumCarbo+ result.sumProtein+ result.sumFat==0){
 						$(".recipeSpecBox").remove();
+						var sstr = "";
+						sstr+= "<div><h2>"+result.sumKcal+" kcal</h2></div>";
+						$("#sumTotalKal").append(sstr);
+
+						var ssstr="";
+						ssstr+= "<div class='my-3'>탄수화물 : "+result.sumCarbo+" g</div>";
+						ssstr+= "<div class='my-3'>단백질 : "+result.sumProtein+" g</div>";
+						ssstr+= "<div class='my-3'>지방 : "+result.sumFat+" g</div>";
+						$("#nutrientsSpec").append(ssstr);
+
 						
-						return;}
+						 return; }
 					else{
 						
-						kaloriesSpecList.push(result.sumKcal,result.sumCarbo,result.sumProtein,result.sumFat );
+						kaloriesSpecList.push(/* result.sumKcal, */result.sumCarbo,result.sumProtein,result.sumFat );
+
+						var sstr = "";
+						sstr+= "<b>"+result.sumKcal+" kcal</b>";
+						$("#sumTotalKal").append(sstr);
+						
+						var ssstr="";
+						ssstr+= "<div class='my-3'>탄수화물 : "+result.sumCarbo+" g</div>";
+						ssstr+= "<div class='my-3'>단백질 : "+result.sumProtein+" g</div>";
+						ssstr+= "<div class='my-3'>지방 : "+result.sumFat+" g</div>";
+						$("#nutrientsSpec").append(ssstr);
+
 						
 						var sums = result.sumCarbo+ result.sumProtein+ result.sumFat ;
 						var sumCarbo = Math.round((result.sumCarbo/sums)*100);
@@ -569,7 +698,7 @@ $(".commentModify").hide();
 							  },
 							  options : {
 								  responsive: true,
-									maintainAspectRatio : true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
+									maintainAspectRatio : false, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
 									scales : {
 										yAxes : [ {
 											ticks : {
@@ -607,11 +736,11 @@ $(".commentModify").hide();
 							});//nutrientDoughutgraph end
 
 							var myChart2 = new Chart(ctx2, {
-						    type: 'horizontalBar',
+						    type: 'bar',
 						    data: {
-						        labels: ['총 칼로리', '탄수화물', '단백질', '지방'],
+						        labels: ['탄수화물', '단백질', '지방'],
 						        datasets: [{
-						            label: 'Kalories (kcal) & nutrients (g)',
+						            label: '# g',
 						            data: kaloriesSpecList,
 						            borderColor: "rgba(130, 24, 32, 1)",
 						            backgroundColor: "rgba(125, 231, 213, 0.5)",
@@ -620,6 +749,7 @@ $(".commentModify").hide();
 						    },
 						    options: {
 						        responsive: true,
+						        maintainAspectRatio : false,
 						        
 						        tooltips: {
 						            mode: 'index',
