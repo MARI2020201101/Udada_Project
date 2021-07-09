@@ -21,6 +21,7 @@
       	<label>이미지 선택</label>
        	<input type="file" class="form-control form-control-user imageInput" name="image" >
       </div>
+
       <a class="btn btn-secondary listBtn">
             <span class="text">목록보기</span>
         </a>
