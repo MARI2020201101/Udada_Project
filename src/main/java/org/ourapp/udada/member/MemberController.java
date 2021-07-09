@@ -10,6 +10,7 @@ import java.util.UUID;
 import org.ourapp.udada.mapper.MemberMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -87,7 +88,7 @@ public class MemberController {
 		return "redirect:/member/myWeight";
 	}
 	
-
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/myWeight")
 	public void myWeight(MemberSpecDTO memberSpecDTO, Model model, PageRequestDTO pageRequestDTO, Authentication auth)  throws Exception {//체중재기 클릭했을 때
 		
