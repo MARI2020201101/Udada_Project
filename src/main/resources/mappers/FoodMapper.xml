@@ -18,66 +18,28 @@
 	</resultMap>
 	
 	<select id="getList" resultMap="foodMap">
-		SELECT F_NO, F_NAME, F_MJCLASS, F_MNCLASS FROM FOOD ORDER BY F_NO 
+		SELECT DISTINCT(F_MJCLASS) FROM FOOD ORDER BY F_MJCLASS
 	</select>
 	
-	<select id="criPage" parameterType="org.ourapp.udada.food.FoodCriteria">
-		SELECT F_NO, F_NAME, F_MJCLASS, F_MNCLASS FROM (select F_NO, F_NAME, F_MJCLASS, F_MNCLASS, ROW_NUMBER() OVER(ORDER BY F_NO DESC) AS R_NUM from FOOD) F_Cri WHERE R_NUM BETWEEN #{rowStart} AND #{rowEnd} ORDER BY F_NO DESC
+	<select id="getMinList" parameterType="string" resultMap="foodMap">
+		SELECT DISTINCT(F_MNCLASS) FROM FOOD WHERE F_MJCLASS LIKE #{fMjclass} ORDER BY F_MNCLASS
 	</select>
 	
-	<select id="foodCount" resultType="int">
-		<![CDATA[
-			SELECT COUNT(F_NO) FROM FOOD
-		]]>
-	</select>
-
-	<select id="read" parameterType="string" resultMap="foodMap">
-		SELECT F_NAME, F_ONCEOFFER, F_KCAL, F_PROTEIN, F_FAT, F_CARBO FROM FOOD WHERE F_NO = #{fNo} 
+	<select id="getFoodList" parameterType="string" resultMap="foodMap">
+		<!-- SELECT F_NAME FROM FOOD WHERE F_MNCLASS LIKE #{fMnclass} ORDER BY F_NAME -->
+		SELECT F_NO, F_NAME, F_KCAL, F_ONCEOFFER, F_CARBO, F_FAT, F_PROTEIN FROM FOOD WHERE F_NO = #{fNo}
+		
 	</select>
 	
-	<select id = "countAll" resultType = "int">
-		SELECT COUNT(*) FROM FOOD
-	</select>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	<insert id="insertFoodMy">
+		INSERT INTO FOOD_MY(FM_NO, M_EMAIL, FM_DATE, FM_AMOUNT, F_NO) 
+		VALUES (SEQ_FM.NEXTVAL, #{mEmail} , TO_DATE( #{fmDate} , 'YYYY-MM-DD') ,#{fmAmount} , #{fNo} )
+	</insert>
 	
 	<select id="selectByFName" resultMap="foodMap">
-	<![CDATA[
-	SELECT * FROM FOOD WHERE F_NAME LIKE '%'||#{keyword}||'%'  AND ROWNUM <= 8
+		<![CDATA[
+			SELECT * FROM FOOD WHERE F_NAME LIKE '%'||#{keyword}||'%'  AND ROWNUM <= 8
 	    ]]>
 	</select>
+	
 </mapper>

@@ -2,32 +2,20 @@ package org.ourapp.udada.journal;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.ourapp.udada.image.ImageController;
 import org.ourapp.udada.image.ImageDTO;
-import org.ourapp.udada.member.MemberDTO;
 import org.ourapp.udada.recipe.PageRequestDTO;
 import org.ourapp.udada.recipe.PageResultDTO;
 import org.ourapp.udada.reply.ReplyDTO;
-import org.ourapp.udada.reply.ReplyService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.sun.tools.javac.util.Log;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;

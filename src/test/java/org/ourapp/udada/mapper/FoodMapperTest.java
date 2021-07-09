@@ -10,7 +10,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@ContextConfiguration(locations={
+		"file:src/main/webapp/WEB-INF/spring/root-context.xml"		
+		,"file:src/main/webapp/WEB-INF/spring/security-context.xml"
+		,"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"})
 public class FoodMapperTest {
 
 	@Autowired
@@ -22,6 +25,17 @@ public class FoodMapperTest {
 		log.info(foodMapper.countAll()+"");
 		
 	}
+	
+	/*
+	 * @Test public void mapperTest() {
+	 * 
+	 * PageRequestDTO pageRequestDTO = PageRequestDTO.builder(
+	 * ).pageNum(1).pageSize(5).keyword("포류").build();
+	 * 
+	 * foodMapper.getMjPagination(pageRequestDTO);
+	 * 
+	 * }
+	 */
 	
 	
 	
