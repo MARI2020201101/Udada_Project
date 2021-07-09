@@ -50,7 +50,7 @@
 											
 												<td class="content">
 												
-													<h2><img src="/resources/imgs/food/recipesicon_trans.gif" style="vertical-align:middle">소분류</h2>
+													<h2>소분류</h2>
 													
 													<c:forEach var="dto" items="${Minlist}">
 														
@@ -106,7 +106,7 @@
 
 <script>
 
-	
+$(document).ready(function(){
 
 	$(".search_FoodDetail").on("click", function(){
 		
@@ -127,7 +127,7 @@
 					
 				$.each(data, function (index, list){
 					str += "<h4>"+
-						   "<a href='/food/FoodInfo?fName="+list.fname+"'>"+list.fname+"</a>"+
+						   "<a href='/food/FoodInfo?fNo="+list.fno+"'>"+list.fname+"</a>"+
 					       "</h4>"; 
 					       
 					       /*"<div class=food_links>" + 
@@ -150,7 +150,7 @@
 							*/"";
 				});
 					
-				$(".집어넣어야 할 클래스").append(str);		
+				$(".secHolder").append(str);		
 					
 			},
 			error:function(xhr,status,errorThrown){
@@ -162,7 +162,7 @@
 		});
 		
 	});
-	
+});	
 </script>
         
 <%@ include file="../include/footer.jsp"%>
