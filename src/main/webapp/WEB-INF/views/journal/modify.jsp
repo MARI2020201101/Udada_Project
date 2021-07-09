@@ -2,12 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
 <!-- Begin Page Content -->
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal.memberDTO.mGrade" var="loginUserRole"/>
+<sec:authentication property="principal.memberDTO.mEmail" var="loginUser"/>
+
 <div class="container-fluid">
+
 
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800">저널 수정하기</h1>
 	
 	<form method="POST" action="/journal/modify" enctype="multipart/form-data">
+	<input type="hidden" value="${loginUser }">
 	  <div class="form-group row" style="display: none">
         <label>JNO</label>
         <input type="text" class="form-control form-control-user" name="jNo" value="${dto.JNo}" readonly>
@@ -24,15 +30,24 @@
 
       <a class="btn btn-secondary listBtn">
             <span class="text">목록보기</span>
-        </a>
-        <a class="btn btn-warning modBtn">
-        	<span class="text">수정</span>
-        </a>
-        <a class="btn btn-danger removeBtn">
-        	<span class="text">삭제</span>
-        </a>
-	</form>      
+      </a>
+      
+ 	<sec:authorize access="isAuthenticated()">
+ 		<sec:authentication property="principal.memberDTO.mGrade" var="loginUserRole"/> 
+		<sec:authentication property="principal.memberDTO.mEmail" var="loginUser" />
 		
+	<c:if test="${loginUser eq dto.MEmail || loginUserRole eq 'ADMIN'}">
+      <a class="btn btn-warning modBtn">
+        	<span class="text">수정</span>
+      </a>
+      <a class="btn btn-danger removeBtn">
+        	<span class="text">삭제</span>
+      </a>
+     </c:if>
+	</sec:authorize>
+        
+	</form>      
+</sec:authorize>
 </div>
 <!-- /.container-fluid -->
 </div>

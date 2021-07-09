@@ -88,17 +88,21 @@
 			</div>
 	  	</div>
 	  </div>
-
       
 		<a href="/journal/mylist" class="btn btn-secondary">
             <span class="text">목록보기</span>
         </a>
-        <a href='/journal/modify?jNo=${dto.JNo}' class="btn btn-warning">
-        	<span class="text">수정하기</span>
-        </a>
-        <a href='/journal/modify?jNo=${dto.JNo}' class="btn btn-danger removeBtn">
-        	<span class="text">삭제하기</span>
-        </a>
+    <sec:authorize access="isAuthenticated()">
+ 	<sec:authentication property="principal.memberDTO.mGrade" var="loginUserRole"/> 
+	<sec:authentication property="principal.memberDTO.mEmail" var="loginUser" />
+		
+	<c:if test="${loginUser eq dto.MEmail || loginUserRole eq 'ADMIN'}">
+      <a href='/journal/modify?jNo=${dto.JNo}' class="btn btn-warning">
+        	<span class="text">수정/삭제</span>
+      </a>
+    </c:if>
+	</sec:authorize>
+
 </div>
 <!-- /.container-fluid -->
 </div>
