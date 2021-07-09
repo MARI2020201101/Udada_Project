@@ -32,12 +32,35 @@
 	</select>
 	
 	<select id="myList" parameterType="String" resultMap="myexerciseMap"><!-- parameterType  -->
-		SELECT A.EM_NO, A.M_EMAIL, A.EM_DATE, B.E_NAME, B.E_KCAL, A.E_NO, A.EM_TIME
+		SELECT D.* FROM
+		(SELECT C.*, ROWNUM AS RN FROM
+		(SELECT A.EM_NO, A.M_EMAIL, A.EM_DATE, B.E_NAME, B.E_KCAL, A.E_NO, A.EM_TIME
 		FROM EXERCISE_MY A
 		INNER JOIN EXERCISE B
 		ON A.E_NO = B.E_NO
-		WHERE A.M_EMAIL = #{mEmail}
-		ORDER BY A.EM_NO DESC
+		<where>  
+		A.M_EMAIL = #{loginUser}
+	    <if test = "keyword != null || keyword!=''">
+		AND B.E_NAME LIKE '%'||#{keyword}||'%'
+	    </if>
+	    </where>
+		ORDER BY A.EM_DATE DESC)C)D
+		<![CDATA[
+		WHERE D.RN > (#{pageNum}-1) * #{pageSize} AND D.RN <= #{pageNum} * #{pageSize}         
+		]]>
+	</select>
+	
+	<select id="countAllMylist" resultType="int">
+		SELECT COUNT(*)
+		FROM EXERCISE_MY A
+		INNER JOIN EXERCISE B
+		ON A.E_NO = B.E_NO
+		<where>  
+		A.M_EMAIL = #{loginUser}
+	    <if test = "keyword != null || keyword!=''">
+		AND B.E_NAME LIKE '%'||#{keyword}||'%'
+	    </if>
+	    </where>
 	</select>
 	
 	<select id="myget" parameterType="long" resultMap="exerciseMap">

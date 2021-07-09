@@ -2,9 +2,6 @@ package org.ourapp.udada.exercise;
 
 import java.util.List;
 
-import org.ourapp.udada.recipe.PageRequestDTO;
-import org.ourapp.udada.recipe.PageResultDTO;
-import org.ourapp.udada.recipe.RecipeDTO;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -26,14 +23,14 @@ public class ExerciseController {
 	private final ExerciseService exerciseService;
 	
 	@GetMapping("/list")
-	public void getList(Model model, PageRequestDTO pageRequestDTO, Authentication auth) throws Exception  {
+	public void getList(Model model, ExercisePageRequestDTO exercisePageRequestDTO, Authentication auth) throws Exception  {
 		log.info("exerciseController-----");
 		
-		List<ExerciseDTO> list = exerciseService.getListWithImageAndPagingAndSearch(pageRequestDTO);
+		List<ExerciseDTO> list = exerciseService.getListWithImageAndPagingAndSearch(exercisePageRequestDTO);
 		model.addAttribute("list", list);
 		// int total = recipeService.countAll();
-		int total = exerciseService.countAllWithSearch(pageRequestDTO);
-		model.addAttribute("pageResultDTO", new PageResultDTO(pageRequestDTO, total));
+		int total = exerciseService.countAllWithSearch(exercisePageRequestDTO);
+		model.addAttribute("exercisePageResultDTO", new ExercisePageResultDTO(exercisePageRequestDTO, total));
 	}//getList end
 	
 	@GetMapping("/read")
@@ -44,14 +41,12 @@ public class ExerciseController {
 	
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/mylist")
-	public void mylist(Authentication auth, Model model) {
-		log.info("myexerciseController----");
-		
-		String mEmail = auth.getName();//로그인한 이메일 가져옴.
-		System.out.println("email : " + mEmail);
-		
-		List<Exercise_myDTO> mylist = exerciseService.myList(mEmail);
-		System.out.println(mylist);
+	public void mylist(Authentication auth, Model model, ExercisePageRequestDTO exercisePageRequestDTO) {
+		log.info(exercisePageRequestDTO);
+		exercisePageRequestDTO.setLoginUser(auth.getName());
+		List<Exercise_myDTO> mylist = exerciseService.myList(exercisePageRequestDTO);		
+		int total = exerciseService.countAllMylist(exercisePageRequestDTO);				
+		model.addAttribute("exercisePageResultDTO", new ExercisePageResultDTO(exercisePageRequestDTO, total));
 		model.addAttribute("mylist", mylist);
 	}//mylist end
 	
@@ -80,16 +75,12 @@ public class ExerciseController {
 	
 	@PostMapping("/insert")
 	public String insert(Authentication auth, Exercise_myDTO exercise_myDTO) {
-		String mEmail= auth.getName();
-		
-		System.out.println("insert..................");
-		System.out.println("eNo:"+exercise_myDTO.getENo());
-		System.out.println("em_time:"+exercise_myDTO.getEmTime());
-		exercise_myDTO.setMEmail(mEmail);
+			
+		log.info(exercise_myDTO);
 		
 		exerciseService.insert(exercise_myDTO);
 		
-		return "redirect:/exercise/list";
+		return "redirect:/exercise/mylist/";
 		
 	}
 	

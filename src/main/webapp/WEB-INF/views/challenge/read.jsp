@@ -4,8 +4,21 @@
 <%@ include file="../include/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<!-- Begin Page Content -->
+<style>
+.goalList a{
+  color: #005780;
+}
+.goalList a i{
+  color: #939597;
+}
+.goalList a:hover i{
+  color: #363945;
+}
+.goalList a:hover {
+  color: #005780;
+  text-decoration: none;
+}
+</style>
 
 <div class="container" style="max-width: 900px; margin-top: 30px; margin-bottom: 30px">
 	<div class="col-md-12"></div>
@@ -60,8 +73,10 @@
                                                 목표 운동</div>
                                             <div class="h5 mb-0">
                                             <c:forEach var="goal" items="${goal}" varStatus="status">
-                                            <div class="my-1">${status.count}. ${goal.EName} ${goal.cgTime}분 &nbsp;(<fmt:formatNumber value="${goal.cgTime/5*goal.EKcal}" pattern="0" />칼로리)
-                                             <button type="button" onclick="location.href='/exercise/read?eNo=${goal.ENo}'" style="background-color:transparent; border-color: transparent; color: secondary;"><i class="fas fa-search fa-sm"></i></button>
+                                            <div class="my-1 goalList">
+											<a role="button" href="/exercise/read?eNo=${goal.ENo}">
+											${status.count}. ${goal.EName} ${goal.cgTime}분 &nbsp;(<fmt:formatNumber value="${goal.cgTime/5*goal.EKcal}" pattern="0" />칼로리)<i class="fas fa-external-link-alt ml-1" style="vertical-align: top; font-size: 0.5em;"></i>
+											</a>
                                             </div>
                                             </c:forEach>
                                             </div>
@@ -98,7 +113,9 @@
 		<sec:authorize access="isAuthenticated()">
 		<input type="hidden" name="cNo" value="${dto.CNo}">
 		<c:if test="${loginUser != dto.MEmail && loginUserRole != 'ADMIN'}">
+			<c:if test="${dto.caCnt<dto.CTotal}">
 		<input type="button" class="btn btn-primary" id="applyChallenge" style="display: none;" value="신청">
+			</c:if>
 		<input type="button" class="btn btn-danger" id="cancelChallenge" style="display: none;" value="신청취소">
 		</c:if>
 		<c:if test="${loginUser == dto.MEmail || loginUserRole == 'ADMIN'}">

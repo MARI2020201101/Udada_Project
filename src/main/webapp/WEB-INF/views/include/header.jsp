@@ -78,7 +78,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                     	<a class="collapse-item" href="/member/myWeight">마이 프로필</a>
                     	<a class="collapse-item" href="/member/foodMy">마이 푸드</a>
-                        <a class="collapse-item" href="#">마이 운동</a>
+                        <a class="collapse-item" href="/exercise/mylist">마이 운동</a>
                     </div>
                 </div>
             </li>

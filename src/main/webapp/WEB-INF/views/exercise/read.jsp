@@ -29,74 +29,110 @@ table.type03 td {
 }
 </style>
 <!-- Begin Page Content -->
-<div class="container-fluid">
+<div class="container">
 
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800">운동 상세</h1>
 	
-<form action="/exercise/insert" method="post">
-	<img class="h3 mb-4 text-gray-800" height="95px" width="95px"
-		src="/resources/imgs/${dto.EName}.png" style="clear: left" />
-		
-		
-		<table class="type03">
-  <tr>
-    <th scope="row">5분 당</th>
-    <td id="eKcal" name="eKcal" class="type03" align="right">${dto.EKcal}칼로리</td>
-  </tr>
-  <tr>
-    <th scope="row">10분 당</th>
-    <td id="eKcal" name="eKcal" class="type03" align="right">${dto.EKcal*2}칼로리</td>
-  </tr>
-  <tr>
-    <th scope="row">15분 당</th>
-    <td id="eKcal" name="eKcal" class="type03" align="right">${dto.EKcal*3}칼로리</td>
-  </tr>
-  <tr>
-    <th scope="row">30분 당</th>
-    <td id="eKcal" name="eKcal" class="type03" align="right">${dto.EKcal*6}칼로리</td>
-  </tr>
-  <tr>
-    <th scope="row">1시간 당</th>
-    <td id="eKcal" name="eKcal" class="type03" align="right">${dto.EKcal*12}칼로리</td>
-  </tr>
-</table>
-		
-		
-			
-	<div class="form-group row">
-		<label>번호</label> 
-		<input type="text" id="eNo" name="eNo" class="form-control form-control-user" value="${dto.ENo}" readonly>
-	</div>
-	<div class="form-group row">
-		<label>운동 이름</label> 
-		<input type="text" id="eName" name="eName" class="form-control form-control-user" value="${dto.EName}" readonly>
-	</div>
-	<div class="form-group row">
-		<label>운동 강도</label> 
-		<input type="text" id="eStr" name="eStr" class="form-control form-control-user" value="${dto.EStr}" readonly>
-	</div>
 
-	<div class="form-group">
-	<label>운동 시간 </label> 
+	<div class="row">
+							<div class="col-md-10 mb-4">
+                            <div class="card shadow h-100 py-2">
+                                <div class="card-body py-2">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col">
+                                            <div class="text-sm font-weight-bold text-primary text-uppercase mb-1">
+                                                이름</div>
+                                            <div class="h5 mb-0 font-weight-bold" style="text-align: center;">${dto.EName}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        						<div class="col-md-2 mb-4">
+                            <div class="card shadow h-100 py-2">
+                                <div class="card-body py-2">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col">
+                                            <div class="text-sm font-weight-bold text-primary text-uppercase mb-1">
+                                                운동 강도</div>
+                                            <div class="h5 mb-0 font-weight-bold" style="text-align: center;">
+											<c:choose>
+											<c:when test="${dto.EStr=='MD'}">
+											<div style="color:orange;">중간</div>
+											</c:when>
+											<c:when test="${dto.EStr=='HIGH'}">
+											<div style="color:red;">중간</div>
+											</c:when>
+											<c:when test="${dto.EStr=='LOW'}">
+											<div style="color:blue;">중간</div>
+											</c:when>
+											<c:when test="${dto.EStr=='REST'}">
+											<div style="color:green;">휴식</div>
+											</c:when>
+                                            </c:choose>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+							<div class="col-md-4 mb-4">
+                            <div class="card shadow h-100 py-2">
+                                <div class="card-body py-2">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col">
+<img class="mb-4" width="100%" src="/resources/imgs/${dto.ENo}.png"></div>
+                   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						<div class="col-md-8 mb-4 row">
+                        <c:forEach varStatus="status" begin="1" end="6">
+                         <div class="col-md-4 my-2">
+                            <div class="card shadow h-100 py-2">
+                                <div class="card-body py-2">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col">
+                                            <div class="text-sm font-weight-bold text-primary text-uppercase mb-1">
+                                                ${status.count*10}분</div>
+                                            <div class="h5 mb-0 font-weight-bold" style="text-align: center;">
+                                            <fmt:formatNumber value="${(dto.EKcal/5)*(status.count*10)}"
+									pattern="0" />칼로리
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </c:forEach>
+                        </div>
+                        
+
+	</div>
 	
-	<br>
-		<select class="form-select" id="emTime" name="emTime">
-			<option value=1>5 분</option>
-			<option value=2>10 분</option>
-			<option value=3>15 분</option>
-			<option value=6>30 분</option>
-			<option value=12>1 시간</option>
-		</select>&nbsp;&nbsp;
+	<div class="row">
+	<div class="col-4">
+	<form action="/exercise/insert" method="post" id="emInsert">
+	<div class="input-group">
+	<input type="hidden" id="mEmail" name="mEmail" class="form-control" value="${loginUser}" readonly>
+	<input type="hidden" id="eNo" name="eNo" class="form-control" value="${dto.ENo}" readonly>
+	<button class="btn btn-outline-secondary" type="button" id="btnAddon" disabled>마이운동 추가</button>
+	<input type="text" class="form-control" name="emTime" placeholder="시간(분) 입력">
+	<button class="btn btn-primary" type="submit" id="btnAddon">추가</button>
+	</div>
+	</div>
+	</form>
+	<div class="col-7">
+	</div>
+	<div class="col-1 mr-0">
+	<button class="btn btn-secondary">목록</button>
+	<div>
+	</div>
 
-		<input type="submit" class="btn btn-primary btn-sm" value="추가">
-		</div>
-		
-	<a href="/exercise/list" class="btn btn-secondary"> 
-	<span class="text">목록</span>
-	</a>
-</form>
-
+</div>
 <!-- /.container-fluid -->
 </div>
 <!-- End of Main Content -->
@@ -120,6 +156,8 @@ table.type03 td {
 		</div>
 	</div>
 </div>
+</div>
+</div>
 <script>
 	$(document).ready(function() {
 		var msg = '${msg}';
@@ -129,6 +167,11 @@ table.type03 td {
 			console.log(modal);
 			modal.modal();
 		}
+		$(".btnAddon").on("click",function(){
+			$("#emInsert").submit();
+		});
 	});
+	
+	
 </script>
 <%@ include file="../include/footer.jsp"%>

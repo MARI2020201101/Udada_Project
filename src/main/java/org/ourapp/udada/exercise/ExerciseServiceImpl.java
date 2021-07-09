@@ -4,9 +4,8 @@
   import java.util.List;
 
   
-  import org.ourapp.udada.mapper.ExerciseMapper;
-import org.ourapp.udada.recipe.PageRequestDTO;
-import org.ourapp.udada.recipe.RecipeDTO;
+import org.ourapp.udada.mapper.ExerciseMapper;
+
 import org.springframework.stereotype.Service;
   
   import lombok.RequiredArgsConstructor; 
@@ -31,8 +30,8 @@ import org.springframework.stereotype.Service;
   }
 
   @Override
-  public List<Exercise_myDTO> myList(String mEmail) {
-	 return exerciseMapper.myList(mEmail);
+  public List<Exercise_myDTO> myList(ExercisePageRequestDTO exercisePageRequestDTO) {
+	 return exerciseMapper.myList(exercisePageRequestDTO);
   }
 
   @Override
@@ -52,13 +51,18 @@ import org.springframework.stereotype.Service;
   }
 
   @Override
-  public int countAllWithSearch(PageRequestDTO pageRequestDTO) {
-	  return exerciseMapper.countAllWithSearch(pageRequestDTO);
+  public int countAllWithSearch(ExercisePageRequestDTO exercisePageRequestDTO) {
+	  return exerciseMapper.countAllWithSearch(exercisePageRequestDTO);
   }
 
   @Override
-  public List<ExerciseDTO> getListWithImageAndPagingAndSearch(PageRequestDTO pageRequestDTO) throws Exception {
-	  return exerciseMapper.selectWithImageAndPagingAndSearch(pageRequestDTO);
+  public List<ExerciseDTO> getListWithImageAndPagingAndSearch(ExercisePageRequestDTO exercisePageRequestDTO) throws Exception {
+	  return exerciseMapper.selectWithImageAndPagingAndSearch(exercisePageRequestDTO);
+}
+
+@Override
+public int countAllMylist(ExercisePageRequestDTO exercisePageRequestDTO) {
+	return exerciseMapper.countAllMylist(exercisePageRequestDTO);
 }
 
   

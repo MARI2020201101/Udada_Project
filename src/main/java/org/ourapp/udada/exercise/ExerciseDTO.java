@@ -13,5 +13,4 @@ public class ExerciseDTO {
 	private String  eName;	
 	private String  eStr;	
 	private int  eKcal;	
-	
 }//class end

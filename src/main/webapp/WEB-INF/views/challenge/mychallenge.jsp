@@ -3,6 +3,7 @@
 <%@ include file="../include/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -16,7 +17,7 @@
     	<div class="card-body py-2">
     	    <label class="h4 my-0">진행중</label>
     		<div class="float-right">
-    		<button class="stretched-link" style="background-color:transparent; border-color: transparent; color: gray;" id="proceedBtn"><i id="proceedIcn" class="fas fa-chevron-down"></i></button>
+    		<i role="button" id="proceedIcn" class="fas fa-chevron-down stretched-link"></i>
     		</div>
     	</div>
    	</div>
@@ -37,7 +38,7 @@
 								-
 								<fmt:formatDate value="${list.CFinish}" pattern="yyyy.MM.dd" />
 							</p>
-							<a href="/challenge/progress/${list.CNo}" data-c-no="${list.CNo}" class="stretched-link linkProgress"></a>
+							<a href="/challenge/progress/${list.CNo}" class="stretched-link linkProgress"></a>
 						</div>
 						<div class="col-auto" style="margin: 20px">
 						<c:forEach var="excs" items="${list.GList}">
@@ -54,7 +55,7 @@
     	<div class="card-body py-2">
     	    <label class="h4 my-0">신청</label>
     		<div class="float-right">
-    		<button class="stretched-link" style="background-color:transparent; border-color: transparent; color: gray;" id="applyBtn"><i id="applyIcn"class="fas fa-chevron-down"></i></button>
+    		<i role="button" id="applyIcn" class="fas fa-chevron-down stretched-link"></i>
     		</div>
     	</div>
    	</div>
@@ -88,11 +89,11 @@
     	<div class="card-body py-2">
     	    <label class="h4 my-0">종료</label>
     		<div class="float-right">
-    		<button class="stretched-link" style="background-color:transparent; border-color: transparent; color: gray;" id="endBtn"><i id="endIcn" class="fas fa-chevron-up"></i></button>
+    		<i role="button" id="endIcn" class="fas fa-chevron-up stretched-link"></i>
     		</div>
     	</div>
    	</div>
-	<div class="row" id="end">
+	<div class="row" id="end" style="display: none;">
 		<c:forEach var="list" items="${endList}">
 			<div class="col-xl-4 col-md-6 mb-4">
 				<div class="card border-left-danger shadow h-100 py-1">
@@ -117,22 +118,26 @@
 			</div>
 		</c:forEach>
 	</div>
+	<c:if test="${fn:length(endList)>6}">
+		<div align="center">
+		<button class="btn btn-primary btn-sm">더보기</button>
+		</div>
+	</c:if>
 
 </div>
 </div>
 <script>
 	$(document).ready( function(){
-		$("#end").hide();
 	});
-	$("#applyBtn").on("click", function() {
+	$("#applyIcn").on("click", function() {
 		  $("#apply").toggle();
 		  $("#applyIcn").toggleClass("fa-chevron-down fa-chevron-up");
 		});
-	$("#endBtn").on("click", function() {
+	$("#endIcn").on("click", function() {
 		  $("#end").toggle();
 		  $("#endIcn").toggleClass("fa-chevron-down fa-chevron-up");
 		});
-	$("#proceedBtn").on("click", function() {
+	$("#proceedIcn").on("click", function() {
 		  $("#proceed").toggle();
 		  $("#proceedIcn").toggleClass("fa-chevron-down fa-chevron-up");
 		});
@@ -141,21 +146,6 @@
 		mode : "range",
 		minDate : "today",
 		dateFormat : "Y-m-d"
-	});
-	
-	$(".linkProgress").on("click", function(e){
-		var cNo = $(this).data("cNo");
-        var tempForm = document.createElement("form");
-        var tempInput;
-        tempInput = document.createElement("input");
-        tempInput.setAttribute("type", "hidden");
-        tempInput.setAttribute("name", "cNo");
-        tempInput.setAttribute("value", cNo);
-        tempForm.appendChild(tempInput);
-        tempForm.setAttribute("method", "post");
-        tempForm.setAttribute("action", "/challenge/progress");
-        document.body.appendChild(tempForm);
-        tempForm.submit();
 	});
 </script>
 <!-- End of Main Content -->
