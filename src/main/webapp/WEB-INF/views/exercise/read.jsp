@@ -62,10 +62,10 @@ table.type03 td {
 											<div style="color:orange;">중간</div>
 											</c:when>
 											<c:when test="${dto.EStr=='HIGH'}">
-											<div style="color:red;">중간</div>
+											<div style="color:red;">강함</div>
 											</c:when>
 											<c:when test="${dto.EStr=='LOW'}">
-											<div style="color:blue;">중간</div>
+											<div style="color:blue;">낮음</div>
 											</c:when>
 											<c:when test="${dto.EStr=='REST'}">
 											<div style="color:green;">휴식</div>
@@ -130,7 +130,7 @@ table.type03 td {
 	<div class="col-7">
 	</div>
 	<div class="col-1 mr-0">
-	<button class="btn btn-secondary">목록</button>
+	<button class="btn btn-secondary" onclick="location.href='/exercise/list'">목록</button>
 	<div>
 	</div>
 
