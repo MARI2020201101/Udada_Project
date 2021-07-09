@@ -5,6 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- Begin Page Content -->
 
+<div class="container-fluid">
 <div class="centerContent">
 
 	<div class="centerInnerContent">
@@ -99,7 +100,7 @@
 	</div>
 
 </div>
-
+		</div>
 </div>
 <!-- /.container-fluid -->
 <!-- End of Main Content -->

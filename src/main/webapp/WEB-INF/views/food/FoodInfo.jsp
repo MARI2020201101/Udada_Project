@@ -12,14 +12,14 @@
 </style>
 
 <div class="container-fluid">
-        
-    <div class="row">
-        	 
         <div class="h3 mb-4 text-gray-800">
-			<a href="/food/FoodInfo"> Food Information Page</a>
+	
 			<h1 class="h3 mb-0 text-gray-800"><c:out value="${dto.FName}"></c:out></h1>
 		</div>
 		
+    <div class="row">
+        	 
+        
 		<div class="col-xl-3 col-md-6 mb-4">
 		
 			<div class="card border-left-primary shadow h-100 py-2">
@@ -137,6 +137,7 @@
 													<button type="button"
 														class="btn btn-primary insertFoodMyBtn my-3 float-right">추가</button>
 												</div>
+												<div class="goToFoodMyBox"></div>
 											</div>
 										</div>
 									</div>
@@ -188,6 +189,9 @@ $(document).ready(function(){
 	            success:function(result){
 		            console.log(result);
 		            alert("마이 푸드에 저장되었습니다.");
+		            var str = "";
+		            str += "<a href='/member/foodMy?day="+ fmDate +"'>마이 푸드로 이동하기</a>";
+		            $(".goToFoodMyBox").append(str);
 		            },
 		        error: function(xhr,status,errorThrown){
 			        console.log("xhr >>",xhr);			
