@@ -4,33 +4,35 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- Begin Page Content -->
-
-<div class="container-fluid">
-<div class="centerContent">
-
-	<div class="centerInnerContent">
-	
-		<div id="content" class="mem">
-		
-			<style type="text/css">
+<style type="text/css">
 				.linkHolder{
 					float:left;
-					width:200px;
+					width:400px;
 				}
-				.linkHolder Table.greybox{
-					background-color: #EBF9FC;
-				}
+				
 				.common{
-					margin:10px;
+					margin:30px;
 				}
 				.secHolder{
 					float:left;
 					width:440px;
 					margin-left:20px;
+					margin-top:60px;
 				
 				}
-			</style>
+			</style> 
+
+<div class="container-fluid">
+
+
+	<div class="centerInnerContent">
+	
+		<div id="content" class="mem">
+	
 			
+		<div class="row">
+		<div class="col-lg-12">
+			<div class="card mb-4 py-3">		
 			<table class="generic">
 			
 				<tbody>
@@ -52,6 +54,7 @@
 												<td class="content">
 												
 													<h2>소분류</h2>
+													<br>
 													
 													<c:forEach var="dto" items="${Minlist}">
 														
@@ -101,7 +104,11 @@
 
 </div>
 		</div>
-</div>
+		</div>
+		</div>
+	</div>
+
+
 <!-- /.container-fluid -->
 <!-- End of Main Content -->
 
