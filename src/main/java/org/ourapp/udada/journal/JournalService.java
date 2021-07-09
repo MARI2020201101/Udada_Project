@@ -36,6 +36,7 @@ public interface JournalService {
 	void deleteLike(Long jNo, String mEmail) throws Exception;
 	void updateLike(Long jNo) throws Exception;
 	List<ReplyDTO> replyList(Long oriNo, String reDiv);
+	int replyCount(Long reNo, Long oriNo);
 	List<ReplyDTO> commentList(Long reNo);
 	
 }//interface end

@@ -2,6 +2,7 @@ package org.ourapp.udada.journal;
 
 import org.ourapp.udada.reply.ReplyController;
 import org.ourapp.udada.reply.ReplyService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ public class LikeyouController {
 
 	private final LikeyouService likeyouService;
 	
+	//@PreAuthorize("authentication.principal.username == #journalDTO.mEmail or hasRole('ROLE_ADMIN')")
 	@ResponseBody
 	@PostMapping("/insertLike")
 	public int insertLike(Long jNo, String mEmail) throws Exception{

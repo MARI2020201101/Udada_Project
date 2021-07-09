@@ -33,6 +33,7 @@ public class JournalDTO {
 	private ImageDTO imageDTO;
 	private List<LikeyouDTO> likeyouList;
 	private int likeCount;
+	private int replyCount;
 	
 	private List<ReplyDTO> replyList;
 	

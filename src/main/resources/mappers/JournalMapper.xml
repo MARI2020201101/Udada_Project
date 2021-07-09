@@ -130,7 +130,7 @@
 		SELECT SSUB.* FROM
         (SELECT SUB.*, ROWNUM AS RN FROM
         (SELECT 
-		J.J_NO , J.M_EMAIL , J.J_CONTENT, J.J_DATE ,I.*
+		J.J_NO , J.M_EMAIL , J.J_CONTENT, J.J_DATE, J.L_CNT,I.*
 		FROM (SELECT * FROM JOURNAL WHERE M_EMAIL= #{loginUser})J
         LEFT JOIN IMAGE I
         ON J.J_NO = I.ORI_NO
@@ -202,6 +202,10 @@
 		FROM REPLY
 		WHERE RE_NO!=#{reNo} AND RE_GROUP=#{reNo}
 		ORDER BY RE_DATE
+	</select>
+	
+	<select id="replyCount" resultMap="replyMap">
+		SELECT COUNT(RE_NO) FROM REPLY WHERE ORI_NO = #{oriNo}
 	</select>
 	
 </mapper>

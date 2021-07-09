@@ -8,25 +8,25 @@
 <sec:authentication property="principal.memberDTO.mEmail" var="loginUser"/>
 
 	<!-- Page Heading -->
-	<h1 class="h3 mb-4 text-gray-800">Journal Register Page</h1>
+	<h1 class="h3 mb-4 text-gray-800">저널 작성</h1>
 
 <form method="POST" action="/journal/register" enctype="multipart/form-data">
 
       <div class="form-group row">
-        <label>CONTENT</label>
+        <label>내용</label>
         <textarea cols="5" class="form-control form-control-user" name="jContent"
                        placeholder="Content"></textarea>
       </div>
       <div class="form-group row">
-        <label>WRITER</label>
+        <label>작성자</label>
         <input type="text" class="form-control form-control-user" name="mEmail" value="${loginUser }" readonly>
       </div>
       <div class="form-group row">
-      	<label>IMAGE</label>
+      	<label>이미지 선택</label>
        	<input type="file" class="form-control form-control-user imageInput" name="image" >
       </div>
 		<button class="btn btn-primary">
-			<span class="text">Register</span>
+			<span class="text">작성하기</span>
 		</button>
 		
 	</form>

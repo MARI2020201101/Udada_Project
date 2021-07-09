@@ -12,7 +12,7 @@
 <sec:authentication property="principal.memberDTO.mEmail" var="loginUser"/>
 
 	<!-- Page Heading -->
-	<h1 class="h3 mb-4 text-gray-800">Journal list Page</h1>
+	<h1 class="h3 mb-4 text-gray-800"></h1>
 
 	
 	<!-- Topbar Search -->
@@ -35,13 +35,12 @@
 	<hr>
 
 	<c:forEach var="dto" items="${list}">
-	<div style="margin: 0 auto; width:50%;"><a href='/journal/read?jNo=<c:out value="${dto.JNo}"/>'>${dto.MEmail }</a></div>
 		<div class="card" style="margin: 0 auto; width: 50%;">
+		<div class="mt-1">&nbsp;<b>${dto.MEmail }</b></div><hr class="my-1">
 			<c:if test="${not empty dto.imageDTO && dto.imageDTO.IName!='' }">
 				<img src="/image/show?imagePath=${dto.imageDTO.imagePath }" height="450px">
-			</c:if>
-			<!--  <img src="/resources/imgs/heart2.svg" class="card-img-top">-->
 			<hr>
+			</c:if>
 			<div class="card-body">
 				<p class="card-text">${dto.JContent }</p>
 			</div>
@@ -431,50 +430,6 @@ $(".commentModify").hide();
 </script>
 
 
-<!-- 좋아요 버튼 -->
-<script>
-/*
-	$(document).ready(function() {
-
-		var heartval = ${heart};
-
-		if (heartval > 0) {
-			console.log(heartval);
-			$("#heart").prop("src", "/resources/imgs/heart2.svg");
-			$(".heart").prop('name', heartval)
-		} else {
-			console.log(heartval);
-			$("#heart").prop("src", "/resources/imgs/heart1.svg");
-			$(".heart").prop('name', heartval)
-		}
-
-		$(".heart").on("click", function() {
-
-			var that = $(".heart");
-
-			var sendData = {
-				'mEmail' : '${dto.MEmail}',
-				'heart' : that.prop('name')
-			};
-			$.ajax({
-				url : '/journal/heart',
-				type : 'POST',
-				data : sendData,
-				success : function(data) {
-					that.prop('name', data);
-					if (data == 1) {
-						$('#heart').prop("src", "/resources/imgs/heart2.svg");
-					} else {
-						$('#heart').prop("src", "/resources/imgs/heart1.svg");
-					}
-
-				}
-			});
-		});
-	});
-	*/
-</script>
-<!-- 좋아요 버튼 끝 -->
 
 
 <%@ include file="../include/footer.jsp"%>

@@ -33,6 +33,7 @@ public interface JournalMapper {
 	void deleteLike(@Param("jNo") Long jNo, @Param("mEmail") String mEmail);
 	void updateLike(@Param("jNo") Long jNo);
 	List<ReplyDTO> replyList(@Param("oriNo") Long oriNo,@Param("reDiv")  String reDiv);
+	int replyCount(@Param("reNo") Long reNo, @Param("oriNo") Long oriNo);
 	List<ReplyDTO> commentList(@Param("reNo") Long reNo);
 	
 }//interface end

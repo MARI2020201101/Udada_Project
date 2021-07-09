@@ -5,30 +5,30 @@
 <div class="container-fluid">
 
 	<!-- Page Heading -->
-	<h1 class="h3 mb-4 text-gray-800">Journal Modify Page</h1>
+	<h1 class="h3 mb-4 text-gray-800">저널 수정하기</h1>
 	
 	<form method="POST" action="/journal/modify" enctype="multipart/form-data">
-		<div class="form-group row">
-       <label>JNO</label>
+	  <div class="form-group row" style="display: none">
+        <label>JNO</label>
         <input type="text" class="form-control form-control-user" name="jNo" value="${dto.JNo}" readonly>
       </div>
 
       <div class="form-group row">
-        <label>CONTENT</label>
-        <textarea cols="5" class="form-control form-control-user"  name="jContent">${dto.JContent}</textarea>
+        <label>내용</label>
+        <textarea rows="5" class="form-control form-control-user"  name="jContent">${dto.JContent}</textarea>
       </div>
 	  <div class="form-group row">
-      	<label>IMAGE</label>
+      	<label>이미지 선택</label>
        	<input type="file" class="form-control form-control-user imageInput" name="image" >
       </div>
       <a class="btn btn-secondary listBtn">
-            <span class="text">LIST</span>
+            <span class="text">목록보기</span>
         </a>
         <a class="btn btn-warning modBtn">
-        	<span class="text">MODIFY</span>
+        	<span class="text">수정</span>
         </a>
         <a class="btn btn-danger removeBtn">
-        	<span class="text">REMOVE</span>
+        	<span class="text">삭제</span>
         </a>
 	</form>      
 		

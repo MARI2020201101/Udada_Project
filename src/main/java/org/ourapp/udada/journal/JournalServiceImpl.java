@@ -172,6 +172,13 @@ public class JournalServiceImpl implements JournalService{
 		
 		return journalMapper.commentList(reNo);
 	}
+	
+	
+	@Override
+	public int replyCount(Long reNo, Long oriNo) {
+		
+		return journalMapper.replyCount(reNo, oriNo);
+	}
 
 	
 	
