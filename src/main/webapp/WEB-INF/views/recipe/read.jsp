@@ -249,7 +249,7 @@
 				<div class="replycard ">
 
 
-					<b class="mx-3">Comments</b>&nbsp;&nbsp;<img class="comment"
+					<b class="mx-3">댓글</b>&nbsp;&nbsp;<img class="comment"
 						src="/resources/imgs/comment.svg" width="30px">
 					<%--  <input type="hidden" name="mEmail" value="${dto.MEmail }"/> --%>
 					<input type="hidden" id="reRno" name="rNo" value="${dto.RNo }" />
