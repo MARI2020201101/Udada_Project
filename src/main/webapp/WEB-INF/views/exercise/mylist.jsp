@@ -290,6 +290,8 @@
 		});
 
  $('#calendar').css('font-size','10px !important');
+
+
   var mySuccessDay = new Array();
 	$.ajax({
 		type : "post",
@@ -312,6 +314,15 @@
    });
    calendar.render();
    $('#calendar').find("button").addClass("btn-sm");
+
+
+   //css제거
+   $('.fc-daygrid-day-number').hover(function(){
+	   
+		           $(this).css('text-decoration','none');
+		       });
+	      
+   
 
 Chart.defaults.global.defaultFontFamily = 'S-CoreDream-4Regular';
 Chart.defaults.global.defaultFontColor = '#363945';

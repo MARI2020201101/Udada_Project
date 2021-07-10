@@ -31,7 +31,7 @@
 		ON A.M_EMAIL=B.M_EMAIL
 		WHERE J_DATE>CURRENT_DATE-7
 		ORDER BY A.L_CNT DESC, J_DATE DESC)
-		WHERE 8>ROWNUM
+		WHERE 6>ROWNUM
 	</select>
 	
 	<select id="endSoonChallenge" resultMap="endSoonChallengeMap">
@@ -45,7 +45,7 @@
 		ON C.C_NO = CA.C_NO
 		WHERE TRUNC(CURRENT_DATE)+1 > C.C_START)D
 		ORDER BY C_COUNT ASC, D_DAY ASC)E
-		WHERE 8>ROWNUM
+		WHERE 6>ROWNUM
 	</select>
 	
 	<select id="highRateRecipe" resultMap="highRateRecipeMap">
@@ -58,7 +58,7 @@
 		ON A.R_NO=B.R_NO
 		WHERE R_DATE>CURRENT_DATE-30
 		ORDER BY B.RG_AVG DESC)C
-		WHERE 8>ROWNUM
+		WHERE 6>ROWNUM
 	</select>
 	
 	<select id="getMyExcs" resultType="int">

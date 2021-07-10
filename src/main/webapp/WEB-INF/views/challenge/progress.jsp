@@ -407,7 +407,13 @@ var challengePeriod = {title:'챌린지 기간', start:"${info.charStart}", end:
    calendar.render();
    calendar.gotoDate("${info.charStart}");
    $('#calendar').find("button").addClass("btn-sm");
-   
+
+   //css제거
+   $('.fc-daygrid-day-number').hover(function(){
+	   
+		           $(this).css('text-decoration','none');
+		       });
+	      
 
    $("#talkReg").one("click","button",function(){
 		var reContent = $("#talkReg").find("textarea").val();

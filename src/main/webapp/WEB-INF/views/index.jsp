@@ -13,7 +13,7 @@
 				<div class="card-body">
 					<div class="row no-gutters align-items-center">
 						<div class="col mr-2">
-							<div class="h5 mb-0 font-weight-bold text-danger">
+							<div class="h6 mb-0 font-weight-bold text-danger">
 							오늘은 어떤 음식을 드셨나요?<br>
 							오늘 먹은 음식을 기록하세요 <i role="button" class="fas fa-arrow-right stretched-link" 
 							onclick="location.href='/member/foodMy'"></i>
@@ -57,7 +57,7 @@
 				<div class="card-body">
 					<div class="row no-gutters align-items-center">
 						<div class="col mr-2">
-							<div class="h5 mb-0 font-weight-bold text-danger">
+							<div class="h6 mb-0 font-weight-bold text-danger">
 							오늘은 어떤 운동을 하셨나요?<br>
 							오늘 하신 운동을 기록하세요 <i class="fas fa-arrow-right stretched-link" role="button" 
 							onclick="location.href='/exercise/mylist'"></i>
@@ -100,7 +100,7 @@
 				<div class="card-body">
 					<div class="row no-gutters align-items-center">
 						<div class="col mr-2">
-							<div class="h5 mb-0 font-weight-bold text-danger">
+							<div class="h6 mb-0 font-weight-bold text-danger">
 							다이어트 중이신가요?<br>
 							체중을 기록해 보세요 <i class="fas fa-arrow-right stretched-link" role="button" 
 							onclick="location.href='/member/myWeight'"></i>
