@@ -86,10 +86,10 @@ public class JouranlController {
 	@GetMapping("/mylist")
 	public void myList(Model model, PageRequestDTO pageRequestDTO, Authentication auth) throws Exception{
 		
-		log.info("security"+auth);
+		//log.info("security"+auth);
 		
 		String loginUser = auth.getName();
-		log.info("로그인 아이디"+loginUser);
+		//log.info("로그인 아이디"+loginUser);
 		//PageRequestDTO pagedto = new PageRequestDTO();
 		//System.out.println(pagedto);
 		pageRequestDTO.setLoginUser(loginUser);
@@ -98,7 +98,7 @@ public class JouranlController {
 		model.addAttribute("mylist", mylist);
 		
 		int total = journalService.mycountAllWithSearch(pageRequestDTO);
-		log.info("페이지" + total);
+		//log.info("페이지" + total);
 		model.addAttribute("pageResultDTO", new PageResultDTO(pageRequestDTO, total));
 		
 	}
@@ -140,13 +140,13 @@ public class JouranlController {
 	
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/modify")
-	public void modifyForm(JournalDTO journalDTO, Long jNo, Model model, Authentication auth) {
+	public void modifyForm(JournalDTO journalDTO, Long jNo, Model model, Authentication auth) throws Exception {
 		//log.info("수정문제찾기"+auth);
 		//log.info("journalDTO"+journalDTO);
-		model.addAttribute("dto", journalService.read(jNo));
+		model.addAttribute("dto", journalService.getWithIngreAndFoodAndImage(jNo));
 	}
 	
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("authentication.principal.username == #journalDTO.mEmail or hasRole('ROLE_ADMIN')")
 	@PostMapping("/modify")
 	public String modify(JournalDTO journalDTO, MultipartFile image, Model model, RedirectAttributes rttr, PageRequestDTO pageRequestDTO) throws Exception{
 		log.info(journalDTO);
@@ -167,7 +167,7 @@ public class JouranlController {
 		
 	}
 	
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("authentication.principal.username == #journalDTO.mEmail or hasRole('ROLE_ADMIN')")
 	@PostMapping("/remove")
 	public String remove(JournalDTO journalDTO, RedirectAttributes rttr) throws Exception{
 		if(journalDTO.getImageDTO()!=null && journalDTO.getImageDTO().getIName()!="") {

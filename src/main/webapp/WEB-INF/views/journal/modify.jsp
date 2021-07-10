@@ -2,18 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
 <!-- Begin Page Content -->
-<sec:authorize access="isAuthenticated()">
-<sec:authentication property="principal.memberDTO.mGrade" var="loginUserRole"/>
-<sec:authentication property="principal.memberDTO.mEmail" var="loginUser"/>
 
 <div class="container-fluid">
 
 
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800">저널 수정하기</h1>
-	
+	${dto }
 	<form method="POST" action="/journal/modify" enctype="multipart/form-data">
-	<input type="hidden" value="${loginUser }">
+		<input type="hidden" name="mEmail" value="${dto.MEmail }">
 	  <div class="form-group row" style="display: none">
         <label>JNO</label>
         <input type="text" class="form-control form-control-user" name="jNo" value="${dto.JNo}" readonly>
@@ -24,9 +21,19 @@
         <textarea rows="5" class="form-control form-control-user"  name="jContent">${dto.JContent}</textarea>
       </div>
 	  <div class="form-group row">
-      	<label>이미지 선택</label>
+      	<label>새로운 이미지</label>
        	<input type="file" class="form-control form-control-user imageInput" name="image" >
       </div>
+      <div class="form-group row">
+         <label>원본이미지</label>
+         <c:if test="${not empty dto.imageDTO && dto.imageDTO.IName!='' }">
+         <input type="text" class="form-control form-control-user"  name="imageDTO.iName" value="${dto.imageDTO.IName}" readonly>
+         <input type="hidden" class="form-control form-control-user" name="imageDTO.iUuid" value=${dto.imageDTO.IUuid }>
+         <input type="hidden" class="form-control form-control-user" name="imageDTO.oriNo" value=${dto.imageDTO.oriNo }>
+         <input type="hidden" class="form-control form-control-user" name="imageDTO.iDir"  value=${dto.imageDTO.IDir }>
+         <input type="hidden" class="form-control form-control-user" name="imageDTO.iDiv"  value=${dto.imageDTO.IDiv }>
+         </c:if>
+        </div>
 
       <a class="btn btn-secondary listBtn">
             <span class="text">목록보기</span>
@@ -46,7 +53,7 @@
      </c:if>
 		</sec:authorize>
 	</form>      
-</sec:authorize>
+
 </div>
 <!-- /.container-fluid -->
 </div>

@@ -6,12 +6,6 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-<sec:authorize access="isAuthenticated()">
-
-<sec:authentication property="principal.memberDTO.mGrade" var="loginUserRole"/>
-<sec:authentication property="principal.memberDTO.mEmail" var="loginUser"/>
-
-
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800"></h1>
 
@@ -81,11 +75,11 @@
 			                    <input type="hidden" id="reJno" name="jNo" value="${dto.JNo }"/>
 			                </div>
 			                
-			                <sec:authorize access="isAuthenticated()">
+			                
 			                <div class="mt-3 d-flex flex-row align-items-center p-3 form-color"> <textarea type="text" id="reContent" class="form-control" placeholder="댓글을 입력해보세요..."></textarea>
 			                &nbsp;<input type="button" class="btn btn-primary replybtn" value="등록"></input></div>
 			                
-	     					</sec:authorize>  
+	     				
 			                <div class="mt-2">
 							<c:forEach var="reply" items="${dto.replyList}">
 			                    <div class="d-flex flex-row p-3"> 
@@ -164,7 +158,7 @@
 		    </li>
 		  </ul>
 		</nav>
-</sec:authorize>
+
 </div>
 
 <!-- /.container-fluid -->
