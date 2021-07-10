@@ -14,7 +14,7 @@
 	<button class="btn btn-primary mb-2 modalBtn" style="width: 80px; float: right;">등록</button>
 	</div>
 	<div class="row">
-			<div class="col-xl-4 col-lg-6 mt-0">
+			<div class="col-xl-4 col-lg-6 mt-1">
 			<div class="card shadow mb-3">
 				<div
 					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -25,9 +25,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-xl-8 col-lg-6">
-			<table class="table table-bordered" id="dataTable"
-				cellspacing="0">
+		<div class="col-xl-8 col-lg-6 card mb-3" style="height: auto;">
+			<table class="table table-hover mt-3">
 				<thead>
 					<tr align="center">
 						<th scope="col" width="50%">운동 내역</th>
@@ -59,7 +58,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			<div class="row mr-2" style="justify-content: center;">
+			<div class="row mr-2" style="justify-content: flex-end;">
 	<nav>
 		<ul class="pagination">
 			<li class="page-item ${exercisePageResultDTO.prev ? "":'disabled' }"><a
