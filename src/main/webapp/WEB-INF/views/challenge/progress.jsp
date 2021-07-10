@@ -238,10 +238,11 @@
 				<div class="col-xl-3 col-md-6 mb-3">
 					<div class="card border-left-success shadow h-100">
 						<div class="card-body pt-3">
+						<i role="button" onclick="location.href='/challenge/list'" style="float: right; padding-top: 10px;"
+				class="fas fa-external-link-alt fa-sm linkBtn stretched-link"></i>
 							<div class="row no-gutters align-items-center">
 									<div class="text-lg font-weight-bold text-success text-uppercase mt-3">
 										다른 챌린지에 도전하세요!
-										<a href="/challenge/list" class="stretched-link"></a>
 								</div>
 							</div>
 						</div>

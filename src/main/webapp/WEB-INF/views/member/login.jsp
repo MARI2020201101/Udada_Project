@@ -16,7 +16,7 @@
 				<div class="card-body p-0">
 					<!-- Nested Row within Card Body -->
 					<div class="row">
-						<div class="col-lg-6 d-none d-lg-block"><img src="/resources/imgs/login-salad.svg"></div>
+						<div class="col-lg-6 d-none d-lg-block px-5 py-5"><img src="/resources/imgs/login-salad.svg"></div>
 						<div class="col-lg-6">
 							<div class="p-5">
 								<div class="text-center">
@@ -34,7 +34,7 @@
 								</form>
 								<br>
 								<div class="text-center">
-                                     <a class="small" href="/member/joinForm">회원가입 하기</a>
+                                     <a class="small" href="/member/joinForm">회원가입</a>
                                 </div>
                                 <div class="text-center">
                                      <a class="small" href="/member/findPw">비밀번호 찾기</a>
@@ -94,6 +94,7 @@
                 </div>
             </div>
         </div>
+</div>
 <script>
 $(document).ready(function(){
 	var msg = '${msg}';

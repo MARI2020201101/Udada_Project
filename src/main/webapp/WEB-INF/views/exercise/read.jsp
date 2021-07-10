@@ -83,8 +83,8 @@ table.type03 td {
                                 <div class="card-body py-2">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col">
-<%-- <img class="mb-4" width="100%" src="/resources/imgs/${dto.ENo}.png"> --%></div>
-                   
+										<img class="my-0 mx-0" width="100%" src="/resources/imgs/exercise/${dto.ENo}.png">
+										</div>
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +121,7 @@ table.type03 td {
 	<input type="hidden" id="mEmail" name="mEmail" class="form-control" value="${loginUser}" readonly>
 	<input type="hidden" id="eNo" name="eNo" class="form-control" value="${dto.ENo}" readonly>
 	<button class="btn btn-outline-secondary" type="button" id="btnAddon" disabled>마이운동 추가</button>
-	<input type="text" class="form-control" name="emTime" placeholder="시간(분) 입력" required>
+	<input type="text" class="form-control" name="emTime" placeholder="시간(분) 입력">
 	<button class="btn btn-primary" type="submit" id="btnAddon">추가</button>
 	</div>
 	</form>
