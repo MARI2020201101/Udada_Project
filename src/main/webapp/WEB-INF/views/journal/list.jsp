@@ -265,11 +265,9 @@ $(document).ready(function(){
 $(".commentTxt").hide();
 $(".replyModify").hide();
 $(".commentModify").hide();
-$(".reply").hide();
 
-	$(".commentimg").on("click", function(e) {
-		$(this).parent().parent().parent().find(".reply").toggle();
-	});
+
+
 
 	
 	$(".commentinsert").on("click", function(e) {
