@@ -403,6 +403,13 @@
 		  options: {
 		    responsive: true,
 		    maintainAspectRatio : false,
+		    scales : {
+				yAxes : [ {
+					ticks : {
+						beginAtZero : true
+					}
+				} ]
+			},
 		    plugins: {
 		        datalabels: {
 		          color: 'grey',

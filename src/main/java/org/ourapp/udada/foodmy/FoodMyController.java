@@ -53,14 +53,14 @@ public class FoodMyController {
 			today = compareDay;
 		}
 
-		log.info("normalized today ... : "+today);
+		//log.info("normalized today ... : "+today);
 		String mEmail = auth.getName();
 		List<FoodMyResultDTO> list = foodMyService.getList(today, mEmail);
 		//FoodMyDayTotalDTO dayTotalDTO = foodMyService.getDayTotal(day, mEmail);
 		Map<String,Object> map = foodMyService.getDayTotalWithRecommend(today, mEmail);	
 		
 		
-		log.info("list : " + list);
+		//log.info("list : " + list);
 		log.info("map : " + map);
 		
 		model.addAttribute("list", list);

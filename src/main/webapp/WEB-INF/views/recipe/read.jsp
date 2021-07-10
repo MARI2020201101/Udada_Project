@@ -223,7 +223,7 @@
 												<b class='card-title ingreName'>${ingredient.FName}</b>
 												</a>
 												<p class='card-text'>
-													<span>selected amount : </span>${ingredient.riAmount}</p>
+													<span>양 (인분) : </span>${ingredient.riAmount}</p>
 											</div>
 										</div>
 									</li>
@@ -616,6 +616,7 @@ $(".commentModify").hide();
 		            contentType:"application/json; charset=utf-8",
 		            success:function(result){
 			            console.log(result);
+			            $(".goToFoodMyBox").empty();
 			            alert("마이 푸드에 저장되었습니다.");
 			            var str = "";
 			            str += "<a href='/member/foodMy?day="+ fmDate +"'>마이 푸드로 이동하기</a>";

@@ -22,7 +22,7 @@ public class FoodDetailController {
 		
 		List<FoodDetailDTO> list = foodDetailService.getNameList(foodDetailDTO);
 		
-		log.info(list);
+		//log.info(list);
 		
 		return list;
 		

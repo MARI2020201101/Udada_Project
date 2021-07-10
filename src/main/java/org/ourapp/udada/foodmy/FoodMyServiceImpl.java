@@ -75,17 +75,22 @@ public class FoodMyServiceImpl implements FoodMyService{
 		int tFat = dayTotalDTO.getDayTotalFat();
 		int tNutrient = 1;
 		tNutrient += tCarbo + tProtein + tFat;
-		
-		
+		log.info("tProtein:"+ tProtein + "\ntFat:"+tFat);
+		log.info("tNutrient:"+ tNutrient);
 		int perCarbo = (tCarbo/tNutrient)*100;
-		int perProtein = (tProtein/tNutrient)*100;
-		int perFat = (tFat/tNutrient)*100;
-		int[] recommendNutrient = new int[3];
 		
-		int[] VEG = {40,20,40};
-		int[] NORMAL = {50,30,20};
-		int[] KETO = {10,30,60};
-		int[] MEDT = {40,30,30};
+		double perProtein = (tProtein/(tNutrient*1.0))*100;
+		double perFat = (tFat/(tNutrient*1.0))*100;
+		double[] recommendNutrient = new double[3];
+		
+		
+		log.info("perProtein:"+ (perProtein) + "\nperFat:"+perFat);
+		
+		
+		double[] VEG = {40,20,40};
+		double[] NORMAL = {50,30,20};
+		double[] KETO = {10,30,60};
+		double[] MEDT = {40,30,30};
 		
 		String mealType = memberInfo.getMemberDTO().getMMeal();
 		if(mealType==null) {
@@ -99,11 +104,10 @@ public class FoodMyServiceImpl implements FoodMyService{
         default: recommendNutrient = NORMAL; break;      		 
 			}
 		
-		
-		if(perProtein<recommendNutrient[1]) {
-			message = "단백질을 좀더 섭취해보아요!";
-			recommendDTO.setImg("message-protein.svg");
-		}else if(perFat<recommendNutrient[2]) {
+		 if(perProtein<recommendNutrient[1]*0.4) {
+				message = "단백질을 좀더 섭취해보아요!";
+				recommendDTO.setImg("message-protein.svg");
+		}else if(perFat<recommendNutrient[2]*0.2) {
 			message = "지방을 좀더 섭취해보아요!";
 			recommendDTO.setImg("message-fat.svg");
 		}else {

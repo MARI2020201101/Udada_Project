@@ -187,7 +187,8 @@ $(document).ready(function(){
 	            data:JSON.stringify(foodMyDTO),
 	            contentType:"application/json; charset=utf-8",
 	            success:function(result){
-		            console.log(result);
+		            
+		            $(".goToFoodMyBox").empty();
 		            alert("마이 푸드에 저장되었습니다.");
 		            var str = "";
 		            str += "<a href='/member/foodMy?day="+ fmDate +"'>마이 푸드로 이동하기</a>";

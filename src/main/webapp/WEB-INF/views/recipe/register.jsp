@@ -130,12 +130,12 @@ $(document).ready(function(){
 
 		if(!($("#rTitle").val())){
 
-			alert("제목을 입력해 주십시오...");
+			alert("레시피의 이름을 입력해 주십시오");
 			return;
 			}
 		if(!($("#rContent").val())){
 
-			alert("내용을 입력해 주십시오...");
+			alert("조리법을 입력해 주십시오");
 			return;
 			}
 		
