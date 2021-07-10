@@ -8,7 +8,6 @@
 
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800">저널 수정하기</h1>
-	${dto }
 	<form method="POST" action="/journal/modify" enctype="multipart/form-data">
 		<input type="hidden" name="mEmail" value="${dto.MEmail }">
 	  <div class="form-group row" style="display: none">
