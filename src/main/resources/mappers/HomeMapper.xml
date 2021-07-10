@@ -71,8 +71,11 @@
 	</select>
 	
 	<select id="getBmi" resultType="double">
-		SELECT NVL(ROUND((MS_WEIGHT/((MS_HEIGHT)*(MS_HEIGHT)))*10000,1),0) FROM MEMBER_SPEC
+		SELECT * FROM
+        (SELECT NVL(ROUND((MS_WEIGHT/((MS_HEIGHT)*(MS_HEIGHT)))*10000,1),0) FROM MEMBER_SPEC
 		WHERE TRUNC(MS_DATE)=TRUNC(CURRENT_DATE)
 		AND M_EMAIL=#{mEmail}
+        ORDER BY MS_DATE DESC)
+        WHERE ROWNUM=1
 	</select>
 </mapper>

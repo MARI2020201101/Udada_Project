@@ -4,10 +4,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- Begin Page Content -->
-<div class="container">
+<div class="container pt-2">
 
 	<!-- Page Heading -->
-	<div class="h3 mb-3 my-4">운동 종류</div>
+	<div class="h3 my-4 ml-3 font-weight-bold">운동 종류</div>
 
 <div class="row" align="center">
 			<c:forEach var="dto" items="${list}">
@@ -16,7 +16,7 @@
                                 <div class="card-body py-3">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col">
-                                            <div class="h4 font-weight-bold text-primary text-uppercase mb-1">
+                                            <div class="h4 text-primary text-uppercase mb-1">
                                             	${dto.EName}
                                                 <a class="stretched-link" href='/exercise/read?eNo=${dto.ENo}'></a></div>
                                         </div>
@@ -27,28 +27,7 @@
              </c:forEach>
 </div>
 
-<%-- 	<table class="table table-bordered" id="dataTable" width="100%"
-		cellspacing="0">
-		<thead>
-			<tr align="center">
-				<th scope="col" width="50%">운동 이름</th>
-				<th scope="col" width="25%">운동 강도</th>
-				<th scope="col" width="25%">소모 칼로리(5분)</th>
-			</tr>
-		</thead>
-		<tbody>
-
-			<c:forEach var="dto" items="${list}">
-				<tr align="center">
-					<td><a href='/exercise/read?eNo=<c:out value="${dto.ENo}"/>'><c:out
-								value="${dto.EName}" /></a></td>
-					<td><c:out value="${dto.EStr}" /></td>
-					<td><c:out value="${dto.EKcal}" /></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table> --%>
-<div class="row mr-2" style="justify-content: flex-end;">
+<div class="row mr-2 mt-3" style="justify-content: center;">
 	<nav>
 		<ul class="pagination">
 			<li class="page-item ${exercisePageResultDTO.prev ? "":'disabled' }"><a

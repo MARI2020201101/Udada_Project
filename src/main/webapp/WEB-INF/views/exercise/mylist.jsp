@@ -7,30 +7,57 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css">
 <!-- Begin Page Content -->
-<div class="container-fluid card pb-3">
+
+<style>
+#calendar a:hover{
+	text-decoration: none !important
+}
+</style>
+<div class="container-fluid">
 
 	<!-- Page Heading -->
-	<div class="h3 mb-0 mt-3">마이 운동
-	<button class="btn btn-primary mb-2 modalBtn" style="width: 80px; float: right;">등록</button>
-	</div>
 	<div class="row">
-			<div class="col-xl-6 col-lg-6 mt-1">
+	<div class="col-xl-12 col-lg-12">
+	<div class="h3 mb-3 ml-3 font-weight-bold" style="vertical-align: middle">
+	<div>
+	마이 운동 <button class="btn btn-primary modalBtn btn mr-2" style="float: right;">운동 추가 +</button>
+	</div>
+	</div>
+	</div>
+				<div class="col-xl-12">
+				<div class="card shadow mb-3">
+				<div
+					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">최근 운동 그래프</h6>
+				</div>
+				<div class="card-body" style="height: 300px">
+						<canvas id="memberSuccessCount"></canvas>
+				</div>
+			</div>
+			</div>
+	
+			<div class="col-xl-6 col-lg-6">
 			<div class="card shadow mb-3">
 				<div
 					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-					<h6 class="m-0 font-weight-bold text-primary">운동 달력</h6>
+					<h6 class="m-0 font-weight-bold text-primary">운동 캘린더</h6>
 				</div>
 				<div class="card-body">
-						<div id="calendar"></div>
+						<div class="disabledHover" id="calendar"></div>
 				</div>
 			</div>
 		</div>
-		<div class="col-xl-6 col-lg-6 card mb-3" style="height: auto;">
-			<table class="table table-hover mt-3">
+		<div class="col-xl-6 col-lg-6">
+		<div class="card shadow mb-3">
+						<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">운동 내역</h6>
+				</div>
+		<div class="card-body py-0">
+			<table class="table table-hover my-1">
 				<thead>
 					<tr align="center">
 						<th scope="col" >운동 내역</th>
-						<th scope="col" >총 소모 칼로리</th>
+						<th scope="col" >소모 칼로리</th>
 						<th scope="col" >등록일</th>
 						<th scope="col" >삭제</th>
 					</tr>
@@ -58,7 +85,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			<div class="row mr-2" style="justify-content: flex-end;">
+			<div class="row mx-2" style="justify-content:center;">
 	<nav>
 		<ul class="pagination">
 			<li class="page-item ${exercisePageResultDTO.prev ? "":'disabled' }"><a
@@ -83,15 +110,15 @@
 			</li>
 		</ul>
 	</nav>
-	<form action="/exercise/mylist" method="GET" id="searchForm"
-		class="d-none d-sm-inline-block ml-2 form-inline navbar-search" style="display: inline-block;">
+				<form action="/exercise/mylist" method="GET" id="searchForm"
+		class="d-none d-sm-inline-block ml-2 form-inline navbar-search">
 		<input type="hidden" class="form-control form-control-user"
-			name="pageNum" value=${exercisePageResultDTO.exercisePageRequestDTO.pageNum }>
+			name="pageNum" value=${exercisePageResultDTO.exercisePageRequestDTO.pageNum } >
 
 		<div class="input-group">
 			<input type="text" class="form-control bg-light border- small"
 				name="keyword" value="${exercisePageRequestDTO.keyword }"
-				placeholder="검색" aria-label="Search"
+				placeholder="검색" aria-label="Search"  style="width: 100px"
 				aria-describedby="basic-addon2">
 			<div class="input-group-append">
 				<button class="btn btn-primary searchBtn" type="button">
@@ -102,17 +129,9 @@
 	</form>
 	</div>
 	</div>
-			<div class="col-xl-12">
-				<div class="card shadow mb-3">
-				<div
-					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-					<h6 class="m-0 font-weight-bold text-primary">최근 운동 그래프</h6>
-				</div>
-				<div class="card-body" style="height: 500px">
-						<canvas id="memberSuccessCount"></canvas>
-				</div>
-			</div>
-			</div>
+	</div>
+	</div>
+
 			
 	</div>
 			
@@ -289,9 +308,6 @@
 				}
 		});
 
- $('#calendar').css('font-size','10px !important');
-
-
   var mySuccessDay = new Array();
 	$.ajax({
 		type : "post",
@@ -314,15 +330,6 @@
    });
    calendar.render();
    $('#calendar').find("button").addClass("btn-sm");
-
-
-   //css제거
-   $('.fc-daygrid-day-number').hover(function(){
-	   
-		           $(this).css('text-decoration','none');
-		       });
-	      
-   
 
 Chart.defaults.global.defaultFontFamily = 'S-CoreDream-4Regular';
 Chart.defaults.global.defaultFontColor = '#363945';
