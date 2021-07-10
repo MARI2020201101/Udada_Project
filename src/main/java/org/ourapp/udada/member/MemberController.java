@@ -181,7 +181,7 @@ public class MemberController {
 		}
 		
 		rttr.addFlashAttribute("msg", "수정되었습니다.");
-		return "redirect:/member/myWeight";
+		return "redirect:/";
 	}
 	
 
