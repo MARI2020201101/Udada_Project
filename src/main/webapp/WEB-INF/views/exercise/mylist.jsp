@@ -14,7 +14,7 @@
 	<button class="btn btn-primary mb-2 modalBtn" style="width: 80px; float: right;">등록</button>
 	</div>
 	<div class="row">
-			<div class="col-xl-4 col-lg-6 mt-1">
+			<div class="col-xl-6 col-lg-6 mt-1">
 			<div class="card shadow mb-3">
 				<div
 					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -25,14 +25,14 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-xl-8 col-lg-6 card mb-3" style="height: auto;">
+		<div class="col-xl-6 col-lg-6 card mb-3" style="height: auto;">
 			<table class="table table-hover mt-3">
 				<thead>
 					<tr align="center">
-						<th scope="col" width="50%">운동 내역</th>
-						<th scope="col" width="15%">총 소모 칼로리</th>
-						<th scope="col" width="25%">등록일</th>
-						<th scope="col" width="10%">삭제</th>
+						<th scope="col" >운동 내역</th>
+						<th scope="col" >총 소모 칼로리</th>
+						<th scope="col" >등록일</th>
+						<th scope="col" >삭제</th>
 					</tr>
 				</thead>
 				<tbody>
