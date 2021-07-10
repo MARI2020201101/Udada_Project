@@ -3,15 +3,29 @@
 <%@ include file="../include/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css">
 <!-- Begin Page Content -->
-<div class="container card pb-3">
+<div class="container-fluid card pb-3">
 
 	<!-- Page Heading -->
-	<div class="h3 mb-0 mt-3">마이 운동</div>
-	<div class="col-12 pr-1" align="right">
-	<button class="btn btn-primary mb-2 modalBtn" style="width: 80px">등록</button>
+	<div class="h3 mb-0 mt-3">마이 운동
+	<button class="btn btn-primary mb-2 modalBtn" style="width: 80px; float: right;">등록</button>
 	</div>
-
+	<div class="row">
+			<div class="col-xl-4 col-lg-6 mt-0">
+			<div class="card shadow mb-3">
+				<div
+					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">운동 달력</h6>
+				</div>
+				<div class="card-body">
+						<div id="calendar"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xl-8 col-lg-6">
 			<table class="table table-bordered" id="dataTable"
 				cellspacing="0">
 				<thead>
@@ -36,7 +50,7 @@
 							<td>
 							<form class="emDel" method="post" action="/exercise/remove?emNo=${dto.emNo}">
 							<input type="hidden" name="emNo">
-							<button class="btn btn-danger btn-sm removeBtn">삭제</button>
+							<button class="btn btn-danger btn-sm removeBtn">X</button>
 							</form>
 							</td>
 						</tr>
@@ -45,7 +59,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			<div class="row mr-2" style="justify-content: flex-end;">
+			<div class="row mr-2" style="justify-content: center;">
 	<nav>
 		<ul class="pagination">
 			<li class="page-item ${exercisePageResultDTO.prev ? "":'disabled' }"><a
@@ -71,7 +85,7 @@
 		</ul>
 	</nav>
 	<form action="/exercise/mylist" method="GET" id="searchForm"
-		class="d-none d-sm-inline-block ml-2 form-inline navbar-search">
+		class="d-none d-sm-inline-block ml-2 form-inline navbar-search" style="display: inline-block;">
 		<input type="hidden" class="form-control form-control-user"
 			name="pageNum" value=${exercisePageResultDTO.exercisePageRequestDTO.pageNum }>
 
@@ -87,6 +101,20 @@
 			</div>
 		</div>
 	</form>
+	</div>
+	</div>
+			<div class="col-xl-12">
+				<div class="card shadow mb-3">
+				<div
+					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">최근 운동 그래프</h6>
+				</div>
+				<div class="card-body" style="height: 500px">
+						<canvas id="memberSuccessCount"></canvas>
+				</div>
+			</div>
+			</div>
+			
 	</div>
 			
 
@@ -261,6 +289,162 @@
 				}, 1000);
 				}
 		});
+
+ $('#calendar').css('font-size','10px !important');
+  var mySuccessDay = new Array();
+	$.ajax({
+		type : "post",
+		url : "/exercise/getMyExcsList",
+		data : {mEmail:"${loginUser}"},
+		dataType : "json",
+		async:false,
+		success:function(data){
+			mySuccessDay = data;
+		}
+	});
+	console.log(mySuccessDay);
+   var calendarEl = document.getElementById('calendar');
+   var calendar = new FullCalendar.Calendar(calendarEl, {
+     themeSystem: 'bootstrap',
+     initialView: 'dayGridMonth',
+     contentHeight:'auto',
+     locale: 'ko',
+     events: mySuccessDay
+   });
+   calendar.render();
+   $('#calendar').find("button").addClass("btn-sm");
+
+Chart.defaults.global.defaultFontFamily = 'S-CoreDream-4Regular';
+Chart.defaults.global.defaultFontColor = '#363945';
+var chartLbl = new Array();
+var chartDta = new Array();
+var i = 0;
+ if(mySuccessDay.length>=14){
+	i=(mySuccessDay.length-14);
+} 
+for(i; i<mySuccessDay.length; i++){
+	var lbl = mySuccessDay[i].start;
+	var dta = mySuccessDay[i].kcal;
+	chartLbl.push(lbl);
+	chartDta.push(dta);
+}
+
+console.log(chartDta);
+
+
+function number_format(number, decimals, dec_point, thousands_sep) {
+
+  number = (number + '').replace(',', '').replace(' ', '');
+  var n = !isFinite(+number) ? 0 : +number,
+    prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+    sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+    dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+    s = '',
+    toFixedFix = function(n, prec) {
+      var k = Math.pow(10, prec);
+      return '' + Math.round(n * k) / k;
+    };
+
+  s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+  if (s[0].length > 3) {
+    s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+  }
+  if ((s[1] || '').length < prec) {
+    s[1] = s[1] || '';
+    s[1] += new Array(prec - s[1].length + 1).join('0');
+  }
+  return s.join(dec);
+}
+
+var ctx = document.getElementById("memberSuccessCount");
+var myLineChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: chartLbl,
+    datasets: [{
+      label: "소모 칼로리",
+      lineTension: 0.3,
+      backgroundColor: "rgba( 255, 255, 255, 0.5 )",
+      borderColor: "#007CB8",
+      pointRadius: 3,
+      pointBackgroundColor: "#007CB8",
+      pointBorderColor: "#007CB8",
+      pointHoverRadius: 3,
+      pointHoverBackgroundColor: "#007CB8",
+      pointHoverBorderColor: "#007CB8",
+      pointHitRadius: 10,
+      pointBorderWidth: 2,
+      data: chartDta,
+      datalabels: {labels: {title: null}}
+    }],
+  },
+  options: {
+	responsive: true,
+    maintainAspectRatio: false,
+    layout: {
+      padding: {
+        left: 10,
+        right: 25,
+        top: 25,
+        bottom: 0
+      }
+    },
+    scales: {
+      xAxes: [{
+        gridLines: {
+          display: false,
+          drawBorder: false
+        },
+        ticks: {
+      	  fontColor:"#363945",
+          maxTicksLimit: 15
+        }
+      }],
+      yAxes: [{
+        ticks: {
+      	  fontColor:"#363945",
+          beginAtZero:true,
+          padding: 10,
+          maxTicksLimit: 5,
+          callback: function(value, index, values) {
+            return number_format(value) + 'kcal';
+          }
+        },
+        gridLines: {
+          color: "rgb(234, 236, 244)",
+          zeroLineColor: "rgb(234, 236, 244)",
+          drawBorder: false,
+          borderDash: [2],
+          zeroLineBorderDash: [2]
+        }
+      }],
+    },
+    legend: {
+      display: false
+    },
+    tooltips: {
+      backgroundColor: "rgb(255,255,255)",
+      bodyFontColor: "#363945",
+      titleMarginBottom: 10,
+      titleFontColor: '#363945',
+      titleFontSize: 14,
+      borderColor: '#dddfeb',
+      borderWidth: 1,
+      xPadding: 15,
+      yPadding: 15,
+      displayColors: false,
+      intersect: false,
+      mode: 'index',
+      caretPadding: 10,
+      callbacks: {
+        label: function(tooltipItem, chart) {
+          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+          return datasetLabel + ' : '+number_format(tooltipItem.yLabel) + 'kcal';
+        }
+      }
+    }
+  }
+});
 </script>
 <%@ include file="../include/footer.jsp"%>
 	

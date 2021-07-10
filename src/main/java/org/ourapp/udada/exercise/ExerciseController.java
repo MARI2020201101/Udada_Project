@@ -2,6 +2,9 @@ package org.ourapp.udada.exercise;
 
 import java.util.List;
 
+import org.ourapp.udada.challenge.ChallengeReadGoalDTO;
+import org.ourapp.udada.challenge.MyChallengeGetMySuccessDayDTO;
+import org.ourapp.udada.challenge.MyChallengeInfoDTO;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -9,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.RequiredArgsConstructor;
@@ -45,7 +49,8 @@ public class ExerciseController {
 		log.info(exercisePageRequestDTO);
 		exercisePageRequestDTO.setLoginUser(auth.getName());
 		List<Exercise_myDTO> mylist = exerciseService.myList(exercisePageRequestDTO);		
-		int total = exerciseService.countAllMylist(exercisePageRequestDTO);				
+		int total = exerciseService.countAllMylist(exercisePageRequestDTO);		
+
 		model.addAttribute("exercisePageResultDTO", new ExercisePageResultDTO(exercisePageRequestDTO, total));
 		model.addAttribute("mylist", mylist);
 	}//mylist end
@@ -82,6 +87,19 @@ public class ExerciseController {
 		
 		return "redirect:/exercise/mylist/";
 		
+	}
+	
+	@ResponseBody
+	@PostMapping("/getMyExcsList")
+	public List<ExerciseGetMyListDTO> getMyExcsList(String mEmail) {
+		
+		List<ExerciseGetMyListDTO> excsList = exerciseService.getMyExcsList(mEmail);
+		for(int i=0; i<excsList.size(); i++) {
+			String title = excsList.get(i).getKcal()+"kcal";
+			excsList.get(i).setTitle(title);
+		}
+
+		return excsList;
 	}
 	
 }//class end

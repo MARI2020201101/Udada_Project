@@ -276,7 +276,7 @@
 					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 					<h6 class="m-0 font-weight-bold text-primary">챌린지 성공률 그래프</h6>
 				</div>
-				<div class="card-body">
+				<div class="card-body" style="height: 220px">
 						<canvas id="successRateChart"></canvas>
 				</div>
 			</div>
@@ -285,7 +285,7 @@
 					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 					<h6 class="m-0 font-weight-bold text-primary">멤버 성공 현황</h6>
 				</div>
-				<div class="card-body">
+				<div class="card-body" style="height: 220px">
 						<canvas id="memberSuccessCount"></canvas>
 				</div>
 			</div>
@@ -302,7 +302,7 @@
                                         </a>
                                     </div>
                                 </div>
-				<div class="card-body py-2" id="challengeTalkDiv" style="overflow:auto; height: 400px; ">
+				<div class="card-body py-2" id="challengeTalkDiv" style="overflow:auto; height: 450px; ">
 				<c:forEach var="talk" items="${talk}" varStatus="status">
 					<div>
 

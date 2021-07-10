@@ -11,8 +11,7 @@
 			<result column="E_STR" property="eStr"/>
 			<result column="E_KCAL" property="eKcal"/>
 	</resultMap>
-	
-	
+		
 	<resultMap type="org.ourapp.udada.exercise.Exercise_myDTO" id="myexerciseMap">
 			<id column="EM_NO" property="emNo"/>
 			<result column="M_EMAIL" property="mEmail"/>
@@ -23,6 +22,10 @@
 			<result column="E_KCAL" property="eKcal"/>
 	</resultMap>
 	
+	<resultMap type="org.ourapp.udada.exercise.ExerciseGetMyListDTO" id="exerciseGetMyListMap">
+			<result column="TOTAL_KCAL" property="kcal"/>
+			<result column="EM_DATE" property="start"/>
+	</resultMap>
 	<select id="getList" resultMap="exerciseMap">
 		SELECT * FROM EXERCISE ORDER BY E_NO ASC
 	</select>
@@ -102,6 +105,17 @@
 		E_NAME LIKE '%'||#{keyword}||'%'
 		</if>
 	</where>
+	</select>
+	
+	<select id="getMyExcsList" resultMap="exerciseGetMyListMap">
+			SELECT * FROM
+			(SELECT SUM(C.TOTAL_KCAL)TOTAL_KCAL, C.EM_DATE FROM
+			(SELECT ((A.EM_TIME*B.E_KCAL)/5)TOTAL_KCAL, TO_CHAR(A.EM_DATE,'YYYY-MM-DD')EM_DATE FROM EXERCISE_MY A
+			INNER JOIN EXERCISE B
+			ON A.E_NO=B.E_NO
+			WHERE A.M_EMAIL=#{mEmail})C
+			GROUP BY C.EM_DATE
+			ORDER BY C.EM_DATE)
 	</select>
 	
 </mapper>

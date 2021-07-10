@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
   
   @Override 
   public List<ExerciseDTO> getList() {
-  log.info("exerciseService~.~"); 
+
   	 return exerciseMapper.getList(); 
   }
 
@@ -63,6 +63,11 @@ import org.springframework.stereotype.Service;
 @Override
 public int countAllMylist(ExercisePageRequestDTO exercisePageRequestDTO) {
 	return exerciseMapper.countAllMylist(exercisePageRequestDTO);
+}
+
+@Override
+public List<ExerciseGetMyListDTO> getMyExcsList(String mEmail) {
+	return exerciseMapper.getMyExcsList(mEmail);
 }
 
   

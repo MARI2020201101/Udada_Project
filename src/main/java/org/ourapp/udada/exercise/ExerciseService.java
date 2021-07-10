@@ -15,5 +15,6 @@ public interface ExerciseService {
 	int countAllWithSearch(ExercisePageRequestDTO exercisePageRequestDTO);
 	List<ExerciseDTO> getListWithImageAndPagingAndSearch(ExercisePageRequestDTO exercisePageRequestDTO) throws Exception;
 	int countAllMylist(ExercisePageRequestDTO exercisePageRequestDTO);
+	List<ExerciseGetMyListDTO> getMyExcsList(String mEmail);
 
 }
