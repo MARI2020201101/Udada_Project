@@ -7,7 +7,7 @@
 
 	<div class="row">
 	<c:choose>
-	<c:when test="${foodKcal==null || foodKcal==0}">
+	<c:when test="${empty foodKcal.dayTotalDTO.dayTotalKcal}">
 		<div class="col-xl-4 col-md-6 mb-4">
 			<div class="card border-left-danger shadow h-100 py-2">
 				<div class="card-body">
@@ -37,7 +37,7 @@
 						<div class="col mr-2">
 							<div class="h5 mb-0 font-weight-bold text-primary">
 							오늘 섭취한 칼로리는<br>
-							<div style="color:#005780; display: inline-block;">${foodKcal}칼로리</div> 입니다 
+							<div style="color:#005780; display: inline-block;">${foodKcal.dayTotalDTO.dayTotalKcal}칼로리</div> 입니다 
 							</div>
 						</div>
 						<div class="col-auto">
@@ -245,18 +245,38 @@
 		</div>
 	</div>
 
-
-
-
-
-
-
-
-
-
-
 </div>
+        <div class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">결과</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ${msg }
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 <!-- /.container-fluid -->
 </div>
 <!-- End of Main Content -->
+<script>
+$(document).ready(function(){
+
+	var msg = '${msg}';
+
+	if (!(msg===''||history.state)){
+		var modal= $(".modal");
+		console.log(modal);	
+		modal.modal();
+	}
+});
+</script>
 <%@ include file="include/footer.jsp"%>

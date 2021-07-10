@@ -46,14 +46,9 @@ public class HomeController {
 		Date newDate = new Date();
 		String today = sdf.format(newDate);
 
-		List<FoodMyResultDTO> foodKcal = foodMyService.getList(today, mEmail); 
-
-		if(foodKcal.size()==0) {
-			model.addAttribute("foodKcal", 0); 
-		}else {
-			model.addAttribute("foodKcal", foodKcal.get(0).getRsKcal()); 
-		}
-			
+		Map<String,Object> foodKcal = foodMyService.getDayTotalWithRecommend(today, mEmail);	
+		
+		model.addAttribute("foodKcal", foodKcal); 
 		model.addAttribute("jList", jList);
 		model.addAttribute("cList", cList);
 		model.addAttribute("rList", rList);
