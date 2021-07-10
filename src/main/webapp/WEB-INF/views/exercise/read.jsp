@@ -121,7 +121,7 @@ table.type03 td {
 	<input type="hidden" id="mEmail" name="mEmail" class="form-control" value="${loginUser}" readonly>
 	<input type="hidden" id="eNo" name="eNo" class="form-control" value="${dto.ENo}" readonly>
 	<button class="btn btn-outline-secondary" type="button" id="btnAddon" disabled>마이운동 추가</button>
-	<input type="text" class="form-control" name="emTime" placeholder="시간(분) 입력">
+	<input type="text" class="form-control" name="emTime" placeholder="시간(분) 입력" required>
 	<button class="btn btn-primary" type="submit" id="btnAddon">추가</button>
 	</div>
 	</form>

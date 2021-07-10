@@ -10,11 +10,11 @@
 <form method="POST" action="/recipe/register" enctype="multipart/form-data">
       <div class="form-group row">
         <label>요리의 이름</label>
-        <input type="text" class="form-control form-control-user" name="rTitle" >
+        <input type="text" class="form-control form-control-user required" name="rTitle" id="rTitle">
       </div>
       <div class="form-group row">
         <label>조리법</label>
-        <textarea cols="5" class="form-control form-control-user" name="rContent" ></textarea>
+        <textarea cols="5" class="form-control form-control-user required" name="rContent" id="rContent"></textarea>
       </div>
       <div class="form-group row">
         <button class="btn btn-secondary addIngreBtn"><span class="text">재료 추가하기</span></button>
@@ -126,6 +126,19 @@ $(document).ready(function(){
 	$(".registerBtn").click(function(e){
 		e.preventDefault();
 		console.log(this);
+
+
+		if(!($("#rTitle").val())){
+
+			alert("제목을 입력해 주십시오...");
+			return;
+			}
+		if(!($("#rContent").val())){
+
+			alert("내용을 입력해 주십시오...");
+			return;
+			}
+		
 		if(appended){
 
 			var str="";
@@ -138,10 +151,10 @@ $(document).ready(function(){
 
 				 });
 			 $("form").append(str);
-			 $("form").submit();
+			 
 			}
 			
-		
+		$("form").submit();
 	});
 	
 	$(".searchResult ul").on("click","button",function(e){

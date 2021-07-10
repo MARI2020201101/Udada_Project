@@ -69,11 +69,11 @@
 			     <div class="row height d-flex justify-content-center align-items-center">
 			        <div class="col-md-12">
 			            <div class="replycard">
-			                <div class="p-3">
-			                    <h6>댓글목록</h6>
+			                <!-- <div class="p-3"> -->
+			                    <b class="mx-3">댓글</b>
 			                    <input type="hidden" name="mEmail" value="${dto.MEmail }"/>
 			                    <input type="hidden" id="reJno" name="jNo" value="${dto.JNo }"/>
-			                </div>
+			        <!--         </div> -->
 			                
 			                
 			                <div class="mt-3 d-flex flex-row align-items-center p-3 form-color"> <textarea type="text" id="reContent" class="form-control" placeholder="댓글을 입력해보세요..."></textarea>
