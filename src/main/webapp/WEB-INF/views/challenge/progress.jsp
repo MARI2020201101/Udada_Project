@@ -326,16 +326,19 @@
   					<button class="btn btn-outline-secondary btn-sm cancelEdit" type="button"><i class="fas fa-times"></i></button>
 					</div>	
 						<c:forEach var="reply" items="${talk.talkReply}">
-							<div>			
-							<div class="mt-1 talkReply" style="font-size: small;">&nbsp;└ ${reply.MName} : ${reply.reContent}
-							<div class="mt-1" style="display: inline-block; float: right; font-size: x-small;"> 
+							<div style="display: flex; flex-wrap: wrap;">			
+							<div class="mt-1 col-auto talkReply px-0 mx-0" style="font-size: small;">&nbsp;└ ${reply.MName} : </div>
+							<div class="mt-1 col px-0 mx-1" style="font-size: small;">
+							${reply.reContent}
+							</div>
+							<div class="mt-1 col-auto px-0 mx-0" style="display: inline-block; text-align:right; font-size: x-small;">
 								<c:choose>
 								<c:when test="${reply.MEmail==loginUser || loginUserRole=='ADMIN'}">
 								<i role="button" class="far fa-edit talkReplyEditBtn talkBtn"></i>
 								<i role="button" data-re-no="${reply.reNo}" data-check-talk="1" class="far fa-trash-alt talkDel talkBtn"></i>
 								</c:when>
 								</c:choose>
-							${reply.reDate}</div></div>
+							${reply.reDate}</div>
 							<div class="input-group talkReplyEdit" style="display: none;">
 		  					<textarea rows="1" class="form-control">${reply.reContent}</textarea>
 		  					<button data-re-no="${reply.reNo}" class="btn btn-outline-secondary applyEdit" type="button"><i class="fas fa-check"></i></button>
