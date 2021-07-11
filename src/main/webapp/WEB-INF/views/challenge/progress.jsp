@@ -325,7 +325,7 @@
 							</div>
 							</c:when>
 							<c:otherwise>
-							<div class="font-weight-bold text-primary mb-1" style="font-size: small;">
+							<div class="font-weight-bold mb-1" style="font-size: small;">
 							${talk.MName}
 							</div>
 							</c:otherwise>
