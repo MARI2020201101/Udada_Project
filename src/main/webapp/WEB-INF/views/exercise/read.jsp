@@ -29,14 +29,27 @@ table.type03 td {
 }
 </style>
 <!-- Begin Page Content -->
-<div class="container">
+<div class="container pt-5">
 
 	<!-- Page Heading -->
-	<h1 class="h3 mb-4 text-gray-800">운동 상세</h1>
-	
-
+	<div class="row mx-2 my-3">
+	<div class="h3 col-xl-12 font-weight-bold" style="vertical-align: middle">
+	운동 상세 	<sec:authorize access="isAuthenticated()">
+	<div style="display: inline-block; float: right;">
+	<form action="/exercise/insert" method="post" id="emInsert">
+	<input type="hidden" id="mEmail" name="mEmail" class="form-control" value="${loginUser}" readonly>
+	<input type="hidden" id="eNo" name="eNo" class="form-control" value="${dto.ENo}" readonly>
+	<div class="input-group">
+	<input type="text" class="form-control" name="emTime" placeholder="시간(분) 입력" required>
+	<button class="btn btn-primary" type="submit" id="btnAddon">마이운동 추가</button>
+	</div>
+	</form>
+	</div>
+	</sec:authorize>
+	</div>
+	</div>
 	<div class="row">
-							<div class="col-md-10 mb-4">
+							<div class="col-lg-10 mb-4">
                             <div class="card shadow h-100 py-2">
                                 <div class="card-body py-2">
                                     <div class="row no-gutters align-items-center">
@@ -49,7 +62,7 @@ table.type03 td {
                                 </div>
                             </div>
                         </div>
-                        						<div class="col-md-2 mb-4">
+                        						<div class="col-lg-2 mb-4">
                             <div class="card shadow h-100 py-2">
                                 <div class="card-body py-2">
                                     <div class="row no-gutters align-items-center">
@@ -78,7 +91,7 @@ table.type03 td {
                             </div>
                         </div>
 
-							<div class="col-md-4 mb-4">
+							<div class="col-lg-4 mb-4">
                             <div class="card shadow h-100 py-2">
                                 <div class="card-body py-2">
                                     <div class="row no-gutters align-items-center">
@@ -89,10 +102,10 @@ table.type03 td {
                                 </div>
                             </div>
                         </div>
-						<div class="col-md-8 mb-4 row">
+						<div class="col-lg-8 mb-4" style="display: flex; flex-wrap: wrap;">
                         <c:forEach varStatus="status" begin="1" end="6">
-                         <div class="col-md-4 my-2">
-                            <div class="card shadow h-100 py-2">
+                         <div class="col-lg-4 col-md-6 my-1 px-1">
+                            <div class="card shadow py-2">
                                 <div class="card-body py-2">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col">
@@ -113,25 +126,8 @@ table.type03 td {
 
 	</div>
 	
-	<div class="row">
-	<div class="col-4">
-	<sec:authorize access="isAuthenticated()">
-	<form action="/exercise/insert" method="post" id="emInsert">
-	<div class="input-group">
-	<input type="hidden" id="mEmail" name="mEmail" class="form-control" value="${loginUser}" readonly>
-	<input type="hidden" id="eNo" name="eNo" class="form-control" value="${dto.ENo}" readonly>
-	<button class="btn btn-outline-secondary" type="button" id="btnAddon" disabled>마이운동 추가</button>
-	<input type="text" class="form-control" name="emTime" placeholder="시간(분) 입력" required>
-	<button class="btn btn-primary" type="submit" id="btnAddon">추가</button>
-	</div>
-	</form>
-	</sec:authorize>
-	</div>
-	<div class="col-7">
-	</div>
-	<div class="col-1 mr-0">
+	<div align="center">
 	<button class="btn btn-secondary" onclick="location.href='/exercise/list'">목록</button>
-	<div>
 	</div>
 
 </div>

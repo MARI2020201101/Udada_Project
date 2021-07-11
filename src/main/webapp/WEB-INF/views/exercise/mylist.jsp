@@ -17,10 +17,10 @@
 
 	<!-- Page Heading -->
 	<div class="row">
-	<div class="col-xl-12 col-lg-12">
+	<div class="col-12">
 	<div class="h3 mb-3 ml-3 font-weight-bold" style="vertical-align: middle">
 	<div>
-	마이 운동 <button class="btn btn-primary modalBtn btn mr-2" style="float: right;">운동 추가 +</button>
+	마이 운동 <button class="btn btn-primary modalBtn btn mr-2" style="float: right;">마이운동 추가 <i class="fas fa-search"></i></button>
 	</div>
 	</div>
 	</div>
@@ -36,30 +36,27 @@
 			</div>
 			</div>
 	
-			<div class="col-xl-6 col-lg-6">
+			<div class="col-xl-6">
 			<div class="card shadow mb-3">
 				<div
 					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 					<h6 class="m-0 font-weight-bold text-primary">운동 캘린더</h6>
 				</div>
 				<div class="card-body">
-						<div class="disabledHover" id="calendar"></div>
+						<div id="calendar"></div>
 				</div>
 			</div>
 		</div>
-		<div class="col-xl-6 col-lg-6">
+		<div class="col-xl-6">
 		<div class="card shadow mb-3">
-						<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-					<h6 class="m-0 font-weight-bold text-primary">운동 내역</h6>
-				</div>
 		<div class="card-body py-0">
-			<table class="table table-hover my-1">
+			<table class="table table-hover mb-1 mt-3">
 				<thead>
 					<tr align="center">
 						<th scope="col" >운동 내역</th>
 						<th scope="col" >소모 칼로리</th>
 						<th scope="col" >등록일</th>
-						<th scope="col" >삭제</th>
+						<th scope="col" style="width:10%">삭제</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -243,7 +240,7 @@
                     if(data.length>0){
                     $.each(data, function (index, excs) {
                         str += "<div class='input-group mb-3'>" +
-                            "<input type='text' class='form-control' aria-describedby='btnAddon" + cnt + "' value='" + excs.ename + " (" + excs.ekcal + "kcal/5분)' readonly>" +
+                            "<input type='text' class='form-control' aria-`describedby='btnAddon" + cnt + "' value='" + excs.ename + " (" + excs.ekcal + "kcal/5분)' readonly>" +
                             "<input type='hidden' class='form-control' id='excsSelNo' value='"+excs.eno+"' readonly>" +
                             "<input type='hidden' class='form-control' id='excsSelName' value='"+excs.ename+"' readonly>" +
                             "<input type='hidden' class='form-control' id='excsSelKcal' value='"+excs.ekcal+"' readonly>" +
@@ -330,7 +327,6 @@
    });
    calendar.render();
    $('#calendar').find("button").addClass("btn-sm");
-
 Chart.defaults.global.defaultFontFamily = 'S-CoreDream-4Regular';
 Chart.defaults.global.defaultFontColor = '#363945';
 var chartLbl = new Array();

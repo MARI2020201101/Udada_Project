@@ -24,7 +24,7 @@
 	<div class="col-md-12"></div>
 	<form class="form-material" method="POST">
 	<div class="row">
-						<div class="col-md-9 mb-4">
+						<div class="col-lg-9 mb-4">
                             <div class="card shadow h-100 py-2">
                                 <div class="card-body py-2">
                                     <div class="row no-gutters align-items-center">
@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 mb-4">
+                        <div class="col-lg-3 mb-4">
                             <div class="card shadow h-100 py-2">
                                 <div class="card-body py-2">
                                     <div class="row no-gutters align-items-center">
@@ -50,7 +50,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12 mb-4">
+                        <div class="col-12 mb-4">
                             <div class="card shadow h-100 py-2">
                                 <div class="card-body py-2">
                                     <div class="row no-gutters align-items-center">
@@ -64,7 +64,7 @@
                             </div>
                         </div>
                        
-                        <div class="col-md-12 mb-4">
+                        <div class="col-12 mb-4">
                             <div class="card shadow h-100 py-2">
                                 <div class="card-body py-2">
                                     <div class="row no-gutters align-items-center">
@@ -86,7 +86,7 @@
                             </div>
                         </div>
                         
-                        <div class="col-md-12 mb-4">
+                        <div class="col-12 mb-4">
                             <div class="card shadow h-100 py-2">
                                 <div class="card-body pt-2" style="min-height: 300px">
                                     <div class="row no-gutters align-items-center">

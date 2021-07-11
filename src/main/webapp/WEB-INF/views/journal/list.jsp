@@ -195,7 +195,7 @@ $(document).ready(function(){
 		
 		
 		var mEmail = '${loginUser}'; //회원 아이디
-		var reContent = $(this).closest(".replycard").find("#reContent").val(); //댓글 내용
+		var reContent = $.trim($(this).closest(".replycard").find("#reContent").val()); //댓글 내용
 		//var oriNo = $("#reJno").val();
 		var oriNo = $(this).closest(".replycard").find("#reJno").val();
 		var result= "";
@@ -211,7 +211,7 @@ $(document).ready(function(){
 				function(data){
 				result= data;
 				if(reContent=="" || reContent==null){
-					alert("작성안됨");
+					alert("댓글을 입력해주세요!");
 				} else if(result==1){
 					//alert("등록되었습니다");
 					location.reload(); //새로고침
@@ -228,7 +228,7 @@ $(document).ready(function(){
 		
 		var mEmail = '${loginUser}';
 		var oriNo = $(this).closest(".replycard").find("#reJno").val();
-		var commentTxt = $(this).closest("div").find("textarea").val();
+		var commentTxt = $.trim($(this).closest("div").find("textarea").val());
 		var targetreNo = $(this).data('reno');
 		var result= "";
 		console.log(targetreNo);
@@ -246,8 +246,8 @@ $(document).ready(function(){
 			success :
 				function(data){
 				result= data;
-				if(reContent=="" || reContent==null){
-					alert("대댓글실패");
+				if(commentTxt=="" || commentTxt==null){
+					alert("댓글을 입력해주세요!");
 				} else if(result==1){
 					//alert("대댓글성공");
 					location.reload();
