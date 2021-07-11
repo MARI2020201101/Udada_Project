@@ -41,7 +41,7 @@ table.type03 td {
 	<input type="hidden" id="eNo" name="eNo" class="form-control" value="${dto.ENo}" readonly>
 	<div class="input-group">
 	<input type="text" class="form-control" name="emTime" placeholder="시간(분) 입력" required>
-	<button class="btn btn-primary" type="button" id="btnAddon">마이운동 추가</button>
+	<button class="btn btn-primary" type="submit" id="btnAddon">마이운동 추가</button>
 	</div>
 	</form>
 	</div>
