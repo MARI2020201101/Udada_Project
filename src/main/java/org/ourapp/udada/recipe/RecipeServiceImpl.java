@@ -177,7 +177,7 @@ public class RecipeServiceImpl implements RecipeService{
 
 	@Override
 	public List<RecipeDTO> getListWithImageAndPagingAndSearch(PageRequestDTO pageRequestDTO) throws Exception {
-		return recipeMapper.selectWithImageAndPagingAndSearch(pageRequestDTO);
+		return recipeMapper.selectWithImageAndPagingAndSearchAndReply(pageRequestDTO);
 	}
 
 	@Override
@@ -193,7 +193,7 @@ public class RecipeServiceImpl implements RecipeService{
 
 	@Override
 	public List<RecipeDTO> getByKewordMEmail(PageRequestDTO pageRequestDTO) throws Exception {
-		return recipeMapper.selectByMEmail(pageRequestDTO);
+		return recipeMapper.selectByMEmailAndReplyCnt(pageRequestDTO);
 	}
 
 	@Override
@@ -203,7 +203,7 @@ public class RecipeServiceImpl implements RecipeService{
 
 	@Override
 	public RecipeDTO getWithIngreAndFoodAndImageAndReply(Long rNo) throws Exception {
-		return recipeMapper.selectWithIngreAndFoodAndImageAndReply(rNo);
+		return recipeMapper.selectWithIngreAndFoodAndImageAndReplyRcp(rNo);
 	}
 
 

@@ -33,4 +33,7 @@ public interface RecipeMapper {
 	int countAllWithMEmail(PageRequestDTO pageRequestDTO);
 	
 	RecipeDTO selectWithIngreAndFoodAndImageAndReply(Long rNo);
+	List<RecipeDTO> selectWithImageAndPagingAndSearchAndReply(PageRequestDTO pageRequestDTO);
+	RecipeDTO selectWithIngreAndFoodAndImageAndReplyRcp(Long rNo);
+	List<RecipeDTO> selectByMEmailAndReplyCnt(PageRequestDTO pageRequestDTO);
 }

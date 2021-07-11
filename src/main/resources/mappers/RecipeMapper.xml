@@ -158,6 +158,7 @@
         
        ]]>     		
     <where>  
+    	
 	<if test = "keyword != null">
 		R.R_TITLE LIKE '%'||#{keyword}||'%'
 	</if>
@@ -200,6 +201,7 @@
 		) SSUB
 		LEFT JOIN IMAGE I
 		ON SSUB.R_NO = I.ORI_NO
+		
 		) SUB 
 		WHERE SUB.RN > (#{pageNum}-1) * #{pageSize}  AND SUB.RN <= #{pageNum} * #{pageSize}
 	
@@ -226,6 +228,77 @@
         LEFT JOIN REPLY RE
         ON RE.ORI_NO = R.R_NO
 		WHERE R.R_NO = #{rNo}
+	
+	</select>
+	
+	<select id="selectWithImageAndPagingAndSearchAndReply" resultMap="recipeMap">
+	<![CDATA[
+		SELECT SSUB.* FROM
+        (SELECT SUB.*, ROWNUM AS RN FROM
+        (SELECT 
+		R.R_NO , R.M_EMAIL ,R.R_TITLE, R.R_CONTENT, R.R_DATE ,I.I_UUID, I.I_DIV, I.ORI_NO, I.I_NAME, I.I_DIR,
+        COUNT(RE.RE_NO)AS REPLYCNT
+		FROM RECIPE R 
+        LEFT JOIN (
+		SELECT * FROM IMAGE WHERE I_DIV = 'RCP') I
+		ON R.R_NO = I.ORI_NO 		
+		LEFT JOIN 	
+		(SELECT * FROM REPLY WHERE RE_DIV = 'RCP') 		
+		RE ON R.R_NO = RE.ORI_NO 
+    
+       ]]>     		
+     
+    <where>	
+	<if test = "keyword != null">
+		R.R_TITLE LIKE '%'||#{keyword}||'%'
+	</if>
+	</where>
+	
+	 GROUP BY R.R_NO,R.M_EMAIL ,R.R_TITLE, R.R_CONTENT, R.R_DATE ,I.I_UUID, I.I_DIV, I.ORI_NO, I.I_NAME, I.I_DIR
+    <![CDATA[
+		ORDER BY R.R_NO DESC)SUB )SSUB    
+        WHERE SSUB.RN > (#{pageNum}-1) * #{pageSize} AND SSUB.RN <= #{pageNum} * #{pageSize}          
+	]]>
+	
+	
+	</select>
+	
+	<select id="selectWithIngreAndFoodAndImageAndReplyRcp" resultMap="recipeMap">
+	
+		SELECT R.*, RI.*, F.* , I.*, RE.M_EMAIL AS REMEMAIL,RE.RE_NO,RE.ORI_NO,RE.RE_CONTENT, RE.RE_DATE, RE.RE_DIV,
+    	RE.RE_GROUP, RE.RE_INDENT FROM RECIPE R
+		LEFT JOIN RECIPE_INGREDIENT RI 
+		ON R.R_NO = RI.R_NO
+		LEFT JOIN FOOD F
+		ON RI.F_NO = F.F_NO
+        LEFT JOIN (SELECT * FROM IMAGE WHERE I_DIV = 'RCP') I
+        ON R.R_NO = I.ORI_NO
+        LEFT JOIN (SELECT * FROM REPLY WHERE RE_DIV = 'RCP')  RE
+        ON RE.ORI_NO = R.R_NO
+		WHERE R.R_NO = #{rNo}
+	
+	</select>
+	
+	<select id="selectByMEmailAndReplyCnt" resultMap="recipeMap">
+		<![CDATA[
+	SELECT SSUB.* FROM (SELECT SUB.*, ROWNUM AS RN FROM (SELECT R.R_NO , R.M_EMAIL ,R.R_TITLE, 
+	R.R_CONTENT, R.R_DATE ,I.I_UUID, I.I_DIV, I.ORI_NO, I.I_NAME, I.I_DIR, COUNT(RE.RE_NO)AS REPLYCNT 
+	FROM RECIPE R 
+	LEFT JOIN (
+	SELECT * FROM IMAGE WHERE I_DIV = 'RCP') I
+	ON R.R_NO = I.ORI_NO 
+	LEFT JOIN 
+	(SELECT * FROM REPLY WHERE RE_DIV = 'RCP') 
+	RE ON R.R_NO = RE.ORI_NO 
+	
+	
+	WHERE R.M_EMAIL = #{keyword}  
+	GROUP BY R.R_NO,R.M_EMAIL ,R.R_TITLE, 
+	R.R_CONTENT, R.R_DATE ,I.I_UUID, I.I_DIV, I.ORI_NO, I.I_NAME, I.I_DIR 
+	ORDER BY R.R_NO DESC)SUB 
+	)SSUB WHERE SSUB.RN > (#{pageNum}-1) * #{pageSize} AND SSUB.RN <= #{pageNum} * #{pageSize}  
+	
+	]]>
 	
 	</select>
 </mapper>

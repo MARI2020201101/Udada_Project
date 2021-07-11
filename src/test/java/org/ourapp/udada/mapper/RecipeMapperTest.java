@@ -99,7 +99,7 @@ public class RecipeMapperTest {
 	
 	@Test
 	public void selectWithImageAndPagingAndSearchTest() {
-		recipeMapper.selectWithImageAndPagingAndSearch(PageRequestDTO.builder().pageNum(2).pageSize(10).keyword("테").build());
+		recipeMapper.selectWithImageAndPagingAndSearch(PageRequestDTO.builder().pageNum(2).pageSize(5).keyword("테").build());
 	}
 	
 	@Test
@@ -120,7 +120,7 @@ public class RecipeMapperTest {
 	
 	@Test
 	public void selectByMEmailTest() {
-		PageRequestDTO pageRequestDTO = PageRequestDTO.builder().pageNum(2).pageSize(5).keyword("user07@gmail.com").build();
+		PageRequestDTO pageRequestDTO = PageRequestDTO.builder().pageNum(1).pageSize(5).keyword("user16@gmail.com").build();
 		recipeMapper.selectByMEmail(pageRequestDTO);
 	}
 	
@@ -130,6 +130,22 @@ public class RecipeMapperTest {
 		int result = recipeMapper.countAllWithMEmail(pageRequestDTO);
 		log.info("result count :"+result);
 	}
-
 	
+	@Test
+	public void selectWithImageAndPagingAndSearchAndReplyTest() {
+		recipeMapper.selectWithImageAndPagingAndSearchAndReply(PageRequestDTO.builder().pageNum(1).pageSize(5).build());
+	}
+
+	@Test
+	public void selectWithIngreAndFoodAndImageAndReplyRcpTest() {
+		RecipeDTO dto = recipeMapper.selectWithIngreAndFoodAndImageAndReplyRcp(119L);
+		log.info("selectWithIngreAndFoodAndImageAndReplyRcp dto : "+dto);
+	}
+	
+	@Test
+	public void selectByMEmailAndReplyCntTest() {
+		PageRequestDTO pageRequestDTO = PageRequestDTO.builder().pageNum(1).pageSize(5).keyword("user16@gmail.com").build();
+		recipeMapper.selectByMEmailAndReplyCnt(pageRequestDTO);
+	}
+
 }
