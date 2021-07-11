@@ -345,7 +345,7 @@
 						</c:forEach>
 						<div class="input-group talkReplyReg" style="display: none;">
   						<textarea rows="1" class="form-control" ></textarea>
-  						<button class="btn btn-outline-secondary" type="button"><i class="far fa-comment"></i></button>
+  						<button class="btn btn-outline-secondary" id="talkReRegBtn" type="button"><i class="far fa-comment"></i></button>
   						<button class="btn btn-outline-secondary btn-sm cancelTalkReg" type="button"><i class="fas fa-times"></i></button>
 						</div>
 						<c:choose>
@@ -431,7 +431,7 @@ var challengePeriod = {title:'챌린지 기간', start:"${info.charStart}", end:
 	});
 
 
-$(".talkReplyReg").on("click","button",function(){
+$(".talkReplyReg").on("click","#talkReRegBtn",function(){
 	var reContent = $(this).parent().find("textarea").val();
 	var groupNo = $(this).parent().parent().find(".talkContent").data("reNo")
 	if(!reContent.trim()){
