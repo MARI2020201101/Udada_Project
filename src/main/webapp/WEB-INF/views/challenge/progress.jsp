@@ -318,7 +318,18 @@
 							</c:when>
 							</c:choose>
 						${talk.reDate}</div>
-						<div class="font-weight-bold mb-1" style="font-size: small;">${talk.MName}</div>
+							<c:choose>
+							<c:when test="${talk.MEmail==loginUser}">
+							<div class="font-weight-bold text-primary mb-1" style="font-size: small;">
+							${talk.MName}
+							</div>
+							</c:when>
+							<c:otherwise>
+							<div class="font-weight-bold text-primary mb-1" style="font-size: small;">
+							${talk.MName}
+							</div>
+							</c:otherwise>
+							</c:choose>
 						<div data-re-no="${talk.reNo}" role="button" class="talkContent">${talk.reContent}</div>
 					<div class="input-group talkModify" style="display: none;">
   					<textarea rows="1" class="form-control">${talk.reContent}</textarea>
@@ -326,8 +337,20 @@
   					<button class="btn btn-outline-secondary btn-sm cancelEdit" type="button"><i class="fas fa-times"></i></button>
 					</div>	
 						<c:forEach var="reply" items="${talk.talkReply}">
-							<div style="display: flex; flex-wrap: wrap;">			
-							<div class="mt-1 col-auto talkReply px-0 mx-0" style="font-size: small;">&nbsp;└ ${reply.MName} : </div>
+						<div>
+							<div style="display: flex; flex-wrap: wrap;" class="talkReply">		
+							└&nbsp;<c:choose>
+							<c:when test="${reply.MEmail==loginUser}">
+							<div class="mt-1 col-auto px-0 mx-0 text-primary" style="font-size: small;">
+							${reply.MName}
+							</div>
+							</c:when>
+							<c:otherwise>
+							<div class="mt-1 col-auto px-0 mx-0" style="font-size: small;">
+							${reply.MName}
+							</div>
+							</c:otherwise>
+							</c:choose>:
 							<div class="mt-1 col px-0 mx-1" style="font-size: small;">
 							${reply.reContent}
 							</div>
@@ -339,7 +362,8 @@
 								</c:when>
 								</c:choose>
 							${reply.reDate}</div>
-							<div class="input-group talkReplyEdit" style="display: none;">
+		  					</div>
+		  					<div class="input-group talkReplyEdit" style="display: none;">
 		  					<textarea rows="1" class="form-control">${reply.reContent}</textarea>
 		  					<button data-re-no="${reply.reNo}" class="btn btn-outline-secondary applyEdit" type="button"><i class="fas fa-check"></i></button>
 		  					<button class="btn btn-outline-secondary btn-sm reCancelEdit" type="button"><i class="fas fa-times"></i></button>
