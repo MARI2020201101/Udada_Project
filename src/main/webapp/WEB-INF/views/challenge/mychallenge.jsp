@@ -23,7 +23,7 @@
    	</div>
 	<div class="row" id="proceed">
 		<c:forEach var="list" items="${proceedList}">
-			<div class="col-xl-4 col-md-6 mb-4">
+			<div class="col-xl-4 col-lg-6 mb-4">
 				<div class="card border-left-primary shadow h-100 py-1">
 					<div class="row no-gutters align-items-center" >
 						<div class="col p-3 d-flex flex-column position-static">
@@ -61,7 +61,7 @@
    	</div>
 	<div class="row" id="apply">
 		<c:forEach var="list" items="${applyList}">
-			<div class="col-xl-4 col-md-6 mb-4">
+			<div class="col-xl-4 col-lg-6 mb-4">
 				<div class="card border-left-success shadow h-100 py-1">
 					<div class="row no-gutters align-items-center">
 						<div class="col p-3 d-flex flex-column position-static">
@@ -95,7 +95,7 @@
    	</div>
 	<div class="row" id="end">
 		<c:forEach var="list" items="${endList}">
-			<div class="col-xl-4 col-md-6 mb-4">
+			<div class="col-xl-4 col-lg-6 mb-4">
 				<div class="card border-left-danger shadow h-100 py-1">
 					<div class="row no-gutters align-items-center">
 						<div class="col p-3 d-flex flex-column position-static">
@@ -119,7 +119,7 @@
 		</c:forEach>
 	</div>
 		<div align="center" class="mb-3">
-		<button class="btn btn-primary moreChallenge" onclick="location.href='/challenge/mylist'">챌린지 전체 내역 <i class="fas fa-arrow-right"></i></button>
+		<button class="btn btn-primary moreChallenge" onclick="location.href='/challenge/mylist'">나의 모든 챌린지 <i class="fas fa-arrow-right"></i></button>
 		</div>
 
 </div>

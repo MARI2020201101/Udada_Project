@@ -13,41 +13,41 @@
 
 <div class="container-fluid">
 
-<div class="row">
-<form class="col-md-11" name="searchBox" method="get" action="">
-	<div class="row col-md-11 mb-4">
-		<div class="col-md-4">
+<form class="row mb-4 my-1" name="searchBox" method="get" action="">
+		<div class="col-lg-3 my-1">
 			<div class="input-group">
-  			<span class="input-group-text"><i class="fas fa-font"></i></span>
- 			<input type="text" name="keyword" class="form-control" placeholder="제목">
+  			<span class="input-group-text"><i class="fas fa-fw fa-font"></i></span>
+ 			<input type="text" name="keyword" class="form-control" placeholder="제목+내용">
 			</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-lg-3 my-1">
 			<div class="input-group">
-  			<span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
- 			<input type="text" name="period" class="form-control selector" readonly placeholder="기간">
+  			<span class="input-group-text"><i class="far fa-fw fa-calendar-alt"></i></span>
+ 			<input type="text" name="period" class="form-control selector" readonly placeholder="가능한 기간">
 			</div>
 		</div>
-		<div class="col-md-3">
+		<div class="col-lg-2 my-1">
 			<div class="input-group">
-  			<span class="input-group-text"><i class="fas fa-dumbbell"></i></span>
- 			<input type="text" name="exercise" class="form-control" placeholder="운동">
+  			<span class="input-group-text"><i class="fas fa-fw fa-dumbbell"></i></span>
+ 			<input type="text" name="exercise" class="form-control" placeholder="운동 이름">
 			</div>
 		</div>
-		<div class="col-md-1">
-			<button type="submit" class="btn btn-outline-secondary"><i class="fas fa-search"></i></button>
+		<div class="col-lg-2 col-6 my-1">
+			<button type="submit" class="btn btn-outline-secondary"><i class="fas fa-fw fa-search"></i></button>
 		</div>
 			<input type="hidden" name=pageNo value=1>
-	</div>
+		<div class="col-lg-2 col-6 my-1" style="text-align:right">
+		<button type="button" class="btn btn-success" disabled><sec:authentication property="principal.memberDTO.mName" />님의 챌린지</button>
+
+	    </div>
+			
 </form>
-	<div class="col-md-1 mb-4" style="text-align:right">
-	</div>
-</div>
-<hr class="mt-0 mb-4">
+
+<hr class="mb-4">
 
 	<div class="row">
 		<c:forEach var="dto" items="${list}">
-			<div class="col-xl-4 col-md-6 mb-4">
+			<div class="col-xl-4 col-lg-6 mb-4">
 				<div class="card border-left-${dto.CIng} shadow h-100 py-2">
 					<div class="row no-gutters align-items-center">
 						<div class="col p-3 d-flex flex-column position-static">

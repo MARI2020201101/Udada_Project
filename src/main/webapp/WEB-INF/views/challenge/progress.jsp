@@ -49,7 +49,7 @@
 
 	<div class="row">
 
-		<div class="col-xl-4 col-md-6 mb-3">
+		<div class="col-xl-4 mb-3">
 			<div class="card border-left-primary shadow h-100">
 				<div class="card-body pt-2 pb-3">
 				<i role="button" onclick="location.href='/challenge/read/${info.CNo}'" style="float: right; padding-top: 10px;"
@@ -66,7 +66,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-xl-4 col-md-6 mb-3">
+		<div class="col-xl-4 col-lg-6 mb-3">
 			<div class="card border-left-primary shadow h-100">
 				<div class="card-body pt-2 pb-3">
 					<div class="row no-gutters align-items-center">
@@ -86,7 +86,7 @@
 			</div>
 		</div>
 
-		<div class="col-xl-4 col-md-6 mb-3">
+		<div class="col-xl-4 col-lg-6 mb-3">
 			<div class="card border-left-primary shadow h-100">
 				<div class="card-body pt-2 pb-3">
 					<div class="row no-gutters align-items-center">
@@ -113,7 +113,7 @@
 			</div>
 		</div>
 
-		<div class="col-xl-3 col-md-6 mb-3">
+		<div class="col-xl-3 col-lg-6 mb-3">
 			<div class="card border-left-success shadow h-100">
 				<div class="card-body pt-3">
 					<div class="row no-gutters align-items-center">
@@ -143,7 +143,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-xl-3 col-md-6 mb-3">
+		<div class="col-xl-3 col-lg-6 mb-3">
 			<div class="card border-left-warning shadow h-100">
 				<div class="card-body pt-3">
 					<div class="row no-gutters align-items-center">
@@ -169,7 +169,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-xl-3 col-md-6 mb-3">
+		<div class="col-xl-3 col-lg-6 mb-3">
 			<div class="card border-left-info shadow h-100">
 				<div class="card-body pt-3">
 					<div class="row no-gutters align-items-center">
@@ -203,7 +203,7 @@
 		<c:when test="${info.progress<=100}">							
 		<c:choose>
 			<c:when test="${info.mySuccess>0}">
-				<div class="col-xl-3 col-md-6 mb-3">
+				<div class="col-xl-3 col-lg-6 mb-3">
 					<div class="card border-left-success shadow h-100">
 						<div class="card-body pt-3">
 							<div class="row no-gutters align-items-center">
@@ -219,7 +219,7 @@
 				</div>
 			</c:when>
 			<c:otherwise>
-				<div class="col-xl-3 col-md-6 mb-3">
+				<div class="col-xl-3 col-lg-6 mb-3">
 					<div class="card border-left-danger shadow h-100">
 						<div class="card-body pt-3">
 							<div class="row no-gutters align-items-center">
@@ -239,7 +239,7 @@
 		</c:choose>
 			</c:when>
 			<c:otherwise>							
-				<div class="col-xl-3 col-md-6 mb-3">
+				<div class="col-xl-3 col-lg-6 mb-3">
 					<div class="card border-left-success shadow h-100">
 						<div class="card-body pt-3">
 						<i role="button" onclick="location.href='/challenge/list'" style="float: right; padding-top: 10px;"
@@ -262,19 +262,19 @@
 
 	<div class="row">
 		
-		<div class="col-lg-3 mb-3">
+		<div class="col-xl-4 mb-3">
 
 			<div class="card shadow mb-3">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary">나의 챌린지 상황</h6>
 				</div>
 				<div class="card-body">
-				<div id="calendar" style="font-size: 10px"></div>
+				<div id="calendar" style="font-size: 11px;"></div>
 				</div>
 			</div>
 		</div>
 
-		<div class="col-xl-5 col-lg-6">
+		<div class="col-xl-5">
 			<div class="card shadow mb-3">
 				<div
 					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -295,7 +295,7 @@
 			</div>
 		</div>
 		
-		<div class="col-xl-4 mb-3">
+		<div class="col-xl-3 mb-3">
 			<div class="card shadow mb-3">
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -403,16 +403,15 @@ var challengePeriod = {title:'챌린지 기간', start:"${info.charStart}", end:
    var calendar = new FullCalendar.Calendar(calendarEl, {
      themeSystem: 'bootstrap',
      initialView: 'dayGridMonth',
-     contentHeight:'auto',
      locale: 'ko',
+     contentHeight: "auto",
      events: mySuccessDay    
    });
    calendar.render();
    calendar.gotoDate("${info.charStart}");
    $('#calendar').find("button").addClass("btn-sm");
-   
 
-   $("#talkReg").one("click","button",function(){
+   $("#talkReg").on("click","button",function(){
 		var reContent = $("#talkReg").find("textarea").val();
 		if(!reContent.trim()){
 			$("#talkReg").find("textarea").css({"border-color": "red"});	
@@ -432,7 +431,7 @@ var challengePeriod = {title:'챌린지 기간', start:"${info.charStart}", end:
 	});
 
 
-$(".talkReplyReg").one("click","button",function(){
+$(".talkReplyReg").on("click","button",function(){
 	var reContent = $(this).parent().find("textarea").val();
 	var groupNo = $(this).parent().parent().find(".talkContent").data("reNo")
 	if(!reContent.trim()){
@@ -457,7 +456,7 @@ $(".talkContent").on("click", function(){
 	$(this).parent().find(".talkReplyReg").toggle();
 });
 
-$(".talkDel").one("click", function(){
+$(".talkDel").on("click", function(){
 	var data = $(this).data();
 	$.ajax({
 		type : "post",
@@ -493,7 +492,7 @@ $(".cancelTalkReg").on("click",function(){
 	$(this).parent().toggle();
 });
 
-	$(".talkModify").one("click",".applyEdit",function(){
+	$(".talkModify").on("click",".applyEdit",function(){
 	var reContent = $(this).parent().find("textarea").val();
 	var reNo = $(this).data("reNo")
 	if(!reContent.trim()){
@@ -514,7 +513,7 @@ $(".cancelTalkReg").on("click",function(){
 	}
 	});
 	
-	$(".talkReplyEdit").one("click",".applyEdit",function(){
+	$(".talkReplyEdit").on("click",".applyEdit",function(){
 		var reContent = $(this).parent().find("textarea").val();
 		var reNo = $(this).data("reNo")
 		if(!reContent.trim()){
