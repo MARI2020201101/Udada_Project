@@ -101,7 +101,7 @@
         (SELECT 
 		J.J_NO , J.M_EMAIL, J.J_CONTENT, J.J_DATE, J.L_CNT ,I.*
 		FROM JOURNAL J 
-        LEFT JOIN IMAGE I
+        LEFT JOIN (SELECT * FROM IMAGE WHERE I_DIV = 'JRN') I
         ON J.J_NO = I.ORI_NO
           
        ]]>     		
@@ -118,7 +118,7 @@
 	
 	<select id="selectWithIngreAndFoodAndImage" resultMap="journalMap" >
 		SELECT J.*, I.* FROM JOURNAL J
-        LEFT JOIN IMAGE I
+        LEFT JOIN (SELECT * FROM IMAGE WHERE I_DIV = 'JRN') I
         ON J.J_NO = I.ORI_NO
 		WHERE J.J_NO = #{jNo}
 	
@@ -132,7 +132,7 @@
         (SELECT 
 		J.J_NO , J.M_EMAIL , J.J_CONTENT, J.J_DATE, J.L_CNT,I.*
 		FROM (SELECT * FROM JOURNAL WHERE M_EMAIL= #{loginUser})J
-        LEFT JOIN IMAGE I
+        LEFT JOIN (SELECT * FROM IMAGE WHERE I_DIV = 'JRN') I
         ON J.J_NO = I.ORI_NO
        ]]>     		
        
