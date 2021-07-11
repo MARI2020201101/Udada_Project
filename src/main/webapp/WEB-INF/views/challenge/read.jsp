@@ -112,13 +112,13 @@
 		<div align="center">
 		<sec:authorize access="isAuthenticated()">
 		<input type="hidden" name="cNo" value="${dto.CNo}">
-		<c:if test="${loginUser != dto.MEmail && loginUserRole != 'ADMIN'}">
+		<c:if test="${loginUser ne dto.MEmail && loginUserRole ne 'ADMIN'}">
 			<c:if test="${dto.caCnt<dto.CTotal}">
 		<input type="button" class="btn btn-primary" id="applyChallenge" style="display: none;" value="신청">
 			</c:if>
 		<input type="button" class="btn btn-danger" id="cancelChallenge" style="display: none;" value="신청취소">
 		</c:if>
-		<c:if test="${loginUser == dto.MEmail || loginUserRole == 'ADMIN'}">
+		<c:if test="${loginUser eq dto.MEmail || loginUserRole eq 'ADMIN'}">
 		<input type="button" class="btn btn-warning" id="modifyChallenge" style="display: none;" value="수정" onclick="modify()">
 		<input type="button" class="btn btn-danger" id="delBtn" style="display: none;" value="삭제">
 		</c:if>

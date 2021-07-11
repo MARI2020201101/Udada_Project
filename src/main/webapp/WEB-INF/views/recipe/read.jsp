@@ -329,12 +329,12 @@
 
 
 	<a href="/recipe/list?pageNum=${pageRequestDTO.pageNum }&keyword=${pageRequestDTO.keyword}" class="btn btn-secondary">
-       <span class="text">LIST</span>
+       <span class="text">목록</span>
     </a>
   
     <c:if test="${loginUser eq dto.MEmail || loginUserRole eq 'ADMIN'}">
     <a href='/recipe/modify?rNo=${dto.RNo}&pageNum=${pageRequestDTO.pageNum }&keyword=${pageRequestDTO.keyword}' class="btn btn-warning">
-        <span class="text">MODIFY</span>
+        <span class="text">수정/삭제</span>
     </a>
     </c:if>
     

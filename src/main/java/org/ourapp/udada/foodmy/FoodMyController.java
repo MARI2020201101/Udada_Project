@@ -61,7 +61,7 @@ public class FoodMyController {
 		
 		
 		//log.info("list : " + list);
-		log.info("map : " + map);
+		//log.info("map : " + map);
 		
 		model.addAttribute("list", list);
 		//model.addAttribute("dayTotalDTO", dayTotalDTO);

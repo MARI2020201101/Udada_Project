@@ -5,7 +5,7 @@
 <div class="container-fluid">
 
 	<!-- Page Heading -->
-	<h1 class="h3 mb-4 text-gray-800">Recipe Modify Page</h1>
+	<h1 class="h3 mb-4 text-gray-800">레시피 수정하기</h1>
 	
 	<form method="POST" action="/recipe/modify" enctype="multipart/form-data">
 	<input type="hidden" class="form-control form-control-user" name="pageNum" id="pageNum" value=${pageRequestDTO.pageNum }>
@@ -33,7 +33,7 @@
         <input type="text" class="form-control form-control-user"  name="mEmail" value="${dto.MEmail}" readonly>
       </div>
       <div class="form-group row">
-        <button class="btn btn-secondary addIngreBtn"><span class="text">ADD INGREDINT</span></button>
+        <button class="btn btn-secondary addIngreBtn"><span class="text">재료 추가하기</span></button>
       </div>  
 	<div class="ingreBox">
 		<ul>
@@ -44,7 +44,7 @@
 							<div class='card-body'>
 								<b class='card-title ingreName'>${ingredient.FName}</b>
 								<p class='card-text'>
-									<span>selected amount : </span>${ingredient.riAmount}</p>
+									<span>양 (인분) : </span>${ingredient.riAmount}</p>
 									<button type='button' class='btn btn-danger btn-sm cancelIngre' >&times;</button>
 							</div>
 						</div>
@@ -72,7 +72,7 @@
 
       	 
 		      <a class="btn btn-secondary listBtn">
-		            <span class="text">LIST</span>
+		            <span class="text">목록</span>
 		       </a>
 		       
 		<sec:authorize access="isAuthenticated()">
@@ -80,9 +80,9 @@
 		<sec:authentication property="principal.memberDTO.mEmail" var="loginUser" />
 		
 			<c:if test="${loginUser eq dto.MEmail || loginUserRole eq 'ADMIN'}">
-				<a class="btn btn-warning modBtn"> <span class="text">MODIFY</span>
+				<a class="btn btn-warning modBtn"> <span class="text">수정</span>
 				</a>
-				<a class="btn btn-danger removeBtn"> <span class="text">REMOVE</span>
+				<a class="btn btn-danger removeBtn"> <span class="text">삭제</span>
 				</a>
 			</c:if>
 		</sec:authorize>
@@ -96,14 +96,14 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Add Ingredient</h5>
+                        <h5 class="modal-title">재료 추가하기</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">                 
                     <div class="form-group">
-              			<input class="form-control searchInput" type="text" placeholder="Search Food...">
+              			<input class="form-control searchInput" type="text" placeholder="추가할 재료 이름을 검색해 주십시오...">
            			 </div>
            			<div class="form-group amountDiv">
               			<input class="form-control amountInput" type="text" value=1.0 placeholder="Add Amount...">
@@ -114,7 +114,7 @@
 					</div>
                     <div class="modal-footer">
                     	<button type="button" class="btn btn-success searchBtn">SEARCH</button>
-                     	<button type="button" class="btn btn-success amountBtn">ADD AMOUNT</button>         
+                     	<button type="button" class="btn btn-success amountBtn">재료 추가하기</button>         
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>

@@ -41,7 +41,7 @@ public class FoodMyServiceImpl implements FoodMyService{
 
 	@Override
 	public Map<String, Object> getDayTotalWithRecommend(String day, String mEmail) throws Exception {
-		log.info("day.......: "+ day);
+		//log.info("day.......: "+ day);
 		FoodMyDayTotalDTO dayTotalDTO = foodMyMapper.selectDayTotal(day, mEmail);
 		FoodMyMemberSpecDTO memberInfo = foodMyMapper.selectMemberInfo(mEmail);
 		

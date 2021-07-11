@@ -151,18 +151,21 @@
 				setTimeout(function() { 
 					btn.attr("class","btn btn-outline-secondary btn-sm modalBtn")
 					}, 1000);
+				
 			}
 			if(cTotal<1 || cTotal>10 || !cTotal){
 				$("#cTotal").css({"border-color": "red"});	
 				setTimeout(function() { 
 					$("#cTotal").css({"border-color": ""});	
 					}, 1000);
+				
 			}
 			if(cTitle.length<5){
 				$("#cTitle").css({"border-color": "red"});	
 				setTimeout(function() { 
 					$("#cTitle").css({"border-color": ""});	
 					}, 1000);
+				
 			}
 			
 			if(cContent.length<15){
@@ -170,6 +173,7 @@
 				setTimeout(function() { 
 					$("#cContent").css({"border-color": ""});	
 					}, 1000);
+				
 			}
 			
 			if(checkPeriod==0){
@@ -177,6 +181,7 @@
 				setTimeout(function() { 
 					$("#cPeriod").css({"border-color": ""});	
 					}, 1000);
+				
 			}
 			
 			return false;
