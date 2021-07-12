@@ -5,9 +5,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+
 import org.ourapp.udada.foodmy.FoodMyDTO;
 import org.ourapp.udada.image.ImageController;
 import org.ourapp.udada.image.ImageDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +36,8 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/recipe")
 public class RecipeController {
 
+	@Autowired
+	private ServletContext servletContext;
 	private final RecipeService recipeService;
 
 	@GetMapping("/list")
@@ -102,7 +107,8 @@ public class RecipeController {
 		log.info("modify.......................");
 		log.info("modify.......+" + recipeDTO);
 		log.info("modify image .......+" + image);
-
+		log.info("servletContext.getRealPath : "+ servletContext.getRealPath("./"));
+	
 		// 이미지 교체 or 새로등록
 		if (image != null && image.getOriginalFilename() != "") {
 
