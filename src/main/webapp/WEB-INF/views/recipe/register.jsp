@@ -14,7 +14,7 @@
       </div>
       <div class="form-group row">
         <label>조리법</label>
-        <textarea cols="5" class="form-control form-control-user required" name="rContent" id="rContent"></textarea>
+        <textarea style="height:200px;" class="form-control form-control-user required" name="rContent" id="rContent"></textarea>
       </div>
       <div class="form-group row">
         <button class="btn btn-secondary addIngreBtn"><span class="text">재료 추가하기</span></button>
