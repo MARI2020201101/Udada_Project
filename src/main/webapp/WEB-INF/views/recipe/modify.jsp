@@ -26,7 +26,7 @@
       </div>
       <div class="form-group row">
         <label>조리법</label>
-        <textarea cols="5" class="form-control form-control-user"  name="rContent">${dto.RContent}</textarea>
+        <textarea style="height:200px;" class="form-control form-control-user"  name="rContent">${dto.RContent}</textarea>
       </div>
       <div class="form-group row">
         <label>작성자</label>
