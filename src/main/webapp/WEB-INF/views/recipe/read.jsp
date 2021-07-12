@@ -208,7 +208,7 @@
 		
 		<div class="form-group row">
 						<b><label>조리법</label></b>
-						<textarea cols="5" class="form-control form-control-user" readonly>${dto.RContent}</textarea>
+						<textarea style="height:200px;" class="form-control form-control-user" readonly>${dto.RContent}</textarea>
 					</div>
 					<div class="ingreBox">
 						<ul>
