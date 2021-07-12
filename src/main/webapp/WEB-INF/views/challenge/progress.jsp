@@ -44,7 +44,7 @@
 }
 </style>
 <c:choose>
-<c:when test="${checkMem>0}">
+<c:when test="${checkMem>0 && info.procDate>0}">
 <div class="container-fluid">
 
 	<div class="row">

@@ -56,4 +56,5 @@ public interface ChallengeMapper {
 	List<ChallengeListDTO> loadMyList(ChallengeGetMyListDTO challengeGetListDTO);
 	int getListSize(ChallengeGetListDTO challengeGetListDTO);
 	int getMyListSize(ChallengeGetMyListDTO challengeGetListDTO);
+	List<ChallengeReadGoalDTO> readSuccessGoal(@Param("cNo") Long cNo);
 }

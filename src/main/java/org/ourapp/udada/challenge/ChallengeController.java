@@ -119,9 +119,7 @@ public class ChallengeController {
 		}
 		for (int i = 0; i < list.size(); i++) {
 			Date chgDate = list.get(i).getCStart();
-			Long cTotal = list.get(i).getCTotal();
-			Long caCnt = list.get(i).getCaCnt();
-			if (nowDate.before(chgDate) && caCnt < cTotal) {
+			if (nowDate.before(chgDate)) {
 				list.get(i).setCIng("primary");
 			} else {
 				list.get(i).setCIng("warning");
@@ -252,9 +250,9 @@ public class ChallengeController {
 	public String progress(Model model,@PathVariable Long cNo, Authentication auth) {
 		
 		MyChallengeInfoDTO myChallengeInfoDTO = challengeService.myChallengeInfo(cNo);
-		List<ChallengeReadGoalDTO> readGoal = challengeService.readGoal(cNo);
-		myChallengeInfoDTO.setGoalList(readGoal);
-		myChallengeInfoDTO.setGoalCnt(readGoal.size());
+		List<ChallengeReadGoalDTO> readSuccessGoal = challengeService.readSuccessGoal(cNo);
+		myChallengeInfoDTO.setGoalList(readSuccessGoal);
+		myChallengeInfoDTO.setGoalCnt(readSuccessGoal.size());
 		List<MyChallengeSuccessCntMDTO> getMemSuccess = challengeService.getMemSuccess(myChallengeInfoDTO);
 		if(myChallengeInfoDTO.getProcDate()>myChallengeInfoDTO.getTotalDate()) {
 			myChallengeInfoDTO.setProcDate(myChallengeInfoDTO.getTotalDate());
@@ -277,6 +275,8 @@ public class ChallengeController {
 		}
 		
 		int checkMem = challengeService.checkMem(cNo, auth.getName());
+		List<ChallengeReadGoalDTO> readGoal = challengeService.readGoal(cNo);
+		myChallengeInfoDTO.setGoalList(readGoal);
 
 		model.addAttribute("info", myChallengeInfoDTO);
 		model.addAttribute("mem", getMemSuccess);
@@ -378,9 +378,8 @@ public class ChallengeController {
 		}
 		for (int i = 0; i < list.size(); i++) {
 			Date chgDate = list.get(i).getCStart();
-			Long cTotal = list.get(i).getCTotal();
-			Long caCnt = list.get(i).getCaCnt();
-			if (nowDate.before(chgDate) && caCnt < cTotal) {
+
+			if (nowDate.before(chgDate)) {
 				list.get(i).setCIng("primary");
 			} else {
 				list.get(i).setCIng("warning");

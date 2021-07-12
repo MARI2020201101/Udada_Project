@@ -44,18 +44,19 @@
 </form>
 
 <hr class="mb-4">
-
 	<div class="row">
 		<c:forEach var="dto" items="${list}">
-			<div class="col-xl-4 col-lg-6 mb-4">
+			<div class="col-xl-4 col-md-6 mb-4">
 				<div class="card border-left-${dto.CIng} shadow h-100 py-2">
 					<div class="row no-gutters align-items-center">
-						<div class="col p-3 d-flex flex-column position-static">
+						<div class="col py-3 pl-3 pr-2 d-flex flex-column position-static">
 							<strong class="d-inline-block mb-1 text-${dto.CIng}"><fmt:formatDate value="${dto.CStart}" pattern="yy.MM.dd" />
 								-
 								<fmt:formatDate value="${dto.CFinish}" pattern="yy.MM.dd" /></strong>
 							<h4 class="my-2">${dto.CTitle}</h4>
-							<p class="mb-auto">${dto.caCnt}명/ ${dto.CTotal}명</p>
+							<c:forEach var="goal" items="${dto.GList}">
+							<p class="mb-auto">${goal.EName} ${goal.cgTime}분</p>
+							</c:forEach>
 							<c:choose>
 							<c:when test="${dto.CIng=='primary'}">
 							<a href="read/${dto.CNo}" class="stretched-link"></a>
@@ -64,12 +65,9 @@
 							<a href="progress/${dto.CNo}" class="stretched-link"></a>
 							</c:otherwise>
 							</c:choose>
-
 						</div>
-						<div class="col-auto" style="margin: 20px">
-						<c:forEach var="goal" items="${dto.GList}">
-							<p class="mb-auto">${goal.EName} ${goal.cgTime}분</p>
-						</c:forEach>
+						<div class="col-auto mr-4">
+							<p class="mb-auto">${dto.caCnt}명/ ${dto.CTotal}명</p>
 						</div>
 					</div>
 				</div>
@@ -78,6 +76,7 @@
 
 
 	</div>
+
 
 	<nav aria-label="Page navigation example">
 		<ul class="pagination justify-content-center">

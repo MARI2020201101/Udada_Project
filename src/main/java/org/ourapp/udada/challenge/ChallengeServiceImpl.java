@@ -189,6 +189,11 @@ public class ChallengeServiceImpl implements ChallengeService{
 	public int getMyListSize(ChallengeGetMyListDTO challengeGetListDTO) {
 		return challengeMapper.getMyListSize(challengeGetListDTO);
 	}
+
+	@Override
+	public List<ChallengeReadGoalDTO> readSuccessGoal(Long cNo) {
+		return challengeMapper.readSuccessGoal(cNo);
+	}
 	
 	
 

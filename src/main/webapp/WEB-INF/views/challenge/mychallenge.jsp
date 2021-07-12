@@ -26,24 +26,24 @@
 			<div class="col-xl-4 col-lg-6 mb-4">
 				<div class="card border-left-primary shadow h-100 py-1">
 					<div class="row no-gutters align-items-center" >
-						<div class="col p-3 d-flex flex-column position-static">
+						<div class="col col py-3 pl-3 pr-2 d-flex flex-column position-static">
 							<div class="progress mb-2">
   							<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: ${list.progress}%;">
   							<i class="fas fa-running"></i>
   							</div>
 							</div>
 							<h5 class="my=">${list.CTitle}</h5>
-							<p class="mb-auto">
-								<fmt:formatDate value="${list.CStart}" pattern="yyyy.MM.dd" />
-								-
-								<fmt:formatDate value="${list.CFinish}" pattern="yyyy.MM.dd" />
-							</p>
-							<a href="/challenge/progress/${list.CNo}" class="stretched-link linkProgress"></a>
-						</div>
-						<div class="col-auto" style="margin: 20px">
 						<c:forEach var="excs" items="${list.GList}">
 							<p class="mb-auto">${excs.EName} ${excs.cgTime}분</p>
 						</c:forEach>
+							<a href="/challenge/progress/${list.CNo}" class="stretched-link linkProgress"></a>
+						</div>
+						<div class="col-auto mr-4">
+																			<p class="mb-auto" style="text-align: center;">
+								<fmt:formatDate value="${list.CStart}" pattern="yyyy.MM.dd" /><br>
+								-<br>
+								<fmt:formatDate value="${list.CFinish}" pattern="yyyy.MM.dd" />
+							</p>
 						</div>
 					</div>
 				</div>
@@ -64,20 +64,20 @@
 			<div class="col-xl-4 col-lg-6 mb-4">
 				<div class="card border-left-success shadow h-100 py-1">
 					<div class="row no-gutters align-items-center">
-						<div class="col p-3 d-flex flex-column position-static">
+						<div class="col py-3 pl-3 pr-2 d-flex flex-column position-static">
 							<strong class="d-inline-block mb-2 text-success">D - ${list.DDay}</strong>
 							<h5 class="py-1 mb-1">${list.CTitle}</h5>
-							<p class="mb-auto">
-								<fmt:formatDate value="${list.CStart}" pattern="yyyy.MM.dd" />
-								-
-								<fmt:formatDate value="${list.CFinish}" pattern="yyyy.MM.dd" />
-							</p>
-							<a href="read/${list.CNo}" class="stretched-link"></a>
-						</div>
-						<div class="col-auto" style="margin: 20px">
 						<c:forEach var="excs" items="${list.GList}">
 							<p class="mb-auto">${excs.EName} ${excs.cgTime}분</p>
 						</c:forEach>
+							<a href="read/${list.CNo}" class="stretched-link"></a>
+						</div>
+						<div class="col-auto mr-4">
+													<p class="mb-auto" style="text-align: center;">
+								<fmt:formatDate value="${list.CStart}" pattern="yyyy.MM.dd" /><br>
+								-<br>
+								<fmt:formatDate value="${list.CFinish}" pattern="yyyy.MM.dd" />
+							</p>
 						</div>
 					</div>
 				</div>
@@ -98,20 +98,20 @@
 			<div class="col-xl-4 col-lg-6 mb-4">
 				<div class="card border-left-danger shadow h-100 py-1">
 					<div class="row no-gutters align-items-center">
-						<div class="col p-3 d-flex flex-column position-static">
+						<div class="col col py-3 pl-3 pr-2 d-flex flex-column position-static">
 							<strong class="d-inline-block mb-2 text-danger">종료</strong>
 							<h5 class="py-1 mb-1">${list.CTitle}</h5>
-							<p class="mb-auto">
-								<fmt:formatDate value="${list.CStart}" pattern="yyyy.MM.dd" />
-								-
-								<fmt:formatDate value="${list.CFinish}" pattern="yyyy.MM.dd" />
-							</p>
+							<c:forEach var="excs" items="${list.GList}">
+								<p class="mb-auto">${excs.EName} ${excs.cgTime}분</p>
+							</c:forEach>
 							<a href="/challenge/progress/${list.CNo}" data-c-no="${list.CNo}" class="stretched-link linkProgress"></a>
 						</div>
-						<div class="col-auto" style="margin: 20px">
-						<c:forEach var="excs" items="${list.GList}">
-							<p class="mb-auto">${excs.EName} ${excs.cgTime}분</p>
-						</c:forEach>
+						<div class="col-auto mr-4">
+													<p class="mb-auto" style="text-align: center;">
+								<fmt:formatDate value="${list.CStart}" pattern="yyyy.MM.dd" /><br>
+								-<br>
+								<fmt:formatDate value="${list.CFinish}" pattern="yyyy.MM.dd" />
+							</p>
 						</div>
 					</div>
 				</div>

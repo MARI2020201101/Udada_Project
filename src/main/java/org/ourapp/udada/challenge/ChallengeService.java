@@ -37,5 +37,6 @@ public interface ChallengeService {
 	List<ChallengeListDTO> loadMyList(ChallengeGetMyListDTO challengeGetListDTO);
 	int getListSize(ChallengeGetListDTO challengeGetListDTO);
 	int getMyListSize(ChallengeGetMyListDTO challengeGetListDTO);
+	List<ChallengeReadGoalDTO> readSuccessGoal(Long cNo);
 
 }

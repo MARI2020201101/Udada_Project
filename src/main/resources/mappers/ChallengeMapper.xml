@@ -229,6 +229,13 @@
 		WHERE C_NO = #{cNo}
 	</select>
 	
+	<select id="readSuccessGoal" resultMap="challengeReadGoalMap">
+		SELECT E_NO, SUM(CG_TIME)CG_TIME
+		FROM CHALLENGE_GOAL
+		WHERE C_NO = #{cNo}
+		GROUP BY E_NO
+	</select>
+	
 	<insert id="challengeApply">
 		INSERT INTO CHALLENGE_APPLY ( CA_NO, C_NO, M_EMAIL, CA_ING, CA_MEMO )
 		VALUES ( SEQ_CA.NEXTVAL, #{cNo}, #{sEmail}, 'APPLY', '' )
