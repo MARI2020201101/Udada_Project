@@ -59,8 +59,6 @@
 	           			</c:otherwise>
 	           		
 	           		</c:choose>
-	           		<a class="btn">
-	           		<img class="commentimg" src="/resources/imgs/comment.svg" width="30px"></a>
 	           		<hr>
 				</div>
 			
@@ -199,6 +197,12 @@ $(document).ready(function(){
 		//var oriNo = $("#reJno").val();
 		var oriNo = $(this).closest(".replycard").find("#reJno").val();
 		var result= "";
+		
+		if(reContent=="" || reContent==null){
+			alert("댓글을 입력해주세요!");
+			return false;
+		}
+		
 		$.ajax({
 			type : "POST",
 			url : "/reply/replyinsert",
@@ -210,12 +214,13 @@ $(document).ready(function(){
 			success :
 				function(data){
 				result= data;
-				if(reContent=="" || reContent==null){
-					alert("댓글을 입력해주세요!");
+				if(result==0){
+					//alert("댓글을 입력해주세요!");
 				} else if(result==1){
 					//alert("등록되었습니다");
-					location.reload(); //새로고침
+					
 				}
+				location.reload(); //새로고침
 				},
 				error : function(){
 					console.log("ajax 댓글 실패");
@@ -231,8 +236,14 @@ $(document).ready(function(){
 		var commentTxt = $.trim($(this).closest("div").find("textarea").val());
 		var targetreNo = $(this).data('reno');
 		var result= "";
-		console.log(targetreNo);
-		console.log(commentTxt);
+		
+		if(commentTxt == null || commentTxt ==""){
+			alert("댓글을 입력해주세요!");
+			return false;
+		}
+		
+		//console.log(targetreNo);
+		//console.log(commentTxt);
 		
 		$.ajax({
 			type : "POST",
@@ -247,11 +258,12 @@ $(document).ready(function(){
 				function(data){
 				result= data;
 				if(commentTxt=="" || commentTxt==null){
-					alert("댓글을 입력해주세요!");
+					//alert("댓글을 입력해주세요!");
 				} else if(result==1){
 					//alert("대댓글성공");
-					location.reload();
+					
 				}
+				location.reload();
 				},
 				error : function(){
 					console.log("ajax 대댓글 실패");

@@ -39,9 +39,8 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="table-layout: fixed">
                     <thead>
                     <tr>
-                        <th  scope="col" width="61%" style="text-align: center">내용</th>
+                        <th  scope="col" width="68%" style="text-align: center">내용</th>
                         <th  scope="col" width="7%" style="text-align: center">좋아요</th>
-                        <th  scope="col" width="7%" style="text-align: center">댓글</th>
                         <th  scope="col" width="25%" style="text-align: center">작성일</th>
                     </tr>
                     </thead>
@@ -51,7 +50,6 @@
 						<tr>
 							<td style="overflow:hidden;text-overflow:ellipsis"><a href='/journal/read?jNo=<c:out value="${dto.JNo}"/>'><c:out value="${dto.JContent}"></c:out></a></td>
 							<td style="text-align: center">${dto.LCnt }</td>
-							<td style="text-align: center">${dto.replyCount }</td>
 							<td style="text-align: center"><fmt:formatDate pattern="yyyy-MM-dd" value="${dto.JDate}" /></td>
 						</tr>
 					</c:forEach>
