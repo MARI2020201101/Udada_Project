@@ -209,7 +209,7 @@
 		FROM REPLY A
         INNER JOIN  MEMBER B
         ON A.M_EMAIL = B.M_EMAIL
-        WHERE A.ORI_NO!=#{reNo} AND A.RE_GROUP=#{reNo}
+        WHERE A.RE_NO!=#{reNo} AND A.RE_GROUP=#{reNo}
 		ORDER BY A.RE_DATE
 	</select>
 	

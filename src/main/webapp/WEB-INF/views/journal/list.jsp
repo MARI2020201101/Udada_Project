@@ -100,8 +100,8 @@
 												</div>
 			                            		<span>
 			                            		<c:if test="${loginUser eq comment.MEmail}">
-												&nbsp;&nbsp;&nbsp;<a class="commentmodify" data-commentcheck="1" data-reno="${comment.reNo }"><small>수정</small></a>
-			                            		&nbsp;&nbsp;&nbsp;<span><a class="commentdel" data-commentcheck="1" data-reno="${comment.reNo }"><small>삭제</small></a></span>
+												&nbsp;&nbsp;&nbsp;<a style="cursor: pointer;" class="commentmodify" data-commentcheck="1" data-reno="${comment.reNo }"><small>수정</small></a>
+			                            		&nbsp;&nbsp;&nbsp;<span><a style="cursor: pointer;" class="commentdel" data-commentcheck="1" data-reno="${comment.reNo }"><small>삭제</small></a></span>
 			                            		</c:if>	
 			                            		</span>
 												<div class="mt-1" style="display: inline-block; float: right; font-size: x-small;">
@@ -115,10 +115,10 @@
 				                            	<textarea rows="1" class="form-control"></textarea>&nbsp;
 				                            	<span><input type="button" class="btn btn-primary commentinsertbtn" value="등록" data-reno="${reply.reNo}"></input></span>
 				                            	</div>
-			                            		<div class="d-flex flex-row user-feed"><a class="commentinsert" data-comment-check="0" data-reno="${reply.reNo }"><small>답글작성</small></a>
+			                            		<div class="d-flex flex-row user-feed"><a style="cursor: pointer;" class="commentinsert" data-comment-check="0" data-reno="${reply.reNo }"><small>답글작성</small></a>
 			                            		<c:if test="${loginUser eq reply.MEmail}">
-			                            		&nbsp;&nbsp;&nbsp;<span class="replymodify"><a class="replymodifybtn" data-commentcheck="0" data-reno="${reply.reNo }"><small>수정</small></a></span>
-			                            		&nbsp;&nbsp;&nbsp;<span><a class="commentdel" data-commentcheck="0" data-reno="${reply.reNo }"><small>삭제</small></a></span>
+			                            		&nbsp;&nbsp;&nbsp;<span class="replymodify"><a style="cursor: pointer;" class="replymodifybtn" data-commentcheck="0" data-reno="${reply.reNo }"><small>수정</small></a></span>
+			                            		&nbsp;&nbsp;&nbsp;<span><a style="cursor: pointer;" class="commentdel" data-commentcheck="0" data-reno="${reply.reNo }"><small>삭제</small></a></span>
 			                            		</c:if>	
 			                            		
 			                            		</div>
