@@ -14,7 +14,7 @@
 
       <div class="form-group row">
         <label>내용</label>
-        <textarea cols="5" class="form-control form-control-user" name="jContent"
+        <textarea cols="5" class="form-control form-control-user" id="jContent" name="jContent"
                        placeholder="Content"></textarea>
       </div>
       <div class="form-group row">
@@ -25,7 +25,7 @@
       	<label>이미지 선택</label>
        	<input type="file" class="form-control form-control-user imageInput" name="image" >
       </div>
-		<button class="btn btn-primary">
+		<button class="btn btn-primary register">
 			<span class="text">작성하기</span>
 		</button>
 		
@@ -39,6 +39,19 @@
 <script>
 
 $(document).ready(function(){
+	
+	$(".register").on("click", function(){
+		
+		var content = $.trim($("#jContent").val());
+		if(content == null || content == ""){
+			alert("내용을 입력해주세요!");
+			$("#jContent").focus();
+			return false
+		}
+		
+	});
+	
+	
 	var imageInput = $(".imageInput");	
 	
 	var amount = 0;
