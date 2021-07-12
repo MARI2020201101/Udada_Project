@@ -232,33 +232,33 @@ $(document).ready(function(){
 		modal.find(".amountDiv").hide();
 		modal.modal();
 
-		searchBtn.click(function(e){
-			e.preventDefault();			
-			var keyword = searchInput.val();
-			var str = "";
- 			$.getJSON("/searchForIngredient?keyword="+keyword, function(array){
- 					
-					searchBtn.hide();				
+		});
+
+	searchBtn.click(function(e){
+		e.preventDefault();			
+		var keyword = searchInput.val();
+		var str = "";
+			$.getJSON("/searchForIngredient?keyword="+keyword, function(array){
 					
-						$.each(array, function(idx,obj){
-						//console.log(obj);
-						str+="<li data-fno='"+ obj.fno +"' data-fname='" + obj.fname+ "'>"
-						  + "<div class='card w-80'><div class='card-body'><b class='card-title'>"+obj.fname+"</b>"
-						  +  "<p class='card-text'><span>carbo : "+ obj.fcarbo +"</span>&nbsp;"
-						  + "<span>protein : "+ obj.fprotein +"</span>&nbsp;"
-					      + "<span>fat : "+ obj.ffat +"</span>&nbsp;"
-					      +   "<span>kcal : "+ obj.fkcal +"</span></p>"
-						  + "<button type='button' class='btn btn-success btn-sm addBtn'>ADD INGREDINET</button>"
-						  + "</div></div></li><br>"
-						
-						});
+				searchBtn.hide();				
 				
-						$(".searchResult ul").append(str);
-						
-				}); 
- 			
-			});
-		
+					$.each(array, function(idx,obj){
+					//console.log(obj);
+					str+="<li data-fno='"+ obj.fno +"' data-fname='" + obj.fname+ "'>"
+					  + "<div class='card w-80'><div class='card-body'><b class='card-title'>"+obj.fname+"</b>"
+					  +  "<p class='card-text'><span>carbo : "+ obj.fcarbo +"</span>&nbsp;"
+					  + "<span>protein : "+ obj.fprotein +"</span>&nbsp;"
+				      + "<span>fat : "+ obj.ffat +"</span>&nbsp;"
+				      +   "<span>kcal : "+ obj.fkcal +"</span></p>"
+					  + "<button type='button' class='btn btn-success btn-sm addBtn'>재료 추가하기</button>"
+					  + "</div></div></li><br>"
+					
+					});
+			
+					$(".searchResult ul").append(str);
+					
+			}); 
+			
 		});
 });
 	
