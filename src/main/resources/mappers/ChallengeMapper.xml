@@ -170,14 +170,18 @@
       				AND (A.C_START+1)>=CURRENT_DATE
    					</otherwise>
   				</choose>
+  				AND A.C_TOTAL>B.CACNT
 		</where>
         ORDER BY A.C_START) C)
         WHERE RN BETWEEN #{startNo} AND #{endNo}
 	</select>
 	
 		<select id="getListSize" resultType="int">
-		SELECT COUNT(*)
+
+        SELECT COUNT(*)
 		FROM CHALLENGE A
+        INNER JOIN (SELECT C_NO, COUNT(*) CACNT FROM CHALLENGE_APPLY GROUP BY C_NO) B
+		ON A.C_NO = B.C_NO
 		 <where>
     		<if test='keyword != null and keyword != ""'>
          		(A.C_TITLE LIKE '%'||#{keyword}||'%' OR A.C_CONTENT LIKE '%'||#{keyword}||'%')
@@ -196,7 +200,9 @@
       				AND (A.C_START+1)>=CURRENT_DATE
    					</otherwise>
   				</choose>
+  				AND A.C_TOTAL>B.CACNT
 		</where>
+
 	</select>
 	
 	<select id="loadGlist" resultMap="challengeGlistMap">

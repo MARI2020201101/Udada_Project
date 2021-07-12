@@ -80,8 +80,8 @@ public class ChallengeController {
 			}
 			challengeGetListDTO.setExcsResult(excsList);
 		}
-		challengeGetListDTO.setStartNo((long) (12 * (challengeGetListDTO.getPageNo() - 1) + 1));
-		challengeGetListDTO.setEndNo((long) (12 * challengeGetListDTO.getPageNo()));
+		challengeGetListDTO.setStartNo((long) (9 * (challengeGetListDTO.getPageNo() - 1) + 1));
+		challengeGetListDTO.setEndNo((long) (9 * challengeGetListDTO.getPageNo()));
 		String pDate = challengeGetListDTO.getPeriod();
 		if (pDate != null && pDate != "") {
 			if (pDate.length() < 13) {
@@ -102,7 +102,7 @@ public class ChallengeController {
 		}
 		List<ChallengeListDTO> list = challengeService.loadList(challengeGetListDTO);
 		Double challengAmount = (double) challengeService.getListSize(challengeGetListDTO);
-		challengeGetListDTO.setEndPage(Math.ceil(challengAmount / 12));
+		challengeGetListDTO.setEndPage(Math.ceil(challengAmount / 9));
 		challengeGetListDTO.setStartPage((Math.ceil(challengeGetListDTO.getPageNo() / 5) - 1) * 5 + 1);
 		Boolean checkEnd;
 		if ((Math.ceil(challengeGetListDTO.getPageNo() / 5) < Math.ceil(challengeGetListDTO.getEndPage() / 5))) {
@@ -338,8 +338,8 @@ public class ChallengeController {
 			}
 			challengeGetListDTO.setExcsResult(excsList);
 		}
-		challengeGetListDTO.setStartNo((long) (12 * (challengeGetListDTO.getPageNo() - 1) + 1));
-		challengeGetListDTO.setEndNo((long) (12 * challengeGetListDTO.getPageNo()));
+		challengeGetListDTO.setStartNo((long) (9 * (challengeGetListDTO.getPageNo() - 1) + 1));
+		challengeGetListDTO.setEndNo((long) (9 * challengeGetListDTO.getPageNo()));
 		String pDate = challengeGetListDTO.getPeriod();
 		if (pDate != null && pDate != "") {
 			if (pDate.length() < 13) {
@@ -361,7 +361,7 @@ public class ChallengeController {
 		challengeGetListDTO.setMEmail(auth.getName());
 		List<ChallengeListDTO> list = challengeService.loadMyList(challengeGetListDTO);
 		Double challengAmount = (double) challengeService.getMyListSize(challengeGetListDTO);
-		challengeGetListDTO.setEndPage(Math.ceil(challengAmount / 12));
+		challengeGetListDTO.setEndPage(Math.ceil(challengAmount / 9));
 		challengeGetListDTO.setStartPage((Math.ceil(challengeGetListDTO.getPageNo() / 5) - 1) * 5 + 1);
 		Boolean checkEnd;
 		if ((Math.ceil(challengeGetListDTO.getPageNo() / 5) < Math.ceil(challengeGetListDTO.getEndPage() / 5))) {
