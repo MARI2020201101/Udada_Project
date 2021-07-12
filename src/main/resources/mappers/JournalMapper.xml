@@ -11,8 +11,10 @@
 		<result column="J_CONTENT" property="jContent"/>
 		<result column="J_DATE" property="jDate"/>
 		<result column="L_CNT" property="lCnt"/>
+		<result column="M_NAME" property="mName"/>
 		<association property="imageDTO" resultMap="imageMap" />
 		<association property="replyDTO" resultMap="replyMap" />
+
 	</resultMap>
 	
 	<resultMap type="org.ourapp.udada.journal.LikeyouDTO" id="likeyouMap">
@@ -38,6 +40,7 @@
 		<result column="RE_DIV" property="reDiv"/>
 		<result column="RE_GROUP" property="reGroup"/>
 		<result column="RE_INDENT" property="reIndent"/>
+		<result column="M_NAME" property="mName"/>
 	</resultMap>
 	
 	<select id="getList" resultMap="journalMap">
@@ -99,10 +102,12 @@
 		SELECT SSUB.* FROM
         (SELECT SUB.*, ROWNUM AS RN FROM
         (SELECT 
-		J.J_NO , J.M_EMAIL, J.J_CONTENT, J.J_DATE, J.L_CNT ,I.*
+		J.J_NO , J.M_EMAIL, J.J_CONTENT, J.J_DATE, J.L_CNT ,I.*, M.M_NAME
 		FROM JOURNAL J 
         LEFT JOIN (SELECT * FROM IMAGE WHERE I_DIV = 'JRN') I
         ON J.J_NO = I.ORI_NO
+        INNER JOIN MEMBER M
+        ON J.M_EMAIL=M.M_EMAIL
           
        ]]>     		
     <where>  
@@ -191,17 +196,21 @@
  	</select>
  	
  	<select id="replyList" resultMap="replyMap">
-		SELECT RE_NO, ORI_NO, M_EMAIL, RE_CONTENT, RE_DATE
-		FROM REPLY
-		WHERE ORI_NO=#{oriNo} AND RE_INDENT=0 AND RE_DIV=#{reDiv}
-		ORDER BY re_date
+		SELECT A.RE_NO, A.ORI_NO, A.M_EMAIL, A.RE_CONTENT, A.RE_DATE, B.M_NAME
+		FROM REPLY A
+        INNER JOIN  MEMBER B
+        ON A.M_EMAIL = B.M_EMAIL
+        WHERE A.ORI_NO=#{oriNo} AND A.RE_INDENT=0 AND A.RE_DIV=#{reDiv}
+		ORDER BY A.RE_DATE
 	</select>
 	
 	<select id="commentList" resultMap="replyMap">
-		SELECT RE_NO, ORI_NO, M_EMAIL, RE_CONTENT, RE_DATE
-		FROM REPLY
-		WHERE RE_NO!=#{reNo} AND RE_GROUP=#{reNo}
-		ORDER BY RE_DATE
+		SELECT A.RE_NO, A.ORI_NO, A.M_EMAIL, A.RE_CONTENT, A.RE_DATE, B.M_NAME
+		FROM REPLY A
+        INNER JOIN  MEMBER B
+        ON A.M_EMAIL = B.M_EMAIL
+        WHERE A.ORI_NO!=#{reNo} AND A.RE_GROUP=#{reNo}
+		ORDER BY A.RE_DATE
 	</select>
 	
 	<select id="replyCount" resultMap="replyMap">

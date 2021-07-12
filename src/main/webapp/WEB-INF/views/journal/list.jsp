@@ -31,7 +31,7 @@
 
 	<c:forEach var="dto" items="${list}">
 		<div class="card" style="margin: 0 auto; width: 50%;">
-		<div class="d-flex justify-content-between align-items-center"><b>&nbsp;${dto.MEmail }</b><small><fmt:formatDate pattern="yyyy-MM-dd" value="${dto.JDate}" /></small></div><hr class="my-1">
+		<div class="d-flex justify-content-between align-items-center"><b>&nbsp;${dto.MName }</b><small><fmt:formatDate pattern="yyyy-MM-dd" value="${dto.JDate}" /></small></div><hr class="my-1">
 			<c:if test="${not empty dto.imageDTO && dto.imageDTO.IName!='' }">
 				<img src="/image/show?imagePath=${dto.imageDTO.imagePath }" height="450px">
 			<hr>
@@ -84,7 +84,7 @@
 			                        <div class="w-100 commentHome">
 			                            <div class="d-flex justify-content-between align-items-center">
 			                                <div class="d-flex flex-row align-items-center">
-			                                 <b>${reply.MEmail}</b>
+			                                 <b>${reply.MName}</b>
 			                                </div> <small>${reply.reDate }</small>
 			                            </div>
 			                            <p data-comment-check="0">${reply.reContent}</p>
@@ -93,7 +93,7 @@
 						  					<span><input type="button" class="btn btn-primary replyModifybtn" value="등록"></input></span>
 										</div>
 			                            <c:forEach var="comment" items="${reply.commentList}">
-			                            	<div class="mt-1 commentContent" style="font-size: small;">&nbsp;└ ${comment.MEmail} : ${comment.reContent}
+			                            	<div class="mt-1 commentContent" style="font-size: small;">&nbsp;└ ${comment.MName} : ${comment.reContent}
 			                            		<div class="input-group commentModify" data-reno="${comment.reNo }">
 								  					<textarea rows="1" class="form-control">${comment.reContent}</textarea>
 								  					<span><input type="button" class="btn btn-primary commentModifybtn" value="등록"></input></span>

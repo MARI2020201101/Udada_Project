@@ -47,6 +47,7 @@
 
 	<div class="row">
 		<c:forEach var="dto" items="${list}">
+		<c:if test="${dto.caCnt ne dto.CTotal}">
 			<div class="col-xl-4 col-md-6 mb-4">
 				<div class="card border-left-${dto.CIng} shadow h-100 py-2">
 					<div class="row no-gutters align-items-center">
@@ -66,6 +67,7 @@
 					</div>
 				</div>
 			</div>
+			</c:if>
 		</c:forEach>
 
 
