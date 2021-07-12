@@ -25,7 +25,7 @@
 <div class="container-fluid">
 
 	<h1 class="h3 mb-4 text-gray-800">
-		<a href="/food/MinClassPage"> 식품 상세분류 탐색 </a>
+		 식품 상세분류 탐색
 	</h1>
 
 	<div class="centerInnerContent">
