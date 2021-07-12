@@ -118,10 +118,17 @@
 		<input type="button" class="btn btn-primary" id="applyChallenge" style="display: none;" value="신청">
 			</c:if>
 		<input type="button" class="btn btn-danger" id="cancelChallenge" style="display: none;" value="신청취소">
+			<c:if test="${dto.checkEnd>=0}">
+        <input type="button" class="btn btn-outline-danger" disabled value="시작 된 챌린지 (신청취소 불가)">
+        	</c:if>
 		</c:if>
+
 		<c:if test="${loginUser eq dto.MEmail || loginUserRole eq 'ADMIN'}">
 		<input type="button" class="btn btn-warning" id="modifyChallenge" style="display: none;" value="수정" onclick="modify()">
 		<input type="button" class="btn btn-danger" id="delBtn" style="display: none;" value="삭제">
+		<c:if test="${dto.checkEnd>=0}">
+        <input type="button" class="btn btn-outline-danger" disabled value="시작 된 챌린지 (수정, 삭제 불가)">
+        </c:if>
 		</c:if>
 		</sec:authorize>
 		</div>
@@ -162,10 +169,8 @@
 		}
 		if(${dto.checkEnd}<=0){
 			if(applyCheck==0){
-				var todayEndStr = "<div class='text-danger' style='display: inline-block; font-size: small;'> 오늘 시작한 챌린지는 신청만 가능합니다 (취소불가)</div>";
 				$("#applyChallenge").show();
-				$("#todayEndCHG").append(todayEndStr);
-				
+
 			}
 		}
 	});
@@ -214,4 +219,3 @@
 </script>
 <!-- End of Main Content -->
 <%@ include file="../include/footer.jsp"%>
-
