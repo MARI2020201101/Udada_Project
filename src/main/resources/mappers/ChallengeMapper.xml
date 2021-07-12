@@ -290,7 +290,8 @@
 	
 	<select id="proceedList" resultMap="myChallengeProceedMap" >
 		<![CDATA[
-		SELECT A.C_NO, B.M_EMAIL, B.C_TITLE, B.C_START, B.C_FINISH, B.PROGRESS
+		SELECT C.* FROM
+        (SELECT A.C_NO, B.M_EMAIL, B.C_TITLE, B.C_START, B.C_FINISH, B.PROGRESS
         FROM (CHALLENGE_APPLY)A
         INNER JOIN
         (SELECT C_NO, M_EMAIL, C_TITLE, C_START, C_FINISH, ROUND((CURRENT_DATE-C_START)/(C_FINISH-C_START+1)*100)PROGRESS
@@ -298,13 +299,15 @@
 		WHERE C_START<CURRENT_DATE AND CURRENT_DATE<C_FINISH+1)B
         ON A.C_NO=B.C_NO
         WHERE A.M_EMAIL=#{sEmail}
-		ORDER BY B.C_START
+		ORDER BY B.C_START)C
+        WHERE ROWNUM<=6
 		]]>
 	</select>
 	
 	<select id="applyList" resultMap="myChallengeApplyMap" >
 		<![CDATA[
-        SELECT A.C_NO, B.M_EMAIL, B.C_TITLE, B.C_START, B.C_FINISH, B.DDAY
+		SELECT C.* FROM
+        (SELECT A.C_NO, B.M_EMAIL, B.C_TITLE, B.C_START, B.C_FINISH, B.DDAY
         FROM (CHALLENGE_APPLY)A
         INNER JOIN
         (SELECT C_NO, M_EMAIL, C_TITLE, C_START, C_FINISH, CEIL(C_START-CURRENT_DATE)DDAY
@@ -312,7 +315,8 @@
 		WHERE C_START>CURRENT_DATE)B
         ON A.C_NO=B.C_NO
         WHERE A.M_EMAIL=#{sEmail}
-		ORDER BY B.C_START
+		ORDER BY B.C_START)C
+        WHERE ROWNUM<=6
 		]]>
 	</select>
 	
@@ -328,7 +332,7 @@
         ON A.C_NO=B.C_NO
         WHERE A.M_EMAIL=#{sEmail}
 		ORDER BY B.C_FINISH DESC)C
-        WHERE ROWNUM<=3
+        WHERE ROWNUM<=6
 		]]>
 	</select>
 

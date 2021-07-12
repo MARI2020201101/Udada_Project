@@ -17,6 +17,9 @@
 
     </div>
     <!-- End of Page Wrapper -->
+    <a class="scroll-to-top rounded" href="#page-top" style="display: inline;">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
 
 </body>

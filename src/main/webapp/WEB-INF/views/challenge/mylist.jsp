@@ -23,7 +23,7 @@
 		<div class="col-lg-3 my-1">
 			<div class="input-group">
   			<span class="input-group-text"><i class="far fa-fw fa-calendar-alt"></i></span>
- 			<input type="text" name="period" class="form-control selector" readonly placeholder="가능한 기간">
+ 			<input type="text" name="period" class="form-control selector" readonly placeholder="진행 기간">
 			</div>
 		</div>
 		<div class="col-lg-2 my-1">

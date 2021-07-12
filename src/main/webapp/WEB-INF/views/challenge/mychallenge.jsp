@@ -55,11 +55,11 @@
     	<div class="card-body py-2">
     	    <label class="h4 my-0">신청</label>
     		<div class="float-right">
-    		<i role="button" id="applyIcn" class="fas fa-chevron-down stretched-link"></i>
+    		<i role="button" id="applyIcn" class="fas fa-chevron-up stretched-link"></i>
     		</div>
     	</div>
    	</div>
-	<div class="row" id="apply">
+	<div class="row" id="apply" style="display: none;">
 		<c:forEach var="list" items="${applyList}">
 			<div class="col-xl-4 col-lg-6 mb-4">
 				<div class="card border-left-success shadow h-100 py-1">
@@ -93,7 +93,7 @@
     		</div>
     	</div>
    	</div>
-	<div class="row" id="end">
+	<div class="row" id="end" style="display: none;">
 		<c:forEach var="list" items="${endList}">
 			<div class="col-xl-4 col-lg-6 mb-4">
 				<div class="card border-left-danger shadow h-100 py-1">

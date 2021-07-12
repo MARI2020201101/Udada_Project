@@ -181,7 +181,7 @@
 			<!-- Main Content -->
 			<div id="content">
 				<!-- Topbar -->
-				<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+				<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow py-0" style="height: auto;">
 				    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3" style="color: gray;">
                         <i class="fa fa-bars"></i>
                     </button>
