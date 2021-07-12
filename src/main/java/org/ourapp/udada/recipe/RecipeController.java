@@ -110,7 +110,7 @@ public class RecipeController {
 		log.info("servletContext.getRealPath : "+ servletContext.getRealPath("./"));
 	
 		// 이미지 교체 or 새로등록
-		if (image != null && image.getOriginalFilename() != "") {
+		if (image != null &&  image.getOriginalFilename() != null && !(image.getOriginalFilename().equals(""))) {
 
 			if (recipeDTO.getImageDTO() != null && recipeDTO.getImageDTO().getIName() != "") {
 				ImageController.removeImage(recipeDTO.getImageDTO().getImagePath());
