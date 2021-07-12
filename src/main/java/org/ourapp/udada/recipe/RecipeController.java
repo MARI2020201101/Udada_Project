@@ -101,6 +101,7 @@ public class RecipeController {
 
 		log.info("modify.......................");
 		log.info("modify.......+" + recipeDTO);
+		log.info("modify image .......+" + image);
 
 		// 이미지 교체 or 새로등록
 		if (image != null && image.getOriginalFilename() != "") {
