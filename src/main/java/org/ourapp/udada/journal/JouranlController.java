@@ -57,6 +57,7 @@ public class JouranlController {
 					 Long reNo=replyList.get(a).getReNo();
 					 List<ReplyDTO> commentList = journalService.commentList(reNo);
 					 replyList.get(a).setCommentList(commentList);
+
 				 }
 			 
 			 

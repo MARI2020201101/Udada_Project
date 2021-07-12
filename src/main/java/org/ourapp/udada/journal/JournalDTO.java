@@ -29,6 +29,7 @@ public class JournalDTO {
 	private ReplyDTO replyDTO;
 	private int heart;
 	private String loginUser;
+	private String mName;
 	
 	private ImageDTO imageDTO;
 	private List<LikeyouDTO> likeyouList;

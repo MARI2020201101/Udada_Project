@@ -118,8 +118,11 @@
 		<input type="button" class="btn btn-primary" id="applyChallenge" style="display: none;" value="신청">
 			</c:if>
 		<input type="button" class="btn btn-danger" id="cancelChallenge" style="display: none;" value="신청취소">
+			<c:if test="${dto.caCnt eq dto.CTotal}">
+		<input type="button" class="btn btn-outline-danger" disabled value="마감된 챌린지">
+			</c:if>
 			<c:if test="${dto.checkEnd>=0}">
-        <input type="button" class="btn btn-outline-danger" disabled value="시작 된 챌린지 (신청취소 불가)">
+        <input type="button" class="btn btn-outline-danger" disabled value="시작된 챌린지 (신청취소 불가)">
         	</c:if>
 		</c:if>
 

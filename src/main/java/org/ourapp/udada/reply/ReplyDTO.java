@@ -20,6 +20,7 @@ public class ReplyDTO {
 	private String reDiv; //RCP, CHG, JRN
 	private int reGroup;
 	private int reIndent;
+	private String mName;
 	
 	private List<ReplyDTO> commentList;
 	
