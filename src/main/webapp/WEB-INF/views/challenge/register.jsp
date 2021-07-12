@@ -213,6 +213,7 @@
     	flatpickr.localize(flatpickr.l10ns.ko);
 
 		$(".selector").flatpickr({
+			disable : ["today"],
 			mode : "range",
 			minDate : "today",
 			dateFormat : "Y-m-d",

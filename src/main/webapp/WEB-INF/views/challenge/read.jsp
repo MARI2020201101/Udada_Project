@@ -57,7 +57,8 @@
                                         <div class="col">
                                             <div class="text-sm font-weight-bold text-primary text-uppercase mb-1">
                                                 기간</div>
-                                            <div class="h5 mb-0"><fmt:formatDate value="${dto.CStart}" pattern="yyyy-MM-dd" /> ~ <fmt:formatDate value="${dto.CFinish}" pattern="yyyy-MM-dd" /></div>
+                                            <div class="h5 mb-0" id="todayEndCHG"><fmt:formatDate value="${dto.CStart}" pattern="yyyy-MM-dd" /> ~ <fmt:formatDate value="${dto.CFinish}" pattern="yyyy-MM-dd" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -133,7 +134,7 @@
 	</form>
 <script type="text/javascript">
 
-	$(document).ready( function(e){		
+	$(document).ready( function(e){	
 		var uEmail = "${loginUser}";
 		var applyCheck = 0;
 		$.ajax({
@@ -161,7 +162,10 @@
 		}
 		if(${dto.checkEnd}<=0){
 			if(applyCheck==0){
+				var todayEndStr = "<div class='text-danger' style='display: inline-block; font-size: small;'> 오늘 시작한 챌린지는 신청만 가능합니다 (취소불가)</div>";
 				$("#applyChallenge").show();
+				$("#todayEndCHG").append(todayEndStr);
+				
 			}
 		}
 	});
