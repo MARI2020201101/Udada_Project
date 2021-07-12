@@ -86,7 +86,7 @@
 				<li class="page-item"><a class="page-link" href="list?keyword=${page.keyword}&period=${page.period}&excercise=${page.exercise}&pageNo=1"
 					aria-label="Previous"> <span aria-hidden="true">&#171;</span>
 				</a></li>
-				<li class="page-item"><a class="page-link" href="list?keyword=${page.keyword}&period=${page.period}&excercise=${page.exercise}&pageNo=${pageNo-1}">&#60;</a></li>
+				<li class="page-item"><a class="page-link" href="list?keyword=${page.keyword}&period=${page.period}&excercise=${page.exercise}&pageNo=${page.startPage-1}">&#60;</a></li>
 			</c:if>
 			<c:forEach var="pageNo" begin="${page.startPage}" end="${endPage}">
 				<c:choose>
@@ -99,7 +99,7 @@
 			</c:choose>
 			</c:forEach>
 			<c:if test="${checkEnd==true}">
-				<li class="page-item"><a class="page-link" href="list?keyword=${page.keyword}&period=${page.period}&excercise=${page.exercise}&pageNo=${pageNo+1}">&#62;</a></li>
+				<li class="page-item"><a class="page-link" href="list?keyword=${page.keyword}&period=${page.period}&excercise=${page.exercise}&pageNo=${page.startPage+5}">&#62;</a></li>
 				<li class="page-item"><a class="page-link"
 					href="list?pageNo=${page.endPage}" aria-label="Next"> <span
 						aria-hidden="true">&#187;</span>

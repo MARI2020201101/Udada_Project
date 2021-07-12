@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="include/header.jsp"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- Begin Page Content -->
 
 <div class="container-fluid">
@@ -177,7 +178,7 @@
 									<div class="col">
 										<div class="mb-0 mt-2 font-weight-bold">
 										@${jList.MName} : ${jList.JContent}... 
-										<button class="btn btn-outline-info btm-sm stretched-link" onclick="location.href='/journal/list?pageNum=1&keyword=${jList.JContent}'" style="float: right;" ><i class="fas fa-heart">
+										<button class="btn btn-outline-info btm-sm stretched-link" onclick="location.href='/journal/list?pageNum=1&keyword=${fn:substring(jList.JContent,0,10)}'" style="float: right;" ><i class="fas fa-heart">
 										</i> + ${jList.LCnt}</button>
 										</div>
 									</div>
