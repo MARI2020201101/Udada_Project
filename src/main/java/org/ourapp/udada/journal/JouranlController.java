@@ -116,7 +116,7 @@ public class JouranlController {
 		log.info("register----------------------");
 
 		
-		if(image!=null && image.getOriginalFilename()!="") {
+		if(image != null &&  image.getOriginalFilename() != null && !(image.getOriginalFilename().equals(""))) {
 			 ImageDTO imageDTO = ImageController.uploadImage(image);
 			 imageDTO.setIDiv("JRN");
 			 journalDTO.setImageDTO(imageDTO);
@@ -151,9 +151,9 @@ public class JouranlController {
 	public String modify(JournalDTO journalDTO, MultipartFile image, Model model, RedirectAttributes rttr, PageRequestDTO pageRequestDTO) throws Exception{
 		log.info(journalDTO);
 		//이미지 교체 or 새로등록
-			if(image!=null && image.getOriginalFilename()!="") {
+			if(image != null &&  image.getOriginalFilename() != null && !(image.getOriginalFilename().equals(""))) {
 					
-			if(journalDTO.getImageDTO()!=null && journalDTO.getImageDTO().getIName()!="") {
+			if(journalDTO.getImageDTO()!=null && !(journalDTO.getImageDTO().getIName().equals(""))) {
 				ImageController.removeImage(journalDTO.getImageDTO().getImagePath());
 			}
 			ImageDTO imageDTO = ImageController.uploadImage(image);
@@ -170,7 +170,7 @@ public class JouranlController {
 	@PreAuthorize("authentication.principal.username == #journalDTO.mEmail or hasRole('ROLE_ADMIN')")
 	@PostMapping("/remove")
 	public String remove(JournalDTO journalDTO, RedirectAttributes rttr) throws Exception{
-		if(journalDTO.getImageDTO()!=null && journalDTO.getImageDTO().getIName()!="") {
+		if(journalDTO.getImageDTO()!=null && !(journalDTO.getImageDTO().getIName().equals(""))) {
 			ImageController.removeImage(journalDTO.getImageDTO().getImagePath());
 		}
 		

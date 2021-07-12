@@ -78,7 +78,7 @@ public class RecipeController {
 		log.info("register..........................");
 		log.info(recipeDTO);
 
-		if (image != null && image.getOriginalFilename() != "") {
+		if (image != null &&  image.getOriginalFilename() != null && !(image.getOriginalFilename().equals(""))) {
 			ImageDTO imageDTO = ImageController.uploadImage(image);
 			imageDTO.setIDiv("RCP");
 			recipeDTO.setImageDTO(imageDTO);
@@ -107,12 +107,15 @@ public class RecipeController {
 		log.info("modify.......................");
 		log.info("modify.......+" + recipeDTO);
 		log.info("modify image .......+" + image);
+		log.info("image != null" + (image != null));
+		log.info("image.getOriginalFilename() != null" + (image.getOriginalFilename() != null));
+		log.info("!(image.getOriginalFilename().equals(''))" + (!(image.getOriginalFilename().equals(""))));
 		log.info("servletContext.getRealPath : "+ servletContext.getRealPath("./"));
 	
 		// 이미지 교체 or 새로등록
 		if (image != null &&  image.getOriginalFilename() != null && !(image.getOriginalFilename().equals(""))) {
 
-			if (recipeDTO.getImageDTO() != null && recipeDTO.getImageDTO().getIName() != "") {
+			if (recipeDTO.getImageDTO() != null && !(recipeDTO.getImageDTO().getIName().equals(""))) {
 				ImageController.removeImage(recipeDTO.getImageDTO().getImagePath());
 			}
 			ImageDTO imageDTO = ImageController.uploadImage(image);
@@ -135,7 +138,7 @@ public class RecipeController {
 	@PostMapping("/remove")
 	public String remove(RecipeDTO recipeDTO, RedirectAttributes rttr) throws Exception {
 
-		if (recipeDTO.getImageDTO() != null && recipeDTO.getImageDTO().getIName() != "") {
+		if (recipeDTO.getImageDTO() != null && !(recipeDTO.getImageDTO().getIName().equals(""))) {
 			ImageController.removeImage(recipeDTO.getImageDTO().getImagePath());
 		}
 		// recipeService.remove(rNo);
