@@ -169,6 +169,7 @@
 					alert("사용 가능한 아이디 입니다.");
 					}else{
 						alert("중복된 아이디 입니다.");
+						return false;
 						}
 				/* if(data == 1){
 					alert("중복된 아이디 입니다.");
