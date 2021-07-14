@@ -41,7 +41,7 @@
 
 ---
 ## 프로젝트 캡처 이미지
-### 로그인 & 인덱스 페이지
+### 로그인 & 인덱스
 ![login-index](https://user-images.githubusercontent.com/73979611/125547356-67252505-ecc8-44a1-a45c-68a522dd04d0.png)
 
 ### 레시피 리스트 & 레시피 상세
