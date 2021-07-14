@@ -17,76 +17,80 @@
 	  	</c:if>
 	  </div>
 	  
-	  <div class="col-xl-4 col-md-4 mb-4">
-		<div class="card border-left-primary shadow h-100 py-2">
-			<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">작성자</h6>
-	  		</div>
-	  		<div class="card-body">
-				<div class="row no-gutters align-items-center">
-				<div class="col mr-2">
-
-				<div class="h2 mb-0 font-weight-bold text-gray-800 my-3"></div>
+	  <div class="row">
+		  <div class="col-xl-4 col-md-6 mb-4">
+			<div class="card border-left-primary shadow h-100 py-2">
+				<div class="card-header py-3">
+				<h6 class="m-0 font-weight-bold text-primary">작성자</h6>
+		  		</div>
+		  		<div class="card-body">
+					<div class="row no-gutters align-items-center">
+					<div class="col mr-2">
+	
+					<div class="h2 mb-0 font-weight-bold text-gray-800 my-3"></div>
+					</div>
+					</div>
+					${dto.MEmail }
+					<img src="/resources/imgs/user-solid.svg" style='width: 40px; float: right; margin-right: 20px'>
 				</div>
-				</div>
-				${dto.MEmail }
-				<img src="/resources/imgs/user-solid.svg" style='width: 40px; float: right; margin-right: 20px'>
-			</div>
-	  	</div>
-	  </div>
+		  	</div>
+		  </div>
 	  
-	  <div class="col-xl-4 col-md-4 mb-4">
-		<div class="card border-left-primary shadow h-100 py-2">
-			<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">내용</h6>
-	  		</div>
-	  		<div class="card-body">
-				<div class="row no-gutters align-items-center">
-				<div class="col mr-2">
-
-				<div class="h2 mb-0 font-weight-bold text-gray-800 my-3"></div>
+		  <div class="col-xl-4 col-md-6 mb-4">
+			<div class="card border-left-primary shadow h-100 py-2">
+				<div class="card-header py-3">
+				<h6 class="m-0 font-weight-bold text-primary">내용</h6>
+		  		</div>
+		  		<div class="card-body">
+					<div class="row no-gutters align-items-center">
+					<div class="col mr-2">
+	
+					<div class="h2 mb-0 font-weight-bold text-gray-800 my-3"></div>
+					</div>
+					</div>
+					${dto.JContent }
+					<img src="/resources/imgs/edit-solid.svg" style='width: 40px; float: right; margin-right: 20px'>
 				</div>
+		  	</div>
+		  </div>
+	 </div>
+	 
+	 <div class="row"> 
+		  <div class="col-xl-4 col-md-6 mb-4">
+			<div class="card border-left-primary shadow h-100 py-2">
+				<div class="card-header py-3">
+				<h6 class="m-0 font-weight-bold text-primary">좋아요</h6>
+		  		</div>
+		  		<div class="card-body">
+					<div class="row no-gutters align-items-center">
+					<div class="col mr-2">
+	
+					<div class="h2 mb-0 font-weight-bold text-gray-800 my-3"></div>
+					</div>
+					</div>
+					${dto.LCnt }
+					<img src="/resources/imgs/heart1.svg" style='width: 40px; float: right; margin-right: 20px'>
 				</div>
-				${dto.JContent }
-				<img src="/resources/imgs/edit-solid.svg" style='width: 40px; float: right; margin-right: 20px'>
-			</div>
-	  	</div>
-	  </div>
-	  
-	  <div class="col-xl-4 col-md-4 mb-4">
-		<div class="card border-left-primary shadow h-100 py-2">
-			<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">좋아요</h6>
-	  		</div>
-	  		<div class="card-body">
-				<div class="row no-gutters align-items-center">
-				<div class="col mr-2">
-
-				<div class="h2 mb-0 font-weight-bold text-gray-800 my-3"></div>
+		  	</div>
+		  </div>
+		  
+		  <div class="col-xl-4 col-md-6 mb-4">
+			<div class="card border-left-primary shadow h-100 py-2">
+				<div class="card-header py-3">
+				<h6 class="m-0 font-weight-bold text-primary">날짜</h6>
+		  		</div>
+		  		<div class="card-body">
+					<div class="row no-gutters align-items-center">
+					<div class="col mr-2">
+	
+					<div class="h2 mb-0 font-weight-bold text-gray-800 my-3"></div>
+					</div>
+					</div>
+					<fmt:formatDate pattern="yyyy-MM-dd" value="${dto.JDate}" />
+					<img src="/resources/imgs/calendar-alt-regular.svg" style='width: 40px; float: right; margin-right: 20px'>
 				</div>
-				</div>
-				${dto.LCnt }
-				<img src="/resources/imgs/heart1.svg" style='width: 40px; float: right; margin-right: 20px'>
-			</div>
-	  	</div>
-	  </div>
-	  
-	  <div class="col-xl-4 col-md-4 mb-4">
-		<div class="card border-left-primary shadow h-100 py-2">
-			<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">날짜</h6>
-	  		</div>
-	  		<div class="card-body">
-				<div class="row no-gutters align-items-center">
-				<div class="col mr-2">
-
-				<div class="h2 mb-0 font-weight-bold text-gray-800 my-3"></div>
-				</div>
-				</div>
-				<fmt:formatDate pattern="yyyy-MM-dd" value="${dto.JDate}" />
-				<img src="/resources/imgs/calendar-alt-regular.svg" style='width: 40px; float: right; margin-right: 20px'>
-			</div>
-	  	</div>
+		  	</div>
+		  </div>
 	  </div>
       
 		<a href="/journal/mylist" class="btn btn-secondary">
