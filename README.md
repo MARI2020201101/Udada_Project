@@ -47,7 +47,8 @@
 
 
 ### 레시피 리스트 & 레시피 상세
-![recipe-list-read](https://user-images.githubusercontent.com/73979611/125547424-7fe7ec17-2f1e-4f13-8912-241104bdf17a.png)
+![recipe-list-read](https://user-images.githubusercontent.com/73979611/125551175-31e0c6db-7e65-4f16-aaca-3bdf2d3234be.png)
+
 
 
 
@@ -57,7 +58,7 @@
 
 
 ### 마이 푸드 & 마이 프로필
-![my-food-my-profile](https://user-images.githubusercontent.com/73979611/125547458-1ed02b57-0fde-4dcc-8eb5-0729d60642c6.png)
+![my-food-my-profile](https://user-images.githubusercontent.com/73979611/125551130-9a8158ad-8990-4809-ba23-6d1a4228cfa3.png)
 
 
 
