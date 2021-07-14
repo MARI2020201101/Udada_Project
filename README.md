@@ -1,6 +1,6 @@
 # UDADA
 ## 회원제 다이어트 웹 어플리케이션
-![우다다](https://github.com/MARI2020201101/Udada_Project/issues/4#issue-943955905)
+![우다다](https://github.com/MARI2020201101/Udada_Project/issues/4)
 ---
 ## 프로젝트 주요 기능
 - 레시피, 챌린지, 저널 , 푸드, 운동 등의 카테고리를 탐색할 수 있다.
@@ -9,7 +9,8 @@
 - 다른 회원들과 일상을 공유하고 커뮤니케이션 할 수 있다. 
 ---
 ## 일정
-![schedule](https://github.com/MARI2020201101/Udada_Project/issues/1#issue-943955389)
+- 팀원 총 6명, 약 5주
+![schedule](https://github.com/MARI2020201101/Udada_Project/issues/1)
 ---
 ## 사용 기술
 ### Front-End 
@@ -26,32 +27,35 @@
 
 ---
 ## ERD
-![erd](https://github.com/MARI2020201101/Udada_Project/issues/5#issue-943956021)
+![erd](https://github.com/MARI2020201101/Udada_Project/issues/5)
 ---
 ## 사이트 맵
-![site-map](https://github.com/MARI2020201101/Udada_Project/issues/2#issue-943955522)
+![site-map](https://github.com/MARI2020201101/Udada_Project/issues/2)
+---
+## 팀원 역할 및 업무
+![works](https://github.com/MARI2020201101/Udada_Project/issues/3)
 ---
 ## 프로젝트 캡처 이미지
 ### 로그인 & 인덱스 페이지
-![login-index](https://github.com/MARI2020201101/Udada_Project/issues/6#issue-943956147)
+![login-index](https://github.com/MARI2020201101/Udada_Project/issues/6)
 
 ### 레시피 리스트 & 레시피 상세
-![recipe](https://github.com/MARI2020201101/Udada_Project/issues/7#issue-943956321)
+![recipe](https://github.com/MARI2020201101/Udada_Project/issues/7)
 
 ### 푸드 & 저널
-![food-journal](https://github.com/MARI2020201101/Udada_Project/issues/12#issue-943957028)
+![food-journal](https://github.com/MARI2020201101/Udada_Project/issues/12)
 
 ### 마이 푸드 & 마이 프로필
-![my-food-my-profile](https://github.com/MARI2020201101/Udada_Project/issues/8#issue-943956462)
+![my-food-my-profile](https://github.com/MARI2020201101/Udada_Project/issues/8)
 
 ### 월간 & 주간 캘린더
-![calendar](https://github.com/MARI2020201101/Udada_Project/issues/9#issue-943956676)
+![calendar](https://github.com/MARI2020201101/Udada_Project/issues/9)
 
 ### 마이 챌린지 & 챌린지 상세
-![challenge](https://github.com/MARI2020201101/Udada_Project/issues/11#issue-943956911)
+![challenge](https://github.com/MARI2020201101/Udada_Project/issues/11)
 
 ### 운동 상세 & 마이 운동
-![exercise](https://github.com/MARI2020201101/Udada_Project/issues/10#issue-943956835)
+![exercise](https://github.com/MARI2020201101/Udada_Project/issues/10)
 
 ---
 ## 프로젝트 총평
