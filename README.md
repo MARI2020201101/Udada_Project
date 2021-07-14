@@ -40,7 +40,7 @@
 ![login-index](https://github.com/MARI2020201101/Udada_Project/issues/6)
 
 ### 레시피 리스트 & 레시피 상세
-![recipe](https://github.com/MARI2020201101/Udada_Project/issues/7)
+![recipe-list-read](https://user-images.githubusercontent.com/73979611/125547424-7fe7ec17-2f1e-4f13-8912-241104bdf17a.png)
 
 ### 푸드 & 저널
 ![food-journal](https://github.com/MARI2020201101/Udada_Project/issues/12)
