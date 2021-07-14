@@ -1,6 +1,6 @@
 # UDADA
 ## 회원제 다이어트 웹 어플리케이션
-![우다다](https://github.com/MARI2020201101/Udada_Project/issues/4)
+![UDADA](https://user-images.githubusercontent.com/73979611/125547309-15c75438-3343-483c-9217-7bbce979bbac.PNG)
 ---
 ## 프로젝트 주요 기능
 - 레시피, 챌린지, 저널 , 푸드, 운동 등의 카테고리를 탐색할 수 있다.
@@ -10,7 +10,7 @@
 ---
 ## 일정
 - 팀원 총 6명, 약 5주
-![schedule](https://github.com/MARI2020201101/Udada_Project/issues/1)
+![udada-schedule](https://user-images.githubusercontent.com/73979611/125547196-19de51b9-b05d-40f1-98d0-11256523b3cd.jpg)
 ---
 ## 사용 기술
 ### Front-End 
@@ -27,35 +27,44 @@
 
 ---
 ## ERD
-![erd](https://github.com/MARI2020201101/Udada_Project/issues/5)
+![erd](https://user-images.githubusercontent.com/73979611/125547343-7f6f5983-58f8-4aa2-b87d-15ce52296ba6.png)
+
 ---
 ## 사이트 맵
-![site-map](https://github.com/MARI2020201101/Udada_Project/issues/2)
+![sitemap](https://user-images.githubusercontent.com/73979611/125547227-48f9cea6-60bc-4974-88d9-4769cef32b22.png)
+
 ---
 ## 팀원 역할 및 업무
-![works](https://github.com/MARI2020201101/Udada_Project/issues/3)
+![works](https://user-images.githubusercontent.com/73979611/125547248-b13edc73-e48f-4962-bfe1-c27f41ed8a02.png)
+
 ---
 ## 프로젝트 캡처 이미지
 ### 로그인 & 인덱스 페이지
-![login-index](https://github.com/MARI2020201101/Udada_Project/issues/6)
+![login-index](https://user-images.githubusercontent.com/73979611/125547356-67252505-ecc8-44a1-a45c-68a522dd04d0.png)
+
 
 ### 레시피 리스트 & 레시피 상세
 ![recipe-list-read](https://user-images.githubusercontent.com/73979611/125547424-7fe7ec17-2f1e-4f13-8912-241104bdf17a.png)
 
 ### 푸드 & 저널
-![food-journal](https://github.com/MARI2020201101/Udada_Project/issues/12)
+![food-journal](https://user-images.githubusercontent.com/73979611/125547579-7c379445-c05e-46f8-bde0-3bc4eeb9250d.png)
+
 
 ### 마이 푸드 & 마이 프로필
-![my-food-my-profile](https://github.com/MARI2020201101/Udada_Project/issues/8)
+![my-food-my-profile](https://user-images.githubusercontent.com/73979611/125547458-1ed02b57-0fde-4dcc-8eb5-0729d60642c6.png)
+
 
 ### 월간 & 주간 캘린더
-![calendar](https://github.com/MARI2020201101/Udada_Project/issues/9)
+![calendar-month-week](https://user-images.githubusercontent.com/73979611/125547518-1146b9f0-fc07-4352-bee9-594df1245645.png)
+
 
 ### 마이 챌린지 & 챌린지 상세
-![challenge](https://github.com/MARI2020201101/Udada_Project/issues/11)
+![my-challenge-progress](https://user-images.githubusercontent.com/73979611/125547565-076c56f0-b84a-44cb-8cc3-859adf334823.png)
+
 
 ### 운동 상세 & 마이 운동
-![exercise](https://github.com/MARI2020201101/Udada_Project/issues/10)
+![exercise-read-my-exercise](https://user-images.githubusercontent.com/73979611/125547542-a387eb4b-6a5a-4ec9-bb18-caa17598b7c7.png)
+
 
 ---
 ## 프로젝트 총평
