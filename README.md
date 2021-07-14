@@ -28,6 +28,7 @@
 
 ---
 ## ERD
+- 총 16개 테이블, 메인 도메인 6개
 ![erd](https://user-images.githubusercontent.com/73979611/125547343-7f6f5983-58f8-4aa2-b87d-15ce52296ba6.png)
 
 ---
