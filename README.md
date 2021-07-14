@@ -57,6 +57,16 @@
 
 
 
+### 운동 상세 & 마이 운동
+![exercise-read-my-exercise](https://user-images.githubusercontent.com/73979611/125547542-a387eb4b-6a5a-4ec9-bb18-caa17598b7c7.png)
+
+
+
+### 마이 챌린지 & 챌린지 상세
+![my-challenge-progress](https://user-images.githubusercontent.com/73979611/125547565-076c56f0-b84a-44cb-8cc3-859adf334823.png)
+
+
+
 ### 마이 푸드 & 마이 프로필
 ![my-food-my-profile](https://user-images.githubusercontent.com/73979611/125551130-9a8158ad-8990-4809-ba23-6d1a4228cfa3.png)
 
@@ -66,14 +76,6 @@
 ![calendar-month-week](https://user-images.githubusercontent.com/73979611/125547518-1146b9f0-fc07-4352-bee9-594df1245645.png)
 
 
-
-### 마이 챌린지 & 챌린지 상세
-![my-challenge-progress](https://user-images.githubusercontent.com/73979611/125547565-076c56f0-b84a-44cb-8cc3-859adf334823.png)
-
-
-
-### 운동 상세 & 마이 운동
-![exercise-read-my-exercise](https://user-images.githubusercontent.com/73979611/125547542-a387eb4b-6a5a-4ec9-bb18-caa17598b7c7.png)
 
 
 ---
