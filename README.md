@@ -44,39 +44,23 @@
 ### 로그인 & 인덱스 페이지
 ![login-index](https://user-images.githubusercontent.com/73979611/125547356-67252505-ecc8-44a1-a45c-68a522dd04d0.png)
 
-
-
 ### 레시피 리스트 & 레시피 상세
 ![recipe-list-read](https://user-images.githubusercontent.com/73979611/125551175-31e0c6db-7e65-4f16-aaca-3bdf2d3234be.png)
-
-
-
 
 ### 푸드 & 저널
 ![food-journal](https://user-images.githubusercontent.com/73979611/125547579-7c379445-c05e-46f8-bde0-3bc4eeb9250d.png)
 
-
-
 ### 운동 상세 & 마이 운동
 ![exercise-read-my-exercise](https://user-images.githubusercontent.com/73979611/125547542-a387eb4b-6a5a-4ec9-bb18-caa17598b7c7.png)
-
-
-
-### 마이 챌린지 & 챌린지 상세
-![my-challenge-progress](https://user-images.githubusercontent.com/73979611/125547565-076c56f0-b84a-44cb-8cc3-859adf334823.png)
-
-
 
 ### 마이 푸드 & 마이 프로필
 ![my-food-my-profile](https://user-images.githubusercontent.com/73979611/125551130-9a8158ad-8990-4809-ba23-6d1a4228cfa3.png)
 
-
+### 마이 챌린지 & 챌린지 상세
+![my-challenge-progress](https://user-images.githubusercontent.com/73979611/125547565-076c56f0-b84a-44cb-8cc3-859adf334823.png)
 
 ### 월간 & 주간 캘린더
 ![calendar-month-week](https://user-images.githubusercontent.com/73979611/125547518-1146b9f0-fc07-4352-bee9-594df1245645.png)
-
-
-
 
 ---
 ## 프로젝트 총평
