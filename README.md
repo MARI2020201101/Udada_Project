@@ -1,6 +1,7 @@
 #:running: UDADA
 ---
 ## 회원제 다이어트 웹 어플리케이션
+[우다다 바로가기](http://udada.ga/)
 ![UDADA](https://user-images.githubusercontent.com/73979611/125547309-15c75438-3343-483c-9217-7bbce979bbac.PNG)
 ---
 ## 프로젝트 주요 기능
