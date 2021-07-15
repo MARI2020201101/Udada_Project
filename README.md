@@ -1,8 +1,10 @@
 #:running: UDADA
 ---
 ## 회원제 다이어트 웹 어플리케이션
-[우다다 바로가기](http://udada.ga/)
 ![UDADA](https://user-images.githubusercontent.com/73979611/125547309-15c75438-3343-483c-9217-7bbce979bbac.PNG)
+
+
+[우다다 바로가기](http://udada.ga/)
 ---
 ## 프로젝트 주요 기능
 - 레시피, 챌린지, 저널 , 푸드, 운동 등의 카테고리를 탐색할 수 있다.
