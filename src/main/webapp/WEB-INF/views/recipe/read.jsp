@@ -597,7 +597,7 @@ $(".commentModify").hide();
 			console.log("fmDate>>", fmDate);
 			console.log(typeof fmDate);
 	
-			//이거 살릴까요 말까요? 선택 안하면 자동으로 오늘날짜라서 에러는 없긴 함...
+			
 			if(!fmDate){
 				alert("날짜를 선택해 주십시오..");
 				return;

@@ -17,7 +17,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@ContextConfiguration(locations={
+		"file:src/main/webapp/WEB-INF/spring/root-context.xml"		
+		,"file:src/main/webapp/WEB-INF/spring/security-context.xml"
+		,"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"})
 public class HikariConfigTest {
 	
 	@Autowired
@@ -25,14 +28,14 @@ public class HikariConfigTest {
 	
 	@Test
 	public void dsConnectionTest() throws SQLException {
-
+		
 		try {
 			Connection con = dataSource.getConnection();
-			log.info("\nconnection : " + con);
+			log.info("con : " + con);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 
 	}
-	
+
 }

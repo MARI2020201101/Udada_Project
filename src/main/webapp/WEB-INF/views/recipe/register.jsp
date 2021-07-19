@@ -132,7 +132,7 @@ $(document).ready(function(){
 
 			alert("레시피의 이름을 입력해 주십시오");
 			return;
-			}
+			} 
 		if(!($("#rContent").val())){
 
 			alert("조리법을 입력해 주십시오");

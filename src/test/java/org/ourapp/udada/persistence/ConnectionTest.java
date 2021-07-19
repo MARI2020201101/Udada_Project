@@ -15,19 +15,27 @@ public class ConnectionTest {
 	@Test
 	public void connectionTest() {
 		
-		try (Connection con = DriverManager.getConnection(
-				"jdbc:oracle:thin:@localhost:1521:xe",
-				"udada_dev",
-				"udada_dev"
-				);){
-			
-		log.info("con: " + con);
-		con.close();
-		}catch(Exception e) {
-			fail(e.getMessage());
-		}finally {
+		
+		for(int i=0;i<10;i++) {
+			try (Connection con = DriverManager.getConnection(
+					"jdbc:oracle:thin:@localhost:1521:xe",
+					"udada_dev",
+					"udada_dev"
+					);){
+				
+			log.info("con " + i +" :"+ con);
+			con.close();
+			}catch(Exception e) {
+				fail(e.getMessage());
+			}finally {
+				
+			}
 			
 		}
+		
+		
+		
+		
 	}
 
 }
