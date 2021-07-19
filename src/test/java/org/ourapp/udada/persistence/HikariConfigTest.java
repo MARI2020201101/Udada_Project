@@ -26,13 +26,16 @@ public class HikariConfigTest {
 	@Test
 	public void dsConnectionTest() throws SQLException {
 
-		try {
-			Connection con = dataSource.getConnection();
-			log.info("\nconnection : " + con);
+		for(int i=0;i<1000;i++) {
+		
+		try(Connection con = dataSource.getConnection()) {
+			
+			log.info("con "+i +" : " + con);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 
+		}
 	}
 	
 }
